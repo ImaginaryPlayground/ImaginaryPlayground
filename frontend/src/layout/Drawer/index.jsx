@@ -34,7 +34,7 @@ const DrawerHeaderGroup = () => {
     setDrawerOpen(false);
     history.push(name);
   };
-
+  // 로그인 창 띄우기(07-14/14:13분 완료)
   const handleSignInDialogOpen = () => {
     setUser({
       user_no: 0,
