@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "스켈레톤 코드",
   "main": "server.js",
   "dependencies": {
     "cors": "^2.8.5",
