@@ -7,6 +7,7 @@ import SignResponsiveDialog from '../../components/Auth/SignResponsiveDialog/';
 import UserResponsiveDialog from '../../components/User/UserResponsiveDialog/';
 import VoteDetailResponsiveDialog from '../../components/Main/VoteDetailResponsiveDialog/';
 
+// FE : 헤더 IMPORT 수정(Button 추가) 
 import {
   Grid,
   Typography,
