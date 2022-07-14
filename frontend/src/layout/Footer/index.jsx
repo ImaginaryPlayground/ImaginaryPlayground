@@ -4,6 +4,7 @@ import { Grid } from '@material-ui/core';
 import Wrapper from './styles';
 import { useHistory } from 'react-router-dom';
 
+// 하단 부분 수정(07/14/14:13분 완료) 
 const Footer = () => {
   const { drawerOpen } = useContext(CommonContext);
   const history = useHistory();
