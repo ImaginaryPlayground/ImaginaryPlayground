@@ -43,7 +43,3 @@ app.get("/", function (req, res) {
 app.listen(port, () => {
   console.log(`{init : ${port}}`);
 });
-
-//----------------------------------
-//
-// passport 구현구현..
