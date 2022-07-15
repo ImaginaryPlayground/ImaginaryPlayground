@@ -3,7 +3,7 @@ var app = express.Router();
 
 app.get("/users/:id", async (req, res) => {
   if (!req.params || !req.params.id) {
-    res.status(403).send({ msg: "잘못된 파라미터입니다." });
+    res.status(403).send({ msg: "파라미터를 입력해주세요" });
     return;
   }
 
@@ -25,12 +25,12 @@ app.get("/users/:id", async (req, res) => {
     });
     console.log("TCL: data", data);
   } catch (error) {
-    res.status(403).send({ msg: "rdb select에 실패하였습니다.", error: error });
+    res.status(403).send({ msg: "rdb select 실패", error: error });
     return;
   }
 
   if (data.length == 0) {
-    res.status(403).send({ msg: "정보가 없습니다." });
+    res.status(403).send({ msg: "정보 없음" });
     return;
   }
 
