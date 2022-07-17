@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 // 🦉 Middle Ware DB Code ** **
 =======
 // 🦉 Middle Ware DB Code **
 
+=======
+// 🦉 Middle Ware DB Code, Jira Commit Test: What
+>>>>>>> yyd_feature/login
 const path = require("path");
 const Sequelize = require("sequelize");
 const mybatisMapper = require("mybatis-mapper");
