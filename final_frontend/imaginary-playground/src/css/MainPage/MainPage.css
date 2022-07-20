@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gugi&display=swap");
+
+.MainPage {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 30px;
+  font-family: "Gugi", cursive;
+}
+
+.MainPage .img_box img {
+  width: 83%;
+  height: 30vh;
+}
+
+.MainPage .info_box {
+  width: 83%;
+  margin: 15px auto;
+}
+
+.MainPage::before {
+  content: "";
+  background-image: url("../../../public/img/mainpage/main_img.png");
+  opacity: 0.09;
+  position: absolute;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0%;
+  z-index: -1;
+}
+
+.MainPage .main_btn_wrapper button {
+  font-family: "Gugi", cursive;
+  font-size: 50px;
+}
+
+.MainPage .main_btn {
+  width: 100%;
+  height: 30vh;
+  background-color: #f7e9d7;
+}
+
+.MainPage .info_content {
+  border: 1px solid gray;
+  margin-top: 25px;
+  font-size: 20px;
+  font-family: "Nanum Pen Script", cursive;
+}
+
+.MainPage .info_box .info_word {
+  font-weight: bold;
+}
+
+@media (min-width: 1200px) {
+  .MainPage {
+    width: 80%;
+  }
+  .MainPage .img_box img {
+    height: 40vh;
+  }
+
+  .MainPage .info_box .info_word {
+    font-size: 48px;
+  }
+
+  .MainPage .info_content {
+    font-size: 36px;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 1200px) {
+  .MainPage {
+    margin-top: 5px;
+  }
+
+  .MainPage .info_content {
+    padding-left: 32px;
+    padding-right: 32px;
+    font-size: 24px;
+  }
+
+  .MainPage .main_btn {
+    font-size: 23px !important;
+  }
+
+  .MainPage .main_btn_icon {
+    font-size: 50px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .MainPage {
+    width: 90%;
+  }
+
+  .MainPage .info_content {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .MainPage .main_btn {
+    font-size: 18px !important;
+  }
+
+  .MainPage .main_btn_icon {
+    font-size: 26px !important;
+  }
+}
