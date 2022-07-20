@@ -1,0 +1,36 @@
+<!-- /server/sql/base/base.xml -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BASE">  
+
+  <select id="AUTH.SELECT.TB_VU.001">
+  	/* 사용자, 유저 정보 조회 */
+    SELECT  
+        vu_nick_name
+        ,vu_id        
+        ,vu_password 
+        ,vu_thumbnail 
+    FROM VOTEON.USERS 
+    WHERE VU_ID = #{id}
+    LIMIT 1
+  </select>
+
+  <insert id="AUTH.INSERT.TB_VU.001">
+  	/* 사용자, 유저 정보 삽입 */
+    INSERT INTO VOTEON.USERS
+    (
+        vu_nick_name  
+        ,vu_id 
+        ,vu_password 
+    )
+    VALUES
+    (
+        #{id}, 
+        #{nick_name}, 
+        #{password}
+    );
+
+  </insert>
+
+</mapper>
