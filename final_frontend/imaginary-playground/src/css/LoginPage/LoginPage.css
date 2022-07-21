@@ -1,0 +1,59 @@
+.LoginPage {
+  width: 80% !important;
+  margin: 0 auto;
+}
+
+.LoginPage .login_banner {
+  width: 100%;
+  text-align: center;
+}
+
+.LoginPage .signin_form {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.LoginPage .signin_form_control {
+  width: 40%;
+}
+
+.LoginPage .signin_form_function {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+}
+
+.LoginPage .login_btn_wrapper {
+  width: 40%;
+  margin-top: 10px;
+}
+
+.LoginPage .login_btn {
+  width: 100%;
+}
+
+.LoginPage .link {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@media (max-width: 900px) {
+  .signin_form_control {
+    width: 100% !important;
+  }
+
+  .LoginPage .signin_form_function {
+    width: 100%;
+  }
+
+  .LoginPage .login_btn_wrapper {
+    width: 100%;
+  }
+}
