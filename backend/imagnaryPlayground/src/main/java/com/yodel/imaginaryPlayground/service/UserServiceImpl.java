@@ -11,13 +11,13 @@ public class UserServiceImpl implements UserService{
 //    UserMapper userMapper;
 
     @Override
-    public boolean registerUser(UserDto user) {
+    public int saveUser(UserDto user) {
         // TODO mapper 작업 추가 필요
         // 임시적으로 sysout 사용
         System.out.println("유저 회원가입 진행!");
         System.out.println(user.toString());
 
-        return true;
+        return 0;
     }
 
     @Override
@@ -32,6 +32,16 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDto detailUser(int userId) {
+        return null;
+    }
+
+    @Override
+    public int countByEmail(String email) {
+        return 0;
+    }
+
+    @Override
+    public UserDto findByEmail(String email) {
         return null;
     }
 }
