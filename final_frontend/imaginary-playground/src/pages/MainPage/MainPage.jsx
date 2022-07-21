@@ -1,12 +1,14 @@
 import React from "react";
-import { Button, Grid, SvgIcon } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import "../../css/MainPage/MainPage.css";
 import ChildCareIcon from "@mui/icons-material/ChildCare";
 import EscalatorWarningIcon from "@mui/icons-material/EscalatorWarning";
 import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
-  const public_url = process.env.PUBLIC_RUL || "";
+  const navigate = useNavigate();
+  //const public_url = process.env.PUBLIC_RUL || "";
   return (
     <Grid className="MainPage">
       <Grid
@@ -68,7 +70,12 @@ const MainPage = () => {
         justifyContent="center"
       >
         <Grid xs={5} item className="main_btn_wrapper">
-          <Button className="main_btn">
+          <Button
+            className="main_btn"
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
             <EscalatorWarningIcon
               sx={{ fontSize: "100px" }}
               className={"main_btn_icon"}
