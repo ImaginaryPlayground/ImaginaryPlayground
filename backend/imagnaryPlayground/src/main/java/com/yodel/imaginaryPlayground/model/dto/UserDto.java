@@ -1,101 +1,34 @@
 package com.yodel.imaginaryPlayground.model.dto;
 
-public class UserDto {
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Role;
 
-    private int id;
+@Data
+@NoArgsConstructor
+public class UserDto {
     private String email;
     private String username;
     private String joinDate;    // Date 였는지 타입 확인
     private String provider;
     private String providerId;
-    private String profileUrl;
+    private String profile_url;
     private String gender;
     private String type;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
+    @Builder
+    public UserDto(String username, String email, String profile_url,  String provider) {
         this.username = username;
-    }
-
-    public String getJoinDate() {
-        return joinDate;
-    }
-
-    public void setJoinDate(String joinDate) {
-        this.joinDate = joinDate;
-    }
-
-    public String getProvider() {
-        return provider;
-    }
-
-    public void setProvider(String provider) {
+        this.email = email;
+        this.profile_url = profile_url;
         this.provider = provider;
     }
+    public UserDto update(String username, String profileUrl) {
+        this.username = username;
+        this.profile_url = profile_url;
 
-    public String getProviderId() {
-        return providerId;
+        return this;
     }
 
-    public void setProviderId(String providerId) {
-        this.providerId = providerId;
-    }
-
-    public String getProfileUrl() {
-        return profileUrl;
-    }
-
-    public void setProfileUrl(String profileUrl) {
-        this.profileUrl = profileUrl;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDto{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", joinDate='" + joinDate + '\'' +
-                ", provider='" + provider + '\'' +
-                ", providerId='" + providerId + '\'' +
-                ", profileUrl='" + profileUrl + '\'' +
-                ", gender='" + gender + '\'' +
-                ", type='" + type + '\'' +
-                '}';
-    }
 }
