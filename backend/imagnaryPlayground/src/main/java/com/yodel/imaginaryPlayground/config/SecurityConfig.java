@@ -48,13 +48,13 @@ public class SecurityConfig { //extends 하는 방식은 deprecated 이므로 @B
                 .antMatchers("/", "/css/**", "/images/**", "/js/**").permitAll()
                 //.antMatchers("/api/v1/**").hasRole(Role.USER.name()) 유저만 사용 가능한 api
                 .and()
-                .logout()
-                .logoutSuccessUrl("/")	// 로그아웃에 대해서 성공하면 "/"로 이동
+                    .logout()//어떻게 인식??
+                    .logoutSuccessUrl("/")	// 로그아웃에 대해서 성공하면 "/"로 이동
                 .and()
-                .oauth2Login()
-                .defaultSuccessUrl("/login-success")
-                .userInfoEndpoint()
-                .userService(customOAuth2UserService);	// oauth2 로그인에 성공하면, 유저 데이터를 가지고 우리가 생성한
+                    .oauth2Login()//url
+                    .defaultSuccessUrl("/login-success")
+                    .userInfoEndpoint()
+                    .userService(customOAuth2UserService);	// oauth2 로그인에 성공하면, 유저 데이터를 가지고 우리가 생성한
         // customOAuth2UserService에서 처리를 하겠다. 그리고 "/login-success"로 이동하라.
         return http.build();
     }
