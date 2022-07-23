@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { KAKAO_AUTH_URL } from "../../components/Oauth/Oauth.jsx";
 import {
   Button,
   Checkbox,
@@ -13,7 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "../../css/LoginPage/LoginPage.css";
 import { pink } from "@mui/material/colors";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -32,6 +33,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [isSaveUserId, setIsSaveUserId] = useState(false);
   const [loginUserInfo, setLoginUserInfo] = useState({
     userEmail: "",
@@ -170,10 +172,16 @@ const LoginPage = () => {
         <h5>sns로 간편 로그인/회원가입</h5>
       </Grid>
       <Grid item className="sns_login_btn">
-        <img src="/icon/SnsLogin/kakao-talk.png" alt="카카오톡" />
-        <img src="/icon/SnsLogin/free-icon-google.png" alt="구글" />
         <img
-          src="/icon/SnsLogin/naver_icon_1.png"
+          src="/iconFolder/SnsLogin/kakao-talk.png"
+          alt="카카오톡"
+          onClick={() => {
+            window.location.href = KAKAO_AUTH_URL;
+          }}
+        />
+        <img src="/iconFolder/SnsLogin/free-icon-google.png" alt="구글" />
+        <img
+          src="/iconFolder/SnsLogin/naver_icon_1.png"
           width="64px"
           height="64px"
           alt="네이버"
