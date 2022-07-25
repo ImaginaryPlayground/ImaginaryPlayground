@@ -5,9 +5,9 @@ import {
   theme,
 } from "../../components/CustomTheme/CustomTheme.jsx";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import swal from "sweetalert";
 import "../../css/MiddlePage/MiddlePage.css";
 
 const columns = [
@@ -107,7 +107,13 @@ const MiddlePage = () => {
   const [searchWord, setSearchWord] = useState("");
   const [hospitalData, setHospitalData] = useState(rows);
   const [searchHospitalData, setSearchHospitalData] = useState([]);
+  const [documentImg, setDocumentImg] = useState({
+    imageFile: "",
+    previewUrl: "/img/MiddlePage/default.jpg",
+  });
+
   const navigate = useNavigate();
+  const documentImgInput = useRef();
   let code = "";
 
   const handleSearchData = () => {
@@ -116,6 +122,49 @@ const MiddlePage = () => {
         return data.id.includes(searchWord);
       })
     );
+  };
+
+  const handleImgChange = async (e) => {
+    e.preventDefault();
+    const fileReader = new FileReader();
+    //console.log(e.target.files[0]);
+    if (e.target.files[0]) {
+      fileReader.readAsDataURL(e.target.files[0]);
+    }
+    fileReader.onload = () => {
+      setDocumentImg({
+        imageFile: e.target.files[0],
+        previewUrl: fileReader.result,
+      });
+    };
+  };
+
+  const handleSubmit = () => {
+    if (!documentImg.imageFile) {
+      swal("이미지 없음!", "재직증명서를 업로드 해주세요", "error");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", documentImg.imageFile);
+    //userData
+    const data = {
+      name: selectData.firstName,
+    };
+    formData.append("data", JSON.stringify(data));
+
+    //비동기통신 하기
+    // const postSurvey = await axios({
+    //   method: "POST",
+    //   url: ``,
+    //   mode: "cors",
+    //   headers: {
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    //   data: formData,
+    // });
+
+    navigate("/", { replace: true });
   };
   useEffect(() => {
     //카카오 or 구글 로그인일 때
@@ -193,7 +242,7 @@ const MiddlePage = () => {
       <ThemeProvider theme={theme}>
         <Grid item textAlign={"center"} width={"100%"}>
           <h2 style={{ color: "#ad1457" }}>추가 정보 입력하기</h2>
-          <Grid textAlign={"start"}>
+          <Grid textAlign={"start"} mb={1}>
             <span
               style={{
                 color: "rgb(117, 117, 117)",
@@ -274,20 +323,99 @@ const MiddlePage = () => {
             borderRadius: "20px",
           }}
         ></div>
+        <Grid
+          item
+          className="document_img_box"
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          flexDirection="column"
+          width={"100%"}
+        >
+          <input
+            type="file"
+            className="img_input"
+            accept="image/*"
+            onChange={handleImgChange}
+            ref={documentImgInput}
+          />
+          <Grid item width="100%" display={"flex"} flexDirection={"column"}>
+            <Grid item textAlign={"start"}>
+              <h3
+                width="100%"
+                style={{
+                  color: "rgb(117,117,117)",
+                  marginBottom: "3px",
+                  textAlign: "start",
+                }}
+              >
+                *재직증명서 업로드
+              </h3>
+              <Grid
+                item
+                display={"flex"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+                flexWrap={"wrap"}
+              >
+                <div style={{ color: "rgb(117,117,117)", marginBottom: "5px" }}>
+                  재직증명서를 이미지 파일로 업로드 해주세요
+                </div>
+                <ColorButton
+                  onClick={(e) => {
+                    e.preventDefault();
+                    documentImgInput.current.click();
+                  }}
+                  sx={{ marginTop: "2px", marginBottom: "5px" }}
+                >
+                  <span style={{ fontWeight: "bold" }}>이미지 업로드</span>
+                </ColorButton>
+              </Grid>
+            </Grid>
+            <Grid
+              item
+              width={"100%"}
+              sx={{
+                padding: "10px",
+                border: "1px solid gray",
+                borderRadius: "10px",
+              }}
+              textAlign="center"
+            >
+              <img
+                src={documentImg.previewUrl}
+                alt=""
+                style={{ maxWidth: "80%" }}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <h5>{documentImg.imageFile.name}</h5>
+        </Grid>
         <ColorButton
           sx={{ width: "100%", marginTop: "5px" }}
           onClick={() => {
-            if (
-              window.confirm(
-                `현재 선택하신 병원은 "${selectData.id}" 
-주소는 "${selectData.firstName}" 입니다.`
-              )
-            ) {
-            }
+            swal({
+              title: "",
+              text: `현재 선택하신 병원은 "${selectData.id}" 
+주소는 "${selectData.firstName}" 입니다.`,
+              icon: "info",
+              buttons: [true, "Ok"],
+            }).then((willDelete) => {
+              if (willDelete) {
+                handleSubmit();
+              }
+            });
           }}
         >
           <span style={{ fontWeight: "bold" }}>회원가입 요청</span>
         </ColorButton>
+        <Grid item>
+          <h5 style={{ color: "rgb(117,117,117)" }}>
+            *회원가입 최종 승인까지 약간의 시간이 소요될 수 있습니다.
+          </h5>
+        </Grid>
       </ThemeProvider>
     </Grid>
   );
