@@ -4,6 +4,9 @@ import com.yodel.imaginaryPlayground.model.dto.BabyDto;
 import com.yodel.imaginaryPlayground.model.dto.ConsultDto;
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
 import com.yodel.imaginaryPlayground.service.UserCareService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Update;
@@ -14,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Api("UserCareController V1")
 @RestController
 @RequestMapping("/user/care")
 @RequiredArgsConstructor
@@ -26,8 +30,11 @@ public class UserCareController{
     private final UserCareService userCareService;
     private final int PAGE = 9; //Pagination을 위한 변수
 
-    @PostMapping("/") //아이 등록
-    public Map<String, String> saveBaby(@RequestBody BabyDto baby) throws Exception {
+    @PostMapping("/")
+    @ApiOperation(value = "아이 등록", notes = "회원 페이지에서 아이를 등록할 수 있다.")
+    public Map<String, String> saveBaby(
+            @RequestBody @ApiParam(value = "필수 회원 정보를 넣어준다.", required = true) BabyDto baby) throws Exception {
+
         Map<String, String> result = new HashMap<>();
 
         try {
@@ -45,7 +52,10 @@ public class UserCareController{
     }
 
     @PutMapping("/")
-    public Map<String, Object> updateBabyInfo(@RequestBody BabyDto baby){
+    @ApiOperation(value = "아이 정보수정", notes = "회원 페이지에서 아이의 정보를 수정할 수 있다.")
+    public Map<String, Object> updateBabyInfo(
+            @RequestBody @ApiParam(value = "변경된 이후의 회원 정보를 모두 넣어준다.", required = true) BabyDto baby){
+
         Map<String, Object> result = new HashMap<>();
         try {
             int res = userCareService.updateBabyInfo(baby);
@@ -62,12 +72,16 @@ public class UserCareController{
             result.put("status", error);
             result.put("message", e.toString());
         }
-        //result.put("data", userCareService.lookupBaby(map.get(""))); : 프론트와 합의 후 자료 던지기
+
         return result;
     }
 
-    @DeleteMapping("/") // 삭제하고자 하는 baby의 id 적어주기
-    public Map<String, String> deleteBabyInfo(Map<String, String> map){ // 꺼내서 토큰의 id값과 일치 검사
+    @DeleteMapping("/")
+    @ApiOperation(value = "아이 정보삭제", notes = "회원 페이지에서 아이의 정보를 삭제한다.")
+    public Map<String, String> deleteBabyInfo(
+            @RequestBody @ApiParam(value = "삭제하는 주체인 회원의 id와 삭제하고자하는 baby_id를 넣어준다.", required = true)
+            Map<String, String> map){ // 받은 후 꺼내서 token의 id값과 대조한 후 baby_id를 삭제
+
         Map<String, String> result = new HashMap<>();
         try {
             int res = userCareService.deleteBabyInfo(map);
@@ -80,13 +94,16 @@ public class UserCareController{
             result.put("status", error);
             result.put("message", e.toString());
         }
-        //result.put("data", userCareService.lookupBaby(map.get(""))); : 프론트와 합의 후 자료 던지기
+
         return result;
     }
 
     @PostMapping("/lookup/all") // user_id와 page를 받음 -> 이후 세팅된 페이지만큼 더한 값도 map에 첨부 / key - value로 검색
-    public Map<String, Object> lookupAllBaby(@RequestBody Map<String, String> map){
-        //key, value값이 존재하는지 확인, 만약 존재하면 그것으로 검색을 진행한다.
+    @ApiOperation(value = "회원명으로 등록된 전체 아이들 조회", notes = "회원 페이지에서 전체 아이들의 정보를 조회한다.")
+    public Map<String, Object> lookupAllBaby(
+            @RequestBody @ApiParam(value = "{page: 요청 페이지, key: 검색 구분, value: 검색 내용}", required = true)
+            Map<String, String> map){
+
         Map<String, Object> result = new HashMap<>();
         List<BabyDto> babyList = new ArrayList<>();
         try {
@@ -110,8 +127,12 @@ public class UserCareController{
         return result;
     }
 
-    @PostMapping("/lookup") //user_id와 아이의 id를 보낼 것
-    public Map<String, Object> lookupBaby(@RequestBody Map<String, Integer> map){
+    @PostMapping("/lookup")
+    @ApiOperation(value = "특정 아이 정보 조회", notes = "회원명으로 등록된 한 아이의 정보를 조회한다.")
+    public Map<String, Object> lookupBaby(
+            @RequestBody @ApiParam(value = "{id: 요청하는 회원의 식별자, baby_id: 조회하고자 하는 아이 식별자}", required = true)
+            Map<String, Integer> map){
+
         Map<String, Object> result = new HashMap<>();
         BabyDto baby = new BabyDto();
         try {
@@ -130,7 +151,11 @@ public class UserCareController{
     }
 
     @PostMapping("/data/consult")
-    public Map<String, Object> getConsultData(Map<String, String> map){
+    @ApiOperation(value = "아이 상담 내역 불러오기", notes = "아이의 상담 데이터를 모두 불러온다.")
+    public Map<String, Object> getConsultData(
+            @RequestBody @ApiParam(value = "{id: 요청하는 회원의 식별자, baby_id: 조회하고자 하는 아이 식별자}", required = true)
+            Map<String, String> map){
+
         Map<String, Object> result = new HashMap<>();
         List<ConsultDto> consultList = new ArrayList<>();
         try {

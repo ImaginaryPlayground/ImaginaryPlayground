@@ -54,7 +54,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         if(findUser == 0){
            user.setEmail(attributes.getEmail());
            user.setUsername(attributes.getUsername());
-           user.setProfile_url(attributes.getProfile_url());
            user.setProvider(attributes.getProvider());
 
            int user_saved = userService.saveUser(user);
