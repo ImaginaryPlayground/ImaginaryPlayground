@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Role;
 @Data
 @NoArgsConstructor
 public class UserDto {
+    private int id;
     private String email;
     private String username;
     private String joinDate;    // Date 였는지 타입 확인
