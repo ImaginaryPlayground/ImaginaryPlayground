@@ -1,5 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import { KAKAO_AUTH_URL } from "../../components/Oauth/Oauth.jsx";
+import {
+  GOOGLE_AUTH_URL,
+  KAKAO_AUTH_URL,
+  NAVER_AUTH_CLIENT_ID,
+  REDIRECT_URI,
+} from "../../components/Oauth/Oauth.jsx";
+
 import {
   Button,
   Checkbox,
@@ -32,6 +38,8 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
+const { naver } = window;
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const [isSaveUserId, setIsSaveUserId] = useState(false);
@@ -44,6 +52,20 @@ const LoginPage = () => {
     select_userEmail: false,
     select_userPassword: false,
   });
+
+  const initializeNaverLogin = () => {
+    const naverLogin = new naver.LoginWithNaverId({
+      clientId: NAVER_AUTH_CLIENT_ID,
+      callbackUrl: REDIRECT_URI,
+      isPopup: false, // popup 형식으로 띄울것인지 설정
+      loginButton: { color: "green", type: 1, height: "64" }, //버튼의 스타일, 타입, 크기를 지정
+    });
+    naverLogin.init();
+  };
+
+  useEffect(() => {
+    initializeNaverLogin();
+  }, []);
 
   const handleFocusInput = (e) => {
     setErrorChecking({
@@ -179,13 +201,22 @@ const LoginPage = () => {
             window.location.href = KAKAO_AUTH_URL;
           }}
         />
-        <img src="/iconFolder/SnsLogin/free-icon-google.png" alt="구글" />
+
         <img
-          src="/iconFolder/SnsLogin/naver_icon_1.png"
-          width="64px"
-          height="64px"
-          alt="네이버"
+          src="/iconFolder/SnsLogin/free-icon-google.png"
+          alt="구글"
+          onClick={() => {
+            window.location.href = GOOGLE_AUTH_URL;
+          }}
         />
+        <div id="naverIdLogin">
+          <img
+            src="/iconFolder/SnsLogin/naver_icon_1.png"
+            width="64px"
+            height="64px"
+            alt="네이버"
+          />
+        </div>
       </Grid>
     </Grid>
   );

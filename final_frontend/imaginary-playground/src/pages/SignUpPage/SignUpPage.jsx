@@ -528,7 +528,7 @@ const SignUpPage = () => {
             <span
               style={{ fontFamily: "IBM Plex Sans KR", fontWeight: "bold" }}
             >
-              회원가입하기
+              병원 인증하고 회원가입
             </span>
           </ColorButton>
           <Grid item textAlign={"center"} my={3}>
