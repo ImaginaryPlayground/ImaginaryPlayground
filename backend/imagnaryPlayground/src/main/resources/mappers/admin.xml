@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yodel.imaginaryPlayground.mapper.AdminMapper">
+    <update id="approveUserMail" parameterType="String">
+        UPDATE imagination_playground.user
+        SET type = 'GUEST'
+        WHERE email = #{email}
+    </update>
+
+    <select id="lookupAllUser" resultType="UserDto">
+        SELECT * FROM imagination_playground.user
+    </select>
+
+    <select id="lookupUser" parameterType="String" resultType="UserDto">
+        SELECT * FROM imagination_playground.user
+        WHERE email = #{email}
+    </select>
+
+    <update id="approveUserType" parameterType="Map">
+        UPDATE imagination_playground.user
+        SET type = #{type}
+        WHERE email = #{email}
+    </update>
+</mapper>

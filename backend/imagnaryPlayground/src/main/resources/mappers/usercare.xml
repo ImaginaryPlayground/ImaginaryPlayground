@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yodel.imaginaryPlayground.mapper.UserCareMapper">
+    <insert id="saveBaby" parameterType="BabyDto">
+        INSERT INTO imagination_playground.user_baby
+        (user_id, name, age, gender, profile, registered_date, modified_date)
+        VALUES
+        (#{user_id}, #{name}, #{age}, #{gender}, #{profile}, NOW(), NOW())
+    </insert>
+
+    <update id="updateBabyInfo" parameterType="BabyDto">
+        UPDATE imagination_playground.user_baby
+        SET name = #{name}, age = #{age}, gender = #{gender}, profile = #{profile}, modified_date = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteBabyInfo" parameterType="Map">
+        DELETE FROM imagination_playground.user_baby
+        WHERE id = #{baby_id}
+    </delete>
+
+    <select id="lookupAllBaby" parameterType="Map" resultType="BabyDto">
+        SELECT * FROM imagination_playground.user_baby
+        LIMIT #{page}, #{page_last}
+    </select>
+
+    <select id="searchByKeyword" parameterType="Map" resultType="BabyDto">
+        SELECT * FROM imagination_playground.user_baby
+        WHERE ${key} LIKE(CONCAT("%", ${value}, "%"))
+        LIMIT #{page}, #{page_last}
+    </select>
+
+    <select id="lookupBaby" parameterType="Map" resultType="BabyDto">
+        SELECT * FROM imagination_playground.user_baby
+        WHERE user_id = #{user_id} AND id = #{baby_id}
+    </select>
+
+    <select id="getConsultData" parameterType="Map" resultType="ConsultDto">
+        SELECT * FROM imagination_playground.user_baby baby
+            LEFT OUTER JOIN imagination_playground.baby_recoed record
+            ON baby.id = record.baby_id
+        WHERE id = #{baby_id} AND user_id = #{user_id}
+        ORDER BY recorded_date ASC
+    </select>
+</mapper>
