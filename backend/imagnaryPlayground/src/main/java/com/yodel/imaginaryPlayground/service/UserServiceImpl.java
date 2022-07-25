@@ -1,14 +1,19 @@
 package com.yodel.imaginaryPlayground.service;
 
+import com.yodel.imaginaryPlayground.mapper.UserMapper;
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
+
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
     // TODO mapper 객체 추가 필요
     // TODO 로거 사용 필요
-//    UserMapper userMapper;
+    private final UserMapper userMapper;
 
     @Override
     public int saveUser(UserDto user) {
@@ -43,5 +48,10 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDto findByEmail(String email) {
         return null;
+    }
+
+    @Override
+    public int test() throws SQLException {
+        return userMapper.test();
     }
 }
