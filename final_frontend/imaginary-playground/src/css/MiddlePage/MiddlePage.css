@@ -1,2 +1,38 @@
-.MiddlePage .custom_google_btn {
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap");
+
+.MiddlePage {
+  margin: 0 auto;
+  width: 500px !important;
+
+  font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+.MiddlePage span {
+  font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+.MiddlePage label {
+  font-family: "IBM Plex Sans KR", sans-serif !important;
+}
+
+.MiddlePage .search_box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.MiddlePage .now_select_info_box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+.MiddlePage .search_result_box {
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  .MiddlePage {
+    width: 95% !important;
+  }
 }
