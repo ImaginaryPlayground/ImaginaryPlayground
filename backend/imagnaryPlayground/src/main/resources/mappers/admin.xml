@@ -3,24 +3,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yodel.imaginaryPlayground.mapper.AdminMapper">
-    <update id="approveUserMail" parameterType="String">
-        UPDATE imagination_playground.user
-        SET type = 'GUEST'
-        WHERE email = #{email}
-    </update>
-
-    <select id="lookupAllUser" resultType="UserDto">
-        SELECT * FROM imagination_playground.user
-    </select>
-
-    <select id="lookupUser" parameterType="String" resultType="UserDto">
-        SELECT * FROM imagination_playground.user
-        WHERE email = #{email}
-    </select>
-
+    <!--회원의 등급 조정-->
     <update id="approveUserType" parameterType="Map">
         UPDATE imagination_playground.user
         SET type = #{type}
         WHERE email = #{email}
     </update>
+
+    <!--전체 회원 조회-->
+    <select id="lookupAllUser" resultType="UserDto">
+        SELECT * FROM imagination_playground.user
+    </select>
+
+    <!--등급이 PENDING인 회원 조회-->
+    <select id="lookupUnapprovedUser" parameterType="Map" resultType="UserDto">
+        SELECT * FROM imagination_playground.user
+        WHERE type = 'PENDING'
+        LIMIT #{page}, #{page_last}
+    </select>
+
+    <!--특정 회원 조회-->
+    <select id="lookupUser" parameterType="String" resultType="UserDto">
+        SELECT * FROM imagination_playground.user
+        WHERE email = #{email}
+    </select>
+
 </mapper>

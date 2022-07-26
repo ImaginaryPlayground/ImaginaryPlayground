@@ -101,13 +101,13 @@ public class UserCareController{
     @PostMapping("/lookup/all") // user_id와 page를 받음 -> 이후 세팅된 페이지만큼 더한 값도 map에 첨부 / key - value로 검색
     @ApiOperation(value = "회원명으로 등록된 전체 아이들 조회", notes = "회원 페이지에서 전체 아이들의 정보를 조회한다.")
     public Map<String, Object> lookupAllBaby(
-            @RequestBody @ApiParam(value = "{page: 요청 페이지, key: 검색 구분, value: 검색 내용}", required = true)
+            @RequestBody @ApiParam(value = "{page: 요청 페이지(필수), key: 검색 구분, value: 검색 내용}", required = true)
             Map<String, String> map){
 
         Map<String, Object> result = new HashMap<>();
         List<BabyDto> babyList = new ArrayList<>();
         try {
-            map.put("page_last", map.get("page") + PAGE);
+            map.put("page_last", Integer.toString(Integer.parseInt(map.get("page")) + PAGE));
             if(map.get("value") == null || map.get("value").trim() == null){
                 babyList = userCareService.lookupAllBaby(map);
             }else{
