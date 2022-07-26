@@ -24,15 +24,17 @@ public class AdminController {
     private final String fail = "FAIL";
     private final String error = "ERROR";
     private final AdminService adminService;
-    @PostMapping("/auth/mail")
-    @ApiOperation(value = "이메일 인증 보내기", notes = "사이트를 통한 회원가입시 이메일을 통해 인증한다.")
-    public Map<String, String> approveUserMail(
-            @RequestBody @ApiParam(value = "이메일 인증에 필요한 이메일 주소", required = true) String email){
-        Map<String, String> result = new HashMap<>();
+
+    @PostMapping("/auth/type")
+    @ApiOperation(value = "정회원 등록", notes = "이메일 인증이 완료된 회원이 사이트를 이용할 수 있도록 정회원으로 승인한다.")
+    public Map<String, Object> approveUserType(
+            @RequestBody @ApiParam(value = "email과 type값을 보낸다. type은 CUSTOMER 또는 USER 값이다.", required = false) Map<String, String> map){
+        Map<String, Object> result = new HashMap<>();
         try {
-            int res = adminService.approveUserMail(email);
+            int res = adminService.approveUserType(map);
             if(res == 1){
                 result.put("status", success);
+                result.put("data", adminService.lookupUnapprovedUser(0));
             }else{
                 result.put("status", fail);
             }
@@ -43,16 +45,15 @@ public class AdminController {
         return result;
     }
 
-    @PostMapping("/auth/type")
-    @ApiOperation(value = "정회원 등록", notes = "이메일 인증이 완료된 회원이 사이트를 이용할 수 있도록 정회원으로 승인한다.")
-    public Map<String, Object> approveUserType(
-            @RequestBody @ApiParam(value = "email과 type값을 보낸다. type은 CUSTOMER 또는 USER 값이다.", required = true) Map<String, String> map){
+    @GetMapping("/lookup/unapproved/{page}")
+    @ApiOperation(value = "승인이 필요한 회원 전체 조회", notes = "관리자 페이지에서 승인을 기다리는 회원 모두를 조회한다.")
+    public Map<String, Object> lookupUnapprovedUser(@PathVariable int page){
         Map<String, Object> result = new HashMap<>();
+        List<UserDto> userList = new ArrayList<>();
         try {
-            int res = adminService.approveUserType(map);
-            if(res == 1){
+            userList = adminService.lookupUnapprovedUser(page);
+            if(userList != null){
                 result.put("status", success);
-                result.put("data", adminService.lookupUser(map.get("email")));
             }else{
                 result.put("status", fail);
             }
@@ -60,6 +61,7 @@ public class AdminController {
             result.put("status", error);
             result.put("message", e.toString());
         }
+        result.put("data", userList);
         return result;
     }
 
