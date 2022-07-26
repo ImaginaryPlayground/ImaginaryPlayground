@@ -1,7 +1,13 @@
 import React from "react";
+import { Grid } from "@mui/material";
+import DrawerLayout from "../../components/AdminPage/DrawerLayout";
 
 const AdminPage = () => {
-  return <div>AdminPage</div>;
+  return (
+    <Grid className="AdminPage">
+      <DrawerLayout />
+    </Grid>
+  );
 };
 
 export default AdminPage;
