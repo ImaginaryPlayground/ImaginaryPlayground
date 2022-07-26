@@ -1,0 +1,26 @@
+.UserInquiryModal .row_flex {
+  display: flex;
+}
+
+.UserInquiryModal .bt_5 {
+  border-top: 0.5px solid rgb(225, 225, 225);
+}
+
+.UserInquiryModal .bb_5 {
+  border-bottom: 0.5px solid rgb(225, 225, 225);
+}
+
+.UserInquiryModal .title_center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  word-break: keep-all;
+}
+
+.UserInquiryModal .bg_gray {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  text-align: center;
+  height: inherit;
+}
