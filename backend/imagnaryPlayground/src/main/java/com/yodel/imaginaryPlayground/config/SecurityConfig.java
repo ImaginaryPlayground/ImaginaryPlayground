@@ -39,13 +39,13 @@ public class SecurityConfig { //extends 하는 방식은 deprecated 이므로 @B
     // WebSecurity에 필터를 거는 게 훨씬 빠름. HttpSecrity에 필터를 걸면, 이미 스프링 시큐리티 내부에 들어온 상태기 때문에..
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/image/**", "/kiosk/**"); // /image/** 있는 모든 파일들은 시큐리티 적용을 무시한다.
+        return (web) -> web.ignoring().antMatchers("/**/**", "image/**", "/kiosk/**"); // /image/** 있는 모든 파일들은 시큐리티 적용을 무시한다.
     }
 
     @Bean // OAuth2ResourceServerProperties.Jwt jwt, TokenService tokenService 두번째 세번째 매개변수 일단 생략
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/css/**", "/images/**", "/js/**").permitAll()
+                .antMatchers("/**", "/css/**", "/images/**", "/js/**").permitAll()
                 //.antMatchers("/api/v1/**").hasRole(Role.USER.name()) 유저만 사용 가능한 api
                 .and()
                     .logout()//어떻게 인식??

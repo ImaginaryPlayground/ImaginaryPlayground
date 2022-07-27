@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yodel.imaginaryPlayground.mapper.QuestionMapper">
+    <insert id="saveQuestion" parameterType="QuestionDto">
+        INSERT INTO imagination_playground.qna_question
+            (user_id, title, content, qna_type, secret, completed, created_date, modified_date)
+        VALUES
+            (#{user_id}, #{title}, #{content}, #{qna_type}, #{secret}, 0, NOW(), NOW())
+    </insert>
+
+    <update id="editQuestion" parameterType="QuestionDto">
+        UPDATE imagination_playground.qna_question
+        SET title = #{title}, content = #{content}, qna_type = #{qna_type}, secret = #{secret}, modified_date = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteQuestion" parameterType="DeleteVO">
+        DELETE FROM imagination_playground.qna_question
+        WHERE id = #{question_id}
+    </delete>
+
+    <select id="lookupQuestion" parameterType="int" resultType="QuestionDto">
+        SELECT * FROM imagination_playground.qna_question
+        WHERE id = #{id}
+    </select>
+
+    <select id="lookupAllQuestion" parameterType="PageDto" resultType="QuestionDto">
+        SELECT * FROM imagination_playground.qna_question
+        ORDER BY created_date
+        ASC
+        LIMIT #{page}, #{page_last}
+    </select>
+
+    <select id="lookupAllQuestionWithQuestionType" parameterType="PageDto" resultType="QuestionDto">
+        SELECT * FROM imagination_playground.qna_question
+        WHERE qna_type = #{qna_type}
+        ORDER BY created_date
+        ASC
+        LIMIT #{page}, #{page_last}
+    </select>
+
+    <select id="searchAllQuestion" parameterType="PageDto" resultType="QuestionDto">
+        SELECT * FROM imagination_playground.qna_question
+        WHERE ${key} LIKE(CONCAT("%", ${value}, "%"))
+        ORDER BY created_date
+        ASC
+        LIMIT #{page}, #{page_last}
+    </select>
+
+    <select id="searchAllQuestionWithQuestionType" parameterType="PageDto" resultType="QuestionDto">
+        SELECT * FROM imagination_playground.qna_question
+        WHERE ${key} LIKE(CONCAT("%", ${value}, "%")) AND qna_type = #{qna_type}
+        ORDER BY created_date
+        ASC
+        LIMIT #{page}, #{page_last}
+    </select>
+
+
+    <select id="lookupBaby" parameterType="Map" resultType="BabyDto">
+        SELECT * FROM imagination_playground.user_baby
+        WHERE user_id = #{user_id} AND id = #{baby_id}
+    </select>
+
+    <select id="getConsultData" parameterType="Map" resultType="ConsultDto">
+        SELECT * FROM imagination_playground.user_baby baby
+                          LEFT OUTER JOIN imagination_playground.baby_recoed record
+                                          ON baby.id = record.baby_id
+        WHERE id = #{baby_id} AND user_id = #{user_id}
+        ORDER BY recorded_date ASC
+    </select>
+</mapper>
