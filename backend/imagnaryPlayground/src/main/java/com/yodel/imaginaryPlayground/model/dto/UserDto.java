@@ -44,6 +44,7 @@ public class UserDto {
         this.document = document;
         this.provider = provider;
     }
+
     public UserDto update(String username, String document) {
         this.username = username;
         this.document = document;
