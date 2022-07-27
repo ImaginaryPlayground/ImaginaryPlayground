@@ -2,6 +2,8 @@ package com.yodel.imaginaryPlayground.service;
 
 import com.yodel.imaginaryPlayground.mapper.AnswerMapper;
 import com.yodel.imaginaryPlayground.model.dto.AnswerDto;
+import com.yodel.imaginaryPlayground.model.dto.PageDto;
+import com.yodel.imaginaryPlayground.model.vo.DeleteVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,7 @@ public class AnswerServiceImpl implements AnswerService{
     private final AnswerMapper answerMapper;
 
     @Override
-    public int isCompleted(int id) throws Exception {
+    public Integer isCompleted(int id) throws Exception {
         return answerMapper.isCompleted(id);
     }
 
@@ -24,13 +26,18 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
+    public int checkCompleted(int question_id) throws Exception {
+        return answerMapper.checkCompleted(question_id);
+    }
+
+    @Override
     public int editAnswer(AnswerDto answer) throws Exception {
         return answerMapper.editAnswer(answer);
     }
 
     @Override
-    public int deleteAnswer(int id) throws Exception {
-        return answerMapper.deleteAnswer(id);
+    public int deleteAnswer(DeleteVO deleteVO) throws Exception {
+        return answerMapper.deleteAnswer(deleteVO);
     }
 
     @Override
@@ -39,7 +46,7 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
-    public List<AnswerDto> lookupUncompletedAnswer(Map<String, String> map) throws Exception {
-        return answerMapper.lookupUncompletedAnswer(map);
+    public List<AnswerDto> lookupUncompletedAnswer(PageDto pageDto) throws Exception {
+        return answerMapper.lookupUncompletedAnswer(pageDto);
     }
 }
