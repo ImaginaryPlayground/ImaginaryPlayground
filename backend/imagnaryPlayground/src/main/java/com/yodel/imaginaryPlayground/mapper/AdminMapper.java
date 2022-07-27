@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Mapper
 public interface AdminMapper {
-    int approveUserType(Map<String, String> map) throws SQLException;
+    int approveUserType(List<Integer> list) throws SQLException;
     List<UserDto> lookupAllUser() throws SQLException;
     List<UserDto> lookupUnapprovedUser(Map<String, Integer> map) throws SQLException;
     UserDto lookupUser(String email) throws SQLException;

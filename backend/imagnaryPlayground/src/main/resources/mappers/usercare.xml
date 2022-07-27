@@ -21,27 +21,27 @@
         WHERE id = #{baby_id}
     </delete>
 
-    <select id="lookupAllBaby" parameterType="Map" resultType="BabyDto">
+    <select id="lookupAllBaby" parameterType="PageDto" resultType="BabyDto">
         SELECT * FROM imagination_playground.user_baby
         LIMIT #{page}, #{page_last}
     </select>
 
-    <select id="searchByKeyword" parameterType="Map" resultType="BabyDto">
+    <select id="searchByKeyword" parameterType="PageDto" resultType="BabyDto">
         SELECT * FROM imagination_playground.user_baby
-        WHERE ${key} LIKE(CONCAT("%", ${value}, "%"))
+        WHERE ${key} LIKE(CONCAT("%", #{value}, "%"))
         LIMIT #{page}, #{page_last}
     </select>
 
     <select id="lookupBaby" parameterType="Map" resultType="BabyDto">
         SELECT * FROM imagination_playground.user_baby
-        WHERE user_id = #{user_id} AND id = #{baby_id}
+        WHERE user_id = #{id} AND id = #{baby_id}
     </select>
 
     <select id="getConsultData" parameterType="Map" resultType="ConsultDto">
         SELECT * FROM imagination_playground.user_baby baby
-            LEFT OUTER JOIN imagination_playground.baby_recoed record
+            LEFT OUTER JOIN imagination_playground.baby_record record
             ON baby.id = record.baby_id
-        WHERE id = #{baby_id} AND user_id = #{user_id}
+        WHERE baby.id = #{baby_id} AND baby.user_id = #{user_id}
         ORDER BY recorded_date ASC
     </select>
 </mapper>

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface AdminService {
-    int approveUserType(Map<String, String> map) throws Exception;
+    int approveUserType(List<Integer> list) throws Exception;
     List<UserDto> lookupAllUser() throws Exception;
     List<UserDto> lookupUnapprovedUser(int page) throws Exception;
     UserDto lookupUser(String email) throws Exception;
