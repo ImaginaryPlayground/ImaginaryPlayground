@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap");
+
+.KidsGridList_wrapper input {
+  font-family: "IBM Plex Sans KR", sans-serif !important;
+}
+.KidsGridList {
+  width: 100%;
+}
+
+.KidsGridList span {
+  font-family: "IBM Plex Sans KR", sans-serif !important;
+}
+
+.KidsGridList input {
+  font-family: "IBM Plex Sans KR", sans-serif !important;
+}
+
+.KidsGridList .profile_text {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  font-size: 14px;
+  color: #474244;
+  height: 105px;
+}
+
+.Mui-selected {
+  color: white !important;
+}
