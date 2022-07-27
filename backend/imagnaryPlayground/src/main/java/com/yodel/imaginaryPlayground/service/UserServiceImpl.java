@@ -26,27 +26,27 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean modifyUser(UserDto user) {
-        return false;
+    public int updateUserInfo(UserDto user) throws Exception {
+        return userMapper.updateUserInfo(user);
     }
 
     @Override
-    public boolean deleteUser(int userId) {
-        return false;
-    }
-
-    @Override
-    public UserDto detailUser(int userId) {
-        return null;
-    }
-
-    @Override
-    public int countByEmail(String email) {
+    public int deleteUser(int userId){
         return 0;
     }
 
     @Override
-    public UserDto findByEmail(String email) {
+    public UserDto detailUser(int userId){
+        return null;
+    }
+
+    @Override
+    public int countByEmail(String email){
+        return 0;
+    }
+
+    @Override
+    public UserDto findByEmail(String email){
         return null;
     }
 

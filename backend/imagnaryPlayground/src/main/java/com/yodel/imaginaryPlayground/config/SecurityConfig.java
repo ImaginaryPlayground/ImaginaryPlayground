@@ -9,9 +9,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.token.TokenService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import static com.google.common.base.Predicates.and;
 
 @Configuration
 @EnableWebSecurity  // 해당 애노테이션을 붙인 필터(현재 클래스)를 스프링 필터체인에 등록.
@@ -55,6 +58,12 @@ public class SecurityConfig { //extends 하는 방식은 deprecated 이므로 @B
                     .defaultSuccessUrl("/login-success")
                     .userInfoEndpoint()
                     .userService(customOAuth2UserService);	// oauth2 로그인에 성공하면, 유저 데이터를 가지고 우리가 생성한
+
+        http.httpBasic().disable()   //프론트엔드가 존재하여 REST API로 구성(Spring security에서 만들어주는 로그인 페이지 사용안함)
+                .csrf().disable();   //csrf 사용안함
+
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);   //세션 사용X
+
         // customOAuth2UserService에서 처리를 하겠다. 그리고 "/login-success"로 이동하라.
         return http.build();
     }
