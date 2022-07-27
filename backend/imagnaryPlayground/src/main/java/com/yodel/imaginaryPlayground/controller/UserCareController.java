@@ -2,6 +2,7 @@ package com.yodel.imaginaryPlayground.controller;
 
 import com.yodel.imaginaryPlayground.model.dto.BabyDto;
 import com.yodel.imaginaryPlayground.model.dto.ConsultDto;
+import com.yodel.imaginaryPlayground.model.dto.PageDto;
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
 import com.yodel.imaginaryPlayground.service.UserCareService;
 import io.swagger.annotations.Api;
@@ -101,17 +102,17 @@ public class UserCareController{
     @PostMapping("/lookup/all") // user_id와 page를 받음 -> 이후 세팅된 페이지만큼 더한 값도 map에 첨부 / key - value로 검색
     @ApiOperation(value = "회원명으로 등록된 전체 아이들 조회", notes = "회원 페이지에서 전체 아이들의 정보를 조회한다.")
     public Map<String, Object> lookupAllBaby(
-            @RequestBody @ApiParam(value = "{page: 요청 페이지(필수), key: 검색 구분, value: 검색 내용}", required = true)
-            Map<String, String> map){
+            @RequestBody @ApiParam(value = "{page: 요청 페이지(필수), key: 'name/age/gender', , value: 검색 내용}", required = true)
+            PageDto pageDto){
 
         Map<String, Object> result = new HashMap<>();
         List<BabyDto> babyList = new ArrayList<>();
         try {
-            map.put("page_last", Integer.toString(Integer.parseInt(map.get("page")) + PAGE));
-            if(map.get("value") == null || map.get("value").trim() == null){
-                babyList = userCareService.lookupAllBaby(map);
+            pageDto.setPage_last(pageDto.getPage() + PAGE);
+            if(pageDto.getValue() == null || pageDto.getValue().trim() == null){
+                babyList = userCareService.lookupAllBaby(pageDto);
             }else{
-                babyList = userCareService.searchByKeyword(map);
+                babyList = userCareService.searchByKeyword(pageDto);
             }
 
             if(babyList != null){

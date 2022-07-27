@@ -3,6 +3,7 @@ package com.yodel.imaginaryPlayground.service;
 import com.yodel.imaginaryPlayground.mapper.UserCareMapper;
 import com.yodel.imaginaryPlayground.model.dto.BabyDto;
 import com.yodel.imaginaryPlayground.model.dto.ConsultDto;
+import com.yodel.imaginaryPlayground.model.dto.PageDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +22,13 @@ public class UserCareServiceImpl implements UserCareService {
     }
 
     @Override
-    public List<BabyDto> lookupAllBaby(Map<String, String> map) throws Exception {
-        return userCareMapper.lookupAllBaby(map);
+    public List<BabyDto> lookupAllBaby(PageDto pageDto) throws Exception {
+        return userCareMapper.lookupAllBaby(pageDto);
     }
 
     @Override
-    public List<BabyDto> searchByKeyword(Map<String, String> map) throws Exception {
-        return userCareMapper.searchByKeyword(map);
+    public List<BabyDto> searchByKeyword(PageDto pageDto) throws Exception {
+        return userCareMapper.searchByKeyword(pageDto);
     }
 
     @Override
