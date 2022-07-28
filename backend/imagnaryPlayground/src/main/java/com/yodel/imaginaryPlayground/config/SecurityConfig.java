@@ -1,20 +1,18 @@
 package com.yodel.imaginaryPlayground.config;
 
+import com.yodel.imaginaryPlayground.model.jwt.JwtAuthenticationFilter;
+import com.yodel.imaginaryPlayground.model.jwt.JwtTokenProvider;
 import com.yodel.imaginaryPlayground.service.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.token.TokenService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import static com.google.common.base.Predicates.and;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity  // 해당 애노테이션을 붙인 필터(현재 클래스)를 스프링 필터체인에 등록.
@@ -23,6 +21,30 @@ public class SecurityConfig { //extends 하는 방식은 deprecated 이므로 @B
 
     // 커스텀한 OAuth2UserService DI.
     private final CustomOAuth2UserService customOAuth2UserService;
+
+    // 커스텀한 Jwt Token Provider
+    private final JwtTokenProvider jwtTokenProvider;
+
+    /* 특정 URI들을 리스트에 저장 */
+
+    // Swagger
+    private static final String[] SWAGGER_URI = {
+            "/swagger-ui.html", "/v2/api-docs", "/swagger-resources/**", "/webjars/**", "/swagger/**"
+    };
+
+    // 로그인, 회원가입 등
+    private static final String[] PUBLIC_URI = {
+            "/", "/login", "/signup", "/*/signup/**", "/css/**", "/images/**", "/js/**"
+    };
+
+    private static final String[] PUBLIC_GET_URI = {
+            "/exception/**"
+    };
+
+    // 유저만 사용가능한 기능
+    private static final String[] USER_URI = {
+            "/user/**", "/user/care/**"
+    };
 
     // encoder를 빈으로 등록.
     @Bean
@@ -48,24 +70,36 @@ public class SecurityConfig { //extends 하는 방식은 deprecated 이므로 @B
     @Bean // OAuth2ResourceServerProperties.Jwt jwt, TokenService tokenService 두번째 세번째 매개변수 일단 생략
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt token으로 인증할것이므로 세션필요없으므로 생성안함.
+                .and()
                 .authorizeRequests()
-                    .antMatchers("/**", "/css/**", "/images/**", "/js/**").permitAll()
-                //.antMatchers("/api/v1/**").hasRole(Role.USER.name()) 유저만 사용 가능한 api
+                    .antMatchers(PUBLIC_URI).permitAll()
+                    .antMatchers(PUBLIC_GET_URI).permitAll()
+                    .antMatchers(USER_URI).hasRole("USER") //유저만 사용 가능한 API
+                    .anyRequest().hasRole("ADMIN") //관리자는 모두 사용가능
                 .and()
                     .logout()//어떻게 인식??
                     .logoutSuccessUrl("/")	// 로그아웃에 대해서 성공하면 "/"로 이동
                 .and()
+                     // jwt token 필터를 id/password 인증 필터 전에 넣어라.
                     .oauth2Login()//url
-                    .defaultSuccessUrl("/login-success")
+                    .defaultSuccessUrl("/login-success")// customOAuth2UserService에서 처리를 하겠다. 그리고 "/login-success"로 이동하라.
                     .userInfoEndpoint()
                     .userService(customOAuth2UserService);	// oauth2 로그인에 성공하면, 유저 데이터를 가지고 우리가 생성한
 
         http.httpBasic().disable()   //프론트엔드가 존재하여 REST API로 구성(Spring security에서 만들어주는 로그인 페이지 사용안함)
                 .csrf().disable();   //csrf 사용안함
 
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);   //세션 사용X
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);   // jwt token으로 인증할것이므로 세션필요X
 
-        // customOAuth2UserService에서 처리를 하겠다. 그리고 "/login-success"로 이동하라.
+        http.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+
+        /* 오류 처리 부분
+        http.exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())            // 인증 오류 발생 시 처리를 위한 핸들러 추가
+                .and()
+                .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())  // 인증 오류 발생 시 처리를 위한 핸들러 추가
+        */
+
         return http.build();
     }
 }

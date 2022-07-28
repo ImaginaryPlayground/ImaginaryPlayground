@@ -37,7 +37,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         UserDto user = saveOrUpdate(attributes);
-        httpSession.setAttribute("user", user);
 
         System.out.println(attributes.getAttributes());
         return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
@@ -56,9 +55,14 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
            user.setUsername(attributes.getUsername());
            user.setProvider(attributes.getProvider());
 
-           int user_saved = userService.saveUser(user);
+           findUser = userService.saveUser(user);
         }
-        System.out.printf(user.toString());
-        return userService.findByEmail(attributes.getEmail());
+
+        if(findUser == 1){
+            user = userService.findByEmail(user.getEmail()); //구현 필요
+        }
+
+        System.out.printf("소셜 로그인 진행: "+user.toString());
+        return user;
     }
 }
