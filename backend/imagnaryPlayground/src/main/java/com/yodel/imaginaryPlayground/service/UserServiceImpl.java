@@ -2,10 +2,13 @@ package com.yodel.imaginaryPlayground.service;
 
 import com.yodel.imaginaryPlayground.mapper.UserMapper;
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
+import com.yodel.imaginaryPlayground.model.vo.EmailCodeVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -51,7 +54,21 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int test() throws SQLException {
-        return userMapper.test();
+    public int saveEmailAuth(String email, String CODE) {
+        Map<String, String> map = new HashMap<>();
+        map.put("email", email);
+        map.put("CODE", CODE);
+        return userMapper.saveEmailAuth(map);
     }
+
+    @Override
+    public int authEmailCode(EmailCodeVO emailCodeVO) {
+        return userMapper.authEmailCode(emailCodeVO);
+    }
+
+    @Override
+    public int deleteEmailCode(String email) {
+        return userMapper.deleteEmailCode(email);
+    }
+
 }
