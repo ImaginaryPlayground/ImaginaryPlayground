@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Role;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @ApiModel(value = "UserDto (회원정보)", description = "id, 이메일, 회원명, 성별, 가입경로, 증명서 경로, 가입일/수정일, 회원구분을 가진 DTO")
@@ -36,6 +39,9 @@ public class UserDto {
 
     @ApiModelProperty(value = "회원구분")
     private String type;
+
+    @ApiModelProperty(value = "유저의 권한을 저장하는 리스트")
+    private List<String> roles = new ArrayList<>();
 
     @Builder
     public UserDto(String username, String email, String document,  String provider) {

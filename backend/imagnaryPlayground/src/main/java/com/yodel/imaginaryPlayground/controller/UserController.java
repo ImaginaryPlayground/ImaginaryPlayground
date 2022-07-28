@@ -3,10 +3,15 @@ package com.yodel.imaginaryPlayground.controller;
 import com.yodel.imaginaryPlayground.model.dto.BabyDto;
 import com.yodel.imaginaryPlayground.model.dto.Role;
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
+import com.yodel.imaginaryPlayground.model.vo.EmailCodeVO;
+import com.yodel.imaginaryPlayground.service.EmailService;
 import com.yodel.imaginaryPlayground.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,16 +25,11 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
+    private final EmailService emailService;
 
     private static final String success = "SUCCESS";
     private static final String fail = "FAIL";
     private static final String error = "ERROR";
-
-    @GetMapping("/test")
-    public void test() throws SQLException {
-        int result = userService.test();
-        System.out.println(result);
-    }
 
     @PostMapping("/register")
     @ApiOperation(value = "회원가입", notes = "회원가입을 한다.")
@@ -144,6 +144,52 @@ public class UserController {
         } catch (Exception e) {
             result.put("status", error);
             result.put("message", e.toString());
+        }
+        return result;
+    }
+
+    @PostMapping("/authEmail/send")
+    public Map<String, Object> sendEmail(@RequestBody String email){
+        Map<String, Object> result = new HashMap<>();
+        System.out.println("이메일 인증 진행 :"+ email);
+
+        //먼저 관련 email 인증을 삭제한다
+        userService.deleteEmailCode(email);
+
+        final int CODE = (int) ( 100000 + Math.random()*899999); //임의의 6자리 코드 생성
+
+        if(emailService.sendEmail( email // 메일 인증 성공
+                , "[상상놀이터] 이메일 인증 안내"
+                , "인증코드는 [ "+CODE+" ] 입니다.").get("status").equals(success)){
+            int res = userService.saveEmailAuth(email, Integer.toString(CODE));
+            if(res == 1){
+                result.put("status", success);
+            }else{
+                result.put("status", error);
+            }
+        }else{
+            // 메일 인증 실패
+            result.put("status", fail);
+        }
+
+        return result;
+    }
+
+    @PostMapping("/authEmail/receive")
+    public Map<String, Object> authEmailCode(@RequestBody EmailCodeVO emailCodeVO){
+        Map<String, Object> result = new HashMap<>();
+        System.out.println("이메일 코드 일치 여부 확인 :"+ emailCodeVO);
+
+        String msg = "";
+        int res = userService.authEmailCode(emailCodeVO);
+
+        if(res == 1){
+            result.put("status", success);
+            result.put("message", "이메일 인증에 성공했습니다.");
+            userService.deleteEmailCode(emailCodeVO.getEmail());
+        }else{
+            result.put("status", fail);
+            result.put("message", "이메일 인증에 실패했습니다.");
         }
         return result;
     }

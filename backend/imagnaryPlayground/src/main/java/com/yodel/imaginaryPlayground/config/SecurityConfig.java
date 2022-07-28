@@ -47,8 +47,9 @@ public class SecurityConfig { //extends 하는 방식은 deprecated 이므로 @B
 
     @Bean // OAuth2ResourceServerProperties.Jwt jwt, TokenService tokenService 두번째 세번째 매개변수 일단 생략
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/**", "/css/**", "/images/**", "/js/**").permitAll()
+        http
+                .authorizeRequests()
+                    .antMatchers("/**", "/css/**", "/images/**", "/js/**").permitAll()
                 //.antMatchers("/api/v1/**").hasRole(Role.USER.name()) 유저만 사용 가능한 api
                 .and()
                     .logout()//어떻게 인식??

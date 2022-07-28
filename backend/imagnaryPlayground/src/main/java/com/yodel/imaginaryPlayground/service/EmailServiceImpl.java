@@ -1,18 +1,23 @@
 package com.yodel.imaginaryPlayground.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+@Service
+@RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService{
 
-    JavaMailSender sender;
+    private static final String success = "SUCCESS";
+    private static final String fail = "FAIL";
+    private static final String error = "ERROR";
+    private final JavaMailSender sender;
 
     public Map<String, Object> sendEmail(String toAddress, String subject, String body) {
         Map<String, Object> result = new HashMap<>();
@@ -22,10 +27,10 @@ public class EmailServiceImpl implements EmailService{
             helper.setTo(toAddress);
             helper.setSubject(subject);
             helper.setText(body);
-            result.put("resultCode", 200);
+            result.put("status", success);
         } catch (MessagingException e) {
             e.printStackTrace();
-            result.put("resultCode", 500);
+            result.put("status", error);
         }
 
         sender.send(message);
