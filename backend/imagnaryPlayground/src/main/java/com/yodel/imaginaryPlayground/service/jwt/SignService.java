@@ -1,5 +1,5 @@
-//package com.yodel.imaginaryPlayground.service.jwt;
-//
-//public interface SignService {
-//    public
-//}
+package com.yodel.imaginaryPlayground.service.jwt;
+
+public interface SignService {
+    public
+}
