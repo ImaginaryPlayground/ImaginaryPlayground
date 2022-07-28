@@ -1,21 +1,18 @@
 package com.yodel.imaginaryPlayground.controller;
 
-import com.yodel.imaginaryPlayground.model.dto.BabyDto;
-import com.yodel.imaginaryPlayground.model.dto.Role;
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
+import com.yodel.imaginaryPlayground.model.jwt.JwtTokenProvider;
 import com.yodel.imaginaryPlayground.model.vo.EmailCodeVO;
 import com.yodel.imaginaryPlayground.service.EmailService;
 import com.yodel.imaginaryPlayground.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +23,9 @@ public class UserController {
 
     private final UserService userService;
     private final EmailService emailService;
+
+    private final JwtTokenProvider jwtTokenProvider;
+    private final PasswordEncoder passwordEncoder;
 
     private static final String success = "SUCCESS";
     private static final String fail = "FAIL";
@@ -39,6 +39,7 @@ public class UserController {
         String username = signupData.get("username");
         String document = signupData.get("document");
         String provider = signupData.get("provider");
+
         if (provider == null) {
             provider = "SITE";
         }
