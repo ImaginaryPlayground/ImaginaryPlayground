@@ -1,0 +1,34 @@
+.KidsInfoComp {
+  margin: 0 auto;
+  margin-top: 3px;
+  display: flex;
+  flex-direction: column;
+}
+
+.KidsInfoComp .flex_row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.KidsInfoComp span {
+  word-break: keep-all;
+  font-weight: bold;
+}
+
+.KidsInfoComp .star {
+  color: #ad1457;
+}
+
+@media (max-width: 800px) {
+  .KidsInfoComp {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 385px) {
+  .KidsInfoComp .next_line {
+    width: 70% !important;
+    display: block;
+  }
+}

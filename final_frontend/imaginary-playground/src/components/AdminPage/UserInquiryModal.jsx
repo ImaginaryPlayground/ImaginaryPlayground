@@ -119,7 +119,7 @@ const UserInquiryModal = ({
         <Grid className="bg_gray title_center" width={"20%"}>
           <span>답변</span>
         </Grid>
-        <Grid p={1} pl={2} width={"80%"} className="title_center">
+        <Grid p={1} pl={2} width={"80%"} className="title_center bb_5">
           <TextField
             id="standard-multiline-static"
             placeholder="답변을 등록해주세요"
@@ -135,6 +135,7 @@ const UserInquiryModal = ({
       </Grid>
       <Grid
         item
+        mt={1}
         width={"100%"}
         sx={{ display: "flex", justifyContent: "flex-end" }}
       >
