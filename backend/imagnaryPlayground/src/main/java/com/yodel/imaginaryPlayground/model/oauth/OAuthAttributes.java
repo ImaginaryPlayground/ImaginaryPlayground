@@ -1,22 +1,19 @@
-package com.yodel.imaginaryPlayground.model.dto;
+package com.yodel.imaginaryPlayground.model.oauth;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.yodel.imaginaryPlayground.model.dto.UserDto;
+import lombok.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@ToString
+@Data
 public class OAuthAttributes {
     private Map<String, Object> attributes;
     private String nameAttributeKey;
     private String username;
     private String email;
-    private String profile_url;
     private String provider;
 
     // 해당 로그인인 서비스가 kakao인지 google인지 구분하여, 알맞게 매핑을 해주도록 합니다.
@@ -39,7 +36,6 @@ public class OAuthAttributes {
                 userNameAttributeName,
                 (String) profile.get("nickname"),
                 (String) kakao_account.get("email"),
-                (String) profile.get("profile_image_url"),
                 "kakao"); //provider 데이터 추가
     }
 
@@ -50,7 +46,6 @@ public class OAuthAttributes {
                 userNameAttributeName,
                 (String) response.get("name"),
                 (String) response.get("email"),
-                (String) response.get("profile_image"),
                 "naver");
     }
 
@@ -60,10 +55,20 @@ public class OAuthAttributes {
                 userNameAttributeName,
                 (String) attributes.get("name"),
                 (String) attributes.get("email"),
-                (String) attributes.get("picture"),
                 "google");
     }
     public UserDto toEntity() {
-        return new UserDto(username, email, profile_url, provider);
+        return new UserDto(username, email, provider);
+    }
+
+    public Map<String, Object> convertToMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", nameAttributeKey);
+        map.put("key", nameAttributeKey);
+        map.put("username", username);
+        map.put("email", email);
+        map.put("provider", provider);
+
+        return map;
     }
 }

@@ -1,7 +1,7 @@
 package com.yodel.imaginaryPlayground.controller;
 
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
-import com.yodel.imaginaryPlayground.model.jwt.JwtTokenProvider;
+import com.yodel.imaginaryPlayground.model.jwt.JwtTokenService;
 import com.yodel.imaginaryPlayground.model.vo.EmailCodeVO;
 import com.yodel.imaginaryPlayground.service.EmailService;
 import com.yodel.imaginaryPlayground.service.UserService;
@@ -24,7 +24,7 @@ public class UserController {
     private final UserService userService;
     private final EmailService emailService;
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenService jwtTokenService;
     private final PasswordEncoder passwordEncoder;
 
     private static final String success = "SUCCESS";
@@ -46,7 +46,7 @@ public class UserController {
 
         Map<String, Object> result = new HashMap<>();
 
-        // 기존 사용자인지 확인(이메일 조회)
+        // 기존 사용자인지 확인(이메일 조회) => 바로 userService.login과 연결해서 token까지 받아와 반환해준다.
         try {
             int findUser = userService.countByEmail(email);
             if(findUser == 1) {
@@ -74,6 +74,8 @@ public class UserController {
         try {
             int res = userService.countByEmail(user.getEmail());
             if(res == 1){
+                //공통으로 토큰이 들어간다(로그인 성공시 따로 넣어준다).
+                //String token = jwtTokenService.createToken(userDto.getEmail(), "ROLE_USER");
                 result.put("status", success);
             }else{
                 result.put("status", fail);

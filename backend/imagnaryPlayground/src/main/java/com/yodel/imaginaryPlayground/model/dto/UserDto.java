@@ -26,9 +26,6 @@ public class UserDto implements UserDetails {
     @ApiModelProperty(value = "이름")
     private String username;
 
-    @ApiModelProperty(value = "성별")
-    private String gender;
-
     @ApiModelProperty(value = "가입경로")
     private String provider;
 
@@ -51,10 +48,16 @@ public class UserDto implements UserDetails {
     private List<String> roles = new ArrayList<>();
 
     @Builder
-    public UserDto(String username, String email, String document,  String provider) {
+    public UserDto(String username, String email,  String provider) {
         this.username = username;
         this.email = email;
+        this.provider = provider;
+    }
+
+    public UserDto(String email, String username, String document, String provider) {
+        this.username = username;
         this.document = document;
+        this.email = email;
         this.provider = provider;
     }
 

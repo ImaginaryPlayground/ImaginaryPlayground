@@ -1,44 +1,46 @@
 package com.yodel.imaginaryPlayground.model.jwt;
 
+import com.yodel.imaginaryPlayground.model.dto.UserDto;
+import com.yodel.imaginaryPlayground.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.*;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.*;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.*;
 import org.springframework.web.filter.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.*;
+import java.util.Arrays;
 
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean{
-    private JwtTokenProvider jwtTokenProvider;
+    private JwtTokenService jwtTokenService;
+    private UserService userService;
 
-    // Jwt Provier 주입
-    public JwtAuthenticationFilter( JwtTokenProvider jwtTokenProvider ) {
-        this.jwtTokenProvider = jwtTokenProvider;
-    }
-
-    /**
-     * <pre>
-     * Request로 들어오는 Jwt Token의 유효성을 검증(jwtTokenProvider.validateToken)하는 filter를 filterChain에 등록합니다.
-     * </pre>
-     *
-     * @param request
-     * @param response
-     * @param filterChain
-     * @throws IOException
-     * @throws ServletException
-     */
     @Override
-    public void doFilter( ServletRequest request, ServletResponse response, FilterChain filterChain ) throws IOException, ServletException {
-        String token = jwtTokenProvider.resolveToken( (HttpServletRequest) request );
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        String token = ((HttpServletRequest)request).getHeader("Auth");
 
-        if( token != null && jwtTokenProvider.validateToken( token ) ) {
-            Authentication auth = jwtTokenProvider.getAuthentication( token );
-            SecurityContextHolder.getContext().setAuthentication( auth );
+        if (token != null && jwtTokenService.verifyToken(token)) {
+            System.out.println("JwtAuthenticationFilter 실행: " + token);
+            String email = jwtTokenService.getUserEmail(token);
+
+            // DB연동을 통해 데이터를 가져와 SpringContext에 저장
+
+            UserDto user = userService.findByEmail(email);
+
+            Authentication auth = getAuthentication(user);
+            SecurityContextHolder.getContext().setAuthentication(auth);
         }
 
-        filterChain.doFilter( request, response );
+        chain.doFilter(request, response);
+    }
+
+    public Authentication getAuthentication(UserDto user) {
+        return new UsernamePasswordAuthenticationToken(user, "",
+                Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
     }
 }

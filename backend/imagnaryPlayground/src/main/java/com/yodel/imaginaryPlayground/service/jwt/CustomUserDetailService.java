@@ -7,12 +7,18 @@ import org.slf4j.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+http://localhost:8080/oauth2/authorization/google
+http://localhost:8080/oauth2/authorization/naver
+http://localhost:8080/oauth2/authorization/kakao
+*/
 @RequiredArgsConstructor
-//@Service
+@Service
 public class CustomUserDetailService implements UserDetailsService {
 
     private Logger logger = LoggerFactory.getLogger(CustomUserDetailService.class);
