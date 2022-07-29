@@ -8,19 +8,23 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
-import java.util.List;
 
 @RequiredArgsConstructor
+<<<<<<< HEAD:backend/imagnaryPlayground/src/main/java/com/yodel/imaginaryPlayground/model/jwt/JwtTokenProvider.java
 @Component
 public class JwtTokenProvider { // JWT 토큰 생성 및 검증 모듈
+=======
+@Service
+public class JwtTokenService { // JWT 토큰을 생성 및 검증 모듈
+>>>>>>> b1f9aef52777152ac57d10008950d946d16cb0f0:backend/imagnaryPlayground/src/main/java/com/yodel/imaginaryPlayground/model/jwt/JwtTokenService.java
 
-    private static Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
+    private static Logger logger = LoggerFactory.getLogger(JwtTokenService.class);
 
     @Value("${spring.jwt.secret}")
     private String secretKey;
@@ -35,9 +39,9 @@ public class JwtTokenProvider { // JWT 토큰 생성 및 검증 모듈
     }
 
     // Jwt 토큰 생성
-    public String createToken(String userId, List<String> roles) {
-        Claims claims = Jwts.claims().setSubject(userId); // id 구분자 넣기
-        claims.put("roles", roles); // 권한 넣기
+    public String createToken(String userEmail, String role) {
+        Claims claims = Jwts.claims().setSubject(userEmail); // id 구분자 넣기
+        claims.put("role", role); // 권한 넣기
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims) // 데이터
@@ -49,12 +53,25 @@ public class JwtTokenProvider { // JWT 토큰 생성 및 검증 모듈
 
     // Jwt 토큰으로 인증 정보를 조회
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPk(token));
+        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserEmail(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
+    public boolean verifyToken(String token) {
+        try {
+            Jws<Claims> claims = Jwts.parser()
+                    .setSigningKey(secretKey)
+                    .parseClaimsJws(token);
+            return claims.getBody()
+                    .getExpiration()
+                    .after(new Date());
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     // Jwt 토큰에서 회원 구별 정보 추출
-    public String getUserPk(String token) {
+    public String getUserEmail(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
