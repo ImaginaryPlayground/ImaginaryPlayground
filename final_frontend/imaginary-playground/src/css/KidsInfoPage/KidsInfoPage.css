@@ -1,0 +1,16 @@
+.KidsInfoPage {
+  margin: 0 auto;
+  width: 1200px;
+}
+
+@media (max-width: 1200px) {
+  .KidsInfoPage {
+    width: 90%;
+  }
+}
+
+@media (max-width: 900px) {
+  .KidsInfoPage {
+    width: 95% !important;
+  }
+}
