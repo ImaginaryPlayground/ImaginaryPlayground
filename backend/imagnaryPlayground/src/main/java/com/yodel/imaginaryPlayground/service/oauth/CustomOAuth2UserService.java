@@ -1,7 +1,8 @@
-package com.yodel.imaginaryPlayground.service;
+package com.yodel.imaginaryPlayground.service.oauth;
 
-import com.yodel.imaginaryPlayground.model.dto.OAuthAttributes;
+import com.yodel.imaginaryPlayground.model.oauth.OAuthAttributes;
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
+import com.yodel.imaginaryPlayground.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -12,15 +13,14 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.Collections;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private final UserService userService;
-    private final HttpSession httpSession;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
@@ -36,17 +36,20 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         // OAuth2 로그인을 통해 가져온 OAuth2User의 attribute를 담아주는 of 메소드.
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
-        UserDto user = saveOrUpdate(attributes);
+        int saveOrlogin = saveOrUpdate(attributes);
+        System.out.println("통합 로그인 성공 여부: "+saveOrlogin);
 
-        System.out.println(attributes.getAttributes());
-        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
-                , attributes.getAttributes()
-                , attributes.getNameAttributeKey());
+        var userAttribute = attributes.convertToMap(); // Map으로 한 번 감싸준다.
+
+        return new DefaultOAuth2User(
+                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")),
+                userAttribute //OAuthAttributes.getAttributes() 로 보내는게 원칙이나 구조가 모두 깨져서 도착해 Map으로 감싸서 보낸다.(깨진 구조 모양은 success 핸들러 참고)
+                , "email");
     }
 
 
     //혹시 이미 저장된 정보라면, update 처리
-    private UserDto saveOrUpdate(OAuthAttributes attributes) {
+    private int saveOrUpdate(OAuthAttributes attributes) {
         int findUser = userService.countByEmail(attributes.getEmail());
         UserDto user = new UserDto();
 
@@ -62,7 +65,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             user = userService.findByEmail(user.getEmail()); //구현 필요
         }
 
-        System.out.printf("소셜 로그인 진행: "+user.toString());
-        return user;
+        System.out.printf("saveOrupdate, 소셜 로그인 진행: "+user.toString());
+        return findUser;
     }
 }
