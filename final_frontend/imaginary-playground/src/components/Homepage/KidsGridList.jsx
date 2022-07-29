@@ -1,5 +1,6 @@
 import {
   Button,
+  Divider,
   easing,
   Grid,
   MenuItem,
@@ -256,7 +257,6 @@ const KidsGridList = () => {
       <Grid
         item
         sx={{
-          borderBottom: "0.5px solid #ad1457",
           marginBottom: "15px",
         }}
       >
@@ -272,11 +272,13 @@ const KidsGridList = () => {
               marginTop: "8px",
               display: "flex",
               alignItems: "center",
+              color: "#ad1457",
             }}
           >
             <FormatListNumberedIcon />
             &nbsp;소아 환자 목록
           </h2>
+
           <Grid item display={"flex"} flexDirection="column">
             <Grid
               item
@@ -289,14 +291,26 @@ const KidsGridList = () => {
             >
               {!isSearch ? (
                 <>
-                  <span style={{ marginRight: "3px", fontWeight: "bold" }}>
+                  <span
+                    style={{
+                      marginRight: "3px",
+                      fontWeight: "bold",
+                      color: "#ad1457",
+                    }}
+                  >
                     검색 상자
                   </span>
                   <PersonSearchIcon />
                 </>
               ) : (
                 <>
-                  <span style={{ marginRight: "3px", fontWeight: "bold" }}>
+                  <span
+                    style={{
+                      color: "#ad1457",
+                      marginRight: "3px",
+                      fontWeight: "bold",
+                    }}
+                  >
                     상자 닫기
                   </span>
                   <CloseIcon />
@@ -330,6 +344,7 @@ const KidsGridList = () => {
               *환자를 클릭하면 상세보기로 이동합니다.
             </Grid>
           </Grid>
+
           {isSearch && (
             <Grid item mb={1} width={"300px"}>
               <Grid
@@ -453,6 +468,7 @@ const KidsGridList = () => {
             </Grid>
           )}
         </Grid>
+        <Divider />
       </Grid>
       <Grid
         container

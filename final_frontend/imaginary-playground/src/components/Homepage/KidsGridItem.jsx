@@ -1,8 +1,17 @@
 import { Grid, Paper } from "@mui/material";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "../../css/Homepage/KidsGridItem.css";
 
 const KidsGridItem = ({ kidData }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleKidClick = () => {
+    dispatch({ type: "SET_SELECTED_KID", data: kidData });
+    navigate("/kidinfopage");
+  };
   return (
     <Paper
       elevation={24}
@@ -18,6 +27,7 @@ const KidsGridItem = ({ kidData }) => {
         sx={{
           cursor: "pointer",
         }}
+        onClick={handleKidClick}
       >
         <Grid item className="kids_img_box" sx={{ position: "relative" }}>
           <img
