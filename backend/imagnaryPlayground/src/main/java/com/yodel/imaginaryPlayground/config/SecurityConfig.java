@@ -16,6 +16,8 @@ import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationF
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.sql.SQLException;
+
 @Configuration
 @EnableWebSecurity  // 해당 애노테이션을 붙인 필터(현재 클래스)를 스프링 필터체인에 등록.
 @RequiredArgsConstructor
@@ -36,7 +38,7 @@ public class SecurityConfig { //extends 하는 방식은 deprecated 이므로 @B
 
     // 로그인, 회원가입 등
     private static final String[] PUBLIC_URI = {
-            "/", "/login", "/signup", "/*/signup/**", "/css/**", "/images/**", "/js/**", "/oauth2/**"
+            "/", "/login", "/signup", "/*/signup/**", "/css/**", "/images/**", "/js/**", "/oauth2/**", "/user/login", "/token/**", "/user/**"
     };
 
     private static final String[] PUBLIC_GET_URI = {
@@ -78,15 +80,16 @@ public class SecurityConfig { //extends 하는 방식은 deprecated 이므로 @B
                 .and()
                 .authorizeRequests()
                     .antMatchers(PUBLIC_URI).permitAll()
+                    .antMatchers(SWAGGER_URI).permitAll()
                     .anyRequest().authenticated()
                 .and()
-                    .addFilterBefore(new JwtAuthenticationFilter(), OAuth2LoginAuthenticationFilter.class)
+                    .addFilterBefore(new JwtAuthenticationFilter(jwtTokenService), OAuth2LoginAuthenticationFilter.class)
                 .oauth2Login() // oauth 로그인시
                     .loginPage("/token/expired") // 로그인 페이지 url 직접 설정
                     .successHandler(oauth2SuccessHandler) //로그인 성공시 핸들러
                     .userInfoEndpoint().userService(customOAuth2UserService);
 
-        http.addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new JwtAuthenticationFilter(jwtTokenService), UsernamePasswordAuthenticationFilter.class);
        /*
                 .authorizeRequests()
                     .antMatchers(PUBLIC_URI).permitAll()
