@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiParam;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -197,4 +198,14 @@ public class UserController {
         return result;
     }
 
+    @PostMapping("/token")
+    public Map<String, Object> parseToken(@RequestBody String token){
+        Map<String, Object> result = new HashMap<>();
+        System.out.println("들어왔냐");
+        System.out.println(SecurityContextHolder.getContext());
+        //UserDto user2 = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //System.out.println("login Service :" + user2.toString());
+
+        return result;
+    }
 }
