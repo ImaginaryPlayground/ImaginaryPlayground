@@ -18,7 +18,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
+public class JwtTokenProvider { // JWT 토큰 생성 및 검증 모듈
 
     private static Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
