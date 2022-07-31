@@ -1,6 +1,8 @@
 package com.yodel.imaginaryPlayground.mapper;
 
+import com.yodel.imaginaryPlayground.model.dto.PageDto;
 import com.yodel.imaginaryPlayground.model.dto.QuestionDto;
+import com.yodel.imaginaryPlayground.model.vo.DeleteVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.SQLException;
@@ -11,10 +13,10 @@ import java.util.Map;
 public interface QuestionMapper {
     int saveQuestion(QuestionDto question) throws SQLException;
     int editQuestion(QuestionDto question) throws SQLException;
-    int deleteQuestion(int id) throws SQLException;
+    int deleteQuestion(DeleteVO deleteVO) throws SQLException;
     QuestionDto lookupQuestion(int id) throws SQLException;
-    List<QuestionDto> lookupAllQuestion(Map<String, Integer> map) throws SQLException;
-    List<QuestionDto> lookupAllQuestionWithQuestionType(Map<String, Integer> map) throws SQLException;
-    List<QuestionDto> searchAllQuestion(Map<String, String> map) throws SQLException;
-    List<QuestionDto> searchAllQuestionWithQuestionType(Map<String, String> map) throws SQLException;
+    List<QuestionDto> lookupAllQuestion(PageDto pageDto) throws SQLException;
+    List<QuestionDto> lookupAllQuestionWithQuestionType(PageDto pageDto) throws SQLException;
+    List<QuestionDto> searchAllQuestion(PageDto pageDto) throws SQLException;
+    List<QuestionDto> searchAllQuestionWithQuestionType(PageDto pageDto) throws SQLException;
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yodel.imaginaryPlayground.mapper.UserMapper">
+
+    <insert id="saveUser" parameterType="int">
+        INSERT INTO imagination_playground.user
+            (email, username, gender, provider, document, join_date, modified_date)
+        VALUES
+            (#{email}, #{username}, #{gender}, #{provider}, #{document}, NOW(), NOW())
+    </insert>
+
+    <select id="login" parameterType="String" resultType="UserDto">
+        SELECT email, id
+        FROM imagination_playground.user
+        WHERE email = #{email}
+    </select>
+
+    <update id="updateUserInfo" parameterType="UserDto">
+        UPDATE imagination_playground.user
+        SET username = #{username}, document = #{document}, modified_date = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <select id="detailUser" parameterType="int" resultType="UserDto">
+        SELECT * FROM imagination_playground.user
+        WHERE id = #{id}
+    </select>
+
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM imagination_playground.user
+        WHERE id = #{id}
+    </delete>
+
+    <select id="countByEmail" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM imagination_playground.user
+        WHERE email = #{email}
+    </select>
+
+    <select id="findByEmail" parameterType="String" resultType="UserDto">
+        SELECT COUNT(*)
+        FROM imagination_playground.user
+        WHERE email = #{email}
+    </select>
+
+    <!--이메일 인증번호 저장-->
+    <insert id="saveEmailAuth" parameterType="Map">
+        INSERT INTO imagination_playground.user_authentication
+        (email, code)
+        VALUES(#{email}, #{CODE})
+    </insert>
+
+    <select id="authEmailCode" parameterType="EmailCodeVO" resultType="int">
+        SELECT COUNT(*)
+        FROM imagination_playground.user_authentication
+        WHERE email = CONCAT('"',#{email}, '"') AND code = #{CODE}
+    </select>
+
+    <delete id="deleteEmailCode" parameterType="String">
+        DELETE FROM imagination_playground.user_authentication
+        WHERE email = #{email}
+    </delete>
+</mapper>

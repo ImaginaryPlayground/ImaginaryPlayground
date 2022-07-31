@@ -28,10 +28,10 @@ public class AdminController {
     @PostMapping("/auth/type")
     @ApiOperation(value = "정회원 등록", notes = "이메일 인증이 완료된 회원이 사이트를 이용할 수 있도록 정회원으로 승인한다.")
     public Map<String, Object> approveUserType(
-            @RequestBody @ApiParam(value = "email과 type값을 보낸다. type은 CUSTOMER 또는 USER 값이다.", required = false) Map<String, String> map){
+            @RequestParam(value="user[]") @ApiParam(value = "id값을 user 이름의 배열을 통해 보내준다.", required = true) List<Integer> list){
         Map<String, Object> result = new HashMap<>();
         try {
-            int res = adminService.approveUserType(map);
+            int res = adminService.approveUserType(list);
             if(res == 1){
                 result.put("status", success);
                 result.put("data", adminService.lookupUnapprovedUser(0));

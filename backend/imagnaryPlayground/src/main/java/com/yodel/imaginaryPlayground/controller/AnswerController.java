@@ -1,12 +1,15 @@
 package com.yodel.imaginaryPlayground.controller;
 
 import com.yodel.imaginaryPlayground.model.dto.AnswerDto;
+import com.yodel.imaginaryPlayground.model.dto.PageDto;
 import com.yodel.imaginaryPlayground.model.dto.QuestionDto;
+import com.yodel.imaginaryPlayground.model.vo.DeleteVO;
 import com.yodel.imaginaryPlayground.service.AnswerService;
 import com.yodel.imaginaryPlayground.service.QuestionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,20 +25,20 @@ public class AnswerController {
     private final String fail = "FAIL";
     private final String error = "ERROR";
     private final AnswerService answerService;
+    private final int PAGE = 9; //Pagination을 위한 변수
 
-    @GetMapping("/")
+    @PostMapping("/")
     @ApiOperation(value = "답변 등록", notes = "관리자가 답변을 등록할 수 있는 기능")
     public Map<String, Object> saveAnswer(
             @RequestBody @ApiParam(value = "답변등록에 필수요소인 AnswerDTO 내용을 보낸다.", required = true) AnswerDto answer){
         Map<String, Object> result = new HashMap<>();
+
         try {
-            int res = answerService.isCompleted(answer.getQuestion_id())==0? 0: answerService.saveAnswer(answer);
-            if(res == 1){
+            Integer res = answerService.isCompleted(answer.getQuestion_id());
+            if(res != null && res == 0 && answerService.saveAnswer(answer) == 1){
                 result.put("status", success);
-                Map<String, String> map = new HashMap<>();
-                map.put("key", "completed");
-                map.put("value", "0");
-                result.put("data", answerService.lookupUncompletedAnswer(map));
+                PageDto pageDto = new PageDto(0, PAGE,"completed", "0", 0);
+                result.put("data", answerService.lookupUncompletedAnswer(pageDto));
             }else{
                 result.put("status", fail);
             }
@@ -49,16 +52,13 @@ public class AnswerController {
     @PutMapping("/")
     @ApiOperation(value = "답변 수정", notes = "관리자가 답변을 수정할 수 있는 기능")
     public Map<String, Object> editAnswer(
-            @RequestBody @ApiParam(value = "답변수정에 필수요소인 AnswerDTO 내용을 보낸다.", required = true) AnswerDto answer){
+            @RequestBody @ApiParam(value = "답변수정에 필수요소인 AnswerDTO 내용을 보낸다. id, question_id, content 필수", required = true) AnswerDto answer){
         Map<String, Object> result = new HashMap<>();
         try {
             int res = answerService.editAnswer(answer);
             if(res == 1){
                 result.put("status", success);
-                Map<String, String> map = new HashMap<>();
-                map.put("key", "completed");
-                map.put("value", "0");
-                result.put("data", answerService.lookupUncompletedAnswer(map));
+                result.put("data", answerService.detailAnswer(answer.getQuestion_id()));
             }else{
                 result.put("status", fail);
             }
@@ -71,19 +71,17 @@ public class AnswerController {
 
     @PostMapping  ("/delete")
     @ApiOperation(value = "답변 삭제", notes = "관리자가 답변을 삭제할 수 있는 기능")
-    public Map<String, Object> deleteQuestion(
-            @PathVariable @ApiParam(value = "답변삭제에 필요한 answer의 id값과 user_id를 전송한다.", required = true)
-            Map<String, Integer> map){
+    public Map<String, Object> deleteAnswer(
+            @RequestBody @ApiParam(value = "답변삭제에 필요한 answer의 id값과 user_id를 전송한다.", required = true)
+            DeleteVO deleteVO){
         Map<String, Object> result = new HashMap<>();
         //이후 토큰의 id와 user_id값을 비교한다.
         try {
-            int res = answerService.deleteAnswer(map.get("id"));
+            int res = answerService.deleteAnswer(deleteVO);
             if(res == 1){
                 result.put("status", success);
-                Map<String, String> map2 = new HashMap<>();
-                map2.put("key", "completed");
-                map2.put("value", "0");
-                result.put("data", answerService.lookupUncompletedAnswer(map2));
+                PageDto pageDto = new PageDto(0, PAGE,"completed", "0", 0);
+                result.put("data", answerService.lookupUncompletedAnswer(pageDto));
             }else{
                 result.put("status", fail);
             }
@@ -113,4 +111,5 @@ public class AnswerController {
         }
         return result;
     }
+
 }

@@ -1,7 +1,9 @@
 package com.yodel.imaginaryPlayground.service;
 
 import com.yodel.imaginaryPlayground.mapper.QuestionMapper;
+import com.yodel.imaginaryPlayground.model.dto.PageDto;
 import com.yodel.imaginaryPlayground.model.dto.QuestionDto;
+import com.yodel.imaginaryPlayground.model.vo.DeleteVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +29,8 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     @Override
-    public int deleteQuestion(int id) throws Exception {
-        return questionMapper.deleteQuestion(id);
+    public int deleteQuestion(DeleteVO deleteVO) throws Exception {
+        return questionMapper.deleteQuestion(deleteVO);
     }
 
     @Override
@@ -38,30 +40,25 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public List<QuestionDto> lookupAllQuestion(int page) throws Exception {
-        Map<String, Integer> map = new HashMap<>();
-        map.put("page", page);
-        map.put("page_last", page+PAGE);
-        return questionMapper.lookupAllQuestion(map);
+        PageDto pageDto = new PageDto(0, PAGE, "", "", 0);
+        return questionMapper.lookupAllQuestion(pageDto);
     }
 
     @Override
-    public List<QuestionDto> lookupAllQuestionWithQuestionType(int page, int qna_type) throws Exception {
-        Map<String, Integer> map = new HashMap<>();
-        map.put("page", page);
-        map.put("page_last", page+PAGE);
-        map.put("qna_type", qna_type);
-        return questionMapper.lookupAllQuestionWithQuestionType(map);
+    public List<QuestionDto> lookupAllQuestionWithQuestionType(PageDto pageDto) throws Exception {
+        pageDto.setPage_last(pageDto.getPage() + PAGE);
+        return questionMapper.lookupAllQuestionWithQuestionType(pageDto);
     }
 
     @Override
-    public List<QuestionDto> searchAllQuestion(Map<String, String> map) throws Exception {
-        map.put("page_last", Integer.toString(Integer.parseInt(map.get("page")+PAGE)));
-        return questionMapper.searchAllQuestion(map);
+    public List<QuestionDto> searchAllQuestion(PageDto pageDto) throws Exception {
+        pageDto.setPage_last(pageDto.getPage() + PAGE);
+        return questionMapper.searchAllQuestion(pageDto);
     }
 
     @Override
-    public List<QuestionDto> searchAllQuestionWithQuestionType(Map<String, String> map) throws Exception {
-        map.put("page_last", Integer.toString(Integer.parseInt(map.get("page")+PAGE)));
-        return questionMapper.searchAllQuestionWithQuestionType(map);
+    public List<QuestionDto> searchAllQuestionWithQuestionType(PageDto pageDto) throws Exception {
+        pageDto.setPage_last(pageDto.getPage() + PAGE);
+        return questionMapper.searchAllQuestionWithQuestionType(pageDto);
     }
 }

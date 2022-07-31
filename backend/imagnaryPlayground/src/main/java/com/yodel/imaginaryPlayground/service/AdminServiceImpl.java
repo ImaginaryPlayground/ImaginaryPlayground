@@ -16,8 +16,8 @@ public class AdminServiceImpl implements AdminService{
     private final AdminMapper adminMapper;
     private final int PAGE = 9; //Pagination을 위한 변수
     @Override //생성자로 만들어서 주기
-    public int approveUserType(Map<String, String> map) throws Exception {
-        return adminMapper.approveUserType(map);
+    public int approveUserType(List<Integer> list) throws Exception {
+        return adminMapper.approveUserType(list);
     }
 
     @Override

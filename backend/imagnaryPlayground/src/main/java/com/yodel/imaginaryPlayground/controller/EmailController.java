@@ -1,28 +1,48 @@
 package com.yodel.imaginaryPlayground.controller;
 
-import com.yodel.imaginaryPlayground.service.EmailService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 
-import java.util.Map;
-
-@Slf4j
-@RequiredArgsConstructor
-@RestController
 public class EmailController {
 
-    private final EmailService emailService;
+    public static void main(String[] args) {
 
-    @PostMapping("AUTH.SEND_EMAIL")
-    public Map<String, Object> sendEmail(@RequestBody Map<String, Object> params){
-        log.info("email params={}", params);
+        final String username = "hmr971127@gmail.com";
+        final String password = "jjizxeiybonklnnm";
 
-        return emailService.sendEmail( (String) params.get("hmr971127@gmail.com")
-                , (String) params.get("메일 인증 테스트")
-                , (String) params.get("메일 인증 테스트입니다.")
-        );
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
+        Session session = Session.getInstance(prop,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("from@gmail.com"));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse("hmr971127@gmail.com")
+            );
+            message.setSubject("Testing Gmail TLS");
+            message.setText("Dear Mail Crawler,"
+                    + "\n\n Please do not spam my email!");
+
+            Transport.send(message);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 }

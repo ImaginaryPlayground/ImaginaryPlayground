@@ -4,10 +4,14 @@
 
 <mapper namespace="com.yodel.imaginaryPlayground.mapper.AdminMapper">
     <!--회원의 등급 조정-->
-    <update id="approveUserType" parameterType="Map">
+    <update id="approveUserType">
         UPDATE imagination_playground.user
         SET type = #{type}
-        WHERE email = #{email}
+        WHERE email = #{email} IN
+        <foreach item="id" collection="list"
+                 open="(" separator="," close=")">
+            #{id}
+        </foreach>
     </update>
 
     <!--전체 회원 조회-->
@@ -18,7 +22,7 @@
     <!--등급이 PENDING인 회원 조회-->
     <select id="lookupUnapprovedUser" parameterType="Map" resultType="UserDto">
         SELECT * FROM imagination_playground.user
-        WHERE type = 'PENDING'
+        WHERE type = 'CUSTOMER'
         LIMIT #{page}, #{page_last}
     </select>
 
