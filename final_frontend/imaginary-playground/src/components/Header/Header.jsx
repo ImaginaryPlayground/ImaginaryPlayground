@@ -19,6 +19,7 @@ import React from "react";
 
 import "../../css/Header/Header.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const drawerWidth = 240;
 const navItems = ["내정보", "1:1문의", "로그아웃"];
@@ -30,7 +31,32 @@ const Header = (props) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const currentPage = useSelector((state) => state.HomePageCurrentPageReducer);
+  const dispatch = useDispatch();
 
+  const handleClickHome = async () => {
+    await dispatch({
+      type: "SET_CURRENT_PAGE",
+      data: { ...currentPage, scrollY: 0, page: 1 },
+    });
+
+    navigate("/");
+  };
+
+  const handleClickMenu = (e) => {
+    switch (e.target.innerText) {
+      case "내정보":
+        navigate("/mypage");
+        break;
+      case "1:1문의":
+        navigate("/qnapage");
+        break;
+      case "로그아웃":
+        break;
+      default:
+        break;
+    }
+  };
   const drawer = (
     <Box
       onClick={handleDrawerToggle}
@@ -40,9 +66,7 @@ const Header = (props) => {
       <Typography variant="h6" sx={{ my: 2 }}>
         <span
           className="text_white text_bold"
-          onClick={() => {
-            navigate("/", { replace: true });
-          }}
+          onClick={handleClickHome}
           style={{ cursor: "pointer" }}
         >
           상상 놀이터
@@ -86,9 +110,7 @@ const Header = (props) => {
             sx={{ flexGrow: 1, display: { xs: "block", sm: "block" } }}
           >
             <span
-              onClick={() => {
-                navigate("/", { replace: true });
-              }}
+              onClick={handleClickHome}
               className="text_white text_bold"
               style={{
                 cursor: "pointer",
@@ -101,7 +123,11 @@ const Header = (props) => {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
+              <Button
+                key={item}
+                sx={{ color: "#fff" }}
+                onClick={handleClickMenu}
+              >
                 {item}
               </Button>
             ))}
