@@ -1,0 +1,52 @@
+.QnaListPage {
+  margin: 0 auto;
+  width: 1200px;
+}
+
+.QnaListPage span,
+li,
+label,
+div {
+  font-family: "IBM Plex Sans KR" !important;
+}
+
+.QnaListPage .text_Ymove {
+  display: block;
+  animation: text_Ymove 2s infinite linear alternate;
+}
+
+.QnaListPage .text_opacity {
+  display: block;
+  animation: text_opacity 2s infinite linear alternate;
+}
+
+@media (max-width: 1250px) {
+  .QnaListPage {
+    width: 90%;
+  }
+}
+
+@media (max-width: 900px) {
+  .QnaListPage {
+    width: 95% !important;
+  }
+}
+
+@keyframes text_Ymove {
+  0% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes text_opacity {
+  0% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

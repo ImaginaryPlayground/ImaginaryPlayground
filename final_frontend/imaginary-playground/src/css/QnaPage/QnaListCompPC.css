@@ -1,0 +1,56 @@
+.QnaListCompPC {
+  width: 100% !important;
+  padding: 10px;
+}
+
+.QnaListCompPC .table_head {
+  border-top: 2px solid black;
+  border-bottom: 1px solid #dadada;
+}
+
+.QnaListCompPC .text_constrained {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.QnaListCompPC .custom_text_align {
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  background-color: gray;
+  border-right: 1px solid white;
+  word-break: break-all;
+}
+
+.QnaListCompPC .font_custom {
+  color: #ad1457;
+  font-weight: bold;
+}
+
+.QnaListCompPC .font_bold {
+  font-weight: bold;
+}
+
+.QnaListCompPC .title_td {
+  width: 55% !important;
+}
+
+.QnaListCompPC .writer_td {
+  width: 13% !important;
+}
+
+.QnaListCompPC .username_td {
+  width: 17% !important;
+}
+
+.QnaListCompPC .date_td {
+  width: 15% !important;
+}
+
+.QnaListCompPC .table_content:last-child {
+  border-bottom: none;
+}
