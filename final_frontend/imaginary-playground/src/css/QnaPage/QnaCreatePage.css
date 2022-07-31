@@ -1,0 +1,31 @@
+.QnaCreatePage {
+  width: 1200px !important;
+  margin: 0 auto;
+}
+
+.QnaCreatePage span,
+li,
+label,
+div {
+  font-family: "IBM Plex Sans KR" !important;
+}
+
+.QnaCreatePage span {
+  word-break: keep-all;
+}
+
+.QnaCreatePage .star {
+  color: #ad1457;
+}
+
+@media (max-width: 1250px) {
+  .QnaCreatePage {
+    width: 90% !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .QnaCreatePage {
+    width: 95% !important;
+  }
+}
