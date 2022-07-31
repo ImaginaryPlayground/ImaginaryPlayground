@@ -1,19 +1,22 @@
 import {
   Button,
   Divider,
-  easing,
   Grid,
   MenuItem,
   Pagination,
   TextField,
   useMediaQuery,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import "../../css/Homepage/KidsGridList.css";
 import KidsGridItem from "./KidsGridItem";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import CloseIcon from "@mui/icons-material/Close";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createBrowserHistory } from "history";
+import ContactsIcon from "@mui/icons-material/Contacts";
 
 const allData = [
   {
@@ -212,6 +215,9 @@ const genderMenu = [
 ];
 
 const KidsGridList = () => {
+  const currentPage = useSelector((state) => state.HomePageCurrentPageReducer);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [kidsData, setKidsData] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
   const [searchData, setSearchData] = useState({
@@ -220,10 +226,15 @@ const KidsGridList = () => {
     age_2: 20,
     gender: "All",
   });
-  const [page, setPage] = useState(1);
+
+  const [page, setPage] = useState(currentPage.page);
   const isMobile_655 = useMediaQuery("(max-width:655px)");
+  const navigate = useNavigate();
+  const history = createBrowserHistory();
 
   useEffect(() => {
+    if (loading) window.scrollTo(0, 200);
+
     if (!isSearch) {
       //검색중이지 않을 때
       setKidsData(allData);
@@ -233,8 +244,38 @@ const KidsGridList = () => {
     //여기서 1페이지에 해당하는 아이들 정보 가져옴
   }, [page]);
 
+  useEffect(() => {
+    //페이지 리로드 감지
+    window.onpageshow = function (event) {
+      if (event.persisted || window.performance) {
+        setPage(1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 60);
+      }
+    };
+
+    setTimeout(() => {
+      window.scrollTo(0, currentPage.scrollY);
+      setLoading(true);
+    }, 50);
+  }, []);
+
+  // useLayoutEffect(() => {
+  //   return () => {
+  //     // dispatch({
+  //     //   type: "SET_CURRENT_PAGE",
+  //     //   data: { ...currentPage, scrollY: 0, page: 1 },
+  //     // });
+  //   };
+  // }, [page, currentPage]);
+
   const handlePageChange = (e, value) => {
     setPage(value);
+    dispatch({
+      type: "SET_CURRENT_PAGE",
+      data: { ...currentPage, page: parseInt(value, 10) },
+    });
   };
 
   const handleOnChangeSearch = (e) => {
@@ -244,11 +285,19 @@ const KidsGridList = () => {
     });
   };
 
+  const handleKidCreateSubmit = () => {
+    dispatch({
+      type: "SET_CURRENT_PAGE",
+      data: { ...currentPage, scrollY: window.scrollY },
+    });
+    navigate("/kidinfocreate");
+  };
+
   const handleSearchSubmit = (e) => {
     console.log(searchData);
     const submitData = {
       ...searchData,
-      page: page,
+      page: 1,
     };
   };
 
@@ -291,16 +340,18 @@ const KidsGridList = () => {
             >
               {!isSearch ? (
                 <>
-                  <span
-                    style={{
-                      marginRight: "3px",
-                      fontWeight: "bold",
-                      color: "#ad1457",
-                    }}
-                  >
-                    검색 상자
-                  </span>
-                  <PersonSearchIcon />
+                  <Grid item display={"flex"}>
+                    <span
+                      style={{
+                        marginRight: "3px",
+                        fontWeight: "bold",
+                        color: "#ad1457",
+                      }}
+                    >
+                      검색 상자
+                    </span>
+                    <PersonSearchIcon />
+                  </Grid>
                 </>
               ) : (
                 <>
@@ -327,7 +378,7 @@ const KidsGridList = () => {
           width={"100%"}
           flexWrap={"wrap-reverse"}
           flexDirection={!isMobile_655 ? "row" : "column"}
-          alignItems={!isMobile_655 ? "center" : ""}
+          alignItems={!isMobile_655 ? "flex-start" : ""}
         >
           <Grid item mb={isMobile_655 ? 2 : 1}>
             <Grid item>
@@ -340,10 +391,49 @@ const KidsGridList = () => {
             <Grid item sx={{ fontSize: "13px" }} mt={1}>
               *검색기능을 통하여 원하는 환자를 검색할 수 있습니다.
             </Grid>
-            <Grid item sx={{ fontSize: "13px" }} mt={1}>
+            <Grid
+              item
+              sx={{
+                fontSize: "13px",
+              }}
+              mt={1}
+            >
               *환자를 클릭하면 상세보기로 이동합니다.
             </Grid>
           </Grid>
+          {!isSearch && (
+            <Grid
+              item
+              display={"flex"}
+              flexDirection="column"
+              justifyContent={"end"}
+              mb={1}
+            >
+              <Button
+                variant="contained"
+                color="main"
+                onClick={() => {
+                  handleKidCreateSubmit();
+                }}
+              >
+                <Grid sx={{ display: "flex", alignItems: "center" }}>
+                  <span
+                    style={{
+                      fontFamily: "IBM Plex Sans KR",
+                      color: "white",
+                      fontWeight: "bold",
+                      marginRight: "3px",
+                      display: "block",
+                    }}
+                  >
+                    환자 등록
+                  </span>
+
+                  <ContactsIcon />
+                </Grid>
+              </Button>
+            </Grid>
+          )}
 
           {isSearch && (
             <Grid item mb={1} width={"300px"}>
@@ -449,6 +539,32 @@ const KidsGridList = () => {
                 justifyContent={"flex-end"}
                 mt={1}
               >
+                {!isMobile_655 && (
+                  <Button
+                    variant="contained"
+                    color="main"
+                    onClick={() => {
+                      handleKidCreateSubmit();
+                    }}
+                    sx={{ marginRight: "10px" }}
+                  >
+                    <Grid sx={{ display: "flex", alignItems: "center" }}>
+                      <span
+                        style={{
+                          fontFamily: "IBM Plex Sans KR",
+                          color: "white",
+                          fontWeight: "bold",
+                          marginRight: "3px",
+                          display: "block",
+                        }}
+                      >
+                        환자 등록
+                      </span>
+
+                      <ContactsIcon />
+                    </Grid>
+                  </Button>
+                )}
                 <Button
                   variant="contained"
                   color="main"
@@ -468,6 +584,34 @@ const KidsGridList = () => {
             </Grid>
           )}
         </Grid>
+        {isSearch && isMobile_655 && (
+          <Grid item width={"100%"} mb={1}>
+            <Button
+              variant="contained"
+              color="main"
+              onClick={() => {
+                handleKidCreateSubmit();
+              }}
+              sx={{ width: "100%" }}
+            >
+              <Grid sx={{ display: "flex", alignItems: "center" }}>
+                <span
+                  style={{
+                    fontFamily: "IBM Plex Sans KR",
+                    color: "white",
+                    fontWeight: "bold",
+                    marginRight: "3px",
+                    display: "block",
+                  }}
+                >
+                  환자 등록
+                </span>
+
+                <ContactsIcon />
+              </Grid>
+            </Button>
+          </Grid>
+        )}
         <Divider />
       </Grid>
       <Grid
@@ -493,6 +637,7 @@ const KidsGridList = () => {
           showFirstButton
           showLastButton
           onChange={handlePageChange}
+          page={page}
         />
       </Grid>
     </Grid>

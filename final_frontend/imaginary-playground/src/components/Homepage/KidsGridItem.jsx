@@ -1,16 +1,20 @@
 import { Grid, Paper } from "@mui/material";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "../../css/Homepage/KidsGridItem.css";
 
 const KidsGridItem = ({ kidData }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const currentPage = useSelector((state) => state.HomePageCurrentPageReducer);
   const handleKidClick = () => {
+    dispatch({
+      type: "SET_CURRENT_PAGE",
+      data: { ...currentPage, scrollY: window.scrollY },
+    });
     dispatch({ type: "SET_SELECTED_KID", data: kidData });
-    navigate("/kidinfopage");
+    navigate("/kidinfo", { state: { isEdit: true } });
   };
   return (
     <Paper
