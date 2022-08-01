@@ -16,6 +16,7 @@ import KidsInfoCreatePage from "./pages/KidsInfoPage/KidsInfoCreatePage";
 import Mypage from "./pages/UserPage/Mypage";
 import QnaListPage from "./pages/QnaPage/QnaListPage";
 import QnaCreatePage from "./pages/QnaPage/QnaCreatePage";
+import QnaDetailPage from "./pages/QnaPage/QnaDetailPage";
 
 let persistor = persistStore(store);
 
@@ -37,6 +38,7 @@ function App() {
               <Route path="/mypage" element={<Mypage />} />
               <Route path="/qnapage" element={<QnaListPage />} />
               <Route path="/qnacreatepage" element={<QnaCreatePage />} />
+              <Route path="/qnadetailpage" element={<QnaDetailPage />} />
             </Routes>
           </BrowserRouter>
         </PersistGate>

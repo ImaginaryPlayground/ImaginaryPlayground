@@ -1,14 +1,25 @@
 import { Grid, Paper } from "@mui/material";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "../../css/QnaPage/QnaListCompMobile.css";
 
 const QnaListCompMobile = ({ qnaListData }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleOnClickQnaData = (data) => {
+    dispatch({ type: "SET_SELECTED_QNADATA", data });
+    navigate("/qnadetailpage");
+  };
   return (
     <Paper className="QnaListCompMobile" elevation={6}>
       {qnaListData.map((data) => (
         <Grid item key={data.id} py={2} px={1} className="data_row" sx={{}}>
           <Grid
             item
+            onClick={() => {
+              handleOnClickQnaData(data);
+            }}
             sx={{ fontSize: "15px", cursor: "pointer" }}
             className="text_constrained"
           >

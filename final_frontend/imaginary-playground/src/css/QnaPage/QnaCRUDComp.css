@@ -1,7 +1,7 @@
 .QnaCRUDComp {
   width: 750px !important;
   display: flex;
-  flex-direction: column;
+  flex-direction: column !important;
   margin: 30px auto;
 }
 

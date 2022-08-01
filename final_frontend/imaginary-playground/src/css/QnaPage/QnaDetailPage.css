@@ -1,0 +1,69 @@
+.QnaDetailPage {
+  width: 1200px !important;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column !important;
+}
+
+.QnaDetailPage span,
+li,
+label,
+div {
+  font-family: "IBM Plex Sans KR" !important;
+}
+
+.QnaDetailPage span {
+  word-break: keep-all;
+}
+
+.QnaDetailPage .star {
+  color: #ad1457;
+}
+
+.QnaDetailPage .compeleted_before {
+  color: gray;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: inline-block;
+  animation: text_Ymove 1s infinite alternate linear;
+}
+
+.QnaDetailPage .compeleted_after {
+  color: #ad1457;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.QnaDetailPage .modified_ban {
+  color: red;
+  font-weight: bold;
+}
+
+.QnaDetailPage .modified_ok {
+  color: #ad1457;
+  font-weight: bold;
+}
+
+@media (max-width: 1250px) {
+  .QnaDetailPage {
+    width: 90% !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .QnaDetailPage {
+    width: 95% !important;
+  }
+}
+
+@keyframes text_Ymove {
+  0% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
