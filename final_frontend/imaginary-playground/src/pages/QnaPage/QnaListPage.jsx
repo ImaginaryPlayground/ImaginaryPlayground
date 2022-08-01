@@ -18,7 +18,6 @@ import QnaListCompMobile from "../../components/QnaPage/QnaListCompMobile";
 import "../../css/QnaPage/QnaListPage.css";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
 const dummyData = [
   {
@@ -265,8 +264,12 @@ const dummyData = [
 
 const QnaListPage = () => {
   const [qnaListData, setQnaListData] = useState([]);
+
   const isMobile_700 = useMediaQuery("(max-width:700px)");
   const isMobile_750 = useMediaQuery("(max-width:750px)");
+  const storagePage = sessionStorage.getItem("qna_list_page")
+    ? parseInt(sessionStorage.getItem("qna_list_page"))
+    : 1;
 
   const [searchData, setSearchData] = useState({
     searchCondition: "name",
@@ -274,15 +277,26 @@ const QnaListPage = () => {
     myQna: false,
     completed: "all",
   });
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(storagePage);
   const navigate = useNavigate();
   useEffect(() => {
+    window.scrollTo(0, 0);
     //비동기로 데이터를 가져옴
     setQnaListData(dummyData);
   }, [page, searchData.myQna, searchData.completed]);
 
+  useEffect(() => {
+    //페이지 리로드 감지
+    window.onpageshow = function (event) {
+      if (event.persisted || window.performance) {
+        setPage(1);
+      }
+    };
+  }, []);
+
   const handleOnChangePage = (e, value) => {
     setPage(value);
+    window.sessionStorage.setItem("qna_list_page", value);
   };
 
   const handleOnSearchChange = (e) => {
