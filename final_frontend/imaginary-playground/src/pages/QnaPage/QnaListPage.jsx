@@ -18,6 +18,7 @@ import QnaListCompMobile from "../../components/QnaPage/QnaListCompMobile";
 import "../../css/QnaPage/QnaListPage.css";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const dummyData = [
   {
