@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@react-three/fiber": "^8.2.2",
+    "three": "^0.143.0"
+  },
+  "devDependencies": {
+    "next-transpile-modules": "^9.0.0"
+  }
+ 
+}
+
