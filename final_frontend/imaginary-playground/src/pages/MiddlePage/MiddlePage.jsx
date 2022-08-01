@@ -153,20 +153,31 @@ const MiddlePage = () => {
     };
     formData.append("data", JSON.stringify(data));
 
-    //비동기통신 하기
-    // const postSurvey = await axios({
+    // 비동기 처리(회원가입, 재직증명서) -> 미들페이지에서 처리
+    // axios({
+    //   url: `/user/register`,
     //   method: "POST",
-    //   url: ``,
-    //   mode: "cors",
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
+    //   data: {
+    //     email: `${userInfo.emailId}@${
+    //       userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
+    //     }`,
+    //     password: userInfo.userPassword,
+    //     username: userInfo.name,
+    //     document: "",
+    //     hospital_id:'순천향병원',
+    //     hospital_name:'순천향병원',
     //   },
-    //   data: formData,
-    // });
+    // }).then((res) => console.log(res));
 
-    navigate("/", { replace: true });
+    navigate("/login", { replace: true });
   };
   useEffect(() => {
+    //병원데이터 주소 받아오기
+    // axios({
+    //   url: `/hospital/${searchWord}`,
+    //   method: "GET",
+    // }).then((res) => console.log(res));
+
     //카카오 or 구글 로그인일 때
     if (new URL(window.location.href).searchParams.get("code")) {
       code = new URL(window.location.href).searchParams.get("code");
@@ -175,7 +186,7 @@ const MiddlePage = () => {
       code = window.location.hash.split("=")[1].split("&")[0];
     } else {
       // 그외의 경우는 홈페이지로 리다이렉트
-      navigate("/", { replace: true });
+      //navigate("/", { replace: true });
     }
 
     //카카오 로그인 access_token 받기

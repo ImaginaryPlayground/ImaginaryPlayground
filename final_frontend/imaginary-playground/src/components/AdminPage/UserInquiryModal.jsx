@@ -1,4 +1,5 @@
 import { Button, Grid, TextField } from "@mui/material";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import swal from "sweetalert";
 
@@ -40,7 +41,25 @@ const UserInquiryModal = ({
               : it;
           })
         );
-        //비동기 통신(회원가입 승인)
+
+        //비동기 통신(답변 수정 or 등록)
+        //전체 승인된 전체 회원 개수
+        axios({
+          url: "answer", //마지막은 페이지번호
+          method: "POST",
+          headers: {
+            token: "", //로그인이됐으면 요청
+          },
+          data: {
+            admin_id: 0,
+            content: "", //검색할 제목, 내용
+            question_id: 0, //답변다는 글id
+          },
+          //전체 개수 주는 API 만들기
+        }).then((res) => {
+          console.log(res);
+        });
+
         swal("답변이 정상적으로 수정되었습니다.!", {
           icon: "success",
         });
