@@ -1,5 +1,7 @@
 package com.yodel.imaginaryPlayground.model.jwt;
 
+import com.yodel.imaginaryPlayground.model.dto.UserDto;
+import com.yodel.imaginaryPlayground.service.UserService;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.*;
@@ -28,6 +30,8 @@ public class JwtTokenService { // JWT 토큰을 생성 및 검증 모듈
 
     private final UserDetailsService userDetailsService;
 
+    private final UserService userService;
+
     @PostConstruct //암호키 생성
     protected void init() {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
@@ -46,10 +50,11 @@ public class JwtTokenService { // JWT 토큰을 생성 및 검증 모듈
                 .compact();
     }
 
-    // Jwt 토큰으로 인증 정보를 조회
+    // Jwt 토큰을 파싱하고 그 값으로 회원 정보를 불러온다.
+    // 불러온 회원정보 객체를 UsernamePasswordAuthenticationToken 객체 안에 넣고 반환하여 Security Context 즉, thread Local에 집어넣는다
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserEmail(token));
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        UserDto user = userService.findByEmail(this.getUserEmail(token));
+        return new UsernamePasswordAuthenticationToken(user, "", user.getAuthorities());
     }
 
     public boolean verifyToken(String token) {
