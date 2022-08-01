@@ -15,6 +15,7 @@ import { pink } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 import InputError from "../../components/InputError/InputError";
 import "../../css/SignUpPage/SignUpPage.css";
+import axios from "axios";
 
 const theme = createTheme({
   palette: {
@@ -78,6 +79,32 @@ const SignUpPage = () => {
     (userInfo.emailUrl === "direct" && !userInfo.emailDirectUrl) ||
     !regExpChecking.regExp_email;
 
+  const handleOnClickEmailAuth = () => {
+    //비동기 처리 이메일인증번호 요청
+    axios({
+      url: `/user/authEmail/send`,
+      method: "POST",
+      data: {
+        email: `${userInfo.emailId}@${
+          userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
+        }`,
+      },
+    }).then((res) => console.log(res));
+
+    //이메일 인증번호 확인처리
+    axios({
+      url: `/user/authEmail/receive`,
+      method: "POST",
+      data: {
+        code: "", //code값 처리
+        email: `${userInfo.emailId}@${
+          userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
+        }`,
+      },
+    }).then((res) => console.log(res));
+    //결과 status:{SUCESS, FAIL}
+  };
+
   const handleSubmit = () => {
     //모든 input 창을 선택으로 바꾼다.
     for (const key in errorChecking) {
@@ -88,6 +115,7 @@ const SignUpPage = () => {
     password_1Focus.current.focus();
     password_2Focus.current.focus();
     nameFocus.current.focus();
+
     // 1. 이메일 유효성 검증
     if (
       !userInfo.emailId.length ||
@@ -111,10 +139,27 @@ const SignUpPage = () => {
     ) {
       password_2Focus.current.focus();
       return;
+      // 4. 이름유효성 검증
     } else if (!userInfo.name.length || !regExpChecking.regExp_name) {
       nameFocus.current.focus();
       return;
     }
+
+    //비동기 처리(회원가입, 재직증명서) -> 미들페이지에서 처리
+    // axios({
+    //   url: `/user/register`,
+    //   method: "POST",
+    //   data: {
+    //     email: `${userInfo.emailId}@${
+    //       userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
+    //     }`,
+    //     password: userInfo.userPassword,
+    //     username: userInfo.name,
+    //     document: "",
+    //   },
+    // }).then((res) => console.log(res));
+
+    navigate("/middlepage");
   };
 
   const handleChangeInput = (e) => {
@@ -391,6 +436,7 @@ const SignUpPage = () => {
               variant="contained"
               sx={{ width: "100%", height: "50px" }}
               disabled
+              onClick={handleOnClickEmailAuth}
             >
               <span
                 style={{ fontFamily: "IBM Plex Sans KR", fontWeight: "bold" }}
