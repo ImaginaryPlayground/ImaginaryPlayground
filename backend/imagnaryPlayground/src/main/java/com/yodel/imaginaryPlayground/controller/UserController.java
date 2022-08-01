@@ -86,6 +86,7 @@ public class UserController {
                 //String token = jwtTokenService.createToken(userDto.getEmail(), "ROLE_USER");
                 result.put("status", success);
 //                result.put("token", token);
+//                result
             }else{
                 result.put("status", fail);
             }
