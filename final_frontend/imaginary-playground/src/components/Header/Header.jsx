@@ -50,6 +50,7 @@ const Header = (props) => {
         break;
       case "1:1문의":
         navigate("/qnapage");
+        sessionStorage.setItem("qna_list_page", 1);
         break;
       case "로그아웃":
         break;

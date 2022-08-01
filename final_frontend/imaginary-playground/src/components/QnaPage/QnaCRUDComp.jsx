@@ -1,11 +1,28 @@
 import { Button, Divider, Grid, TextField, useMediaQuery } from "@mui/material";
+import LowPriorityIcon from "@mui/icons-material/LowPriority";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 import "../../css/QnaPage/QnaCRUDComp.css";
 
 const QnaCRUDComp = ({ isEdit }) => {
   const currentLoginUser = useSelector((state) => state.loginUserDataReducer);
+  const nowDate = new Date();
+
+  const nowDateConvert =
+    nowDate.getFullYear() +
+    "-" +
+    `${parseInt(nowDate.getMonth(), 10) + 1}` +
+    "-" +
+    nowDate.getDate() +
+    " " +
+    nowDate.getHours() +
+    ":" +
+    nowDate.getMinutes() +
+    ":" +
+    nowDate.getSeconds();
+
   const selectedQnaDataRedux = useSelector(
     (state) => state.QnaPageSelectedDataReducer
   );
@@ -18,6 +35,8 @@ const QnaCRUDComp = ({ isEdit }) => {
           username: currentLoginUser.username,
           completed: false,
           email: currentLoginUser.email,
+          created_date: nowDateConvert,
+          modified_date: nowDateConvert,
         }
   );
 
@@ -27,6 +46,7 @@ const QnaCRUDComp = ({ isEdit }) => {
   const isMobile_780 = useMediaQuery("(max-width:780px)");
   const titleInput = useRef();
   const contentInput = useRef();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!currentLoginUser) {
@@ -70,10 +90,36 @@ const QnaCRUDComp = ({ isEdit }) => {
     }
 
     //이미 처리된 글이라면 수정 불가
-    if (selectedQnaDataRedux.completed) {
+    if (selectedQnaData.completed) {
       return;
     }
 
+    swal({
+      title: "",
+      text: `정말로 ${isEdit ? "수정" : "작성"}하시겠습니까?`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        //비동기 통신(회원가입 거절)
+        if (isEdit) {
+          //수정상태라면
+        } else {
+          //작성상태라면
+          setSelectedQnaData({
+            ...selectedQnaData,
+            created_date: nowDateConvert,
+          });
+          dispatch({ type: "SET_SELECTED_QNADATA", data: selectedQnaData });
+          navigate("/qnadetailpage");
+        }
+
+        // swal(`${isEdit ? "수정" : "작성"}이 완료 되었습니다.`, {
+        //   icon: "success",
+        // });
+      }
+    });
     //비동기 처리
   };
 
@@ -82,7 +128,7 @@ const QnaCRUDComp = ({ isEdit }) => {
       {isEdit && (
         <Grid
           item
-          mb={4}
+          mb={3}
           p={1}
           width={"100%"}
           textAlign="center"
@@ -116,14 +162,52 @@ const QnaCRUDComp = ({ isEdit }) => {
           </Grid>
         </Grid>
       )}
-      <Grid item my={1}>
-        <TextField
-          color="main"
-          value={selectedQnaData.username}
-          sx={isMobile_780 ? { width: "80%" } : { width: "50%" }}
-          placeholder="이름"
-          disabled
-        />
+      <Grid
+        item
+        display={"flex"}
+        justifyContent="space-between"
+        alignItems={"center"}
+        mb={4}
+      >
+        <Grid
+          item
+          display={"flex"}
+          alignItems={"center"}
+          onClick={() => {
+            navigate("/qnapage");
+          }}
+        >
+          <Button variant="outlined" color="main" size="large">
+            <LowPriorityIcon />
+            <span
+              style={{
+                display: "block",
+                color: "#ad1457",
+                fontWeight: "bold",
+              }}
+            >
+              목록
+            </span>
+          </Button>
+        </Grid>
+        {isEdit && (
+          <Grid item textAlign="end">
+            <Grid className="qna_date">
+              <span style={{ marginRight: "5px" }} className="text_custom">
+                작성일
+              </span>
+              <span className="text_custom_date">{`${selectedQnaData.created_date}`}</span>
+            </Grid>
+            {selectedQnaData.created_date !== selectedQnaData.modified_date && (
+              <Grid item>
+                <span style={{ marginRight: "5px" }} className="text_custom">
+                  마지막 수정일
+                </span>
+                <span className="text_custom_date">{`${selectedQnaData.modified_date}`}</span>
+              </Grid>
+            )}
+          </Grid>
+        )}
       </Grid>
       <Grid item my={1}>
         <TextField
@@ -170,9 +254,7 @@ const QnaCRUDComp = ({ isEdit }) => {
           placeholder="제목"
           multiline
           rows={2}
-          onChange={
-            !selectedQnaDataRedux.completed ? handleOnChangeData : () => {}
-          }
+          onChange={!selectedQnaData.completed ? handleOnChangeData : () => {}}
           name="title"
           inputRef={titleInput}
           focused
@@ -191,9 +273,7 @@ const QnaCRUDComp = ({ isEdit }) => {
           value={selectedQnaData.content}
           sx={{ width: "100%" }}
           placeholder="문의 내용"
-          onChange={
-            !selectedQnaDataRedux.completed ? handleOnChangeData : () => {}
-          }
+          onChange={!selectedQnaData.completed ? handleOnChangeData : () => {}}
           name="content"
           inputRef={contentInput}
           focused
@@ -204,7 +284,7 @@ const QnaCRUDComp = ({ isEdit }) => {
           {selectedQnaData.content.length}자/최대 1000자
         </span>
       </Grid>
-
+      <Divider sx={{ marginTop: "20px" }} />
       {!selectedQnaData.completed ? (
         <Grid item my={1} width={"100%"} height="50px">
           <Button
@@ -231,29 +311,34 @@ const QnaCRUDComp = ({ isEdit }) => {
           p={2}
           sx={{
             borderRadius: "5px",
-            backgroundColor: "#ca3e47",
+            backgroundColor: "palevioletred",
             color: "white",
           }}
           my={4}
         >
-          <h4>
+          <h4 style={{ marginBottm: "5px" }}>
             <span
               style={{
                 display: "block",
                 marginBottom: "5px",
                 textAlign: "start",
                 paddingLeft: "5px",
+                fontSize: "20px",
               }}
             >
               담당자 답변
             </span>
+
             <span style={{ display: "block", textAlign: "end" }}>
+              <span style={{ marginRight: "5px" }}>답변일:</span>
               {answerData.created_date}
             </span>
           </h4>
           <Divider color="white" />
           <Grid item py={3}>
-            <span style={{ wordBreak: "keep-all" }}>{answerData.content}</span>
+            <span style={{ wordBreak: "keep-all", fontSize: "17px" }}>
+              {answerData.content}
+            </span>
           </Grid>
         </Grid>
       )}
