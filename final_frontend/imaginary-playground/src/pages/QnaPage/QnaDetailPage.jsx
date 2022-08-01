@@ -1,12 +1,18 @@
 import { Divider, Grid } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Header from "../../components/Header/Header";
 import QnaCRUDComp from "../../components/QnaPage/QnaCRUDComp";
-import "../../css/QnaPage/QnaCreatePage.css";
+import "../../css/QnaPage/QnaDetailPage.css";
 
-const QnaCreatePage = () => {
+const QnaDetailPage = () => {
+  const selectedQnaDataRedux = useSelector(
+    (state) => state.QnaPageSelectedDataReducer
+  );
+
+  const [selectedQnaData, setselectedQnaData] = useState(selectedQnaDataRedux);
   return (
-    <Grid className="QnaCreatePage">
+    <Grid className="QnaDetailPage">
       <Header />
       <h2
         style={{
@@ -16,7 +22,7 @@ const QnaCreatePage = () => {
           marginLeft: "10px",
         }}
       >
-        1:1문의하기
+        1:1문의 상세보기
       </h2>
       <Divider sx={{ marginTop: "5px", marginBottom: "5px" }} textAlign="left">
         <span
@@ -40,11 +46,15 @@ const QnaCreatePage = () => {
           <span className="star">*</span> 담당자 확인 후 빠른 시일 내에 문제를
           해결하여 드리겠습니다.
         </span>
+        <span>
+          <span className="star">*</span> 아직 처리되지 않은 질문만 수정
+          가능합니다.
+        </span>
       </Grid>
       <Divider sx={{ marginTop: "10px", marginBottom: "10px" }} />
-      <QnaCRUDComp />
+      <QnaCRUDComp isEdit />
     </Grid>
   );
 };
 
-export default QnaCreatePage;
+export default QnaDetailPage;

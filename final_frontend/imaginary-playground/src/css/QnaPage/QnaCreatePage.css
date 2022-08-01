@@ -1,6 +1,8 @@
 .QnaCreatePage {
   width: 1200px !important;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column !important;
 }
 
 .QnaCreatePage span,

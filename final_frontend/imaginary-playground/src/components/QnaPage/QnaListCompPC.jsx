@@ -1,11 +1,17 @@
 import { Grid, Paper } from "@mui/material";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "../../css/QnaPage/QnaListCompPC.css";
 
 const QnaListCompPC = ({ qnaListData }) => {
-  const handleOnTitleClick = () => {
-    console.log("타이틀 클릭");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleOnClickQnaData = (data) => {
+    dispatch({ type: "SET_SELECTED_QNADATA", data });
+    navigate("/qnadetailpage");
   };
+
   return (
     <Paper className="QnaListCompPC" elevation={12}>
       <Grid item display={"flex"} alignItems="center" className="table_head">
@@ -36,7 +42,9 @@ const QnaListCompPC = ({ qnaListData }) => {
             item
             className="title_td text_constrained"
             sx={{ textAlign: "left", marginRight: "15px", cursor: "pointer" }}
-            onClick={handleOnTitleClick}
+            onClick={() => {
+              handleOnClickQnaData(data);
+            }}
           >
             <span>{data.title}</span>
           </Grid>
