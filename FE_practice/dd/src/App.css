@@ -1,0 +1,81 @@
+.big {
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+}
+
+.whale1 {
+  width: 10%;
+  height: 10%;
+  background-color: black;
+
+  position: absolute;
+  z-index: 50;
+
+  left: 10%;
+  top: 40%;
+}
+
+.whale2 {
+  width: 10%;
+  height: 10%;
+  background-color: black;
+
+  position: absolute;
+  z-index: 50;
+
+  left: 45%;
+  top: 45%;
+}
+
+.whale3 {
+  width: 10%;
+  height: 10%;
+  background-color: black;
+
+  position: absolute;
+  z-index: 50;
+
+  left: 75%;
+  top: 40%;
+  
+}
+
+.whale4 {
+  width: 10%;
+  height: 10%;
+  background-color: black;
+
+  position: absolute;
+  z-index: 50;
+
+  left: 30%;
+  top: 25%;
+}
+
+.whale5 {
+  width: 10%;
+  height: 10%;
+  background-color: black;
+
+  position: absolute;
+  z-index: 50;
+
+  left: 60%;
+  top: 25%;
+}
+
+.canvasRef {
+  position: absolute;
+  z-index: 100;
+  /* background-image: '/assets/pic.png'; */
+  background-color: green;
+  width: 100%;
+}
+
+.backRef {
+  position: absolute;
+  z-index: 10;
+}
+
