@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import axios from "axios";
 import {
   GOOGLE_AUTH_URL,
   KAKAO_AUTH_URL,
@@ -41,7 +42,6 @@ const ColorButton = styled(Button)(({ theme }) => ({
 const { naver } = window;
 
 const LoginPage = () => {
-  const navigate = useNavigate();
   const [isSaveUserId, setIsSaveUserId] = useState(false);
   const [loginUserInfo, setLoginUserInfo] = useState({
     userEmail: "",
@@ -92,6 +92,16 @@ const LoginPage = () => {
       userPasswordInput.current.focus();
       return;
     }
+
+    //비동기 처리
+    axios({
+      url: `/user/login`,
+      method: "POST",
+      data: {
+        email: loginUserInfo.userEmail,
+        password: loginUserInfo.userPassword,
+      },
+    }).then((res) => console.log(res));
   };
 
   const handleChangeInput = (e) => {
