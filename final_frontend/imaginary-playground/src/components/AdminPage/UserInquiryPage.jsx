@@ -4,6 +4,7 @@ import { Button, Dialog, DialogTitle, useMediaQuery } from "@mui/material";
 import { DialogActions } from "@mui/material";
 import { DialogContent } from "@mui/material";
 import UserInquiryModal from "./UserInquiryModal";
+import axios from "axios";
 
 const columns = [
   { field: "id", headerName: "id", width: 50 },
@@ -72,6 +73,23 @@ const UserInquiryPage = () => {
 
   useEffect(() => {
     //비동기로 전체 문의사항들고온다.
+    //전체 승인된 전체 회원 개수
+    axios({
+      url: "question/lookup/all", //마지막은 페이지번호
+      method: "POST",
+      headers: {
+        token: "", //로그인이됐으면 요청
+      },
+      data: {
+        page: 0,
+        key: "", //검색할 제목, 내용
+        page_last: "",
+        qna_type: 0, //전체검색
+        value: "", //검색할 단어
+      },
+    }).then((res) => {
+      console.log(res);
+    });
 
     setAllInquiry(rows);
   }, []);

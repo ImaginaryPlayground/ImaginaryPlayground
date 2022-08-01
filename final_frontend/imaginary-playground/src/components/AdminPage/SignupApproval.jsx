@@ -15,6 +15,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
 import Draggable from "react-draggable";
 import swal from "sweetalert";
+import axios from "axios";
+import { useEffect } from "react";
 
 function PaperComponent(props) {
   return (
@@ -122,6 +124,24 @@ const SignupApproval = () => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    //전체 회원 개수
+    axios({
+      url: "admin/lookup/all", //마지막은 페이지번호
+      method: "GET",
+    }).then((res) => {
+      console.log(res);
+    });
+
+    //승인안된 회원 조회
+    axios({
+      url: "admin/lookup/unapproved/0", //마지막은 페이지번호
+      method: "GET",
+    }).then((res) => {
+      console.log(res);
+    });
+  }, []);
+
   const handleSelectRow = (id) => {
     const tempSelectedRowData = [];
     id.forEach((element) => {
@@ -145,7 +165,24 @@ const SignupApproval = () => {
       buttons: true,
     }).then((Approval) => {
       if (Approval) {
-        //비동기 통신(회원가입 승인)
+        //비동기 통신(회원가입 승인, params로 받는다)
+
+        const axiosRowData = selectedRowData.map((data) => {
+          return data.id;
+        });
+
+        console.log(axiosRowData);
+
+        axios({
+          url: "admin/auth/type",
+          method: "POST",
+          params: {
+            user: axiosRowData,
+          },
+        }).then((res) => {
+          console.log(res);
+        });
+
         swal("승인이 완료 되었습니다.", {
           icon: "success",
         });
@@ -168,6 +205,21 @@ const SignupApproval = () => {
     }).then((willDelete) => {
       if (willDelete) {
         //비동기 통신(회원가입 거절)
+
+        const axiosRowData = selectedRowData.map((data) => {
+          return data.id;
+        });
+
+        axios({
+          url: "admin/auth/type",
+          method: "POST",
+          params: {
+            user: axiosRowData,
+          },
+        }).then((res) => {
+          console.log(res);
+        });
+
         swal("거절이 완료 되었습니다.", {
           icon: "success",
         });

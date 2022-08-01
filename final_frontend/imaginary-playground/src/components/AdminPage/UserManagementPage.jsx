@@ -10,6 +10,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useState } from "react";
 import UserInfoReadModal from "./UserInfoReadModal";
 import swal from "sweetalert";
+import { useEffect } from "react";
+import axios from "axios";
 
 const columns = [
   { field: "id", headerName: "id", width: 50 },
@@ -97,7 +99,6 @@ const UserManagementPage = () => {
 
   const handleClickOpen = (e) => {
     setOpen(true);
-
     setSelectedUserInfo(e.row);
   };
 
@@ -110,9 +111,44 @@ const UserManagementPage = () => {
       alert("이름은 1~15자 여야 합니다.");
       return;
     }
+
+    //전체 승인된 전체 회원 개수
+    axios({
+      url: "admin/user/update", //마지막은 페이지번호
+      method: "POST",
+      headers: {
+        token: "", //로그인이됐으면 요청
+      },
+      data: {
+        id: selectedUserInfo.id,
+        username: selectedUserInfo.username,
+      },
+    }).then((res) => {
+      console.log(res);
+    });
+
     //console.log(selectedUserInfo);
-    setOpen(false);
+    //setOpen(false);
   };
+
+  useEffect(() => {
+    //비동기 회원관리
+    //전체 승인된 전체 회원 개수
+    axios({
+      url: "admin/lookup/all", //마지막은 페이지번호
+      method: "GET",
+    }).then((res) => {
+      console.log(res);
+    });
+
+    //승인안된 회원 조회
+    axios({
+      url: "admin/lookup/approved/0", //마지막은 페이지번호
+      method: "GET",
+    }).then((res) => {
+      console.log(res);
+    });
+  }, []);
 
   const handleDeleteUserInfo = () => {
     //console.log(selectedUserInfo);
