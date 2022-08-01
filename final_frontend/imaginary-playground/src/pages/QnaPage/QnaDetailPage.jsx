@@ -1,16 +1,14 @@
 import { Divider, Grid } from "@mui/material";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
 import Header from "../../components/Header/Header";
 import QnaCRUDComp from "../../components/QnaPage/QnaCRUDComp";
 import "../../css/QnaPage/QnaDetailPage.css";
 
 const QnaDetailPage = () => {
-  const selectedQnaDataRedux = useSelector(
-    (state) => state.QnaPageSelectedDataReducer
-  );
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  const [selectedQnaData, setselectedQnaData] = useState(selectedQnaDataRedux);
   return (
     <Grid className="QnaDetailPage">
       <Header />
