@@ -38,33 +38,31 @@ public class UserController {
             @RequestBody @ApiParam(value = "필수 입력 정보를 모두 넣어준다.", required = true) Map<String, String> signupData) {
         String email = signupData.get("email");
         String username = signupData.get("username");
-        String document = signupData.get("document");
-        String provider = signupData.get("provider");
-
-        if (provider == null) {
-            provider = "SITE";
-        }
+        String provider = "SITE";
 
         Map<String, Object> result = new HashMap<>();
 
-        // 기존 사용자인지 확인(이메일 조회) => 바로 userService.login과 연결해서 token까지 받아와 반환해준다.
+        // 기존 사용자인지 확인(이메일 조회)
         try {
             int findUser = userService.countByEmail(email);
-            if(findUser == 1) {
-                result.put("status", success);
-                UserDto user = new UserDto(email, username, document, provider);
+            if(findUser == 1) {     // 이미 존재하는 이메일
+                result.put("status", fail);
+                UserDto user = new UserDto(email, username, provider);
+
+                userService.saveUser(user);
+                //이메일 인증 구현
+
                 result.put("data", user);
             } else {
-                result.put("status", fail);
+                result.put("status", success);
             }
         } catch (Exception e) {
+            result.put("error", error);
             result.put("message", e.getMessage());
         }
         return result;
 
     }
-
-
 
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "로그인을 한다.")
@@ -76,9 +74,11 @@ public class UserController {
             int res = userService.countByEmail(user.getEmail());
             if(res == 1){
                 //공통으로 토큰이 들어간다(로그인 성공시 따로 넣어준다).
-                //String token = jwtTokenService.createToken(userDto.getEmail(), "ROLE_USER");
+                String token = jwtTokenService.createToken(user.getEmail(), user.getType());
+                result.put("data", token);
                 result.put("status", success);
             }else{
+                // 실패했을 때 사용자 정보?
                 result.put("status", fail);
             }
         } catch (Exception e) {
