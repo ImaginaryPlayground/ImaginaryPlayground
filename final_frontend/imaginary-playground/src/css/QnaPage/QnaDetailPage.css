@@ -47,6 +47,11 @@ div {
   font-weight: bold;
 }
 
+.QnaDetailPage .qna_date input {
+  color: #ad1457;
+  font-weight: bold;
+}
+
 @media (max-width: 1250px) {
   .QnaDetailPage {
     width: 90% !important;
