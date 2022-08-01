@@ -54,11 +54,14 @@ public class UserDto implements UserDetails {
         this.provider = provider;
     }
 
-    public UserDto(String username, String email, String document, String provider) {
+    public UserDto(String username, String document) {
         this.username = username;
-        this.email = email;
         this.document = document;
-        this.provider = provider;
+    }
+
+    public UserDto(String email, int id) {
+        this.email = email;
+        this.id = id;
     }
 
     @Override

@@ -17,9 +17,9 @@
         WHERE email = #{email}
     </select>
 
-    <update id="updateUserInfo" parameterType="UserDto">
+    <update id="updateUserInfo" parameterType="String">
         UPDATE imagination_playground.user
-        SET username = #{username}, document = #{document}, modified_date = NOW()
+        SET username = #{username}, modified_date = NOW()
         WHERE id = #{id}
     </update>
 
@@ -44,6 +44,11 @@
         FROM imagination_playground.user
         WHERE email = #{email}
     </select>
+
+    <insert id="saveFile" parameterType="String">
+        INSERT INTO imagination_playground.user(document)
+        VALUES(#{document})
+    </insert>
 
     <!--이메일 인증번호 저장-->
     <insert id="saveEmailAuth" parameterType="Map">

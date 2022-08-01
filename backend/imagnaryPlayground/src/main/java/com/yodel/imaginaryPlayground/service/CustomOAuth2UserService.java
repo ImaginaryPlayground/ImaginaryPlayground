@@ -1,6 +1,5 @@
 package com.yodel.imaginaryPlayground.service;
 
-import com.yodel.imaginaryPlayground.model.dto.OAuthAttributes;
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

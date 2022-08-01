@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService{
     private final UserMapper userMapper;
 
     @Override
-    public int saveUser(UserDto user){
+    public int saveUser(UserDto user) {
         // 임시적으로 sysout 사용
         System.out.println("유저 회원가입 진행!");
         System.out.println(user.toString());
@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int updateUserInfo(UserDto user) throws Exception {
-        return userMapper.updateUserInfo(user);
+    public int updateUserInfo(String username) throws Exception {
+        return userMapper.updateUserInfo(username);
     }
 
     @Override
@@ -46,13 +46,18 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int countByEmail(String email){
+    public int countByEmail(String email) {
         return userMapper.countByEmail(email);
     }
 
     @Override
-    public UserDto findByEmail(String email){
+    public UserDto findByEmail(String email) {
         return userMapper.findByEmail(email);
+    }
+
+    @Override
+    public String saveFile(String document) {
+        return userMapper.saveFile(document);
     }
 
     @Override

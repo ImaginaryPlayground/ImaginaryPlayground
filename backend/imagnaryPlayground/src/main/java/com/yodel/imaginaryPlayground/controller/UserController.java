@@ -7,14 +7,22 @@ import com.yodel.imaginaryPlayground.service.EmailService;
 import com.yodel.imaginaryPlayground.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.FileInputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +46,6 @@ public class UserController {
     public Map<String, Object> signUp(
             @ApiParam(value = "이메일", required = true) @RequestParam String email,
             @ApiParam(value = "이름", required = true) @RequestParam String username,
-            @ApiParam(value = "재직 증명서", required = true) @RequestParam String document,
             @ApiParam(value = "가입경로") @RequestParam String provider
     ) {
 
@@ -56,7 +63,7 @@ public class UserController {
             } else {                // 사용 가능한 이메일
                 result.put("status", success);
             }
-            UserDto user = new UserDto(email, username, document, provider);   // 유저 정보 반환
+            UserDto user = new UserDto(email, username, provider);   // 유저 정보 반환
             result.put("data", user);
         } catch (Exception e) {
             result.put("error", error);
@@ -65,7 +72,6 @@ public class UserController {
         return result;
 
     }
-
 
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "로그인을 한다.")
@@ -112,11 +118,11 @@ public class UserController {
     @PutMapping("/update/{id}")
     @ApiOperation(value = "회원 정보 수정", notes = "회원 페이지에서 사용자의 정보를 수정할 수 있다.")
     public Map<String, Object> updateUserInfo(
-            @PathVariable int id, @RequestBody UserDto user){
+            @PathVariable int id, @RequestBody String username){
 
         Map<String, Object> result = new HashMap<>();
         try {
-            int res = userService.updateUserInfo(user);
+            int res = userService.updateUserInfo(username);
             if(res == 1){
                 result.put("status", success);
                 result.put("data", userService.detailUser(id));
@@ -145,6 +151,61 @@ public class UserController {
                 result.put("status", fail);
             }
         } catch (Exception e) {
+            result.put("status", error);
+            result.put("message", e.toString());
+        }
+        return result;
+    }
+
+    @PostMapping("/upload")
+    @ApiOperation(value = "재직 증명서 업로드")
+    public Map<String, Object> uploadFile(
+//            @RequestHeader String email,    // 이메일로 회원을 찾아서 회원의 재직 증명서 저장
+            @RequestParam("file")MultipartFile file, HttpServletRequest request) throws Exception {
+
+        Map<String, Object> result = new HashMap<>();
+
+        String fileName = file.getOriginalFilename();
+        System.out.println(fileName);
+        System.out.println(request.getServletContext().getRealPath("/"));
+
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+            String uploadDate = simpleDateFormat.format(new Date());
+            String document = save(file, request.getServletContext().getRealPath("/"), uploadDate);
+//            UserDto userFile = new UserDto(email, document);   //이메일을 같이 넘겨줘야하나?
+
+            userService.saveFile(document);
+            result.put("status", success);
+        } catch (IllegalStateException e) {
+            result.put("status", error);
+            result.put("message", e.toString());
+        }
+        return result;
+    }
+
+    @GetMapping("/getFile")
+    @ApiOperation(value = "재직 증명서 가져오기")
+    public Map<String, Object> getFile(@RequestParam String email, HttpServletRequest request) throws Exception{
+
+        Map<String, Object> result = new HashMap<>();
+        HttpHeaders header = new HttpHeaders();
+
+
+        try {
+            UserDto user = userService.findByEmail(email);
+            String filePath = request.getServletContext().getRealPath("/") + user.getDocument();
+            System.out.println(filePath);
+            String mimeType = Files.probeContentType(Paths.get(filePath));  //파일 확장자
+            System.out.println(mimeType);
+            FileInputStream input = new FileInputStream(filePath);
+            header.setContentType(MediaType.parseMediaType(mimeType));
+
+            result.put("byte", IOUtils.toByteArray(input));
+            result.put("header", header);
+            result.put("status", success);
+
+        } catch (IllegalStateException e) {
             result.put("status", error);
             result.put("message", e.toString());
         }
@@ -206,5 +267,19 @@ public class UserController {
         //System.out.println("login Service :" + user2.toString());
 
         return result;
+    }
+
+    private String save(MultipartFile file, String contextPath, String uploadDate) {
+
+        try {
+            String newFileName = uploadDate + file.getOriginalFilename();
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(contextPath + newFileName);
+            Files.write(path, bytes);
+            return newFileName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
