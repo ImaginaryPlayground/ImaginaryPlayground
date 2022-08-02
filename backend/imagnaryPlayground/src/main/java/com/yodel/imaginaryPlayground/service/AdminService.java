@@ -10,7 +10,7 @@ import java.util.Map;
 public interface AdminService {
     int approveUser(List<Integer> list) throws Exception;
     int deleteUser(List<Integer> list) throws Exception;
-    int lookupUserNumber(boolean isApproved) throws Exception;
+    int lookupUserNumber(int mode) throws Exception;
     List<UserDto> lookupUnapprovedUser(int page) throws Exception;
     List<UserDto> lookupApprovedUser(int page) throws Exception;
     List<UserDto> lookupAllUser(int mode) throws Exception;

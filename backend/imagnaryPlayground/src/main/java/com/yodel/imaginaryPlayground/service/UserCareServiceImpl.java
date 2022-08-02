@@ -4,6 +4,8 @@ import com.yodel.imaginaryPlayground.mapper.UserCareMapper;
 import com.yodel.imaginaryPlayground.model.dto.BabyDto;
 import com.yodel.imaginaryPlayground.model.dto.ConsultDto;
 import com.yodel.imaginaryPlayground.model.dto.PageDto;
+import com.yodel.imaginaryPlayground.model.vo.BabyVO;
+import com.yodel.imaginaryPlayground.model.vo.IdVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,16 @@ public class UserCareServiceImpl implements UserCareService {
     }
 
     @Override
+    public List<BabyDto> searchAllBaby(BabyVO babyVO) throws Exception {
+        return userCareMapper.searchAllBaby(babyVO);
+    }
+
+    @Override
+    public int searchAllBabyCount(BabyVO babyVO) throws Exception {
+        return userCareMapper.searchAllBabyCount(babyVO);
+    }
+
+    @Override
     public List<BabyDto> lookupAllBaby(PageDto pageDto) throws Exception {
         return userCareMapper.lookupAllBaby(pageDto);
     }
@@ -32,8 +44,8 @@ public class UserCareServiceImpl implements UserCareService {
     }
 
     @Override
-    public BabyDto lookupBaby(Map<String, Integer> map) throws Exception {
-        return userCareMapper.lookupBaby(map);
+    public BabyDto lookupBaby(IdVO idVO) throws Exception {
+        return userCareMapper.lookupBaby(idVO);
     }
 
     @Override
@@ -42,12 +54,12 @@ public class UserCareServiceImpl implements UserCareService {
     }
 
     @Override
-    public int deleteBabyInfo(Map<String, String> map) throws Exception {
-        return userCareMapper.deleteBabyInfo(map);
+    public int deleteBabyInfo(BabyDto babyDto) throws Exception {
+        return userCareMapper.deleteBabyInfo(babyDto);
     }
 
     @Override
-    public List<ConsultDto> getConsultData(Map<String, String> map) throws Exception {
-        return userCareMapper.getConsultData(map);
+    public List<ConsultDto> getConsultData(IdVO idVO) throws Exception {
+        return userCareMapper.getConsultData(idVO);
     }
 }

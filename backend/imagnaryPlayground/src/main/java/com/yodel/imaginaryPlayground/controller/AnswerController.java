@@ -2,14 +2,11 @@ package com.yodel.imaginaryPlayground.controller;
 
 import com.yodel.imaginaryPlayground.model.dto.AnswerDto;
 import com.yodel.imaginaryPlayground.model.dto.PageDto;
-import com.yodel.imaginaryPlayground.model.dto.QuestionDto;
-import com.yodel.imaginaryPlayground.model.vo.DeleteVO;
+import com.yodel.imaginaryPlayground.model.vo.IdVO;
 import com.yodel.imaginaryPlayground.service.AnswerService;
-import com.yodel.imaginaryPlayground.service.QuestionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +35,7 @@ public class AnswerController {
             Integer res = answerService.isCompleted(answer.getQuestion_id());
             if(res != null && res == 0 && answerService.saveAnswer(answer) == 1){
                 result.put("status", success);
-                PageDto pageDto = new PageDto(0, PAGE,"completed", "0", 0, "");
+                PageDto pageDto = new PageDto(0, PAGE,"completed", "0", 0, "", 0);
                 result.put("data", answerService.lookupUncompletedAnswer(pageDto));
             }else{
                 result.put("status", fail);
@@ -74,14 +71,14 @@ public class AnswerController {
     @ApiOperation(value = "답변 삭제", notes = "관리자가 답변을 삭제할 수 있는 기능")
     public Map<String, Object> deleteAnswer(
             @RequestBody @ApiParam(value = "답변삭제에 필요한 answer의 id값과 user_id를 전송한다.", required = true)
-            DeleteVO deleteVO){
+            IdVO idVO){
         Map<String, Object> result = new HashMap<>();
         //이후 토큰의 id와 user_id값을 비교한다.
         try {
-            int res = answerService.deleteAnswer(deleteVO);
+            int res = answerService.deleteAnswer(idVO);
             if(res == 1){
                 result.put("status", success);
-                PageDto pageDto = new PageDto(0, PAGE,"completed", "0", 0, "");
+                PageDto pageDto = new PageDto(0, PAGE,"completed", "0", 0, "", 0);
                 result.put("data", answerService.lookupUncompletedAnswer(pageDto));
             }else{
                 result.put("status", fail);

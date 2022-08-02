@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@ApiModel(value = "BabyDto (아이정보)", description = "id, 담당자 식별자, 이름, 나이, 성별, 사진 경로가 기록된 DTO")
+@ApiModel(value = "BabyDto (아이정보)", description = "id, 담당자 식별자, 이름, 나이, 성별, 사진 경로, 특이사항이 기록된 DTO")
 public class BabyDto {
     private int id;
     private int user_id;
@@ -23,4 +23,7 @@ public class BabyDto {
 
     @ApiModelProperty(value = "사진 경로")
     private String profile;
+
+    @ApiModelProperty(value = "특이사항")
+    private String character;
 }
