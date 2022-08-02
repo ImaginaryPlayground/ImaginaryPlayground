@@ -17,6 +17,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createBrowserHistory } from "history";
 import ContactsIcon from "@mui/icons-material/Contacts";
+import axios from "axios";
+import { config } from "../../util/config";
 
 const allData = [
   {
@@ -224,7 +226,7 @@ const KidsGridList = () => {
     name: "",
     age_1: 1,
     age_2: 20,
-    gender: "All",
+    gender: "A", //F,M,A
   });
 
   const [page, setPage] = useState(currentPage.page);
@@ -235,13 +237,37 @@ const KidsGridList = () => {
   useEffect(() => {
     if (loading) window.scrollTo(0, 200);
 
+    //여기서 페이지에 해당하는 아이들 정보 가져옴
+    //등록된 전체아이 조회
+    axios({
+      url: `${config.api}/care/lookup/all`, //마지막은 페이지번호
+      method: "POST",
+      headers: "", //헤더에 토큰
+      data: {
+        name: searchData.name,
+        age_1: searchData.age_1,
+        age_2: searchData.age_2,
+        gender: searchData.gender,
+        page: page,
+      },
+    })
+      .then((res) => {
+        //전체 데이터를 배열로 반환(아이 이미지)
+        console.log(res);
+        //받은 데이터들 입력(전체 데이터 수도 같이 준다)
+        //setKidsData(allData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     if (!isSearch) {
       //검색중이지 않을 때
       setKidsData(allData);
     } else {
       //검색중일 때
     }
-    //여기서 1페이지에 해당하는 아이들 정보 가져옴
+    //F,M,A
   }, [page]);
 
   useEffect(() => {
@@ -293,12 +319,34 @@ const KidsGridList = () => {
     navigate("/kidinfocreate");
   };
 
+  //검색버튼
   const handleSearchSubmit = (e) => {
-    console.log(searchData);
-    const submitData = {
-      ...searchData,
-      page: 1,
-    };
+    //1. 비동기로 검색된 환자 전체 수 받기(페이지 별로 말고)
+
+    //2. 검색된 데이터 받기
+    //여기서 페이지에 해당하는 아이들 정보 가져옴
+    //등록된 전체아이 조회
+    axios({
+      url: `${config.api}/care/lookup/all`, //마지막은 페이지번호
+      method: "POST",
+      headers: "", //헤더에 토큰
+      data: {
+        name: searchData.name,
+        age_1: searchData.age_1,
+        age_2: searchData.age_2,
+        gender: searchData.gender,
+        page: page,
+      },
+    })
+      .then((res) => {
+        //전체 데이터를 배열로 반환(아이 이미지)
+        console.log(res);
+        //받은 데이터들 입력
+        //setKidsData(allData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
