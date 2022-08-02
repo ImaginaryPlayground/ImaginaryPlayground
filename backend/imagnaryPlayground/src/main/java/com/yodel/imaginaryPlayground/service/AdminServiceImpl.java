@@ -26,12 +26,14 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public int lookupUserNumber(boolean isApproved) throws Exception {
+    public int lookupUserNumber(int mode) throws Exception {
         String type;
-        if (isApproved) {
+        if(mode == 1){ //승인 조회
             type = "ROLE_USER";
-        } else {
+        } else if (mode == 2) { //미승인 회원 조회
             type = "CUSTOMER";
+        } else {
+            type = "";
         }
         return adminMapper.lookupUserNumber(type);
     }

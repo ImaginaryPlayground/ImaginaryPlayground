@@ -3,13 +3,11 @@ package com.yodel.imaginaryPlayground.service;
 import com.yodel.imaginaryPlayground.mapper.QuestionMapper;
 import com.yodel.imaginaryPlayground.model.dto.PageDto;
 import com.yodel.imaginaryPlayground.model.dto.QuestionDto;
-import com.yodel.imaginaryPlayground.model.vo.DeleteVO;
+import com.yodel.imaginaryPlayground.model.vo.IdVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -29,8 +27,8 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     @Override
-    public int deleteQuestion(DeleteVO deleteVO) throws Exception {
-        return questionMapper.deleteQuestion(deleteVO);
+    public int deleteQuestion(IdVO idVO) throws Exception {
+        return questionMapper.deleteQuestion(idVO);
     }
 
     @Override
@@ -40,8 +38,13 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public List<QuestionDto> lookupAllQuestion(int page) throws Exception {
-        PageDto pageDto = new PageDto(0, PAGE, "", "", 0, "");
+        PageDto pageDto = new PageDto(0, PAGE, "", "", 0, "", 0);
         return questionMapper.lookupAllQuestion(pageDto);
+    }
+
+    @Override
+    public int lookupAllQuestionCount() throws Exception {
+        return questionMapper.lookupAllQuestionCount();
     }
 
     @Override
@@ -51,14 +54,29 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     @Override
+    public int lookupAllQuestionWithEmailCount(PageDto pageDto) throws Exception {
+        return questionMapper.lookupAllQuestionWithEmailCount(pageDto);
+    }
+
+    @Override
     public List<QuestionDto> searchAllQuestion(PageDto pageDto) throws Exception {
         pageDto.setPage_last(pageDto.getPage() + PAGE);
         return questionMapper.searchAllQuestion(pageDto);
     }
 
     @Override
+    public int searchAllQuestionCount(PageDto pageDto) throws Exception {
+        return questionMapper.searchAllQuestionCount(pageDto);
+    }
+
+    @Override
     public List<QuestionDto> searchAllQuestionWithEmail(PageDto pageDto) throws Exception {
         pageDto.setPage_last(pageDto.getPage() + PAGE);
         return questionMapper.searchAllQuestionWithEmail(pageDto);
+    }
+
+    @Override
+    public int searchAllQuestionWithEmailCount(PageDto pageDto) throws Exception {
+        return questionMapper.searchAllQuestionWithEmailCount(pageDto);
     }
 }
