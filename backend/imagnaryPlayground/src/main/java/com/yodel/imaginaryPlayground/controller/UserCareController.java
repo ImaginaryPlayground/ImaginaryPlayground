@@ -61,6 +61,7 @@ public class UserCareController{
             try {
                 UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 baby.setUser_id(user.getId());
+                baby.setProfile(profile);
                 int res = userCareService.saveBaby(baby);
                 if (res == 1) {
                     result.put("status", success);
