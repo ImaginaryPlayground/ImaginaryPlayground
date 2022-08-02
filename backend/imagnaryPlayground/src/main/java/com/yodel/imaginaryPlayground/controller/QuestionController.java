@@ -25,6 +25,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/question")
 @RequiredArgsConstructor
+@CrossOrigin("*")
+
 public class QuestionController {
     private final String success = "SUCCESS"; //이 부분을 한 객체로 묶어서 사용할 수는 없을까?
     private final String fail = "FAIL";
