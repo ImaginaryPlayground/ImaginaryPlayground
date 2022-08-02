@@ -79,9 +79,10 @@ public class SecurityConfig { //extends 하는 방식은 deprecated 이므로 @B
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt token으로 인증할것이므로 세션필요없으므로 생성안함
                 .and()
                 .authorizeRequests()
-                    .antMatchers(PUBLIC_URI).permitAll()
-                    .antMatchers(SWAGGER_URI).permitAll()
-                    .anyRequest().authenticated()
+//                    .antMatchers(PUBLIC_URI).permitAll()
+//                    .antMatchers(SWAGGER_URI).permitAll()
+//                    .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                     .addFilterBefore(new JwtAuthenticationFilter(jwtTokenService), OAuth2LoginAuthenticationFilter.class)
                 .oauth2Login() // oauth 로그인시
