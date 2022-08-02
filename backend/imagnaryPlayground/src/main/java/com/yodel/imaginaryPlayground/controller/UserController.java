@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiParam;
 
 import lombok.RequiredArgsConstructor;
 
+import org.apache.catalina.User;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -105,6 +106,7 @@ public class UserController {
     public Map<String, Object> detailUser(@PathVariable int id) {
         Map<String, Object> result = new HashMap<>();
         UserDto user = new UserDto();
+
         try {
             user = userService.detailUser(id);
             if(user != null){
@@ -265,10 +267,11 @@ public class UserController {
     }
 
     @PostMapping("/token")
-    public Map<String, Object> parseToken(@RequestBody String token){
+    public Map<String, Object> parseToken(){
         Map<String, Object> result = new HashMap<>();
         System.out.println("들어왔냐");
-        System.out.println((UserDto)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(user.toString());
         //UserDto user2 = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         //System.out.println("login Service :" + user2.toString());
 

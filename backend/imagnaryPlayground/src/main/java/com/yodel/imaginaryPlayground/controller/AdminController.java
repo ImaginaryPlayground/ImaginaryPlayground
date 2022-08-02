@@ -25,7 +25,7 @@ public class AdminController {
     private final String error = "ERROR";
     private final AdminService adminService;
 
-    @PostMapping("/auth")
+    @PostMapping("/")
     @ApiOperation(value = "정회원 등록", notes = "이메일 인증이 완료된 회원이 사이트를 이용할 수 있도록 정회원으로 승인한다.")
     public Map<String, Object> approveUserType(
             @RequestParam(value="user[]") @ApiParam(value = "email 값을 user 이름의 배열을 통해 보내준다.", required = true) List<Integer> list){
@@ -45,15 +45,16 @@ public class AdminController {
         return result;
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/")
     @ApiOperation(value = "회원 삭제", notes = "관리자 페이지에서 등록된 회원을 삭제한다.")
-    public Map<String, String> deleteUser(
+    public Map<String, Object> deleteUser(
             @RequestParam(value="user[]") @ApiParam(value = "email 값을 user 이름의 배열을 통해 보내준다.", required = true) List<Integer> list){
-        Map<String, String> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         try {
             int res = adminService.deleteUser(list);
             if(res == 1){
                 result.put("status", success);
+                result.put("data", adminService.lookupUnapprovedUser(0));
             }else{
                 result.put("status", fail);
             }
@@ -65,7 +66,7 @@ public class AdminController {
     }
 
     @GetMapping("/lookup/unapproved/{page}")
-    @ApiOperation(value = "승인이 필요한 회원 전체 조회", notes = "관리자 페이지에서 승인을 기다리는 회원 모두를 조회한다.")
+    @ApiOperation(value = "승인이 필요한 회원 전체 조회", notes = "[페이지] 관리자 페이지에서 승인을 기다리는 회원 모두를 조회한다.")
     public Map<String, Object> lookupUnapprovedUser(@PathVariable int page){
         Map<String, Object> result = new HashMap<>();
         List<UserDto> userList = new ArrayList<>();
@@ -85,7 +86,7 @@ public class AdminController {
     }
 
     @GetMapping("/lookup/approved/{page}")
-    @ApiOperation(value = "승인이 완료된 회원 전체 조회", notes = "관리자 페이지에서 승인을 받은 회원 모두를 조회한다.")
+    @ApiOperation(value = "승인이 완료된 회원 전체 조회", notes = "[페이지] 관리자 페이지에서 승인을 받은 회원 모두를 조회한다.")
     public Map<String, Object> lookupApprovedUser(@PathVariable int page){
         Map<String, Object> result = new HashMap<>();
         List<UserDto> userList = new ArrayList<>();
@@ -125,13 +126,13 @@ public class AdminController {
         return result;
     }
 
-    @GetMapping("/lookup/number/{isApproved}")
-    @ApiOperation(value = "특정 회원의 수 조회", notes = "관리자 페이지에서 승인된/승인되지 않은 회원 숫자를 조회한다.")
-    public Map<String, Object> lookupUserNumber(@PathVariable boolean isApproved){
+    @GetMapping("/lookup/number/{mode}")
+    @ApiOperation(value = "회원 수 전체 조회", notes = "[0]: 전체 회원 조회, [1] 승인된 회원 조회, [2] 미승인 회원 조회")
+    public Map<String, Object> lookupUserNumber(@PathVariable int mode){
         Map<String, Object> result = new HashMap<>();
         int res = 0;
         try {
-            res = adminService.lookupUserNumber(isApproved);
+            res = adminService.lookupUserNumber(mode);
             if(res != 0){
                 result.put("status", success);
             }else{

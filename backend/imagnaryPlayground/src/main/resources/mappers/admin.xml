@@ -41,10 +41,10 @@
 
     <select id="lookupUserNumber" parameterType="String" resultType="int">
         SELECT COUNT(*) FROM imagination_playground.user
-        WHERE type = #{type}
+        WHERE type LIKE (CONCAT("%", #{type}, "%"))
     </select>
 
-    <!--등급이 PENDING인 회원 조회-->
+    <!--등급이 CUSTOMER 회원 조회-->
     <select id="lookupUnapprovedUser" parameterType="Map" resultType="UserDto">
         SELECT * FROM imagination_playground.user
         WHERE type = 'CUSTOMER'
