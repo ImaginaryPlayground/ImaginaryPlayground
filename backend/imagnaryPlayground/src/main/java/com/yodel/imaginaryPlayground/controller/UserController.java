@@ -100,7 +100,7 @@ public class UserController {
     @GetMapping("/detail/{email}")
     @ApiOperation(value = "회원 정보 조회", notes = "회원 정보를 조회한다.")
     public Map<String, Object> detailUser(
-            @RequestHeader String token,
+            @RequestHeader String token,  //헤더X
             @PathVariable String email) {
 
         System.out.println("token::" + token);
