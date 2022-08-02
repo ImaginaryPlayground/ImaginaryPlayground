@@ -54,18 +54,12 @@ public class UserDto implements UserDetails {
         this.provider = provider;
     }
 
-    public UserDto(String email, String username, String document, String provider) {
+    @Builder
+    public UserDto(String username, String password, String email, String provider) {
         this.username = username;
-        this.document = document;
+        this.password = password;
         this.email = email;
         this.provider = provider;
-    }
-
-    public UserDto update(String username, String document) {
-        this.username = username;
-        this.document = document;
-
-        return this;
     }
 
     @Override
