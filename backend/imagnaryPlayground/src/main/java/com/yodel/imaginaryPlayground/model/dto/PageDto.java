@@ -16,5 +16,6 @@ public class PageDto {
     private String key;
     private String value;
     private int qna_type;
+    private String email;
 
 }
