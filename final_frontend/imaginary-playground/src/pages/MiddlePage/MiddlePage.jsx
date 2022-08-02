@@ -9,6 +9,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import "../../css/MiddlePage/MiddlePage.css";
+import { config } from "../../util/config.jsx";
+import { useDispatch, useSelector } from "react-redux";
 
 const columns = [
   {
@@ -103,7 +105,9 @@ const MiddlePage = () => {
     positionX: 126.9990168,
     positionY: 37.5797151,
   });
-
+  const signUpUserDataReducer = useSelector(
+    (state) => state.signUpUserDataReducer
+  );
   const [searchWord, setSearchWord] = useState("");
   const [hospitalData, setHospitalData] = useState(rows);
   const [searchHospitalData, setSearchHospitalData] = useState([]);
@@ -113,21 +117,27 @@ const MiddlePage = () => {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const documentImgInput = useRef();
-  let code = "";
+  let code;
 
   const handleSearchData = () => {
-    setSearchHospitalData(
-      hospitalData.filter((data) => {
-        return data.id.includes(searchWord);
+    //병원데이터 주소 받아오기
+    axios({
+      url: `${config.api}/hospital/${searchWord}`,
+      method: "GET",
+    })
+      .then((res) => {
+        console.log(res);
+        setSearchHospitalData({ ...res });
       })
-    );
+      .catch((err) => console.log(err));
   };
 
   const handleImgChange = async (e) => {
     e.preventDefault();
     const fileReader = new FileReader();
-    //console.log(e.target.files[0]);
+
     if (e.target.files[0]) {
       fileReader.readAsDataURL(e.target.files[0]);
     }
@@ -145,49 +155,76 @@ const MiddlePage = () => {
       return;
     }
 
+    //formData에 담기
     const formData = new FormData();
-    formData.append("file", documentImg.imageFile);
+    formData.append("document", documentImg.imageFile);
     //userData
     const data = {
-      name: selectData.firstName,
+      email: signUpUserDataReducer.email,
+      username: signUpUserDataReducer.username,
+      password: signUpUserDataReducer.password,
+      hospital_id: searchHospitalData.hospital_id,
+      hospital_name: searchHospitalData.hospital_name,
     };
     formData.append("data", JSON.stringify(data));
 
-    // 비동기 처리(회원가입, 재직증명서) -> 미들페이지에서 처리
-    // axios({
-    //   url: `/user/register`,
-    //   method: "POST",
-    //   data: {
+    //회원가입시 보내야 하는 데이터 양식
+    // {
     //     email: `${userInfo.emailId}@${
     //       userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
     //     }`,
     //     password: userInfo.userPassword,
     //     username: userInfo.name,
     //     document: "",
-    //     hospital_id:'순천향병원',
-    //     hospital_name:'순천향병원',
+    //     hospital_id: 1,
+    //     hospital_name: "순천향병원",
     //   },
-    // }).then((res) => console.log(res));
+
+    // 비동기 처리(회원가입, 재직증명서) -> 미들페이지에서 처리
+    axios({
+      url: `${config.api}/user/register`,
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     navigate("/login", { replace: true });
   };
   useEffect(() => {
-    //병원데이터 주소 받아오기
-    // axios({
-    //   url: `/hospital/${searchWord}`,
-    //   method: "GET",
-    // }).then((res) => console.log(res));
+    //페이지 리로드 감지
+    // window.onpageshow = function (event) {
+    //   if (event.persisted || window.performance) {
+    //     navigate(-1, { replace: true });
+    //   }
+    // };
+
+    //만약 회원가입 데이터가 없다면 무조건 뒤로가기
+    console.log(signUpUserDataReducer);
+    if (!signUpUserDataReducer) {
+      navigate(-1, { replace: true });
+    }
+    return () => {
+      dispatch({ type: "SET_SIGNUP_USER", data: null });
+    };
 
     //카카오 or 구글 로그인일 때
-    if (new URL(window.location.href).searchParams.get("code")) {
-      code = new URL(window.location.href).searchParams.get("code");
-    } else if (window.location.hash) {
-      // 네이버 로그인 일때
-      code = window.location.hash.split("=")[1].split("&")[0];
-    } else {
-      // 그외의 경우는 홈페이지로 리다이렉트
-      //navigate("/", { replace: true });
-    }
+    // if (new URL(window.location.href).searchParams.get("code")) {
+    //   code = new URL(window.location.href).searchParams.get("code");
+    // } else if (window.location.hash) {
+    //   // 네이버 로그인 일때
+    //   code = window.location.hash.split("=")[1].split("&")[0];
+    // } else {
+    //   // 그외의 경우는 홈페이지로 리다이렉트
+    //   //navigate("/", { replace: true });
+    // }
 
     //카카오 로그인 access_token 받기
     // const getKakaoTokenHandler = async (code) => {
