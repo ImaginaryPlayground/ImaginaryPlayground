@@ -22,6 +22,7 @@ import "../../css/LoginPage/LoginPage.css";
 import { pink } from "@mui/material/colors";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { config } from "../../util/config.jsx";
 
 const theme = createTheme({
   palette: {
@@ -95,13 +96,20 @@ const LoginPage = () => {
 
     //비동기 처리
     axios({
-      url: `/user/login`,
+      url: `${config.api}/user/login`,
       method: "POST",
       data: {
         email: loginUserInfo.userEmail,
         password: loginUserInfo.userPassword,
       },
-    }).then((res) => console.log(res));
+    })
+      .then((res) => {
+        console.log(res);
+        //localStorage.setItem("token", JSON.stringify(res?.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleChangeInput = (e) => {

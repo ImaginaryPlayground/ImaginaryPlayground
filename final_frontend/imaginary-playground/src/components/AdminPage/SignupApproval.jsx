@@ -17,6 +17,7 @@ import Draggable from "react-draggable";
 import swal from "sweetalert";
 import axios from "axios";
 import { useEffect } from "react";
+import { config } from "../../util/config";
 
 function PaperComponent(props) {
   return (
@@ -114,7 +115,9 @@ const rows = [
 const SignupApproval = () => {
   const [selectedRowData, setSelectedRowData] = useState([]);
   const [open, setOpen] = useState(false);
+  const [dataUpdate, setDataUpdate] = useState(false);
   const [ApprovalUserData, setApprovalUserData] = useState(rows);
+  const [page, setPage] = useState(0);
   const isMobile = useMediaQuery("(max-width: 600px)");
   const handleClickOpen = () => {
     setOpen(true);
@@ -125,9 +128,9 @@ const SignupApproval = () => {
   };
 
   useEffect(() => {
-    //전체 회원 개수
+    //전체 승인안된 전체 회원 개수
     axios({
-      url: "admin/lookup/all", //마지막은 페이지번호
+      url: `${config.api}/admin/lookup/all`, //마지막은 페이지번호
       method: "GET",
     }).then((res) => {
       console.log(res);
@@ -135,12 +138,13 @@ const SignupApproval = () => {
 
     //승인안된 회원 조회
     axios({
-      url: "admin/lookup/unapproved/0", //마지막은 페이지번호
+      url: `${config.api}/admin/lookup/unapproved/${page}`, //마지막은 페이지번호
       method: "GET",
     }).then((res) => {
       console.log(res);
+      setApprovalUserData(res);
     });
-  }, []);
+  }, [dataUpdate, page]);
 
   const handleSelectRow = (id) => {
     const tempSelectedRowData = [];
@@ -168,20 +172,26 @@ const SignupApproval = () => {
         //비동기 통신(회원가입 승인, params로 받는다)
 
         const axiosRowData = selectedRowData.map((data) => {
-          return data.id;
+          return data.eamil;
         });
 
         console.log(axiosRowData);
 
         axios({
-          url: "admin/auth/type",
+          url: `${config.api}/admin/auth/type`,
           method: "POST",
           params: {
             user: axiosRowData,
           },
-        }).then((res) => {
-          console.log(res);
-        });
+        })
+          .then((res) => {
+            console.log(res);
+            //데이터 업데이트 토글
+            setDataUpdate(!dataUpdate);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
 
         swal("승인이 완료 되었습니다.", {
           icon: "success",
@@ -207,17 +217,19 @@ const SignupApproval = () => {
         //비동기 통신(회원가입 거절)
 
         const axiosRowData = selectedRowData.map((data) => {
-          return data.id;
+          return data.email;
         });
 
         axios({
-          url: "admin/auth/type",
+          url: `${config.api}/admin/auth/type`,
           method: "POST",
           params: {
             user: axiosRowData,
           },
         }).then((res) => {
           console.log(res);
+          //업데이트 처리
+          setDataUpdate(!dataUpdate);
         });
 
         swal("거절이 완료 되었습니다.", {
@@ -241,7 +253,11 @@ const SignupApproval = () => {
             handleClickOpen();
           }
         }}
+        pagination
         disableSelectionOnClick
+        onPageChange={(page) => {
+          setPage(page);
+        }}
       />
       <Grid
         sx={{

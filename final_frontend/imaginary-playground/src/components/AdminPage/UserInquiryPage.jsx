@@ -5,6 +5,7 @@ import { DialogActions } from "@mui/material";
 import { DialogContent } from "@mui/material";
 import UserInquiryModal from "./UserInquiryModal";
 import axios from "axios";
+import { config } from "../../util/config";
 
 const columns = [
   { field: "id", headerName: "id", width: 50 },
@@ -69,30 +70,32 @@ const UserInquiryPage = () => {
   const [selectedInquiry, setSelectedInquiry] = useState({});
   const [allInquiry, setAllInquiry] = useState([]);
   const [open, setOpen] = useState(false);
+  const [page, setPage] = useState(0);
   //const [isModifiedState, setIsModifiedState] = useState(false);
 
   useEffect(() => {
     //비동기로 전체 문의사항들고온다.
-    //전체 승인된 전체 회원 개수
     axios({
-      url: "question/lookup/all", //마지막은 페이지번호
+      url: `${config.api}/question/lookup/all`, //마지막은 페이지번호
       method: "POST",
       headers: {
         token: "", //로그인이됐으면 요청
       },
       data: {
-        page: 0,
+        page: page,
         key: "", //검색할 제목, 내용
-        page_last: "",
         qna_type: 0, //전체검색
         value: "", //검색할 단어
+        email: "", //검색할 아이디
       },
     }).then((res) => {
       console.log(res);
     });
 
+    //전체 개수 주는 API 만들기
+
     setAllInquiry(rows);
-  }, []);
+  }, [page]);
 
   const isMobile = useMediaQuery("(max-width:600px)");
   const handleOneclickRow = (e) => {
@@ -112,6 +115,10 @@ const UserInquiryPage = () => {
         pageSize={15}
         rowsPerPageOptions={[15]}
         onRowClick={handleOneclickRow}
+        pagination
+        onPageChange={(page) => {
+          setPage(page);
+        }}
       />
       <Dialog
         open={open}

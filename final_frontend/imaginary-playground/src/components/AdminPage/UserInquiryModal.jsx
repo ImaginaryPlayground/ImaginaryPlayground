@@ -1,6 +1,6 @@
 import { Button, Grid, TextField } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import swal from "sweetalert";
 
 import "../../css/AdminPage/UserInquiryModal.css";
@@ -11,12 +11,7 @@ const UserInquiryModal = ({
   setAllInquiry,
   allInquiry,
 }) => {
-  const [answer, setAnswer] = useState("");
-
-  useEffect(() => {
-    //만약 답변이 존재할 경우 답변을 비동기로 가져온다.
-    setAnswer("");
-  }, []);
+  const [answer, setAnswer] = useState(selectedInquiry.answer);
 
   const handleAnswerSubmit = () => {
     const text =
