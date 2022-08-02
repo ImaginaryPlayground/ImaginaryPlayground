@@ -49,11 +49,12 @@ public class UserController {
     public Map<String, Object> signUp(
             @RequestBody @ApiParam(value = "필수 입력 정보를 모두 넣어준다.", required = true) Map<String, String> signupData) {
         String email = signupData.get("email");
+        String password = signupData.get("password");
         String username = signupData.get("username");
         String provider = "SITE";
 
         Map<String, Object> result = new HashMap<>();
-        UserDto user = new UserDto(email, username, provider);
+        UserDto user = new UserDto(email, password, username, provider);
 
         // 기존 사용자인지 확인(이메일 조회)
         try {
@@ -62,7 +63,6 @@ public class UserController {
                 result.put("status", fail);
                 result.put("data", user);
             } else {     //새로운 사용자
-
                 userService.saveUser(user);
                 result.put("status", success);
             }
@@ -71,7 +71,6 @@ public class UserController {
             result.put("message", e.getMessage());
         }
         return result;
-
     }
 
     @PostMapping("/login")
@@ -101,11 +100,14 @@ public class UserController {
     @GetMapping("/detail/{email}")
     @ApiOperation(value = "회원 정보 조회", notes = "회원 정보를 조회한다.")
     public Map<String, Object> detailUser(
+            @RequestHeader String token,
             @PathVariable String email) {
 
-//        String token = token;
-//        System.out.println("token::" + token);
-//        Authentication auth_data = jwtTokenService.getAuthentication(token);
+        System.out.println("token::" + token);
+        Authentication auth_data = jwtTokenService.getAuthentication(token);
+
+        // user에서 email 뽑아서 기능 구현(회원 정보 수정도 마찬가지)
+        UserDto user2 = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Map<String, Object> result = new HashMap<>();
         try {
