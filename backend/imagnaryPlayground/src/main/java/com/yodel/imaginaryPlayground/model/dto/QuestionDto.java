@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class QuestionDto {
     private int id;
     private int user_id;
+    private String email;
     private String title;
     private String content;
     private int qna_type;

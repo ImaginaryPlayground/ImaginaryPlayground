@@ -103,23 +103,23 @@ public class QuestionController {
     @PostMapping("/lookup/all")
     @ApiOperation(value = "전체 질문글을 조회한다.", notes = "질문들을 모두 조회하여 가져온다.")
     public Map<String, Object> lookupAllQuestion(
-            @RequestBody @ApiParam(value = "page(필수), key: 검색할 제목/내용, value: 검색값, qna_type: 유형(0이면 전체 검색)", required = false)
+            @RequestBody @ApiParam(value = "page(필수), key: 검색할 제목/내용, value: 검색값, email: 특정 유저의 이메일로 검색", required = false)
             PageDto pageDto){
         Map<String, Object> result = new HashMap<>();
         List<QuestionDto> questionList = new ArrayList<>();
         System.out.println(pageDto.getValue() == null);
         try {
             if(pageDto.getValue() == null || pageDto.getValue().trim() == null){ //검색값이 없는 경우
-                if(pageDto.getQna_type() == 0){ //문의유형이 0인 경우
+                if(pageDto.getEmail() == null || pageDto.getEmail().trim().equals("")){ //문의유형이 0인 경우
                     questionList = questionService.lookupAllQuestion(pageDto.getPage());
                 }else{ //만약 문의유형이 0이 아닌 경우
-                    questionList = questionService.lookupAllQuestionWithQuestionType(pageDto);
+                    questionList = questionService.lookupAllQuestionWithEmail(pageDto);
                 }
             }else { //검색값이 있는 경우
-                if(pageDto.getQna_type() == 0){ //문의유형이 0인 경우
+                if(pageDto.getEmail() == null || pageDto.getEmail().trim().equals("")){ //문의유형이 0인 경우
                     questionList = questionService.searchAllQuestion(pageDto);
                 }else{ //만약 문의유형이 0이 아닌 경우
-                    questionList = questionService.searchAllQuestionWithQuestionType(pageDto);
+                    questionList = questionService.searchAllQuestionWithEmail(pageDto);
                 }
             }
 
