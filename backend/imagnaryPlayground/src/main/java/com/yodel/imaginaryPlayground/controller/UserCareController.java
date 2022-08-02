@@ -78,7 +78,7 @@ public class UserCareController{
             return result;
         }
     }
-    
+
     @PutMapping("/")
     @ApiOperation(value = "아이 정보수정", notes = "회원 페이지에서 아이의 정보를 수정할 수 있다.")
     public Map<String, Object> updateBabyInfo(
