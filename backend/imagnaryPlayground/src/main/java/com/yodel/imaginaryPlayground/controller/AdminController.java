@@ -18,6 +18,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/admin")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class AdminController {
 
     private final String success = "SUCCESS"; //이 부분을 한 객체로 묶어서 사용할 수는 없을까?
