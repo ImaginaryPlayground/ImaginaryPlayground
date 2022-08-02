@@ -112,15 +112,12 @@ public class UserController {
         System.out.println("token::" + token);
         Authentication auth_data = jwtTokenService.getAuthentication(token);
 
-        // user에서 email 뽑아서 기능 구현(회원 정보 수정도 마찬가지)
-        UserDto user2 = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         Map<String, Object> result = new HashMap<>();
 
         UserDto user = new UserDto();
 
         try {
-            UserDto user = userService.findByEmail(email);
+            user = userService.findByEmail(email);
             if(auth_data != null){
                 result.put("status", success);
                 result.put("data", user);
