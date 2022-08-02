@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import "../../css/QnaPage/QnaCRUDComp.css";
+import axios from "axios";
+import { config } from "../../util/config";
 
 const QnaCRUDComp = ({ isEdit }) => {
   const currentLoginUser = useSelector((state) => {
@@ -53,6 +55,19 @@ const QnaCRUDComp = ({ isEdit }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    //특정 글에 대한 정보와 그에 대한 답변을 불러온다.
+    axios({
+      url: `${config.api}/question/lookup/${selectedQnaData.id}`, //마지막은 페이지번호
+      method: "GET",
+      headers: "", //헤더에 토큰
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     if (!currentLoginUser) {
       navigate("/login");
       return;
@@ -106,10 +121,42 @@ const QnaCRUDComp = ({ isEdit }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        //비동기 통신(회원가입 거절)
+        //비동기 통신(글작성 or 수정)
         if (isEdit) {
           //수정상태라면
+          axios({
+            url: `${config.api}/question`, //마지막은 페이지번호
+            method: "PUT",
+            headers: "", //헤더에 토큰
+            data: {
+              id: selectedQnaData.id,
+              title: selectedQnaData.title,
+              content: selectedQnaData.content,
+            },
+          })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         } else {
+          axios({
+            url: `${config.api}/question`, //마지막은 페이지번호
+            method: "POST",
+            headers: "", //헤더에 토큰
+            data: {
+              title: selectedQnaData.title,
+              content: selectedQnaData.content,
+            },
+          })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
           //작성상태라면
           setSelectedQnaData({
             ...selectedQnaData,
@@ -125,6 +172,24 @@ const QnaCRUDComp = ({ isEdit }) => {
       }
     });
     //비동기 처리
+  };
+
+  const handleDeleteQnaData = () => {
+    //질문 삭제 버튼
+    axios({
+      url: `${config.api}/question`, //마지막은 페이지번호
+      method: "DELETE",
+      headers: "", //헤더에 토큰
+      data: {
+        id: selectedQnaData.id,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

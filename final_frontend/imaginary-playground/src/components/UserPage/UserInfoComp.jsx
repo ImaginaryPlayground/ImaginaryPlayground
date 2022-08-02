@@ -1,8 +1,12 @@
 import { Button, Grid, TextField } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../css/UserPage/UserInfoComp.css";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import swal from "sweetalert";
+import axios from "axios";
+import { config } from "../../util/config";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const initialData = {
   id: 2,
@@ -16,7 +20,21 @@ const initialData = {
   hospital_address: "인천광역시 부평구 동수로 56-(부평동)",
 };
 const UserInfoComp = () => {
+  const [loginUserData, setLoginUserData] = useState({});
   const [modifyName, setmodifyName] = useState(initialData.usename);
+  const loginUserDataReducer = useSelector(
+    (state) => state.loginUserDataReducer
+  );
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios({
+      url: `${config.api}/user/detail/`, //마지막은 페이지번호
+      method: "GET",
+      headers: "", //헤더에 토큰
+    }).then((res) => {
+      console.log(res); //이메일, 이름, 가입일자 , 가입경로, 병원이름, 병원주소, 재직 증명서(이미지)
+    });
+  }, []);
 
   const nameInput = useRef();
   const handleUserInfoChange = (e) => {
@@ -36,13 +54,27 @@ const UserInfoComp = () => {
       buttons: true,
     }).then((ok) => {
       if (ok) {
-        //비동기 통신(회원가입 승인)
+        //비동기 통신(수정)
+        axios({
+          url: `${config.api}/user/update/`, //마지막은 페이지번호
+          method: "POST",
+          headers: "", //헤더에 토큰
+          data: {
+            username: modifyName,
+          },
+        })
+          .then((res) => {
+            console.log(res); //success
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
         swal("수정이 완료 되었습니다.", {
           icon: "success",
         });
       }
     });
-    //회원정보 수정 비동기 통신
   };
 
   const handleOnWithdrawal = () => {
@@ -53,7 +85,22 @@ const UserInfoComp = () => {
       buttons: true,
     }).then((ok) => {
       if (ok) {
-        //비동기 통신(회원가입 승인)
+        //비동기 통신(회원 탈퇴)
+        axios({
+          url: `${config.api}/user/delete`, //마지막은 페이지번호
+          method: "POST",
+          headers: "", //헤더에 토큰
+        })
+          .then((res) => {
+            console.log(res);
+            //세션스토리지에 있는 토큰값 삭제
+            //로그인으로 이동
+            navigate("/login");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
         swal("탈퇴가 완료 되었습니다.", {
           icon: "success",
         });
