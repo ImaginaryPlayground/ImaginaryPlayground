@@ -3,12 +3,11 @@ package com.yodel.imaginaryPlayground.service;
 import com.yodel.imaginaryPlayground.mapper.AnswerMapper;
 import com.yodel.imaginaryPlayground.model.dto.AnswerDto;
 import com.yodel.imaginaryPlayground.model.dto.PageDto;
-import com.yodel.imaginaryPlayground.model.vo.DeleteVO;
+import com.yodel.imaginaryPlayground.model.vo.IdVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -36,8 +35,8 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
-    public int deleteAnswer(DeleteVO deleteVO) throws Exception {
-        return answerMapper.deleteAnswer(deleteVO);
+    public int deleteAnswer(IdVO idVO) throws Exception {
+        return answerMapper.deleteAnswer(idVO);
     }
 
     @Override

@@ -17,5 +17,5 @@ public class PageDto {
     private String value;
     private int qna_type;
     private String email;
-
+    private int completed;
 }
