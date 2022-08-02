@@ -13,13 +13,18 @@ import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Api("UserCareController V1")
 @RestController
@@ -35,29 +40,45 @@ public class UserCareController{
     private final UserCareService userCareService;
     private final int PAGE = 9; //Pagination을 위한 변수
 
-    @PostMapping("/")
     @ApiOperation(value = "아이 등록", notes = "회원 페이지에서 아이를 등록할 수 있다.")
+    @PostMapping(value="/", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
     public Map<String, String> saveBaby(
-            @RequestBody @ApiParam(value = "필수 회원 정보를 넣어준다.", required = true) BabyDto baby) throws Exception {
+            @RequestPart(value="key", required=false) BabyDto baby,
+            @RequestPart(value="file", required=true) MultipartFile file, HttpServletRequest request) throws Exception {
 
         Map<String, String> result = new HashMap<>();
 
+        String fileName = file.getOriginalFilename();
+        System.out.println(fileName);
+        System.out.println(request.getServletContext().getRealPath("/"));
+
         try {
-            UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            baby.setUser_id(user.getId());
-            int res = userCareService.saveBaby(baby);
-            if(res == 1){
-                result.put("status", success);
-            }else{
-                result.put("status", fail);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+            String uploadDate = simpleDateFormat.format(new Date());
+            String profile = save(file, request.getServletContext().getRealPath("/"), uploadDate);
+
+
+            try {
+                UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                baby.setUser_id(user.getId());
+                int res = userCareService.saveBaby(baby);
+                if (res == 1) {
+                    result.put("status", success);
+                } else {
+                    result.put("status", fail);
+                }
+            } catch (Exception e) {
+                result.put("status", error);
+                result.put("message", e.toString());
             }
-        } catch (Exception e) {
+            return result;
+        } catch (IllegalStateException e){
             result.put("status", error);
             result.put("message", e.toString());
+            return result;
         }
-        return result;
     }
-
+    
     @PutMapping("/")
     @ApiOperation(value = "아이 정보수정", notes = "회원 페이지에서 아이의 정보를 수정할 수 있다.")
     public Map<String, Object> updateBabyInfo(
@@ -187,5 +208,18 @@ public class UserCareController{
         return result;
     }
 
+    private String save(MultipartFile file, String contextPath, String uploadDate) {
+
+        try {
+            String newFileName = uploadDate + file.getOriginalFilename();
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(contextPath + newFileName);
+            Files.write(path, bytes);
+            return newFileName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
 
