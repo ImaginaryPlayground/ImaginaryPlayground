@@ -4,11 +4,12 @@
 
 <mapper namespace="com.yodel.imaginaryPlayground.mapper.UserMapper">
 
-    <insert id="saveUser" parameterType="int">
+    <!-- document 임시 삭제 -->
+    <insert id="saveUser" parameterType="UserDto">
         INSERT INTO imagination_playground.user
-            (email, username, gender, provider, document, join_date, modified_date)
+            (email, username, provider, type, join_date, modified_date)
         VALUES
-            (#{email}, #{username}, #{gender}, #{provider}, #{document}, NOW(), NOW())
+            (#{email}, #{username}, #{provider}, "CUSTOMER" ,NOW(), NOW())
     </insert>
 
     <update id="updateUserInfo" parameterType="String">
@@ -34,7 +35,7 @@
     </select>
 
     <select id="findByEmail" parameterType="String" resultType="UserDto">
-        SELECT COUNT(*)
+        SELECT *
         FROM imagination_playground.user
         WHERE email = #{email}
     </select>
