@@ -4,19 +4,44 @@
 
 <mapper namespace="com.yodel.imaginaryPlayground.mapper.AdminMapper">
     <!--회원의 등급 조정-->
+    <update id="approveUser">
+        UPDATE imagination_playground.user
+        SET type = 'ROLE_USER'
+        WHERE email = #{email} IN
+        <foreach item="email" collection="list"
+                 open="(" separator="," close=")">
+            #{email}
+        </foreach>
+    </update>
+
+    <delete id="deleteUser">
+        DELETE FROM imagination_playground.user
+        WHERE email = #{email} IN
+        <foreach item="email" collection="list"
+                 open="(" separator="," close=")">
+            #{email}
+        </foreach>
+    </delete>
+
     <update id="approveUserType">
         UPDATE imagination_playground.user
         SET type = #{type}
         WHERE email = #{email} IN
-        <foreach item="id" collection="list"
+        <foreach item="email" collection="list"
                  open="(" separator="," close=")">
-            #{id}
+            #{email}
         </foreach>
     </update>
 
     <!--전체 회원 조회-->
-    <select id="lookupAllUser" resultType="UserDto">
+    <select id="lookupAllUser" parameterType="String" resultType="UserDto">
         SELECT * FROM imagination_playground.user
+        WHERE type LIKE (CONCAT("%", #{type}, "%"))
+    </select>
+
+    <select id="lookupUserNumber" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM imagination_playground.user
+        WHERE type = #{type}
     </select>
 
     <!--등급이 PENDING인 회원 조회-->
@@ -24,6 +49,12 @@
         SELECT * FROM imagination_playground.user
         WHERE type = 'CUSTOMER'
         LIMIT #{page}, #{page_last}
+    </select>
+
+    <select id="lookupApprovedUser" parameterType="Map" resultType="UserDto">
+        SELECT * FROM imagination_playground.user
+        WHERE type = 'ROLE_USER'
+            LIMIT #{page}, #{page_last}
     </select>
 
     <!--특정 회원 조회-->

@@ -40,14 +40,14 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public List<QuestionDto> lookupAllQuestion(int page) throws Exception {
-        PageDto pageDto = new PageDto(0, PAGE, "", "", 0);
+        PageDto pageDto = new PageDto(0, PAGE, "", "", 0, "");
         return questionMapper.lookupAllQuestion(pageDto);
     }
 
     @Override
-    public List<QuestionDto> lookupAllQuestionWithQuestionType(PageDto pageDto) throws Exception {
+    public List<QuestionDto> lookupAllQuestionWithEmail(PageDto pageDto) throws Exception {
         pageDto.setPage_last(pageDto.getPage() + PAGE);
-        return questionMapper.lookupAllQuestionWithQuestionType(pageDto);
+        return questionMapper.lookupAllQuestionWithEmail(pageDto);
     }
 
     @Override
@@ -57,8 +57,8 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     @Override
-    public List<QuestionDto> searchAllQuestionWithQuestionType(PageDto pageDto) throws Exception {
+    public List<QuestionDto> searchAllQuestionWithEmail(PageDto pageDto) throws Exception {
         pageDto.setPage_last(pageDto.getPage() + PAGE);
-        return questionMapper.searchAllQuestionWithQuestionType(pageDto);
+        return questionMapper.searchAllQuestionWithEmail(pageDto);
     }
 }

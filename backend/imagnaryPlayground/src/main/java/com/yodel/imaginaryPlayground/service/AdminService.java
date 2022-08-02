@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 public interface AdminService {
-    int approveUserType(List<Integer> list) throws Exception;
-    List<UserDto> lookupAllUser() throws Exception;
+    int approveUser(List<Integer> list) throws Exception;
+    int deleteUser(List<Integer> list) throws Exception;
+    int lookupUserNumber(boolean isApproved) throws Exception;
     List<UserDto> lookupUnapprovedUser(int page) throws Exception;
+    List<UserDto> lookupApprovedUser(int page) throws Exception;
+    List<UserDto> lookupAllUser(int mode) throws Exception;
     UserDto lookupUser(String email) throws Exception;
-    int deleteUser(String email) throws Exception;
 }

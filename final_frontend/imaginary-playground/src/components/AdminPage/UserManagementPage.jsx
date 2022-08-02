@@ -12,6 +12,7 @@ import UserInfoReadModal from "./UserInfoReadModal";
 import swal from "sweetalert";
 import { useEffect } from "react";
 import axios from "axios";
+import { config } from "../../util/config";
 
 const columns = [
   { field: "id", headerName: "id", width: 50 },
@@ -96,6 +97,7 @@ const rows = [
 const UserManagementPage = () => {
   const [open, setOpen] = useState(false);
   const [selectedUserInfo, setSelectedUserInfo] = useState({});
+  const [page, setPage] = useState(0);
 
   const handleClickOpen = (e) => {
     setOpen(true);
@@ -114,8 +116,8 @@ const UserManagementPage = () => {
 
     //전체 승인된 전체 회원 개수
     axios({
-      url: "admin/user/update", //마지막은 페이지번호
-      method: "POST",
+      url: `${config.api}/admin/user/update`, //마지막은 페이지번호
+      method: "GET",
       headers: {
         token: "", //로그인이됐으면 요청
       },
@@ -135,7 +137,7 @@ const UserManagementPage = () => {
     //비동기 회원관리
     //전체 승인된 전체 회원 개수
     axios({
-      url: "admin/lookup/all", //마지막은 페이지번호
+      url: `${config.api}/admin/lookup/all`, //마지막은 페이지번호
       method: "GET",
     }).then((res) => {
       console.log(res);
@@ -143,7 +145,7 @@ const UserManagementPage = () => {
 
     //승인안된 회원 조회
     axios({
-      url: "admin/lookup/approved/0", //마지막은 페이지번호
+      url: `${config.api}/admin/lookup/approved/${page}`, //마지막은 페이지번호
       method: "GET",
     }).then((res) => {
       console.log(res);
@@ -182,6 +184,10 @@ const UserManagementPage = () => {
         rowsPerPageOptions={[15]}
         onCellClick={(e) => {
           handleClickOpen(e);
+        }}
+        pagination
+        onPageChange={(page) => {
+          setPage(page);
         }}
       />
       <Dialog

@@ -9,9 +9,11 @@ import java.util.Map;
 
 @Mapper
 public interface AdminMapper {
-    int approveUserType(List<Integer> list) throws SQLException;
-    List<UserDto> lookupAllUser() throws SQLException;
+    int approveUser(List<Integer> list) throws SQLException;
+    int deleteUser(List<Integer> list) throws SQLException;
+    int lookupUserNumber(String type) throws SQLException;
     List<UserDto> lookupUnapprovedUser(Map<String, Integer> map) throws SQLException;
+    List<UserDto> lookupApprovedUser(Map<String, Integer> map) throws SQLException;
+    List<UserDto> lookupAllUser(String type) throws SQLException;
     UserDto lookupUser(String email) throws SQLException;
-    int deleteUser(String email) throws SQLException;
 }

@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import InputError from "../../components/InputError/InputError";
 import "../../css/SignUpPage/SignUpPage.css";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const theme = createTheme({
   palette: {
@@ -44,6 +45,7 @@ const SignUpPage = () => {
   const whiteSpaceRegExp = /[^A-Za-z가-힣]/;
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const emailUrlFocus = useRef();
   const emailIdFocus = useRef();
   const password_1Focus = useRef();
@@ -145,20 +147,17 @@ const SignUpPage = () => {
       return;
     }
 
-    //비동기 처리(회원가입, 재직증명서) -> 미들페이지에서 처리
-    // axios({
-    //   url: `/user/register`,
-    //   method: "POST",
-    //   data: {
-    //     email: `${userInfo.emailId}@${
-    //       userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
-    //     }`,
-    //     password: userInfo.userPassword,
-    //     username: userInfo.name,
-    //     document: "",
-    //   },
-    // }).then((res) => console.log(res));
-
+    //리덕스에 저장 후 middlepage로 넘어간다.
+    dispatch({
+      type: "SET_SIGNUP_USER",
+      data: {
+        email: `${userInfo.emailId}@${
+          userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
+        }`,
+        username: userInfo.name,
+        password: userInfo.password_1,
+      },
+    });
     navigate("/middlepage");
   };
 
