@@ -4,7 +4,7 @@
 
 <mapper namespace="com.yodel.imaginaryPlayground.mapper.HospitalMapper">
     <select id="searchHospital" parameterType="String" resultType="HospitalDto">
-        SELECT name, pos_x, pos_y, address, date
+        SELECT id, name, pos_x, pos_y, address, date
         FROM imagination_playground.hospital
         WHERE name LIKE(CONCAT("%", #{value}, "%"))
     </select>
