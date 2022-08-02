@@ -18,6 +18,8 @@ import QnaListCompMobile from "../../components/QnaPage/QnaListCompMobile";
 import "../../css/QnaPage/QnaListPage.css";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { config } from "../../util/config";
 
 const dummyData = [
   {
@@ -272,7 +274,7 @@ const QnaListPage = () => {
     : 1;
 
   const [searchData, setSearchData] = useState({
-    searchCondition: "name",
+    searchCondition: "title",
     searchWord: "",
     myQna: false,
     completed: "all",
@@ -282,6 +284,28 @@ const QnaListPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     //비동기로 데이터를 가져옴
+    axios({
+      url: `${config.api}/question/lookup/all`, //마지막은 페이지번호
+      method: "POST",
+      headers: "", //헤더에 토큰
+      data: {
+        key: searchData.searchCondition,
+        qna_type: searchData.myQna ? 1 : 0, //0 은 전체조회 1은, 내qna조회
+        completed: "all" ? 2 : searchData.completed === "before" ? 0 : 1, //0처리안된거, 1이 처리된거, 2가 전체
+        value: searchData.searchWord,
+        page: page,
+      },
+    })
+      .then((res) => {
+        //전체 데이터를 배열로 반환
+        console.log(res);
+        //받은 데이터들 입력
+        //setKidsData(allData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     setQnaListData(dummyData);
   }, [page, searchData.myQna, searchData.completed]);
 
@@ -310,6 +334,29 @@ const QnaListPage = () => {
     console.log(searchData);
 
     //비동기로 검색된 데이터 설정
+    //비동기로 데이터를 가져옴
+    axios({
+      url: `${config.api}/question/lookup/all`, //마지막은 페이지번호
+      method: "POST",
+      headers: "", //헤더에 토큰
+      data: {
+        key: searchData.searchCondition,
+        qna_type: searchData.myQna ? 1 : 0, //0 은 전체조회 1은, 내qna조회
+        completed: "all" ? 2 : searchData.completed === "before" ? 0 : 1, //0처리안된거, 1이 처리된거, 2가 전체
+        value: searchData.searchWord,
+        page: 1,
+      },
+    })
+      .then((res) => {
+        //전체 데이터를 배열로 반환
+        console.log(res);
+        //받은 데이터들 입력
+        //setKidsData(allData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     setQnaListData(dummyData);
   };
 
@@ -381,8 +428,8 @@ const QnaListPage = () => {
               onChange={handleOnSearchChange}
               name="searchCondition"
             >
-              <MenuItem value={"name"}>이름</MenuItem>
               <MenuItem value={"title"}>제목</MenuItem>
+              <MenuItem value={"content"}>내용</MenuItem>
             </Select>
           </FormControl>
 

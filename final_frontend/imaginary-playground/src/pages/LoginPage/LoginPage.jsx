@@ -93,7 +93,7 @@ const LoginPage = () => {
       userPasswordInput.current.focus();
       return;
     }
-
+    console.log("로그인 직전");
     //비동기 처리
     axios({
       url: `${config.api}/user/login`,
@@ -104,10 +104,12 @@ const LoginPage = () => {
       },
     })
       .then((res) => {
+        console.log("연결 성공!!");
         console.log(res);
         //localStorage.setItem("token", JSON.stringify(res?.data));
       })
       .catch((err) => {
+        console.log("에러!!");
         console.log(err);
       });
   };
