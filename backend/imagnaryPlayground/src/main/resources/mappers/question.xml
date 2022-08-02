@@ -33,12 +33,14 @@
         LIMIT #{page}, #{page_last}
     </select>
 
-    <select id="lookupAllQuestionWithQuestionType" parameterType="PageDto" resultType="QuestionDto">
-        SELECT * FROM imagination_playground.qna_question
-        WHERE qna_type = #{qna_type}
+    <select id="lookupAllQuestionWithEmail" parameterType="PageDto" resultType="QuestionDto">
+        SELECT q.email, u.id, u.user_id, u.title, u.content, u.secret, u.completed, u.created_date, u.modified_date
+                 FROM imagination_playground.qna_question q
+                 LEFT OUTER JOIN imagination_playground.user u
+                 ON u.id = q.user_id
+        WHERE email = #{email}
         ORDER BY created_date
         ASC
-        LIMIT #{page}, #{page_last}
     </select>
 
     <select id="searchAllQuestion" parameterType="PageDto" resultType="QuestionDto">
@@ -49,9 +51,12 @@
         LIMIT #{page}, #{page_last}
     </select>
 
-    <select id="searchAllQuestionWithQuestionType" parameterType="PageDto" resultType="QuestionDto">
-        SELECT * FROM imagination_playground.qna_question
-        WHERE ${key} LIKE(CONCAT("%", ${value}, "%")) AND qna_type = #{qna_type}
+    <select id="searchAllQuestionWithEmail" parameterType="PageDto" resultType="QuestionDto">
+        SELECT q.email, u.id, u.user_id, u.title, u.content, u.secret, u.completed, u.created_date, u.modified_date
+                 FROM imagination_playground.qna_question q
+                 LEFT OUTER JOIN imagination_playground.user u
+                 ON u.id = q.user_id
+        WHERE ${key} LIKE(CONCAT("%", ${value}, "%")) AND email = #{email}
         ORDER BY created_date
         ASC
         LIMIT #{page}, #{page_last}

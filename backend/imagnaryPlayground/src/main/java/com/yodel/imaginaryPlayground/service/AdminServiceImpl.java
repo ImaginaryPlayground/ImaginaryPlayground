@@ -16,13 +16,24 @@ public class AdminServiceImpl implements AdminService{
     private final AdminMapper adminMapper;
     private final int PAGE = 9; //Pagination을 위한 변수
     @Override //생성자로 만들어서 주기
-    public int approveUserType(List<Integer> list) throws Exception {
-        return adminMapper.approveUserType(list);
+    public int approveUser(List<Integer> list) throws Exception {
+        return adminMapper.approveUser(list);
     }
 
     @Override
-    public List<UserDto> lookupAllUser() throws Exception {
-        return adminMapper.lookupAllUser();
+    public int deleteUser(List<Integer> list) throws Exception {
+        return adminMapper.deleteUser(list);
+    }
+
+    @Override
+    public int lookupUserNumber(boolean isApproved) throws Exception {
+        String type;
+        if (isApproved) {
+            type = "ROLE_USER";
+        } else {
+            type = "CUSTOMER";
+        }
+        return adminMapper.lookupUserNumber(type);
     }
 
     @Override
@@ -34,12 +45,29 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
+    public List<UserDto> lookupApprovedUser(int page) throws Exception {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("page", page);
+        map.put("page_last", page + PAGE);
+        return adminMapper.lookupApprovedUser(map);
+    }
+
+    @Override
+    public List<UserDto> lookupAllUser(int mode) throws Exception {
+        String type;
+        if(mode == 1){ //승인 조회
+            type = "ROLE_USER";
+        } else if (mode == 2) { //미승인 회원 조회
+            type = "CUSTOMER";
+        } else {
+            type = "";
+        }
+        return adminMapper.lookupAllUser(type);
+    }
+
+    @Override
     public UserDto lookupUser(String email) throws Exception {
         return adminMapper.lookupUser(email);
     }
 
-    @Override
-    public int deleteUser(String email) throws Exception {
-        return adminMapper.deleteUser(email);
-    }
 }

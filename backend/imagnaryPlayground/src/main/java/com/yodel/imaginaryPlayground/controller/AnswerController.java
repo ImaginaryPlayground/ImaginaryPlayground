@@ -37,7 +37,7 @@ public class AnswerController {
             Integer res = answerService.isCompleted(answer.getQuestion_id());
             if(res != null && res == 0 && answerService.saveAnswer(answer) == 1){
                 result.put("status", success);
-                PageDto pageDto = new PageDto(0, PAGE,"completed", "0", 0);
+                PageDto pageDto = new PageDto(0, PAGE,"completed", "0", 0, "");
                 result.put("data", answerService.lookupUncompletedAnswer(pageDto));
             }else{
                 result.put("status", fail);
@@ -80,7 +80,7 @@ public class AnswerController {
             int res = answerService.deleteAnswer(deleteVO);
             if(res == 1){
                 result.put("status", success);
-                PageDto pageDto = new PageDto(0, PAGE,"completed", "0", 0);
+                PageDto pageDto = new PageDto(0, PAGE,"completed", "0", 0, "");
                 result.put("data", answerService.lookupUncompletedAnswer(pageDto));
             }else{
                 result.put("status", fail);
