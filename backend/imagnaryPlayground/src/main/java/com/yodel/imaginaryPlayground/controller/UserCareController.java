@@ -40,6 +40,7 @@ public class UserCareController{
     private final UserCareService userCareService;
     private final int PAGE = 9; //Pagination을 위한 변수
 
+    ttps://gaemi606.tistory.com/entry/Spring-Boot-multipartform-data-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C-React-Axios-REST-API
     @ApiOperation(value = "아이 등록", notes = "회원 페이지에서 아이를 등록할 수 있다.")
     @PostMapping(value="/", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
     public Map<String, String> saveBaby(
@@ -61,6 +62,7 @@ public class UserCareController{
             try {
                 UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 baby.setUser_id(user.getId());
+                baby.setProfile(profile);
                 int res = userCareService.saveBaby(baby);
                 if (res == 1) {
                     result.put("status", success);
