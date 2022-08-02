@@ -98,20 +98,19 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/detail/{email}")
     @ApiOperation(value = "회원 정보 조회", notes = "회원 정보를 조회한다.")
     public Map<String, Object> detailUser(
-            @RequestHeader Map<String, String> data,
-            @PathVariable int id) {
+            @PathVariable String email) {
 
-        String token = (String)data.get("authorization");
-        Authentication user_auth = jwtTokenService.getAuthentication(token);
+//        String token = token;
+//        System.out.println("token::" + token);
+//        Authentication auth_data = jwtTokenService.getAuthentication(token);
 
         Map<String, Object> result = new HashMap<>();
-        UserDto user = new UserDto();
         try {
-            UserDto user = userService.detailUser(id);
-            if(user != null){
+            UserDto user = userService.findByEmail(email);
+            if(auth_data != null){
                 result.put("status", success);
                 result.put("data", user);
             }else{
@@ -121,11 +120,10 @@ public class UserController {
             result.put("status", error);
             result.put("message", e.toString());
         }
-        result.put("data", user);
         return result;
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update")
     @ApiOperation(value = "회원 정보 수정", notes = "회원 페이지에서 사용자의 정보를 수정할 수 있다.")
     public Map<String, Object> updateUserInfo(
             //헤더에 토큰
@@ -148,10 +146,10 @@ public class UserController {
         return result;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("")
     @ApiOperation(value = "회원 정보 삭제", notes = "회원 페이지에서 사용자의 정보를 삭제한다.")
     public Map<String, String> deleteUser(
-            @PathVariable int id){
+            @RequestHeader int id){    // 토큰
 
         Map<String, String> result = new HashMap<>();
 
