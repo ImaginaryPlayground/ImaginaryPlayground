@@ -4,7 +4,6 @@
 
 <mapper namespace="com.yodel.imaginaryPlayground.mapper.UserMapper">
 
-    <!-- document 임시 삭제 -->
     <insert id="saveUser" parameterType="UserDto">
         INSERT INTO imagination_playground.user
             (email, username, provider, type, join_date, modified_date)
