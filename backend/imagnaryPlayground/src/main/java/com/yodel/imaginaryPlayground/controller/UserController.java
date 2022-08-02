@@ -7,19 +7,17 @@ import com.yodel.imaginaryPlayground.service.EmailService;
 import com.yodel.imaginaryPlayground.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-
-import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
-
 import org.apache.commons.io.IOUtils;
+import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,9 +25,8 @@ import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -50,31 +47,52 @@ public class UserController {
 
     @PostMapping("/register")
     @ApiOperation(value = "회원가입", notes = "회원가입을 한다.")
-    public Map<String, Object> signUp(
-            @RequestBody @ApiParam(value = "필수 입력 정보를 모두 넣어준다.", required = true) Map<String, String> signupData) {
-        String email = signupData.get("email");
-        String password = signupData.get("password");
-        String username = signupData.get("username");
-        String provider = "SITE";
+    public ResponseEntity<Void> signUp(
+            @RequestPart("document") MultipartFile document,
+            @RequestParam("data") String data) {
 
-        Map<String, Object> result = new HashMap<>();
-        UserDto user = new UserDto(email, password, username, provider);
+        JSONObject signupData = new JSONObject(data);
 
-        // 기존 사용자인지 확인(이메일 조회)
-        try {
-            int findUser = userService.countByEmail(email);
-            if(findUser == 1) {     // 이미 존재하는 사용자
-                result.put("status", fail);
-                result.put("data", user);
-            } else {     //새로운 사용자
-                userService.saveUser(user);
-                result.put("status", success);
-            }
-        } catch (Exception e) {
-            result.put("error", error);
-            result.put("message", e.getMessage());
+        Iterator it = signupData.keys();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            System.out.println("key: " + key + ", value: " + signupData.getString(key));
         }
-        return result;
+
+//        String email = signupData.get("email");
+//        String password = signupData.get("password");
+//        String username = signupData.get("username");
+//        String provider = "SITE";
+
+//        Map<String, Object> result = new HashMap<>();
+//        UserDto user = new UserDto(email, password, username, provider);
+//
+//        // 기존 사용자인지 확인(이메일 조회)
+//        try {
+//            int findUser = userService.countByEmail(email);
+//            if(findUser == 1) {     // 이미 존재하는 사용자
+//                result.put("status", fail);
+//                result.put("data", user);
+//            } else {     //새로운 사용자
+//                userService.saveUser(user);
+//                result.put("status", success);
+//            }
+//        } catch (Exception e) {
+//            result.put("error", error);
+//            result.put("message", e.getMessage());
+//        }
+        return null;
+    }
+
+    @PostMapping("/upload")
+    @ApiOperation(value = "재직 증명서 업로드")
+    public ResponseEntity<Void> uploadFile(
+            @RequestPart("document") List<MultipartFile> document,
+            @RequestParam("data") String data) {
+
+        System.out.println(document);
+        System.out.println(data);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/login")
@@ -197,17 +215,6 @@ public class UserController {
 //        }
 //        return result;
 //    }
-
-    @PostMapping("/upload")
-    @ApiOperation(value = "재직 증명서 업로드")
-    public ResponseEntity<Void> uploadFile(
-            @RequestPart("document") List<MultipartFile> document,
-            @RequestParam("data") String data) {
-
-        System.out.println(document);
-        System.out.println(data);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 
     @GetMapping("/getFile")
     @ApiOperation(value = "재직 증명서 가져오기")
