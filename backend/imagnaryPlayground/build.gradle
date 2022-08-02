@@ -51,6 +51,9 @@ dependencies {
 	// security
 	implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.7.1'
 
+	// File upload
+	implementation 'commons-io:commons-io:2.6'
+
 }
 
 tasks.named('test') {
