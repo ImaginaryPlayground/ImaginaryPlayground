@@ -3,6 +3,47 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yodel.imaginaryPlayground.mapper.UserMapper">
+
+    <insert id="saveUser" parameterType="int">
+        INSERT INTO imagination_playground.user
+            (email, username, gender, provider, document, join_date, modified_date)
+        VALUES
+            (#{email}, #{username}, #{gender}, #{provider}, #{document}, NOW(), NOW())
+    </insert>
+
+    <update id="updateUserInfo" parameterType="String">
+        UPDATE imagination_playground.user
+        SET username = #{username}, modified_date = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <select id="detailUser" parameterType="int" resultType="UserDto">
+        SELECT * FROM imagination_playground.user
+        WHERE id = #{id}
+    </select>
+
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM imagination_playground.user
+        WHERE id = #{id}
+    </delete>
+
+    <select id="countByEmail" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM imagination_playground.user
+        WHERE email = #{email}
+    </select>
+
+    <select id="findByEmail" parameterType="String" resultType="UserDto">
+        SELECT COUNT(*)
+        FROM imagination_playground.user
+        WHERE email = #{email}
+    </select>
+
+    <insert id="saveFile" parameterType="String">
+        INSERT INTO imagination_playground.user(document)
+        VALUES(#{document})
+    </insert>
+
     <!--이메일 인증번호 저장-->
     <insert id="saveEmailAuth" parameterType="Map">
         INSERT INTO imagination_playground.user_authentication
