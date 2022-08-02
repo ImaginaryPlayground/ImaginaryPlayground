@@ -10,10 +10,21 @@ import io.swagger.annotations.ApiParam;
 
 import lombok.RequiredArgsConstructor;
 
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.FileInputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,19 +52,20 @@ public class UserController {
         String provider = "SITE";
 
         Map<String, Object> result = new HashMap<>();
+        UserDto user = new UserDto(email, username, provider);
 
         // 기존 사용자인지 확인(이메일 조회)
         try {
             int findUser = userService.countByEmail(email);
-            if(findUser == 1) {     // 이미 존재하는 이메일
+            if(findUser == 1) {     // 이미 존재하는 사용자
                 result.put("status", fail);
-                UserDto user = new UserDto(email, username, provider);
+                result.put("data", user);
+            } else {     //새로운 사용자
+
+                //이메일 인증? auth 테이블의 email이 null이 아니면 이메일 인증 실패, 성공했으면 사라짐
+
 
                 userService.saveUser(user);
-                //이메일 인증 구현
-
-                result.put("data", user);
-            } else {
                 result.put("status", success);
             }
         } catch (Exception e) {
@@ -109,17 +121,18 @@ public class UserController {
         return result;
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{id}")
     @ApiOperation(value = "회원 정보 수정", notes = "회원 페이지에서 사용자의 정보를 수정할 수 있다.")
     public Map<String, Object> updateUserInfo(
-            @RequestBody UserDto user){
+            //헤더에 토큰
+            @PathVariable int id, @RequestBody String username){
 
         Map<String, Object> result = new HashMap<>();
         try {
-            int res = userService.updateUserInfo(user);
+            int res = userService.updateUserInfo(username);
             if(res == 1){
                 result.put("status", success);
-                result.put("data", userService.detailUser(user.getId()));
+                result.put("data", userService.detailUser(id));
             }else{
                 result.put("status", fail);
             }
@@ -146,6 +159,59 @@ public class UserController {
                 result.put("status", fail);
             }
         } catch (Exception e) {
+            result.put("status", error);
+            result.put("message", e.toString());
+        }
+        return result;
+    }
+
+    @PostMapping("/upload")
+    @ApiOperation(value = "재직 증명서 업로드")
+    public Map<String, Object> uploadFile(
+            @RequestParam("file") MultipartFile document, HttpServletRequest request) throws Exception {
+
+        Map<String, Object> result = new HashMap<>();
+
+        String fileName = document.getOriginalFilename();
+        System.out.println(fileName);
+        System.out.println(request.getServletContext().getRealPath("/"));
+
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+            String uploadDate = simpleDateFormat.format(new Date());
+            String file = save(document, request.getServletContext().getRealPath("/"), uploadDate);
+
+            userService.saveFile(file);
+            result.put("status", success);
+        } catch (IllegalStateException e) {
+            result.put("status", error);
+            result.put("message", e.toString());
+        }
+        return result;
+    }
+
+    @GetMapping("/getFile")
+    @ApiOperation(value = "재직 증명서 가져오기")
+    public Map<String, Object> getFile(@RequestParam String email, HttpServletRequest request) throws Exception{
+
+        Map<String, Object> result = new HashMap<>();
+        HttpHeaders header = new HttpHeaders();
+
+
+        try {
+            UserDto user = userService.findByEmail(email);
+            String filePath = request.getServletContext().getRealPath("/") + user.getDocument();
+            System.out.println(filePath);
+            String mimeType = Files.probeContentType(Paths.get(filePath));  //파일 확장자
+            System.out.println(mimeType);
+            FileInputStream input = new FileInputStream(filePath);
+            header.setContentType(MediaType.parseMediaType(mimeType));
+
+            result.put("byte", IOUtils.toByteArray(input));
+            result.put("header", header);
+            result.put("status", success);
+
+        } catch (IllegalStateException e) {
             result.put("status", error);
             result.put("message", e.toString());
         }
@@ -207,5 +273,19 @@ public class UserController {
         //System.out.println("login Service :" + user2.toString());
 
         return result;
+    }
+
+    private String save(MultipartFile file, String contextPath, String uploadDate) {
+
+        try {
+            String newFileName = uploadDate + file.getOriginalFilename();
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(contextPath + newFileName);
+            Files.write(path, bytes);
+            return newFileName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
