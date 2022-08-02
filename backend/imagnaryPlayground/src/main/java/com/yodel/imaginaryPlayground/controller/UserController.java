@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -62,9 +63,6 @@ public class UserController {
                 result.put("data", user);
             } else {     //새로운 사용자
 
-                //이메일 인증? auth 테이블의 email이 null이 아니면 이메일 인증 실패, 성공했으면 사라짐
-
-
                 userService.saveUser(user);
                 result.put("status", success);
             }
@@ -102,11 +100,17 @@ public class UserController {
 
     @GetMapping("/detail/{id}")
     @ApiOperation(value = "회원 정보 조회", notes = "회원 정보를 조회한다.")
-    public Map<String, Object> detailUser(@PathVariable int id) {
+    public Map<String, Object> detailUser(
+            @RequestHeader Map<String, String> data,
+            @PathVariable int id) {
+
+        String token = (String)data.get("authorization");
+        Authentication user = jwtTokenService.getAuthentication(token);
+
         Map<String, Object> result = new HashMap<>();
-        UserDto user = new UserDto();
+//        UserDto user = new UserDto();
         try {
-            user = userService.detailUser(id);
+            UserDto user2 = userService.detailUser(id);
             if(user != null){
                 result.put("status", success);
                 result.put("data", user);
