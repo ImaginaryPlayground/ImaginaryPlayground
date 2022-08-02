@@ -51,6 +51,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     //혹시 이미 저장된 정보라면, update 처리
     private int saveOrUpdate(OAuthAttributes attributes) {
         int findUser = userService.countByEmail(attributes.getEmail());
+
         UserDto user = new UserDto();
 
         if(findUser == 0){
@@ -61,8 +62,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
            findUser = userService.saveUser(user);
         }
 
+        System.out.println("findUser : " + findUser);
         if(findUser == 1){
-            user = userService.findByEmail(user.getEmail()); //구현 필요
+            user = userService.findByEmail(attributes.getEmail()); //구현 필요
         }
 
         System.out.printf("saveOrupdate, 소셜 로그인 진행: "+user.toString());
