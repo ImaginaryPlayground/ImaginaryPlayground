@@ -8,12 +8,16 @@ import com.yodel.imaginaryPlayground.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
 
 import org.apache.catalina.User;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,11 +31,13 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class UserController {
 
     private final UserService userService;
@@ -49,11 +55,12 @@ public class UserController {
     public Map<String, Object> signUp(
             @RequestBody @ApiParam(value = "필수 입력 정보를 모두 넣어준다.", required = true) Map<String, String> signupData) {
         String email = signupData.get("email");
+        String password = signupData.get("password");
         String username = signupData.get("username");
         String provider = "SITE";
 
         Map<String, Object> result = new HashMap<>();
-        UserDto user = new UserDto(email, username, provider);
+        UserDto user = new UserDto(email, password, username, provider);
 
         // 기존 사용자인지 확인(이메일 조회)
         try {
@@ -62,10 +69,6 @@ public class UserController {
                 result.put("status", fail);
                 result.put("data", user);
             } else {     //새로운 사용자
-
-                //이메일 인증? auth 테이블의 email이 null이 아니면 이메일 인증 실패, 성공했으면 사라짐
-
-
                 userService.saveUser(user);
                 result.put("status", success);
             }
@@ -74,7 +77,6 @@ public class UserController {
             result.put("message", e.getMessage());
         }
         return result;
-
     }
 
     @PostMapping("/login")
@@ -101,15 +103,25 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/detail/{email}")
     @ApiOperation(value = "회원 정보 조회", notes = "회원 정보를 조회한다.")
-    public Map<String, Object> detailUser(@PathVariable int id) {
+    public Map<String, Object> detailUser(
+            @RequestHeader String token,  //헤더X
+            @PathVariable String email) {
+
+        System.out.println("token::" + token);
+        Authentication auth_data = jwtTokenService.getAuthentication(token);
+
+        // user에서 email 뽑아서 기능 구현(회원 정보 수정도 마찬가지)
+        UserDto user2 = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         Map<String, Object> result = new HashMap<>();
+
         UserDto user = new UserDto();
 
         try {
-            user = userService.detailUser(id);
-            if(user != null){
+            UserDto user = userService.findByEmail(email);
+            if(auth_data != null){
                 result.put("status", success);
                 result.put("data", user);
             }else{
@@ -119,11 +131,10 @@ public class UserController {
             result.put("status", error);
             result.put("message", e.toString());
         }
-        result.put("data", user);
         return result;
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update")
     @ApiOperation(value = "회원 정보 수정", notes = "회원 페이지에서 사용자의 정보를 수정할 수 있다.")
     public Map<String, Object> updateUserInfo(
             //헤더에 토큰
@@ -146,10 +157,10 @@ public class UserController {
         return result;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("")
     @ApiOperation(value = "회원 정보 삭제", notes = "회원 페이지에서 사용자의 정보를 삭제한다.")
     public Map<String, String> deleteUser(
-            @PathVariable int id){
+            @RequestHeader int id){    // 토큰
 
         Map<String, String> result = new HashMap<>();
 
@@ -167,29 +178,40 @@ public class UserController {
         return result;
     }
 
+//    @PostMapping("/upload")
+//    @ApiOperation(value = "재직 증명서 업로드")
+//    public Map<String, Object> uploadFile(
+//            @RequestParam("file") MultipartFile document, HttpServletRequest request) throws Exception {
+//
+//        Map<String, Object> result = new HashMap<>();
+//
+//        String fileName = document.getOriginalFilename();
+//        System.out.println(fileName);
+//        System.out.println(request.getServletContext().getRealPath("/"));
+//
+//        try {
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+//            String uploadDate = simpleDateFormat.format(new Date());
+//            String file = save(document, request.getServletContext().getRealPath("/"), uploadDate);
+//
+//            userService.saveFile(file);
+//            result.put("status", success);
+//        } catch (IllegalStateException e) {
+//            result.put("status", error);
+//            result.put("message", e.toString());
+//        }
+//        return result;
+//    }
+
     @PostMapping("/upload")
     @ApiOperation(value = "재직 증명서 업로드")
-    public Map<String, Object> uploadFile(
-            @RequestParam("file") MultipartFile document, HttpServletRequest request) throws Exception {
+    public ResponseEntity<Void> uploadFile(
+            @RequestPart("document") List<MultipartFile> document,
+            @RequestParam("data") String data) {
 
-        Map<String, Object> result = new HashMap<>();
-
-        String fileName = document.getOriginalFilename();
-        System.out.println(fileName);
-        System.out.println(request.getServletContext().getRealPath("/"));
-
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
-            String uploadDate = simpleDateFormat.format(new Date());
-            String file = save(document, request.getServletContext().getRealPath("/"), uploadDate);
-
-            userService.saveFile(file);
-            result.put("status", success);
-        } catch (IllegalStateException e) {
-            result.put("status", error);
-            result.put("message", e.toString());
-        }
-        return result;
+        System.out.println(document);
+        System.out.println(data);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/getFile")
