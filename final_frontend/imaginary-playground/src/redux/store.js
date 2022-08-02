@@ -3,20 +3,10 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-const loginUserDataReducer = (
-  state = {
-    email: "jimdac@naver.com",
-    username: "우영우",
-    join_date: "2022-07-31",
-    modified_date: "2022-07-31",
-    hospital_id: 1,
-    hospital_name: "순천향병원",
-    hospital_address: "인천광역시 부평구 동수로 56-(부평동)",
-  },
-  action
-) => {
+
+const signUpUserDataReducer = (state = null, action) => {
   switch (action.type) {
-    case "SET_LOGIN_USER":
+    case "SET_SIGNUP_USER":
       return action.data;
     default:
       return state;
@@ -32,10 +22,10 @@ const selectedKidReducer = (state = null, action) => {
   }
 };
 
-const HomePageCurrentPageReducer = (
-  state = { page: 1, scrollY: 0 },
-  action
-) => {
+const HomePageCurrentPageReducer = (state, action) => {
+  if (!state) {
+    state = { page: 1, scrollY: 0 };
+  }
   switch (action.type) {
     case "SET_CURRENT_PAGE":
       return action.data;
@@ -53,16 +43,38 @@ const QnaPageSelectedDataReducer = (state = null, action) => {
   }
 };
 
+const initailLoginUserdata = {
+  email: "jimdac@naver.com",
+  username: "우영우",
+  join_date: "2022-07-31",
+  modified_date: "2022-07-31",
+  hospital_id: 1,
+  hospital_name: "순천향병원",
+  hospital_address: "인천광역시 부평구 동수로 56-(부평동)",
+};
+const loginUserDataReducer = (state, action) => {
+  if (!state) {
+    state = initailLoginUserdata;
+  }
+  switch (action.type) {
+    case "SET_LOGIN_USER":
+      return action.data;
+    default:
+      return state;
+  }
+};
+
 const persistConfig = {
   key: "root",
   storage,
 };
 
 const reducers = combineReducers({
+  loginUserDataReducer,
   selectedKidReducer,
   HomePageCurrentPageReducer,
   QnaPageSelectedDataReducer,
-  loginUserDataReducer,
+  signUpUserDataReducer,
 });
 const persistedReducer = persistReducer(persistConfig, reducers);
 const store = configureStore({

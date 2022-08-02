@@ -7,7 +7,11 @@ import swal from "sweetalert";
 import "../../css/QnaPage/QnaCRUDComp.css";
 
 const QnaCRUDComp = ({ isEdit }) => {
-  const currentLoginUser = useSelector((state) => state.loginUserDataReducer);
+  const currentLoginUser = useSelector((state) => {
+    console.log(state);
+    return state.loginUserDataReducer;
+  });
+
   const nowDate = new Date();
 
   const nowDateConvert =
