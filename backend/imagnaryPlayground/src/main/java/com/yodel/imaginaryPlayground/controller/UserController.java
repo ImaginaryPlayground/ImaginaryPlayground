@@ -8,11 +8,14 @@ import com.yodel.imaginaryPlayground.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +30,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -169,29 +173,40 @@ public class UserController {
         return result;
     }
 
+//    @PostMapping("/upload")
+//    @ApiOperation(value = "재직 증명서 업로드")
+//    public Map<String, Object> uploadFile(
+//            @RequestParam("file") MultipartFile document, HttpServletRequest request) throws Exception {
+//
+//        Map<String, Object> result = new HashMap<>();
+//
+//        String fileName = document.getOriginalFilename();
+//        System.out.println(fileName);
+//        System.out.println(request.getServletContext().getRealPath("/"));
+//
+//        try {
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+//            String uploadDate = simpleDateFormat.format(new Date());
+//            String file = save(document, request.getServletContext().getRealPath("/"), uploadDate);
+//
+//            userService.saveFile(file);
+//            result.put("status", success);
+//        } catch (IllegalStateException e) {
+//            result.put("status", error);
+//            result.put("message", e.toString());
+//        }
+//        return result;
+//    }
+
     @PostMapping("/upload")
     @ApiOperation(value = "재직 증명서 업로드")
-    public Map<String, Object> uploadFile(
-            @RequestParam("file") MultipartFile document, HttpServletRequest request) throws Exception {
+    public ResponseEntity<Void> uploadFile(
+            @RequestPart("document") List<MultipartFile> document,
+            @RequestParam("data") String data) {
 
-        Map<String, Object> result = new HashMap<>();
-
-        String fileName = document.getOriginalFilename();
-        System.out.println(fileName);
-        System.out.println(request.getServletContext().getRealPath("/"));
-
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
-            String uploadDate = simpleDateFormat.format(new Date());
-            String file = save(document, request.getServletContext().getRealPath("/"), uploadDate);
-
-            userService.saveFile(file);
-            result.put("status", success);
-        } catch (IllegalStateException e) {
-            result.put("status", error);
-            result.put("message", e.toString());
-        }
-        return result;
+        System.out.println(document);
+        System.out.println(data);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/getFile")
