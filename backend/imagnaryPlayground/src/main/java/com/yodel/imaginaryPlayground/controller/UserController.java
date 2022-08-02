@@ -268,7 +268,7 @@ public class UserController {
     public Map<String, Object> parseToken(@RequestBody String token){
         Map<String, Object> result = new HashMap<>();
         System.out.println("들어왔냐");
-        System.out.println(SecurityContextHolder.getContext());
+        System.out.println((UserDto)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         //UserDto user2 = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         //System.out.println("login Service :" + user2.toString());
 
