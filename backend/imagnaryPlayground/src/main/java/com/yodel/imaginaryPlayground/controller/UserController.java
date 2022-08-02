@@ -105,12 +105,12 @@ public class UserController {
             @PathVariable int id) {
 
         String token = (String)data.get("authorization");
-        Authentication user = jwtTokenService.getAuthentication(token);
+        Authentication user_auth = jwtTokenService.getAuthentication(token);
 
         Map<String, Object> result = new HashMap<>();
-//        UserDto user = new UserDto();
+        UserDto user = new UserDto();
         try {
-            UserDto user2 = userService.detailUser(id);
+            UserDto user = userService.detailUser(id);
             if(user != null){
                 result.put("status", success);
                 result.put("data", user);
