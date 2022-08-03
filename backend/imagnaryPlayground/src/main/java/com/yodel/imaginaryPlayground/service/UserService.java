@@ -8,6 +8,7 @@ public interface UserService {
     int saveUser(UserDto user);
     int getUserId(String email);
     int savePassword(int user_id, String password);
+    String getPassword(int user_id);
     int updateUserInfo(UserDto user) throws Exception;
     UserDto detailUser(int userId) throws Exception;
     int deleteUser(int userId) throws Exception;

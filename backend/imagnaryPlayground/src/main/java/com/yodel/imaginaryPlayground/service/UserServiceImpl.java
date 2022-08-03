@@ -42,6 +42,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public String getPassword(int user_id) {
+        return userMapper.getPassword(user_id);
+    }
+
+    @Override
     public UserDto detailUser(int userId) throws Exception {
         return userMapper.detailUser(userId);
     }

@@ -55,7 +55,7 @@ public class UserController {
 
         String fileName = file.getOriginalFilename();
         System.out.println(fileName);
-        System.out.println(request.getServletContext().getRealPath("/"));
+        System.out.println(request.getServletContext().getRealPath("/"));   //경로
 
         String email = "";
         String password = "";
@@ -89,9 +89,10 @@ public class UserController {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
             String uploadDate = simpleDateFormat.format(new Date());
-            String document = save(file, request.getServletContext().getRealPath("/"), uploadDate);
+//            String document = save(file, request.getServletContext().getRealPath("/"), uploadDate);
+            String document = request.getServletContext().getRealPath("/");
 
-            userService.saveFile(document, email);
+//            userService.saveFile(document, email);
 
             UserDto user = new UserDto(email, password, username, provider, document, hospital_id, hospital_name);
 
@@ -144,12 +145,20 @@ public class UserController {
 
         try {
             int res = userService.countByEmail(user.getEmail());
-            if(res == 1){
-                
-                //공통으로 토큰이 들어간다(로그인 성공시 따로 넣어준다).
-                String token = jwtTokenService.createToken(user.getEmail(), user.getType());
-                result.put("status", success);
-                result.put("data", token);
+            if(res == 1){   //가입한 회원이면
+                //id 가져오기
+                int id = userService.getUserId(user.getEmail());
+                //비밀번호 가져오기
+                String user_password = userService.getPassword(id);
+
+                if(password == user_password){    //비밀번호 유효성 검사
+                    //공통으로 토큰이 들어간다(로그인 성공시 따로 넣어준다).
+                    String token = jwtTokenService.createToken(user.getEmail(), user.getType());
+                    result.put("status", success);
+                    result.put("data", token);
+                }else{
+                    result.put("status", fail);
+                }
             }else{
                 result.put("status", fail);
             }
