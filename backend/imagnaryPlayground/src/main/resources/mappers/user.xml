@@ -39,9 +39,10 @@
         WHERE email = #{email}
     </select>
 
-    <insert id="saveFile" parameterType="String">
-        INSERT INTO imagination_playground.user(document)
-        VALUES(#{document})
+    <insert id="saveFile" parameterType="map">
+        UPDATE imagination_playground.user
+        SET document = #{document}
+        WHERE email = #{email}
     </insert>
 
     <!--이메일 인증번호 저장-->
