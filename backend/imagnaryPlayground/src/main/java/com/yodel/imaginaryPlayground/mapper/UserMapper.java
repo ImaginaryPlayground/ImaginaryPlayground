@@ -2,6 +2,7 @@ package com.yodel.imaginaryPlayground.mapper;
 
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
 import com.yodel.imaginaryPlayground.model.vo.EmailCodeVO;
+import com.yodel.imaginaryPlayground.model.vo.PasswordVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import java.util.Map;
 public interface UserMapper {
     int saveUser(UserDto user);
     int getUserId(String email);
-    int savePassword(Map<String, String> map);
+    int savePassword(PasswordVO passwordVO);
     int updateUserInfo(UserDto user) throws SQLException;
     UserDto detailUser(int userId) throws SQLException;
     int deleteUser(int userId) throws SQLException;
