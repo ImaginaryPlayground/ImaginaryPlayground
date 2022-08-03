@@ -14,17 +14,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 const columns = [
   {
-    field: "id",
-    headerName: "기관명",
+    field: "name",
+    headerName: "병원명",
     minWidth: 250,
   },
   {
-    field: "lastName",
-    headerName: "종별코드명",
+    field: "id",
+    headerName: "병원코드",
     minWidth: 100,
   },
   {
-    field: "firstName",
+    field: "address",
     headerName: "주소",
     minWidth: 500,
   },
@@ -99,11 +99,11 @@ const rows = [
 const { kakao } = window;
 const MiddlePage = () => {
   const [selectData, setSelectData] = useState({
-    id: "서울대학교병원",
-    lastName: "상급종합",
-    firstName: "서울특별시 종로구 대학로 101 (연건동)",
-    positionX: 126.9990168,
-    positionY: 37.5797151,
+    id: 0,
+    name: "서울대학교병원",
+    address: "서울특별시 종로구 대학로 101 (연건동)",
+    pos_x: 126.9990168,
+    pos_y: 37.5797151,
   });
   const signUpUserDataReducer = useSelector(
     (state) => state.signUpUserDataReducer
@@ -119,19 +119,27 @@ const MiddlePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const documentImgInput = useRef();
+  const searchHospitalInput = useRef();
   let code;
 
   const handleSearchData = () => {
+    if (!searchWord.length) {
+      searchHospitalInput.current.focus();
+      return;
+    }
     //병원데이터 주소 받아오기
     axios({
       url: `${config.api}/hospital/${searchWord}`,
       method: "GET",
     })
       .then((res) => {
-        console.log(res);
-        setSearchHospitalData({ ...res });
+        setSearchHospitalData(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log("통신 에러");
+        console.log(err);
+        // alert('통신에러')
+      });
   };
 
   const handleImgChange = async (e) => {
@@ -254,10 +262,7 @@ const MiddlePage = () => {
     const container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
     const options = {
       //지도를 생성할 때 필요한 기본 옵션
-      center: new window.kakao.maps.LatLng(
-        selectData.positionY,
-        selectData.positionX
-      ), //지도의 중심좌표.
+      center: new window.kakao.maps.LatLng(selectData.pos_y, selectData.pos_x), //지도의 중심좌표.
       level: 5, //지도의 레벨(확대, 축소 정도)
     };
 
@@ -269,8 +274,8 @@ const MiddlePage = () => {
 
     // 마커가 표시될 위치입니다
     const markerPosition = new kakao.maps.LatLng(
-      selectData.positionY,
-      selectData.positionX
+      selectData.pos_y,
+      selectData.pos_x
     );
     // 마커를 생성합니다
     const marker = new kakao.maps.Marker({
@@ -318,6 +323,7 @@ const MiddlePage = () => {
                 handleSearchData();
               }
             }}
+            inputRef={searchHospitalInput}
           />
           <ColorButton
             sx={{ width: "8%", marginLeft: "3px" }}
@@ -354,13 +360,13 @@ const MiddlePage = () => {
         <Grid item className="now_select_info_box">
           <h3 style={{ marginBottom: "3px", wordBreak: "keep-all" }}>
             현재 선택된 병원:
-            <span style={{ color: "#ad1457" }}> {selectData.id}</span>
+            <span style={{ color: "#ad1457" }}> {selectData.name}</span>
           </h3>
           <h4
             style={{ marginTop: 0, marginBottom: "3px", wordBreak: "keep-all" }}
           >
             주소:
-            <span style={{ color: "#ad1457" }}> {selectData.firstName}</span>
+            <span style={{ color: "#ad1457" }}> {selectData.address}</span>
           </h4>
         </Grid>
         <div
@@ -446,8 +452,8 @@ const MiddlePage = () => {
           onClick={() => {
             swal({
               title: "",
-              text: `현재 선택하신 병원은 "${selectData.id}" 
-주소는 "${selectData.firstName}" 입니다.`,
+              text: `현재 선택하신 병원은 "${selectData.name}" 
+주소는 "${selectData.address}" 입니다.`,
               icon: "info",
               buttons: [true, "Ok"],
             }).then((willDelete) => {

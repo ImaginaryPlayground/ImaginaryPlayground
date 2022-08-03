@@ -16,6 +16,8 @@ import LowPriorityIcon from "@mui/icons-material/LowPriority";
 import DoneIcon from "@mui/icons-material/Done";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import "../../css/KidsInfoPage/KidsInfoComp.css";
+import { config } from "../../util/config";
+import axios from "axios";
 
 const KidsInfoComp = () => {
   const navigate = useNavigate();
@@ -46,7 +48,24 @@ const KidsInfoComp = () => {
   const handleOnChangeData = (e) => {
     setkidInfoData({ ...kidInfoData, [e.target.name]: e.target.value });
   };
-  const handleOnDelete = () => {};
+  const handleOnDelete = () => {
+    console.log("삭제API", kidInfoData);
+
+    axios({
+      url: `${config.api}/user/care`, //마지막은 페이지번호
+      method: "DELETE",
+      headers: "", //헤더에 토큰
+      data: {
+        baby_id: kidInfoData.id, //아이 id값 보내기
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const handleOnSumbit = async (e) => {
     if (!kidInfoData.name.length) {
       nameInput.current.focus();
@@ -55,8 +74,49 @@ const KidsInfoComp = () => {
 
     if (state?.isEdit) {
       console.log("수정API", kidInfoData);
+      //formdata로 변환해서 보내기(수정필요)
+      axios({
+        url: `${config.api}/user/care`, //마지막은 페이지번호
+        method: "PUT",
+        headers: "", //헤더에 토큰
+        data: {
+          name: kidInfoData.name,
+          age: kidInfoData.age,
+          profile: kidInfoData.faceImg,
+          gender: kidInfoData.gender,
+          character: kidInfoData.profile,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          //받은 데이터들 입력
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       console.log("등록API", kidInfoData);
+      //formdata로 변환해서 보내기(수정필요)
+      axios({
+        url: `${config.api}/user/care`, //마지막은 페이지번호
+        method: "POST",
+        headers: "", //헤더에 토큰
+        data: {
+          name: kidInfoData.name,
+          age: kidInfoData.age,
+          profile: kidInfoData.faceImg,
+          gender: kidInfoData.gender,
+          character: kidInfoData.profile,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          //받은 데이터들 입력
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
       dispatch({ type: "SET_SELECTED_KID", data: kidInfoData });
       dispatch({
         type: "SET_CURRENT_PAGE",
