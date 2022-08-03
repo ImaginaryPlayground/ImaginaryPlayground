@@ -8,13 +8,10 @@ import com.yodel.imaginaryPlayground.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
-
-import org.apache.catalina.User;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -64,6 +61,8 @@ public class UserController {
         String password = "";
         String username = "";
         String provider = "SITE";
+        int hospital_id = 0;
+        String hospital_name = "";
 
         Iterator it = signupData.keys();
         while (it.hasNext()) {
@@ -74,12 +73,18 @@ public class UserController {
                 email = signupData.getString(key);
             } else if (key.equals("username")) {
                 username = signupData.getString(key);
+            } else if (key.equals("hospital_id")) {
+                hospital_id = Integer.parseInt(signupData.getString(key));
+            } else if (key.equals("hospital_name")) {
+                hospital_name = signupData.getString(key);
             }
         }
 
         System.out.println("email: " + email);
         System.out.println(" password: " + password);
         System.out.println(" username: " + username);
+        System.out.println(" hospital_id: " + hospital_id);
+        System.out.println(" hospital_name: " + hospital_name);
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
@@ -88,10 +93,23 @@ public class UserController {
 
             userService.saveFile(document, email);
 
-            UserDto user = new UserDto(email, password, username, provider);
-            result.put("status", success);
-            result.put("data", user);
+            UserDto user = new UserDto(email, password, username, provider, hospital_id, hospital_name);
+            int res = userService.saveUser(user);    // 유저정보 저장
 
+            if(res == 1) {       // 저장 성공
+                //id 가져오기
+                int id = userService.getUserId(user.getEmail());
+                //password 저장
+                int res2 = userService.savePassword(id, password);
+                if(res2 == 1) {
+                    result.put("status", success);   //저장 성공
+                    result.put("data", user);
+                }else {
+                    result.put("status", fail);
+                }
+            } else {
+                result.put("status", fail);
+            }
         } catch (IllegalStateException e) {
             result.put("status", error);
             result.put("message", e.toString());
@@ -124,7 +142,6 @@ public class UserController {
                 result.put("data", token);
                 result.put("status", success);
             }else{
-                // 실패했을 때 사용자 정보?
                 result.put("status", fail);
             }
         } catch (Exception e) {
@@ -134,22 +151,18 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/detail/{email}")
+    @GetMapping("")
     @ApiOperation(value = "회원 정보 조회", notes = "회원 정보를 조회한다.")
-    public Map<String, Object> detailUser(
-            @RequestHeader String token,  //헤더X
-            @PathVariable String email) {
+    public Map<String, Object> detailUser() {
 
-        System.out.println("token::" + token);
-        Authentication auth_data = jwtTokenService.getAuthentication(token);
+//        System.out.println("token::" + token);
+//        Authentication auth_data = jwtTokenService.getAuthentication(token);
 
         Map<String, Object> result = new HashMap<>();
 
-        UserDto user = new UserDto();
-
         try {
-            user = userService.findByEmail(email);
-            if(auth_data != null){
+            UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if(user != null){
                 result.put("status", success);
                 result.put("data", user);
             }else{
@@ -162,18 +175,19 @@ public class UserController {
         return result;
     }
 
-    @PutMapping("/update")
+    @PutMapping("")
     @ApiOperation(value = "회원 정보 수정", notes = "회원 페이지에서 사용자의 정보를 수정할 수 있다.")
     public Map<String, Object> updateUserInfo(
-            //헤더에 토큰
-            @PathVariable int id, @RequestBody String username){
+            @RequestBody String username){
 
         Map<String, Object> result = new HashMap<>();
         try {
-            int res = userService.updateUserInfo(username);
+            UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            user.setUsername(username);
+            int res = userService.updateUserInfo(user);
             if(res == 1){
                 result.put("status", success);
-                result.put("data", userService.detailUser(id));
+                result.put("data", user);
             }else{
                 result.put("status", fail);
             }
