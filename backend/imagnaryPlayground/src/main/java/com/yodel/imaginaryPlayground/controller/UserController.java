@@ -151,7 +151,7 @@ public class UserController {
                 //비밀번호 가져오기
                 String user_password = userService.getPassword(id);
 
-                if(password == user_password){    //비밀번호 유효성 검사
+                if(password.equals(user_password)){    //비밀번호 유효성 검사
                     //공통으로 토큰이 들어간다(로그인 성공시 따로 넣어준다).
                     String token = jwtTokenService.createToken(user.getEmail(), user.getType());
                     result.put("status", success);
@@ -293,27 +293,32 @@ public class UserController {
     @PostMapping("/authEmail/send")
     public Map<String, Object> sendEmail(@RequestBody String email){
         Map<String, Object> result = new HashMap<>();
-        System.out.println("이메일 인증 진행 :"+ email);
 
-        //먼저 관련 email 인증을 삭제한다
-        userService.deleteEmailCode(email);
+        int chkEmail = userService.countByEmail(email);
+        if(chkEmail != 1) {
+            System.out.println("이메일 인증 진행 :"+ email);
 
-        final int CODE = (int) ( 100000 + Math.random()*899999); //임의의 6자리 코드 생성
+            //먼저 관련 email 인증을 삭제한다
+            userService.deleteEmailCode(email);
 
-        if(emailService.sendEmail( email // 메일 인증 성공
-                , "[상상놀이터] 이메일 인증 안내"
-                , "인증코드는 [ "+CODE+" ] 입니다.").get("status").equals(success)){
-            int res = userService.saveEmailAuth(email, Integer.toString(CODE));
-            if(res == 1){
-                result.put("status", success);
+            final int CODE = (int) ( 100000 + Math.random()*899999); //임의의 6자리 코드 생성
+
+            if(emailService.sendEmail( email // 메일 인증 성공
+                    , "[상상놀이터] 이메일 인증 안내"
+                    , "인증코드는 [ "+CODE+" ] 입니다.").get("status").equals(success)){
+                int res = userService.saveEmailAuth(email, Integer.toString(CODE));
+                if(res == 1){
+                    result.put("status", success);
+                }else{
+                    result.put("status", error);
+                }
             }else{
-                result.put("status", error);
+                // 메일 인증 실패
+                result.put("status", fail);
             }
-        }else{
-            // 메일 인증 실패
+        }else {
             result.put("status", fail);
         }
-
         return result;
     }
 
