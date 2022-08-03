@@ -219,12 +219,13 @@ public class UserController {
 
     @DeleteMapping("")
     @ApiOperation(value = "회원 정보 삭제", notes = "회원 페이지에서 사용자의 정보를 삭제한다.")
-    public Map<String, String> deleteUser(
-            @RequestHeader int id){    // 토큰
+    public Map<String, String> deleteUser(){
 
         Map<String, String> result = new HashMap<>();
 
         try {
+            UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            int id = user.getId();
             int res = userService.deleteUser(id);
             if(res == 1) {
                 result.put("status", success);
@@ -291,9 +292,10 @@ public class UserController {
     }
 
     @PostMapping("/authEmail/send")
-    public Map<String, Object> sendEmail(@RequestBody String email){
+    public Map<String, Object> sendEmail(@RequestBody UserDto user){
         Map<String, Object> result = new HashMap<>();
 
+        String email = user.getEmail();
         int chkEmail = userService.countByEmail(email);
         if(chkEmail != 1) {
             System.out.println("이메일 인증 진행 :"+ email);
