@@ -44,9 +44,11 @@ const ColorButton = styled(Button)(({ theme }) => ({
 const { naver } = window;
 
 const LoginPage = () => {
-  const [isSaveUserId, setIsSaveUserId] = useState(false);
+  const savedStrogeUserId = localStorage.getItem("stored_id");
+  const [isSaveUserId, setIsSaveUserId] = useState(!!savedStrogeUserId);
+
   const [loginUserInfo, setLoginUserInfo] = useState({
-    userEmail: "",
+    userEmail: !!savedStrogeUserId ? savedStrogeUserId : "",
     userPassword: "",
   });
 
@@ -86,11 +88,11 @@ const LoginPage = () => {
     userEmailInput.current.focus();
     userPasswordInput.current.focus();
 
-    if (!loginUserInfo.userEmail) {
+    if (!loginUserInfo.userEmail.length) {
       userEmailInput.current.focus();
       return;
     }
-    if (!loginUserInfo.userPassword) {
+    if (!loginUserInfo.userPassword.length) {
       userPasswordInput.current.focus();
       return;
     }
@@ -107,8 +109,16 @@ const LoginPage = () => {
       .then((res) => {
         console.log(res);
         if (res.data.status === "SUCCESS") {
-          sessionStorage.setItem("token", JSON.stringify(res?.data));
+          sessionStorage.setItem("token", JSON.stringify(res?.data.data));
           //회원정보 가져오는 비동기 처리
+          console.log("로그인 성공!");
+
+          // 로컬 스토리지에 저장되어있는 아이디 삭제 혹은 생성
+          if (isSaveUserId) {
+            localStorage.setItem("stored_id", loginUserInfo.userEmail);
+          } else {
+            localStorage.setItem("stored_id", "");
+          }
         } else {
           swal(
             "로그인에 실패하였습니다.",
@@ -189,6 +199,7 @@ const LoginPage = () => {
         <FormControlLabel
           control={
             <Checkbox
+              checked={isSaveUserId}
               value={isSaveUserId}
               onClick={() => {
                 setIsSaveUserId(!isSaveUserId);
