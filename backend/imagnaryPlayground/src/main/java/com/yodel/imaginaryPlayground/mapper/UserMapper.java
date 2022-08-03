@@ -13,6 +13,7 @@ public interface UserMapper {
     int saveUser(UserDto user);
     int getUserId(String email);
     int savePassword(PasswordVO passwordVO);
+    String getPassword(int user_id);
     int updateUserInfo(UserDto user) throws SQLException;
     UserDto detailUser(int userId) throws SQLException;
     int deleteUser(int userId) throws SQLException;
