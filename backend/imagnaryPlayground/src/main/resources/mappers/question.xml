@@ -16,7 +16,7 @@
         WHERE id = #{id} AND user_id = #{user_id}
     </update>
 
-    <delete id="deleteQuestion" parameterType="DeleteVO">
+    <delete id="deleteQuestion" parameterType="IdVO">
         DELETE FROM imagination_playground.qna_question
         WHERE id = #{question_id} AND user_id = #{user_id}
     </delete>
