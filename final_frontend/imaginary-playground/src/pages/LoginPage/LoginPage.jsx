@@ -111,7 +111,7 @@ const LoginPage = () => {
       .then((res) => {
         console.log(res);
         if (res.data.status === "SUCCESS") {
-          sessionStorage.setItem("token", JSON.stringify(res?.data.data));
+          sessionStorage.setItem("token", res.data.data);
           //회원정보 가져오는 비동기 처리
           //console.log("로그인 성공!");
 
@@ -126,7 +126,7 @@ const LoginPage = () => {
             url: `${config.api}/user/token`, //마지막은 페이지번호
             method: "POST",
             headers: {
-              Auth: loginUserToken,
+              Auth: res.data.data,
             }, //헤더에 토큰
           })
             .then((res) => {
