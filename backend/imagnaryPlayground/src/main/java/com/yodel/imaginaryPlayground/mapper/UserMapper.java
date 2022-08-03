@@ -1,6 +1,5 @@
 package com.yodel.imaginaryPlayground.mapper;
 
-import com.yodel.imaginaryPlayground.model.dto.BabyDto;
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
 import com.yodel.imaginaryPlayground.model.vo.EmailCodeVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,7 +10,9 @@ import java.util.Map;
 @Mapper
 public interface UserMapper {
     int saveUser(UserDto user);
-    int updateUserInfo(String username) throws SQLException;
+    int getUserId(String email);
+    int savePassword(Map<String, String> map);
+    int updateUserInfo(UserDto user) throws SQLException;
     UserDto detailUser(int userId) throws SQLException;
     int deleteUser(int userId) throws SQLException;
     // 사용자 전체 검색은 사용하지 않을 것 같아서 제외
