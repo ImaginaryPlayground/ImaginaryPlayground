@@ -17,7 +17,7 @@ public interface UserMapper {
     // 사용자 전체 검색은 사용하지 않을 것 같아서 제외
     int countByEmail(String email);
     UserDto findByEmail(String email);
-    String saveFile(String document);
+    int saveFile(Map<String, String> map);
     int saveEmailAuth(Map<String, String> map);
     int authEmailCode(EmailCodeVO emailCodeVO);
     int deleteEmailCode(String email);

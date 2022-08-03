@@ -11,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,9 +23,10 @@ import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -47,53 +46,66 @@ public class UserController {
 
     @PostMapping("/register")
     @ApiOperation(value = "회원가입", notes = "회원가입을 한다.")
-    public ResponseEntity<Void> signUp(
-            @RequestPart("document") MultipartFile document,
-            @RequestParam("data") String data) {
+    public Map<String, Object> signUp(
+            @RequestPart("document") MultipartFile file,
+            @RequestParam("data") String data, HttpServletRequest request) {
 
+        Map<String, Object> result = new HashMap<>();
         JSONObject signupData = new JSONObject(data);
+
+        String fileName = file.getOriginalFilename();
+        System.out.println(fileName);
+        System.out.println(request.getServletContext().getRealPath("/"));
+
+        String email = "";
+        String password = "";
+        String username = "";
+        String provider = "SITE";
 
         Iterator it = signupData.keys();
         while (it.hasNext()) {
             String key = (String) it.next();
-            System.out.println("key: " + key + ", value: " + signupData.getString(key));
+            if (key.equals("password")) {
+                password = signupData.getString(key);
+            } else if (key.equals("email")) {
+                email = signupData.getString(key);
+            } else if (key.equals("username")) {
+                username = signupData.getString(key);
+            }
         }
 
-//        String email = signupData.get("email");
-//        String password = signupData.get("password");
-//        String username = signupData.get("username");
-//        String provider = "SITE";
+        System.out.println("email: " + email);
+        System.out.println(" password: " + password);
+        System.out.println(" username: " + username);
 
-//        Map<String, Object> result = new HashMap<>();
-//        UserDto user = new UserDto(email, password, username, provider);
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+            String uploadDate = simpleDateFormat.format(new Date());
+            String document = save(file, request.getServletContext().getRealPath("/"), uploadDate);
+
+            userService.saveFile(document, email);
+
+            UserDto user = new UserDto(email, password, username, provider);
+            result.put("status", success);
+            result.put("data", user);
+
+        } catch (IllegalStateException e) {
+            result.put("status", error);
+            result.put("message", e.toString());
+        }
+        return result;
+    }
+
+//    @PostMapping("/upload")
+//    @ApiOperation(value = "재직 증명서 업로드")
+//    public ResponseEntity<Void> uploadFile(
+//            @RequestPart("document") List<MultipartFile> document,
+//            @RequestParam("data") String data) {
 //
-//        // 기존 사용자인지 확인(이메일 조회)
-//        try {
-//            int findUser = userService.countByEmail(email);
-//            if(findUser == 1) {     // 이미 존재하는 사용자
-//                result.put("status", fail);
-//                result.put("data", user);
-//            } else {     //새로운 사용자
-//                userService.saveUser(user);
-//                result.put("status", success);
-//            }
-//        } catch (Exception e) {
-//            result.put("error", error);
-//            result.put("message", e.getMessage());
-//        }
-        return null;
-    }
-
-    @PostMapping("/upload")
-    @ApiOperation(value = "재직 증명서 업로드")
-    public ResponseEntity<Void> uploadFile(
-            @RequestPart("document") List<MultipartFile> document,
-            @RequestParam("data") String data) {
-
-        System.out.println(document);
-        System.out.println(data);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//        System.out.println(document);
+//        System.out.println(data);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "로그인을 한다.")
@@ -194,7 +206,7 @@ public class UserController {
 //    @PostMapping("/upload")
 //    @ApiOperation(value = "재직 증명서 업로드")
 //    public Map<String, Object> uploadFile(
-//            @RequestParam("file") MultipartFile document, HttpServletRequest request) throws Exception {
+//            @RequestParam("file") MultipartFile document, HttpServletRequest request) {
 //
 //        Map<String, Object> result = new HashMap<>();
 //
@@ -222,7 +234,6 @@ public class UserController {
 
         Map<String, Object> result = new HashMap<>();
         HttpHeaders header = new HttpHeaders();
-
 
         try {
             UserDto user = userService.findByEmail(email);
