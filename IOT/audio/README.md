@@ -14,6 +14,18 @@ https://www.adafruit.com/product/3367
 
 놀랍게도 본인이 사용하려고 하는 [Google Assistant](https://developers.google.com/assistant/sdk/guides/service/python)에서 추천하는 마이크로 바로 끼워서 녹화, 음질, 음감도 등을 테스트해볼 예정이다.
 
-## Google Assistant
+## Google Assistant API
 
-작성예정
+스마트 기기에 자주 쓰이는 api 중 하나, 스마트 스피커에서 'OK Google!'이라고 부르면 호출되는 것이 바로 이 api 서비스 중 하나이다.
+
+[google assistant 서비스 공식 홈페이지](https://developers.google.com/assistant/sdk/guides/service/python/embed/setup?hardware=rpi)
+
+리뉴얼된 페이지에서 클릭을 잘못하여 해매다가 [참고한 동영상](https://www.youtube.com/watch?v=wavlbH0M1Zg)을 보면서 진행하였다.
+
+**Google Cloud에 로고와 프로젝트 도메인 등 추가정보를 기입해보자.**
+
+진행 도중에 또 다시 에러가 생겨서..
+
+아.. 그러고보니.. 이거는 초음파센서가 아니라 음성인식 부분인데 초음파.. 아몰랑
+
+Model id : imaginaryplayground-7be00-pi-oblyte
