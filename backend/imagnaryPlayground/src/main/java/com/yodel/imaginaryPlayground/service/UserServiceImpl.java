@@ -51,8 +51,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String saveFile(String document) {
-        return userMapper.saveFile(document);
+    public int saveFile(String document, String email) {
+        Map<String, String> map = new HashMap<>();
+        map.put("document", document);
+        map.put("email", email);
+        return userMapper.saveFile(map);
     }
 
     @Override
