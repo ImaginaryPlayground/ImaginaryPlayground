@@ -19,6 +19,7 @@ import { createBrowserHistory } from "history";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import axios from "axios";
 import { config } from "../../util/config";
+import { loginUserToken } from "../../util/token";
 
 const allData = [
   {
@@ -203,15 +204,15 @@ const allData = [
 
 const genderMenu = [
   {
-    value: "All",
+    value: "A",
     label: "전체",
   },
   {
-    value: "Male",
+    value: "M",
     label: "남",
   },
   {
-    value: "Woman",
+    value: "F",
     label: "여",
   },
 ];
@@ -240,9 +241,11 @@ const KidsGridList = () => {
     //여기서 페이지에 해당하는 아이들 정보 가져옴
     //등록된 전체아이 조회
     axios({
-      url: `${config.api}/care/lookup/all`, //마지막은 페이지번호
+      url: `${config.api}/user/care/lookup/all`, //마지막은 페이지번호
       method: "POST",
-      headers: "", //헤더에 토큰
+      headers: {
+        Auth: loginUserToken,
+      }, //헤더에 토큰
       data: {
         name: searchData.name,
         age_1: searchData.age_1,

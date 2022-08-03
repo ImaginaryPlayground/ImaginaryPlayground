@@ -18,6 +18,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import "../../css/KidsInfoPage/KidsInfoComp.css";
 import { config } from "../../util/config";
 import axios from "axios";
+import { loginUserToken } from "../../util/token";
 
 const KidsInfoComp = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const KidsInfoComp = () => {
           faceImg: "/img/KidsInfoPage/default_img.jpg",
           name: "",
           age: 1,
-          gender: "Male",
+          gender: "M",
           profile: "",
         }
   );
@@ -97,17 +98,31 @@ const KidsInfoComp = () => {
     } else {
       console.log("등록API", kidInfoData);
       //formdata로 변환해서 보내기(수정필요)
+      const data = {
+        name: kidInfoData.name,
+        age: kidInfoData.age,
+        gender: kidInfoData.gender,
+        character: kidInfoData.profile,
+      };
+
+      const formData = new FormData();
+      //blob객체의 타입을 application/json 형식으로 만들기
+      const blob = new Blob([JSON.stringify(data)], {
+        type: "application/json",
+      });
+      //text데이터 추가
+      formData.append("key", blob);
+      //이미지 데이터 추가
+      formData.append("file", kidInfoData.faceImg);
+
       axios({
-        url: `${config.api}/user/care`, //마지막은 페이지번호
+        url: `${config.api}/user/care/`, //마지막은 페이지번호
         method: "POST",
-        headers: "", //헤더에 토큰
-        data: {
-          name: kidInfoData.name,
-          age: kidInfoData.age,
-          profile: kidInfoData.faceImg,
-          gender: kidInfoData.gender,
-          character: kidInfoData.profile,
+        headers: {
+          Auth: `${loginUserToken}`, //헤더에 토큰
+          "Content-Type": "multipart/form-data",
         },
+        data: formData,
       })
         .then((res) => {
           console.log(res);
@@ -117,19 +132,13 @@ const KidsInfoComp = () => {
           console.log(err);
         });
 
-      dispatch({ type: "SET_SELECTED_KID", data: kidInfoData });
-      dispatch({
-        type: "SET_CURRENT_PAGE",
-        data: { ...reducerCurrentPage, page: 1, scrollY: 0 },
-      });
-      navigate("/kidinfo", { state: { isEdit: true } });
+      // dispatch({ type: "SET_SELECTED_KID", data: kidInfoData });
+      // dispatch({
+      //   type: "SET_CURRENT_PAGE",
+      //   data: { ...reducerCurrentPage, page: 1, scrollY: 0 },
+      // });
+      // navigate("/kidinfo", { state: { isEdit: true } });
     }
-
-    const formData = new FormData();
-
-    !!kidInfoData.faceImg && formData.append("kidFaceImg", kidInfoData.faceImg);
-    //이미지 URL객체 삭제
-    URL.revokeObjectURL(kidInfoData.faceImg);
   };
 
   const handleOnImgChange = (event) => {
@@ -268,7 +277,7 @@ const KidsInfoComp = () => {
               onChange={handleOnChangeData}
             >
               <FormControlLabel
-                value="Male"
+                value="M"
                 control={
                   <Radio
                     sx={{
@@ -282,7 +291,7 @@ const KidsInfoComp = () => {
                 label="남자"
               />
               <FormControlLabel
-                value="Female"
+                value="F"
                 control={
                   <Radio
                     sx={{
