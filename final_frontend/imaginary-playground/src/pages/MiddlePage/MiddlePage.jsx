@@ -30,91 +30,42 @@ const columns = [
   },
 ];
 
-const rows = [
-  {
-    id: "순천향대학교부속 천안병원",
-    lastName: "상급종합",
-    firstName: "인천광역시 부평구 동수로 56-(부평동)",
-    positionX: 127.1358588,
-    positionY: 36.8027381,
-  },
-  {
-    id: "강릉아산병원",
-    lastName: "상급종합",
-    firstName: "강원도 강릉시 사천면 방동길 38 ()",
-    positionX: 128.8578411,
-    positionY: 37.8184325,
-  },
-  {
-    id: "강북삼성병원",
-    lastName: "상급종합",
-    firstName: "서울특별시 종로구 새문안로 29 (평동)",
-    positionX: 126.96775,
-    positionY: 37.5684083,
-  },
-  {
-    id: "건국대학교병원",
-    lastName: "상급종합",
-    firstName: "서울특별시 광진구 능동로 120-1 (화양동)",
-    positionX: 127.0718276,
-    positionY: 37.5403764,
-  },
-  {
-    id: "경북대학교병원",
-    lastName: "상급종합",
-    firstName: "대구광역시 중구 동덕로 130 (삼덕동2가, 경북대학교병원)",
-    positionX: 128.604125,
-    positionY: 35.866774,
-  },
-  {
-    id: "경상국립대학교병원",
-    lastName: "상급종합",
-    firstName: "경상남도 진주시 강남로 79 (칠암동)",
-    positionX: 128.0956717,
-    positionY: 35.1763252,
-  },
-  {
-    id: "고려대학교의과대학부속구로병원",
-    lastName: "상급종합",
-    firstName: "서울특별시 구로구 구로동로 148 고려대부속구로병원 (구로동)",
-    positionX: 126.8848701,
-    positionY: 37.492052,
-  },
-  {
-    id: "동아대학교병원",
-    lastName: "상급종합",
-    firstName: "부산광역시 서구 대신공원로 26 (동대신동3가)",
-    positionX: 129.017425,
-    positionY: 35.12019,
-  },
-  {
-    id: "서울대학교병원",
-    lastName: "상급종합",
-    firstName: "서울특별시 종로구 대학로 101 (연건동)",
-    positionX: 126.9990168,
-    positionY: 37.5797151,
-  },
-];
-
 const { kakao } = window;
 const MiddlePage = () => {
   const [selectData, setSelectData] = useState({
-    id: 0,
-    name: "서울대학교병원",
-    address: "서울특별시 종로구 대학로 101 (연건동)",
-    pos_x: 126.9990168,
-    pos_y: 37.5797151,
+    id: 10,
+    name: "건국대학교병원",
+    address: "서울특별시 광진구 능동로 120-1 (화양동)",
+    pos_x: 127.0718276,
+    pos_y: 37.5403764,
   });
   const signUpUserDataReducer = useSelector(
     (state) => state.signUpUserDataReducer
   );
-  const [searchWord, setSearchWord] = useState("");
-  const [hospitalData, setHospitalData] = useState(rows);
+
+  const getHospitalDataApi = () => {
+    //병원데이터 주소 받아오기
+    axios({
+      url: `${config.api}/hospital/${searchWord}`,
+      method: "GET",
+    })
+      .then((res) => {
+        setSearchHospitalData(res.data.data);
+      })
+      .catch((err) => {
+        alert("병원 데이터 load API 통신에러");
+      });
+  };
+  const [searchWord, setSearchWord] = useState("건국대학교병원");
   const [searchHospitalData, setSearchHospitalData] = useState([]);
   const [documentImg, setDocumentImg] = useState({
     imageFile: "",
     previewUrl: "/img/MiddlePage/default.jpg",
   });
+  useEffect(() => {
+    //병원데이터 주소 받아오기
+    getHospitalDataApi();
+  }, []);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -128,18 +79,7 @@ const MiddlePage = () => {
       return;
     }
     //병원데이터 주소 받아오기
-    axios({
-      url: `${config.api}/hospital/${searchWord}`,
-      method: "GET",
-    })
-      .then((res) => {
-        setSearchHospitalData(res.data.data);
-      })
-      .catch((err) => {
-        console.log("통신 에러");
-        console.log(err);
-        // alert('통신에러')
-      });
+    getHospitalDataApi();
   };
 
   const handleImgChange = async (e) => {
@@ -166,14 +106,16 @@ const MiddlePage = () => {
     //formData에 담기
     const formData = new FormData();
     formData.append("document", documentImg.imageFile);
+
     //userData
     const data = {
       email: signUpUserDataReducer.email,
       username: signUpUserDataReducer.username,
       password: signUpUserDataReducer.password,
-      hospital_id: searchHospitalData.hospital_id,
-      hospital_name: searchHospitalData.hospital_name,
+      hospital_id: searchHospitalData.id,
+      hospital_name: searchHospitalData.name,
     };
+
     formData.append("data", JSON.stringify(data));
 
     //회원가입시 보내야 하는 데이터 양식
@@ -198,13 +140,22 @@ const MiddlePage = () => {
       data: formData,
     })
       .then((res) => {
-        console.log(res);
+        if (res.status === "SUCCESS") {
+          swal(
+            "성공!",
+            "정상적으로 회원가입 요청이 완료되었습니다. 담당자 승인 후 이용가능합니다.!",
+            "info"
+          );
+          navigate("/login", { replace: true });
+          return;
+        } else {
+          swal("실패!", "회원가입이 실패하였습니다.!", "error");
+        }
       })
       .catch((err) => {
         console.log(err);
+        swal("에러!", "서버와 연결이 되지 않습니다!", "error");
       });
-
-    navigate("/login", { replace: true });
   };
   useEffect(() => {
     //페이지 리로드 감지
@@ -215,7 +166,7 @@ const MiddlePage = () => {
     // };
 
     //만약 회원가입 데이터가 없다면 무조건 뒤로가기
-    console.log(signUpUserDataReducer);
+    //console.log(signUpUserDataReducer);
     if (!signUpUserDataReducer) {
       navigate(-1, { replace: true });
     }
