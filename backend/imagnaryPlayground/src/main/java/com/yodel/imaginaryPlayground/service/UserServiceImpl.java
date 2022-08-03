@@ -6,7 +6,6 @@ import com.yodel.imaginaryPlayground.model.vo.EmailCodeVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,8 +25,21 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int updateUserInfo(String username) throws Exception {
-        return userMapper.updateUserInfo(username);
+    public int updateUserInfo(UserDto user) throws Exception {
+        return userMapper.updateUserInfo(user);
+    }
+
+    @Override
+    public int getUserId(String email) {
+        return userMapper.getUserId(email);
+    }
+
+    @Override
+    public int savePassword(int id, String password) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", Integer.toString(id));
+        map.put("password", password);
+        return userMapper.savePassword(map);
     }
 
     @Override
