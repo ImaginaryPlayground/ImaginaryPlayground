@@ -74,7 +74,7 @@ public class UserController {
             } else if (key.equals("username")) {
                 username = signupData.getString(key);
             } else if (key.equals("hospital_id")) {
-                hospital_id = Integer.parseInt(signupData.getString(key));
+                hospital_id = signupData.getInt(key);
             } else if (key.equals("hospital_name")) {
                 hospital_name = signupData.getString(key);
             }
@@ -93,18 +93,24 @@ public class UserController {
 
             userService.saveFile(document, email);
 
-            UserDto user = new UserDto(email, password, username, provider, hospital_id, hospital_name);
-            int res = userService.saveUser(user);    // 유저정보 저장
+            UserDto user = new UserDto(email, password, username, provider, document, hospital_id, hospital_name);
 
-            if(res == 1) {       // 저장 성공
-                //id 가져오기
-                int id = userService.getUserId(user.getEmail());
-                //password 저장
-                int res2 = userService.savePassword(id, password);
-                if(res2 == 1) {
-                    result.put("status", success);   //저장 성공
-                    result.put("data", user);
-                }else {
+            int chkEmail = userService.countByEmail(user.getEmail());
+            if(chkEmail != 1){    //기존 사용자가 아닌 경우 회원가입 진행
+                int res = userService.saveUser(user);    // 유저정보 저장
+
+                if(res == 1) {       // 저장 성공
+                    //id 가져오기
+                    int id = userService.getUserId(user.getEmail());
+                    //password 저장
+                    int res2 = userService.savePassword(id, password);
+                    if(res2 == 1) {
+                        result.put("status", success);   //저장 성공
+                        result.put("data", user);
+                    }else {
+                        result.put("status", fail);
+                    }
+                } else {
                     result.put("status", fail);
                 }
             } else {
@@ -132,15 +138,18 @@ public class UserController {
     @ApiOperation(value = "로그인", notes = "로그인을 한다.")
     public Map<String, Object> login(
             @RequestBody @ApiParam(value = "로그인 정보를 입력한다.") UserDto user) {
+
         Map<String, Object> result = new HashMap<>();
+        String password = user.getPassword();   // 입력한 비밀번호
 
         try {
             int res = userService.countByEmail(user.getEmail());
             if(res == 1){
+                
                 //공통으로 토큰이 들어간다(로그인 성공시 따로 넣어준다).
                 String token = jwtTokenService.createToken(user.getEmail(), user.getType());
-                result.put("data", token);
                 result.put("status", success);
+                result.put("data", token);
             }else{
                 result.put("status", fail);
             }
