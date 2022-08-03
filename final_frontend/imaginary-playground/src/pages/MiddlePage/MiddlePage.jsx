@@ -11,6 +11,7 @@ import swal from "sweetalert";
 import "../../css/MiddlePage/MiddlePage.css";
 import { config } from "../../util/config.jsx";
 import { useDispatch, useSelector } from "react-redux";
+import { loginApi } from "../../util/Api.jsx";
 
 const columns = [
   {
@@ -112,8 +113,8 @@ const MiddlePage = () => {
       email: signUpUserDataReducer.email,
       username: signUpUserDataReducer.username,
       password: signUpUserDataReducer.password,
-      hospital_id: searchHospitalData.id,
-      hospital_name: searchHospitalData.name,
+      hospital_id: selectData.id,
+      hospital_name: selectData.name,
     };
 
     formData.append("data", JSON.stringify(data));
@@ -140,14 +141,14 @@ const MiddlePage = () => {
       data: formData,
     })
       .then((res) => {
-        if (res.status === "SUCCESS") {
+        console.log(res);
+        if (res.data.status === "SUCCESS") {
           swal(
             "성공!",
             "정상적으로 회원가입 요청이 완료되었습니다. 담당자 승인 후 이용가능합니다.!",
             "info"
           );
-          navigate("/login", { replace: true });
-          return;
+          loginApi(signUpUserDataReducer.email, signUpUserDataReducer.password);
         } else {
           swal("실패!", "회원가입이 실패하였습니다.!", "error");
         }
