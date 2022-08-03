@@ -8,7 +8,7 @@
         INSERT INTO imagination_playground.user
             (email, username, provider, document, type, hospital_id, hospital_name, join_date, modified_date)
         VALUES
-            (#{email}, #{username}, #{provider}, document, "CUSTOMER", #{hospital_id}, #{hospital_name}, NOW(), NOW());
+            (#{email}, #{username}, #{provider}, #{document}, "CUSTOMER", #{hospital_id}, #{hospital_name}, NOW(), NOW());
 
     </insert>
 
@@ -52,8 +52,10 @@
     </select>
 
     <select id="findByEmail" parameterType="String" resultType="UserDto">
-        SELECT *
-        FROM imagination_playground.user
+        SELECT u.email, u.id, u.username, u.provider, u.document, u.hospital_id, u.hospital_name, h.address, h.sido, h.gungu
+        FROM imagination_playground.user u
+        FULL OUTER JOIN imagination_playground.hospital h
+        ON u.hospital_id = h.id
         WHERE email = #{email}
     </select>
 
@@ -73,7 +75,7 @@
     <select id="authEmailCode" parameterType="EmailCodeVO" resultType="int">
         SELECT COUNT(*)
         FROM imagination_playground.user_authentication
-        WHERE email = CONCAT('"',#{email}, '"') AND code = #{CODE}
+        WHERE email = #{email} AND code = #{CODE}
     </select>
 
     <delete id="deleteEmailCode" parameterType="String">
