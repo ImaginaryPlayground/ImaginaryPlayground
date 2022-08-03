@@ -138,24 +138,26 @@ public class UserController {
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "로그인을 한다.")
     public Map<String, Object> login(
-            @RequestBody @ApiParam(value = "로그인 정보를 입력한다.") UserDto user) {
+            @RequestBody @ApiParam(value = "로그인 정보를 입력한다.") UserDto userInfo) {
 
         Map<String, Object> result = new HashMap<>();
-        String password = user.getPassword();   // 입력한 비밀번호
+        String password = userInfo.getPassword();   // 입력한 비밀번호
 
         try {
-            int res = userService.countByEmail(user.getEmail());
+            int res = userService.countByEmail(userInfo.getEmail());
             if(res == 1){   //가입한 회원이면
                 //id 가져오기
-                int id = userService.getUserId(user.getEmail());
+                int id = userService.getUserId(userInfo.getEmail());
                 //비밀번호 가져오기
                 String user_password = userService.getPassword(id);
 
                 if(password.equals(user_password)){    //비밀번호 유효성 검사
                     //공통으로 토큰이 들어간다(로그인 성공시 따로 넣어준다).
-                    String token = jwtTokenService.createToken(user.getEmail(), user.getType());
+                    String token = jwtTokenService.createToken(userInfo.getEmail(), userInfo.getType());
+                    UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                     result.put("status", success);
                     result.put("data", token);
+                    result.put("userInfo", user);
                 }else{
                     result.put("status", fail);
                 }
