@@ -23,6 +23,7 @@ import { pink } from "@mui/material/colors";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { config } from "../../util/config.jsx";
+import swal from "sweetalert";
 
 const theme = createTheme({
   palette: {
@@ -93,7 +94,7 @@ const LoginPage = () => {
       userPasswordInput.current.focus();
       return;
     }
-    console.log("로그인 직전");
+
     //비동기 처리
     axios({
       url: `${config.api}/user/login`,
@@ -104,12 +105,20 @@ const LoginPage = () => {
       },
     })
       .then((res) => {
-        console.log("연결 성공!!");
         console.log(res);
-        //localStorage.setItem("token", JSON.stringify(res?.data));
+        if (res.data.status === "SUCCESS") {
+          sessionStorage.setItem("token", JSON.stringify(res?.data));
+          //회원정보 가져오는 비동기 처리
+        } else {
+          swal(
+            "로그인에 실패하였습니다.",
+            "아이디와 비밀번호를 확인해주세요",
+            "error"
+          );
+        }
       })
       .catch((err) => {
-        console.log("에러!!");
+        alert("서버와 통신에러 발생");
         console.log(err);
       });
   };
