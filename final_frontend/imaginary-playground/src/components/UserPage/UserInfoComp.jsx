@@ -7,6 +7,7 @@ import axios from "axios";
 import { config } from "../../util/config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { loginUserToken } from "../../util/token";
 
 const initialData = {
   id: 2,
@@ -28,9 +29,9 @@ const UserInfoComp = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios({
-      url: `${config.api}/user/detail/`, //마지막은 페이지번호
+      url: `${config.api}/user`, //마지막은 페이지번호
       method: "GET",
-      headers: "", //헤더에 토큰
+      headers: { Auth: loginUserToken }, //헤더에 토큰
     }).then((res) => {
       console.log(res); //이메일, 이름, 가입일자 , 가입경로, 병원이름, 병원주소, 재직 증명서(이미지)
     });
