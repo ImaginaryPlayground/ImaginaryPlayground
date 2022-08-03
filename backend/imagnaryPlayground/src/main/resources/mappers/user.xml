@@ -52,10 +52,8 @@
     </select>
 
     <select id="findByEmail" parameterType="String" resultType="UserDto">
-        SELECT u.email, u.id, u.username, u.provider, u.document, u.hospital_id, u.hospital_name, h.address, h.sido, h.gungu
+        SELECT *
         FROM imagination_playground.user u
-        FULL OUTER JOIN imagination_playground.hospital h
-        ON u.hospital_id = h.id
         WHERE email = #{email}
     </select>
 

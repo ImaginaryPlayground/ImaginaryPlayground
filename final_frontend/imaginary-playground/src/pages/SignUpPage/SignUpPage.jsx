@@ -8,6 +8,7 @@ import {
   TextField,
   ThemeProvider,
 } from "@mui/material";
+
 import React, { useRef, useState } from "react";
 import CancelIcon from "@mui/icons-material/Cancel";
 import styled from "@emotion/styled";
@@ -19,6 +20,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 import { config } from "../../util/config";
+import CircularProgress from "@mui/material/CircularProgress";
+import { motion, AnimatePresence } from "framer-motion";
 
 const theme = createTheme({
   palette: {
@@ -54,7 +57,15 @@ const SignUpPage = () => {
   const password_2Focus = useRef();
   const nameFocus = useRef();
 
+  //이메일 인증 체크 여부
   const [checkEmailVerify, setCheckEmailVerify] = useState(false);
+  //이메일 인증 체크 중인지 체크
+  const [checkEmailVerifyIng, setCheckEmailVerifyIng] = useState(false);
+
+  //이메일 인증코드
+  const [emailVerifyCode, setEmailVerifyCode] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
     emailId: "",
@@ -86,11 +97,7 @@ const SignUpPage = () => {
     !regExpChecking.regExp_email;
 
   const handleOnClickEmailAuth = () => {
-    console.log(
-      `${userInfo.emailId}@${
-        userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
-      }`
-    );
+    setIsLoading(true);
     //비동기 처리 이메일인증번호 요청
     axios({
       url: `${config.api}/user/authEmail/send`,
@@ -101,22 +108,47 @@ const SignUpPage = () => {
         }`,
       },
     })
-      .then((res) => console.log(res))
+      .then((res) => {
+        setIsLoading(false);
+        if (res.data.status === "SUCCESS") {
+          setCheckEmailVerifyIng(true);
+        } else {
+          swal("중복 이메일", "이미 이메일이 존재합니다.", "error");
+          return;
+        }
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+        alert("서버통신에러!!");
+      });
+  };
+
+  //이메일 인증번호 6자리 체킹
+  const handleOnEmailCodeVerify = () => {
+    //이메일 인증번호 확인처리;
+    axios({
+      url: `${config.api}/user/authEmail/receive`,
+      method: "POST",
+      data: {
+        code: emailVerifyCode, //code값 처리
+        email: `${userInfo.emailId}@${
+          userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
+        }`,
+      },
+    })
+      .then((res) => {
+        if (res.data.status === "SUCCESS") {
+          setCheckEmailVerify(true);
+          //swal("인증성공!", "이메일 인증에 성공했습니다.", "success");
+        } else {
+          swal("인증번호오류!", "인증번호를 확인해 주세요!", "error");
+        }
+      })
       .catch((err) => {
         console.log(err);
+        alert("서버 통신 에러");
       });
-
-    //이메일 인증번호 확인처리
-    // axios({
-    //   url: `/user/authEmail/receive`,
-    //   method: "POST",
-    //   data: {
-    //     code: "", //code값 처리
-    //     email: `${userInfo.emailId}@${
-    //       userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
-    //     }`,
-    //   },
-    // }).then((res) => console.log(res));
     //결과 status:{SUCESS, FAIL}
   };
 
@@ -221,6 +253,15 @@ const SignUpPage = () => {
   };
 
   const handleChangeEmailInput = (e) => {
+    if (
+      e.target.name === "emailId" ||
+      e.target.name === "emailUrl" ||
+      e.target.name === "emailDirectUrl"
+    ) {
+      setCheckEmailVerifyIng(false);
+      setEmailVerifyCode("");
+    }
+
     if (e.target.value.includes("@")) {
       setUserInfo({
         ...userInfo,
@@ -337,6 +378,7 @@ const SignUpPage = () => {
                 onBlur={handleFocusInput}
                 error={errorChecking.select_emailId && !userInfo.emailId.length}
                 inputRef={emailIdFocus}
+                disabled={checkEmailVerify}
               />
             </FormControl>
           </Grid>
@@ -352,6 +394,7 @@ const SignUpPage = () => {
                   onChange={handleChangeEmailInput}
                   color="main"
                   sx={{ fontFamily: "IBM Plex Sans KR" }}
+                  disabled={checkEmailVerify}
                 >
                   <MenuItem value={"require_select"} disabled>
                     선택해주세요
@@ -380,14 +423,17 @@ const SignUpPage = () => {
                       errorChecking.select_emailDirectUrl &&
                       !userInfo.emailDirectUrl.length
                     }
+                    disabled={checkEmailVerify}
                   />
-                  <Grid
-                    item
-                    className="cancleIcon_box"
-                    onClick={toggleDirectEmailUrlBtn}
-                  >
-                    <CancelIcon />
-                  </Grid>
+                  {!checkEmailVerify && (
+                    <Grid
+                      item
+                      className="cancleIcon_box"
+                      onClick={toggleDirectEmailUrlBtn}
+                    >
+                      <CancelIcon />
+                    </Grid>
+                  )}
                 </Grid>
               )}
             </FormControl>
@@ -437,16 +483,26 @@ const SignUpPage = () => {
           <></>
         )}
         <Grid item mt={2}>
-          {!emailEffectivenessCheck ? (
+          {!emailEffectivenessCheck && !checkEmailVerifyIng ? (
             <ColorButton
               sx={{ width: "100%", height: "50px" }}
               color="secondary"
               onClick={handleOnClickEmailAuth}
+              disabled={isLoading}
             >
               <span
-                style={{ fontFamily: "IBM Plex Sans KR", fontWeight: "bold" }}
+                style={{
+                  fontFamily: "IBM Plex Sans KR",
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                }}
               >
-                이메일 인증하기
+                {!isLoading ? (
+                  "이메일 인증하기"
+                ) : (
+                  <CircularProgress sx={{ color: "white" }} />
+                )}
               </span>
             </ColorButton>
           ) : (
@@ -458,11 +514,102 @@ const SignUpPage = () => {
               <span
                 style={{ fontFamily: "IBM Plex Sans KR", fontWeight: "bold" }}
               >
-                이메일 인증하기
+                {checkEmailVerify ? "이메일 인증완료" : "이메일 인증하기"}
               </span>
             </Button>
           )}
         </Grid>
+
+        <AnimatePresence>
+          {checkEmailVerifyIng && !checkEmailVerify && (
+            <motion.div
+              key="child"
+              initial={{ transform: "translateY(-50%)" }}
+              animate={{ transform: "translateY(0%)" }}
+              exit={{ transform: "translateY(-25%)", opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Grid
+                item
+                className="email_verify_box"
+                mt={2}
+                p={2}
+                sx={{
+                  backgroundColor: "rgb(247,248,250)",
+                }}
+              >
+                <Grid item>
+                  <span style={{ fontSize: "12px", color: "#ad1457" }}>
+                    이메일로 전송된 인증코드를 입력해주세요.
+                  </span>
+                </Grid>
+                <Grid item display={"flex"} alignItems="center" mt={2}>
+                  <Grid item flexGrow={1} sx={{ marginRight: "2px" }}>
+                    <TextField
+                      size="small"
+                      sx={{ width: "100%" }}
+                      placeholder="인증코드 6자리 입력"
+                      color="main"
+                      value={emailVerifyCode}
+                      onChange={(e) => {
+                        setEmailVerifyCode(e.target.value);
+                      }}
+                      focused
+                    />
+                  </Grid>
+                  <Grid item height={"100%"}>
+                    <Button
+                      color="main"
+                      variant="contained"
+                      sx={{ height: "40px" }}
+                      onClick={handleOnEmailCodeVerify}
+                      disabled={!emailVerifyCode}
+                    >
+                      <span
+                        style={{
+                          color: "white",
+                          fontWeight: "bold",
+                          fontFamily: "IBM Plex Sans KR",
+                        }}
+                      >
+                        인증
+                      </span>
+                    </Button>
+                  </Grid>
+                </Grid>
+                <Grid item mt={1}>
+                  <span
+                    style={{
+                      marginRight: "4px",
+                      color: "rgb(130, 140, 148)",
+                      fontSize: "14px",
+                    }}
+                  >
+                    이메일을 받지 못하셨나요?
+                  </span>
+                  <span
+                    style={
+                      !isLoading
+                        ? {
+                            textDecoration: "underline",
+                            color: "black",
+                            fontSize: "14px",
+                            cursor: "pointer",
+                          }
+                        : {
+                            color: "rgb(194, 200, 204)",
+                            fontSize: "14px",
+                          }
+                    }
+                    onClick={!isLoading ? handleOnClickEmailAuth : () => {}}
+                  >
+                    이메일 재전송하기
+                  </span>
+                </Grid>
+              </Grid>
+            </motion.div>
+          )}
+        </AnimatePresence>
         <Grid item className="password_box" mt={3}>
           <h4>비밀번호</h4>
           <h5
