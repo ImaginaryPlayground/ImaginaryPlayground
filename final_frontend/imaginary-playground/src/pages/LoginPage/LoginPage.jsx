@@ -44,6 +44,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 const { naver } = window;
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const savedStrogeUserId = localStorage.getItem("stored_id");
   const [isSaveUserId, setIsSaveUserId] = useState(!!savedStrogeUserId);
 
@@ -111,7 +112,7 @@ const LoginPage = () => {
         if (res.data.status === "SUCCESS") {
           sessionStorage.setItem("token", JSON.stringify(res?.data.data));
           //회원정보 가져오는 비동기 처리
-          console.log("로그인 성공!");
+          //console.log("로그인 성공!");
 
           // 로컬 스토리지에 저장되어있는 아이디 삭제 혹은 생성
           if (isSaveUserId) {
@@ -119,6 +120,9 @@ const LoginPage = () => {
           } else {
             localStorage.setItem("stored_id", "");
           }
+
+          navigate("/");
+          //window.location.href = "/";
         } else {
           swal(
             "로그인에 실패하였습니다.",

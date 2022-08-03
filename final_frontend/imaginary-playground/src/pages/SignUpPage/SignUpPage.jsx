@@ -17,6 +17,8 @@ import InputError from "../../components/InputError/InputError";
 import "../../css/SignUpPage/SignUpPage.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import swal from "sweetalert";
+import { config } from "../../util/config";
 
 const theme = createTheme({
   palette: {
@@ -52,6 +54,8 @@ const SignUpPage = () => {
   const password_2Focus = useRef();
   const nameFocus = useRef();
 
+  const [checkEmailVerify, setCheckEmailVerify] = useState(false);
+
   const [userInfo, setUserInfo] = useState({
     emailId: "",
     emailUrl: "require_select",
@@ -82,28 +86,37 @@ const SignUpPage = () => {
     !regExpChecking.regExp_email;
 
   const handleOnClickEmailAuth = () => {
+    console.log(
+      `${userInfo.emailId}@${
+        userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
+      }`
+    );
     //비동기 처리 이메일인증번호 요청
     axios({
-      url: `/user/authEmail/send`,
+      url: `${config.api}/user/authEmail/send`,
       method: "POST",
       data: {
         email: `${userInfo.emailId}@${
           userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
         }`,
       },
-    }).then((res) => console.log(res));
+    })
+      .then((res) => console.log(res))
+      .catch((err) => {
+        console.log(err);
+      });
 
     //이메일 인증번호 확인처리
-    axios({
-      url: `/user/authEmail/receive`,
-      method: "POST",
-      data: {
-        code: "", //code값 처리
-        email: `${userInfo.emailId}@${
-          userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
-        }`,
-      },
-    }).then((res) => console.log(res));
+    // axios({
+    //   url: `/user/authEmail/receive`,
+    //   method: "POST",
+    //   data: {
+    //     code: "", //code값 처리
+    //     email: `${userInfo.emailId}@${
+    //       userInfo.emailDirectUrl ? userInfo.emailDirectUrl : userInfo.emailUrl
+    //     }`,
+    //   },
+    // }).then((res) => console.log(res));
     //결과 status:{SUCESS, FAIL}
   };
 
@@ -144,6 +157,11 @@ const SignUpPage = () => {
       // 4. 이름유효성 검증
     } else if (!userInfo.name.length || !regExpChecking.regExp_name) {
       nameFocus.current.focus();
+      return;
+    }
+
+    if (!checkEmailVerify) {
+      swal("이메일 인증 필요", "이메일 인증이 필요합니다.", "error");
       return;
     }
 
@@ -423,6 +441,7 @@ const SignUpPage = () => {
             <ColorButton
               sx={{ width: "100%", height: "50px" }}
               color="secondary"
+              onClick={handleOnClickEmailAuth}
             >
               <span
                 style={{ fontFamily: "IBM Plex Sans KR", fontWeight: "bold" }}
@@ -435,7 +454,6 @@ const SignUpPage = () => {
               variant="contained"
               sx={{ width: "100%", height: "50px" }}
               disabled
-              onClick={handleOnClickEmailAuth}
             >
               <span
                 style={{ fontFamily: "IBM Plex Sans KR", fontWeight: "bold" }}
