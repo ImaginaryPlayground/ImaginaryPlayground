@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap');
+
+body {
+    overflow: hidden;
+}
+
+.jungle {
+    position: relative;
+}
+
+
+
+
+
+/* 배경 */
+
+.background {
+    position: absolute;
+    width: 100%;
+}
+
+.palmTree {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+}
+
+
+
+/* 움직이는 배경 */
+
+.bird {
+    animation: bird 4000ms linear infinite;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+}
+
+@keyframes bird {
+    from {
+        right: -30%;
+    }
+    
+    to {
+        right: 30%;
+    }
+}
+
+.secondCeil {
+    animation: jungleMove 2400ms linear infinite alternate;
+    position: absolute;
+    z-index: 4;
+    width: 115%;
+}
+
+.firstCeil {
+    animation: jungleMove 1800ms linear infinite alternate;
+    position: absolute;
+    z-index: 10;
+    width: 115%;
+}
+
+@keyframes jungleMove {
+    from {
+        right: -1%;
+    }
+    
+    to {
+        right: 1%;
+    }
+}
+
+
+/* 움직이지 않는 배경 */
+
+.onlyTree {
+    position: absolute;
+    width: 100%;
+    z-index: 3;
+}
+
+.secondHill {
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+}
+
+
+.firstHill {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+}
+
+
+
+
+/* 햇빛 */
+.sun1 {
+    position: absolute;
+    z-index: 7;
+    width: 100%;
+}
+
+.sun2 {
+    position: absolute;
+    z-index: 7;
+    width: 100%;
+}
+
+.sun3 {
+    position: absolute;
+    z-index: 7;
+    width: 100%;
+}
