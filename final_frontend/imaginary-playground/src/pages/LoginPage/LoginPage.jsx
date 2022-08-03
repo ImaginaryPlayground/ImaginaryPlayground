@@ -24,6 +24,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { config } from "../../util/config.jsx";
 import swal from "sweetalert";
+import { loginUserToken } from "../../util/token.jsx";
 
 const theme = createTheme({
   palette: {
@@ -121,7 +122,22 @@ const LoginPage = () => {
             localStorage.setItem("stored_id", "");
           }
 
-          navigate("/");
+          axios({
+            url: `${config.api}/user/token`, //마지막은 페이지번호
+            method: "POST",
+            headers: {
+              Auth: loginUserToken,
+            }, //헤더에 토큰
+          })
+            .then((res) => {
+              console.log("유저정보", res);
+              //홈으로 이동
+              navigate("/");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
           //window.location.href = "/";
         } else {
           swal(
