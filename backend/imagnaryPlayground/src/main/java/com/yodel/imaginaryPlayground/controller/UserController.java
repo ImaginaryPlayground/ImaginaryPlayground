@@ -154,7 +154,7 @@ public class UserController {
                 if(password.equals(user_password)){    //비밀번호 유효성 검사
                     //공통으로 토큰이 들어간다(로그인 성공시 따로 넣어준다).
                     String token = jwtTokenService.createToken(userInfo.getEmail(), userInfo.getType());
-                    UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                    UserDto user = userService.findByEmail(userInfo.getEmail());
                     result.put("status", success);
                     result.put("data", token);
                     result.put("userInfo", user);

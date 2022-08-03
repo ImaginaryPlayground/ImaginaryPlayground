@@ -146,9 +146,12 @@ const MiddlePage = () => {
           swal(
             "성공!",
             "정상적으로 회원가입 요청이 완료되었습니다. 담당자 승인 후 이용가능합니다.!",
-            "info"
-          );
-          loginApi(signUpUserDataReducer.email, signUpUserDataReducer.password);
+            "success"
+          ).then((ok) => {
+            navigate("/login");
+          });
+
+          //loginApi(signUpUserDataReducer.email, signUpUserDataReducer.password);
         } else {
           swal("실패!", "회원가입이 실패하였습니다.!", "error");
         }

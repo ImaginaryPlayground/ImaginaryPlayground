@@ -1,7 +1,6 @@
 import axios from "axios";
 import { config } from "./config";
 import swal from "sweetalert";
-import { useNavigate } from "react-router-dom";
 
 export const loginApi = (email, password) => {
   axios({
