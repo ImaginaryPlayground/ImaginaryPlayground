@@ -3,6 +3,7 @@ package com.yodel.imaginaryPlayground.service;
 import com.yodel.imaginaryPlayground.mapper.UserMapper;
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
 import com.yodel.imaginaryPlayground.model.vo.EmailCodeVO;
+import com.yodel.imaginaryPlayground.model.vo.PasswordVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +36,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int savePassword(int id, String password) {
-        Map<String, String> map = new HashMap<>();
-        map.put("id", Integer.toString(id));
-        map.put("password", password);
-        return userMapper.savePassword(map);
+    public int savePassword(int user_id, String password) {
+        PasswordVO passwordVO = new PasswordVO(user_id, password);
+        return userMapper.savePassword(passwordVO);
     }
 
     @Override

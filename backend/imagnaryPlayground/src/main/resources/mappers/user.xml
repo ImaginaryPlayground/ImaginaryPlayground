@@ -17,10 +17,11 @@
         WHERE email = #{email}
     </select>
 
-    <insert id="savePassword" parameterType="map">
-        UPDATE imagination_playground.password
-        SET password = #{password}
-        WHERE id = #{id}
+    <insert id="savePassword" parameterType="PasswordVO">
+        INSERT INTO imagination_playground.password
+            (user_id, password)
+        VALUES
+            (#{user_id}, #{password})
     </insert>
 
     <update id="updateUserInfo" parameterType="UserDto">
