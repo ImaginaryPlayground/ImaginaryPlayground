@@ -72,4 +72,9 @@ public class AdminServiceImpl implements AdminService{
         return adminMapper.lookupUser(email);
     }
 
+    @Override
+    public int editUserInfo(UserDto user) throws Exception {
+        return adminMapper.editUserInfo(user);
+    }
+
 }
