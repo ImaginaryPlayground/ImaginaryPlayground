@@ -13,6 +13,7 @@ public class QuestionDto {
     private String email;
     private String title;
     private String content;
+    private String username;
     private int qna_type;
     private int secret;
     private int completed;
