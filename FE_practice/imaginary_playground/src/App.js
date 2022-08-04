@@ -7,8 +7,6 @@ import Universe from "./pages/universe";
 function App() {
   return (
     <div className="App">
-      {/* <Ocean />
-      <Jungle /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Map />} />
