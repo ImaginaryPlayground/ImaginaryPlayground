@@ -62,6 +62,7 @@ public class QuestionController {
         try {
             UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             question.setUser_id(user.getId());
+            question.setEmail(user.getEmail());
             if(question.getCompleted() == 1){
                 result.put("status", fail);
                 result.put("message", "답변이 완료된 글의 질문은 수정할 수 없습니다.");
@@ -127,7 +128,7 @@ public class QuestionController {
                     countQuestion = questionService.lookupAllQuestionWithEmailCount(pageDto);
                 }
             }else if(pageDto.getKey().equals("title") || pageDto.getKey().equals("content")){ //검색값이 있는 경우: 유효성 검사 기회
-                if(pageDto.getEmail() == null || pageDto.getEmail().trim().equals("")){ //문의유형이 0인 경우
+                if(pageDto.getQna_type() == 0){ //문의유형이 0인 경우
                     questionList = questionService.searchAllQuestion(pageDto);
                     countQuestion = questionService.searchAllQuestionCount(pageDto);
                 }else{ //만약 문의유형이 0이 아닌 경우
