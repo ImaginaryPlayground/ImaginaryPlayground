@@ -16,12 +16,12 @@ public class AdminServiceImpl implements AdminService{
     private final AdminMapper adminMapper;
     private final int PAGE = 9; //Pagination을 위한 변수
     @Override //생성자로 만들어서 주기
-    public int approveUser(List<Integer> list) throws Exception {
+    public int approveUser(List<String> list) throws Exception {
         return adminMapper.approveUser(list);
     }
 
     @Override
-    public int deleteUser(List<Integer> list) throws Exception {
+    public int deleteUser(List<String> list) throws Exception {
         return adminMapper.deleteUser(list);
     }
 
