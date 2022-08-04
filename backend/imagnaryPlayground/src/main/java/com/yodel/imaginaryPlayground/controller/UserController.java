@@ -208,9 +208,9 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
         try {
             UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            int res = userService.updateUserInfo(user.getId());
+            user.setUsername(userInfo.getUsername());
+            int res = userService.updateUserInfo(user);
             if(res == 1){
-                user.setUsername(userInfo.getUsername());
                 result.put("status", success);
                 result.put("data", user);
             }else{
@@ -368,12 +368,19 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/logout")
-    public RedirectView logout(@RequestHeader("Auth") String token){
+    @PostMapping("/logout")
+    public Map<String, Object> logout(@RequestHeader("Auth") String token){
         System.out.println(token);
-        jwtTokenService.closeToken(token);
-        SecurityContextHolder.clearContext();
-        return new RedirectView("/");
+        Map<String, Object> result = new HashMap<>();
+
+        if(token != null){
+            result.put("status", success);
+            jwtTokenService.closeToken(token);
+            SecurityContextHolder.clearContext();
+        }else {
+            result.put("status", fail);
+        }
+        return result;
     }
 
     private String save(MultipartFile file, String contextPath, String uploadDate) {

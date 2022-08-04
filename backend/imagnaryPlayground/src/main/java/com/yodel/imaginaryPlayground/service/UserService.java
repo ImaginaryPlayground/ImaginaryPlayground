@@ -9,7 +9,7 @@ public interface UserService {
     int getUserId(String email);
     int savePassword(int user_id, String password);
     String getPassword(int user_id);
-    int updateUserInfo(int user_id) throws Exception;
+    int updateUserInfo(UserDto userDto) throws Exception;
     UserDto detailUser(int userId) throws Exception;
     int deleteUser(int userId) throws Exception;
     // 사용자 전체 검색은 사용하지 않을 것 같아서 제외
