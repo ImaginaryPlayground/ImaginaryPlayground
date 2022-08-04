@@ -12,7 +12,7 @@ public interface QuestionService {
     int deleteQuestion(IdVO idVO) throws Exception;
     QuestionDto lookupQuestion(int id) throws Exception;
     QuestionDto detailQuestion(QuestionDto questionDto) throws Exception;
-    List<QuestionDto> lookupAllQuestion(int page) throws Exception;
+    List<QuestionDto> lookupAllQuestion(PageDto pageDto) throws Exception;
     List<QuestionDto> lookAllQuestion() throws Exception;
     int lookupAllQuestionCount(PageDto pageDto) throws Exception;
     List<QuestionDto> lookupAllQuestionWithEmail(PageDto pageDto) throws Exception;
