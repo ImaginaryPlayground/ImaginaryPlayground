@@ -37,6 +37,11 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     @Override
+    public QuestionDto detailQuestion(QuestionDto questionDto) throws Exception {
+        return questionMapper.detailQuestion(questionDto);
+    }
+
+    @Override
     public List<QuestionDto> lookupAllQuestion(int page) throws Exception {
         PageDto pageDto = new PageDto(0, PAGE, "", "", 0, "", 0);
         return questionMapper.lookupAllQuestion(pageDto);
