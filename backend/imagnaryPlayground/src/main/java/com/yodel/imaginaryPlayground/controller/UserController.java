@@ -154,7 +154,11 @@ public class UserController {
                 if(password.equals(user_password)){    //비밀번호 유효성 검사
                     //공통으로 토큰이 들어간다(로그인 성공시 따로 넣어준다).
                     String token = jwtTokenService.createToken(userInfo.getEmail(), userInfo.getType());
-                    UserDto user = userService.findByEmail(userInfo.getEmail());
+                    UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+                    //병원주소(이메일을 이용해서 병원 아이디를 가져오고, 병원 아이디를 이용해서 병원 주소를 가져온다)
+                    UserDto hospital_id = userService.findByEmail(userInfo.getEmail());
+
                     result.put("status", success);
                     result.put("data", token);
                     result.put("userInfo", user);
@@ -197,15 +201,14 @@ public class UserController {
 
     @PutMapping("")
     @ApiOperation(value = "회원 정보 수정", notes = "회원 페이지에서 사용자의 정보를 수정할 수 있다.")
-    public Map<String, Object> updateUserInfo(
-            @RequestBody String username){
+    public Map<String, Object> updateUserInfo(){
 
         Map<String, Object> result = new HashMap<>();
         try {
             UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            user.setUsername(username);
-            int res = userService.updateUserInfo(user);
+            int res = userService.updateUserInfo(user.getId());
             if(res == 1){
+                userService.updateUserInfo(user.getId());
                 result.put("status", success);
                 result.put("data", user);
             }else{
