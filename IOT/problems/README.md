@@ -37,9 +37,9 @@ no-cache-dir=true 설정의 경우에는 본인이 사용하고 싶어서 넣은
 + https://kjk92.tistory.com/83 (pip.conf 설정)
 + https://foxybearkim.tistory.com/14 (mirror 서버 설정 및 trusted-host 설정)
 
-### 해결과정
+### `–no-cache-dir` 옵션
 
-해시값 에러에는 –no-cache-dir 옵션을 사용하면 된다는 말이 지배적이었으나 안 되서 pip 업데이트 시도도 해보았으나 업데이트에도 어김없이 sha 에러가 생겼다.
+해시값 에러에는 `–no-cache-dir` 옵션을 사용하면 된다는 말이 지배적이었으나 안 되서 pip 업데이트 시도도 해보았으나 업데이트에도 어김없이 sha 에러가 생겼다.
 
 <img src='https://user-images.githubusercontent.com/19484971/182135615-fe9eaed5-70c5-4c8e-883e-e09e0f04ddeb.png' width=600>
 
