@@ -36,7 +36,7 @@ public class AdminController {
         }
         try {
             int res = adminService.approveUser(list);
-            if(res == 1){
+            if(res != 0){
                 result.put("status", success);
                 result.put("data", adminService.lookupUnapprovedUser(0));
             }else{
@@ -56,7 +56,7 @@ public class AdminController {
         Map<String, Object> result = new HashMap<>();
         try {
             int res = adminService.deleteUser(list);
-            if(res == 1){
+            if(res != 0){
                 result.put("status", success);
                 result.put("data", adminService.lookupUnapprovedUser(0));
             }else{
@@ -156,6 +156,7 @@ public class AdminController {
             @RequestBody @ApiParam(value = "조회에 필요한 이메일 주소", required = true) String email){
         Map<String, Object> result = new HashMap<>();
         UserDto user = new UserDto();
+        System.out.println(email);
         try {
             user = adminService.lookupUser(email);
             if(user != null){
