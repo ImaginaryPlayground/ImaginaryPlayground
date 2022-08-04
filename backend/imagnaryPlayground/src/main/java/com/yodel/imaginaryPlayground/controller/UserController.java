@@ -157,7 +157,7 @@ public class UserController {
                     UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
                     //병원주소(이메일을 이용해서 병원 아이디를 가져오고, 병원 아이디를 이용해서 병원 주소를 가져온다)
-                    UserDto hospital_id = userService.findByEmail(userInfo.getEmail());
+//                    int hospital_id = (int) userService.findByEmail(userInfo.getEmail());
 
                     result.put("status", success);
                     result.put("data", token);
@@ -223,7 +223,7 @@ public class UserController {
     }
 
     @DeleteMapping("")
-    @ApiOperation(value = "회원 정보 삭제", notes = "회원 페이지에서 사용자의 정보를 삭제한다.")
+    @ApiOperation(value = "회원 탈퇴", notes = "회원 페이지에서 사용자의 정보를 삭제한다.")
     public Map<String, String> deleteUser(){
 
         Map<String, String> result = new HashMap<>();
@@ -234,6 +234,7 @@ public class UserController {
             int res = userService.deleteUser(id);
             if(res == 1) {
                 result.put("status", success);
+                userService.deleteUser(id);
             } else {
                 result.put("status", fail);
             }
