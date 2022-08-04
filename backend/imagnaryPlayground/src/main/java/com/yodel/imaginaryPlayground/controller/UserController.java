@@ -202,16 +202,17 @@ public class UserController {
 
     @PutMapping("")
     @ApiOperation(value = "회원 정보 수정", notes = "회원 페이지에서 사용자의 정보를 수정할 수 있다.")
-    public Map<String, Object> updateUserInfo(){
+    public Map<String, Object> updateUserInfo(
+            @RequestBody UserDto userInfo){
 
         Map<String, Object> result = new HashMap<>();
         try {
             UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             int res = userService.updateUserInfo(user.getId());
             if(res == 1){
-                userService.updateUserInfo(user.getId());
+                user.setUsername(userInfo.getUsername());
                 result.put("status", success);
-                result.put("data", user);
+                result.put("data", userService.updateUserInfo(user.getId()));
             }else{
                 result.put("status", fail);
             }
