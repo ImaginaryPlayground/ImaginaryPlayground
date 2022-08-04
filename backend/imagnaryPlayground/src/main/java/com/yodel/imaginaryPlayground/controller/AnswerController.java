@@ -35,6 +35,10 @@ public class AnswerController {
             Integer res = answerService.isCompleted(answer.getQuestion_id());
             if(res != null && res == 0 && answerService.saveAnswer(answer) == 1){
                 result.put("status", success);
+                res = answerService.checkCompleted(answer.getQuestion_id());
+                if(res != null && res == 0){
+                    result.put("message", "답변 완료 체크 실패");
+                }
                 PageDto pageDto = new PageDto(0, PAGE,"completed", "0", 0, "", 0);
                 result.put("data", answerService.lookupUncompletedAnswer(pageDto));
             }else{
