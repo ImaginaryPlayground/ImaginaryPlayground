@@ -32,7 +32,6 @@ public class AnswerController {
     public Map<String, Object> saveAnswer(
             @RequestBody @ApiParam(value = "답변등록에 필수요소인 AnswerDTO 내용을 보낸다.", required = true) AnswerDto answer){
         Map<String, Object> result = new HashMap<>();
-
         try {
             Integer res = answerService.isCompleted(answer.getQuestion_id());
             if(res != null && res == 0 && answerService.saveAnswer(answer) == 1){
@@ -67,6 +66,7 @@ public class AnswerController {
                 result.put("data", answerService.detailAnswer(answer.getQuestion_id()));
             }else{
                 result.put("status", fail);
+                result.put("message", "수정 실패!");
             }
         } catch (Exception e) {
             result.put("status", error);
