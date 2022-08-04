@@ -63,4 +63,10 @@
         WHERE email = #{email}
     </select>
 
+    <update id="editUserInfo" parameterType="UserDto">
+        UPDATE imagination_playground.user
+        SET username = #{username}
+        WHERE id = #{id}
+    </update>
+
 </mapper>
