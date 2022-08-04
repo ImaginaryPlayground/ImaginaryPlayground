@@ -43,7 +43,7 @@ public class QuestionController {
             int res = questionService.saveQuestion(question);
             if(res == 1){
                 result.put("status", success);
-                result.put("data", questionService.lookupAllQuestion(0));
+                result.put("data", questionService.detailQuestion(question));
             }else{
                 result.put("status", fail);
             }

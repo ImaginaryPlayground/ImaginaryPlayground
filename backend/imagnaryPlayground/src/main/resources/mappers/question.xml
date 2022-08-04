@@ -26,6 +26,11 @@
         WHERE id = #{id}
     </select>
 
+    <select id="detailQuestion" parameterType="QuestionDto" resultType="QuestionDto">
+        SELECT * FROM imagination_playground.qna_question
+        WHERE user_id = #{user_id} AND title = #{titile} AND content = #{content} AND qna_type = 0 AND completed = 0
+    </select>
+
     <select id="lookupAllQuestion" parameterType="PageDto" resultType="QuestionDto">
         SELECT * FROM imagination_playground.qna_question
         <if test="completed != 2">
