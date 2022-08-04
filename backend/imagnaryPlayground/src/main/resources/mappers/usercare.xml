@@ -13,12 +13,15 @@
     <select id="getBaby" parameterType="BabyDto" resultType="BabyDto">
         SELECT *
         FROM imagination_playground.user_baby
-        WHERE user_id = #{user_id} AND name = #{name} AND age = #{age} AND gender = #{gender} AND profile = #{profile}
+        WHERE user_id = #{user_id} AND name = #{name} AND age = #{age} AND gender = #{gender}
+        <if test="profile != null">
+            AND profile = #{profile}
+        </if>
     </select>
 
     <update id="updateBabyInfo" parameterType="BabyDto">
         UPDATE imagination_playground.user_baby
-        SET name = #{name}, age = #{age}, gender = #{gender}, modified_date = NOW()
+        SET name = #{name}, age = #{age}, gender = #{gender}, character = #{character}, modified_date = NOW()
         <if test="profile != null">
             , profile = #{profile}
         </if>
