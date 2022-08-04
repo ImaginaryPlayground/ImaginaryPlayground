@@ -63,6 +63,7 @@ public class UserController {
         String provider = "SITE";
         int hospital_id = 0;
         String hospital_name = "";
+        String hospital_address = "";
 
         Iterator it = signupData.keys();
         while (it.hasNext()) {
@@ -77,6 +78,8 @@ public class UserController {
                 hospital_id = signupData.getInt(key);
             } else if (key.equals("hospital_name")) {
                 hospital_name = signupData.getString(key);
+            } else if (key.equals("hospital_address")) {
+                hospital_address = signupData.getString(key);
             }
         }
 
@@ -85,16 +88,16 @@ public class UserController {
         System.out.println(" username: " + username);
         System.out.println(" hospital_id: " + hospital_id);
         System.out.println(" hospital_name: " + hospital_name);
+        System.out.println(" hospital_name: " + hospital_address);
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
             String uploadDate = simpleDateFormat.format(new Date());
-//            String document = save(file, request.getServletContext().getRealPath("/"), uploadDate);
             String document = request.getServletContext().getRealPath("/");
 
 //            userService.saveFile(document, email);
 
-            UserDto user = new UserDto(email, password, username, provider, document, hospital_id, hospital_name);
+            UserDto user = new UserDto(email, password, username, provider, document, hospital_id, hospital_name, hospital_address);
 
             int chkEmail = userService.countByEmail(user.getEmail());
             if(chkEmail != 1){    //기존 사용자가 아닌 경우 회원가입 진행
@@ -154,14 +157,11 @@ public class UserController {
                 if(password.equals(user_password)){    //비밀번호 유효성 검사
                     //공통으로 토큰이 들어간다(로그인 성공시 따로 넣어준다).
                     String token = jwtTokenService.createToken(userInfo.getEmail(), userInfo.getType());
-                    UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
                     //병원주소(이메일을 이용해서 병원 아이디를 가져오고, 병원 아이디를 이용해서 병원 주소를 가져온다)
-//                    int hospital_id = (int) userService.findByEmail(userInfo.getEmail());
 
                     result.put("status", success);
                     result.put("data", token);
-                    result.put("userInfo", user);
                 }else{
                     result.put("status", fail);
                 }
