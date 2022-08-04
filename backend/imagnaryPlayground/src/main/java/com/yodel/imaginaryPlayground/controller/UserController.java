@@ -212,7 +212,7 @@ public class UserController {
             if(res == 1){
                 user.setUsername(userInfo.getUsername());
                 result.put("status", success);
-                result.put("data", userService.updateUserInfo(user.getId()));
+                result.put("data", user);
             }else{
                 result.put("status", fail);
             }
@@ -226,17 +226,18 @@ public class UserController {
 
     @DeleteMapping("")
     @ApiOperation(value = "회원 탈퇴", notes = "회원 페이지에서 사용자의 정보를 삭제한다.")
-    public Map<String, String> deleteUser(){
+    public Map<String, String> deleteUser(@RequestHeader("Auth") String token){
 
         Map<String, String> result = new HashMap<>();
 
         try {
             UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            int id = user.getId();
-            int res = userService.deleteUser(id);
+            int userId = user.getId();
+            int res = userService.deleteUser(userId);
             if(res == 1) {
                 result.put("status", success);
-                userService.deleteUser(id);
+                jwtTokenService.closeToken(token);
+                SecurityContextHolder.clearContext();
             } else {
                 result.put("status", fail);
             }
