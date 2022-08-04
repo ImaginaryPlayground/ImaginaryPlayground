@@ -353,9 +353,13 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
         System.out.println("들어왔냐");
         UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(user.toString());
-        //UserDto user2 = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //System.out.println("login Service :" + user2.toString());
+
+        if(user != null){
+            result.put("status", success);
+            result.put("data", user);
+        }else{
+            result.put("status", fail);
+        }
 
         return result;
     }

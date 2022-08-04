@@ -23,6 +23,8 @@ import { pink } from "@mui/material/colors";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { config } from "../../util/config.jsx";
+import swal from "sweetalert";
+import { loginUserToken } from "../../util/token.jsx";
 
 const theme = createTheme({
   palette: {
@@ -43,9 +45,12 @@ const ColorButton = styled(Button)(({ theme }) => ({
 const { naver } = window;
 
 const LoginPage = () => {
-  const [isSaveUserId, setIsSaveUserId] = useState(false);
+  const navigate = useNavigate();
+  const savedStrogeUserId = localStorage.getItem("stored_id");
+  const [isSaveUserId, setIsSaveUserId] = useState(!!savedStrogeUserId);
+
   const [loginUserInfo, setLoginUserInfo] = useState({
-    userEmail: "",
+    userEmail: !!savedStrogeUserId ? savedStrogeUserId : "",
     userPassword: "",
   });
 
@@ -85,15 +90,15 @@ const LoginPage = () => {
     userEmailInput.current.focus();
     userPasswordInput.current.focus();
 
-    if (!loginUserInfo.userEmail) {
+    if (!loginUserInfo.userEmail.length) {
       userEmailInput.current.focus();
       return;
     }
-    if (!loginUserInfo.userPassword) {
+    if (!loginUserInfo.userPassword.length) {
       userPasswordInput.current.focus();
       return;
     }
-    console.log("로그인 직전");
+
     //비동기 처리
     axios({
       url: `${config.api}/user/login`,
@@ -104,12 +109,46 @@ const LoginPage = () => {
       },
     })
       .then((res) => {
-        console.log("연결 성공!!");
         console.log(res);
-        //localStorage.setItem("token", JSON.stringify(res?.data));
+        if (res.data.status === "SUCCESS") {
+          sessionStorage.setItem("token", res.data.data);
+          //회원정보 가져오는 비동기 처리
+          //console.log("로그인 성공!");
+
+          // 로컬 스토리지에 저장되어있는 아이디 삭제 혹은 생성
+          if (isSaveUserId) {
+            localStorage.setItem("stored_id", loginUserInfo.userEmail);
+          } else {
+            localStorage.setItem("stored_id", "");
+          }
+
+          axios({
+            url: `${config.api}/user/token`, //마지막은 페이지번호
+            method: "POST",
+            headers: {
+              Auth: res.data.data,
+            }, //헤더에 토큰
+          })
+            .then((res) => {
+              console.log("유저정보", res);
+              //홈으로 이동
+              navigate("/");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
+          //window.location.href = "/";
+        } else {
+          swal(
+            "로그인에 실패하였습니다.",
+            "아이디와 비밀번호를 확인해주세요",
+            "error"
+          );
+        }
       })
       .catch((err) => {
-        console.log("에러!!");
+        alert("서버와 통신에러 발생");
         console.log(err);
       });
   };
@@ -180,6 +219,7 @@ const LoginPage = () => {
         <FormControlLabel
           control={
             <Checkbox
+              checked={isSaveUserId}
               value={isSaveUserId}
               onClick={() => {
                 setIsSaveUserId(!isSaveUserId);

@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { config } from "../../util/config";
+import { loginUserToken } from "../../util/token";
 
 const drawerWidth = 240;
 const navItems = ["내정보", "1:1문의", "로그아웃"];
@@ -59,7 +60,9 @@ const Header = (props) => {
         axios({
           url: `${config.api}/question`, //마지막은 페이지번호
           method: "POST",
-          headers: "", //헤더에 토큰
+          headers: {
+            Auth: loginUserToken,
+          }, //헤더에 토큰
           data: {
             id: 1, //로그인된 유저 ID 번호()
           },

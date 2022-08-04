@@ -1,5 +1,5 @@
 import { Grid, Paper } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "../../css/Homepage/KidsGridItem.css";
@@ -8,12 +8,17 @@ const KidsGridItem = ({ kidData }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentPage = useSelector((state) => state.HomePageCurrentPageReducer);
+
   const handleKidClick = () => {
     dispatch({
       type: "SET_CURRENT_PAGE",
       data: { ...currentPage, scrollY: window.scrollY },
     });
-    dispatch({ type: "SET_SELECTED_KID", data: kidData });
+    const newKidData = {
+      ...kidData,
+      character: kidData.character || "",
+    };
+    dispatch({ type: "SET_SELECTED_KID", data: newKidData });
     navigate("/kidinfo", { state: { isEdit: true } });
   };
   return (
@@ -61,12 +66,12 @@ const KidsGridItem = ({ kidData }) => {
             <span style={{ fontWeight: "bold" }}>{kidData.name}</span>
             <span
               style={
-                kidData.gender === "Male"
+                kidData.gender === "M"
                   ? { color: "#1967d2", fontWeight: "bold" }
                   : { color: "#ad1457", fontWeight: "bold" }
               }
             >
-              {kidData.gender === "Male" ? "남" : "여"}
+              {kidData.gender === "M" ? "남" : "여"}
             </span>
           </Grid>
           <Grid item sx={{ textAlign: "end" }}>
@@ -76,7 +81,7 @@ const KidsGridItem = ({ kidData }) => {
             세
           </Grid>
           <Grid item className="profile_text">
-            {kidData.profile}
+            {kidData.character}
           </Grid>
         </Grid>
       </Grid>
