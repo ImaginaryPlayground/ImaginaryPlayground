@@ -61,6 +61,11 @@ public class UserDto implements UserDetails {
     }
 
     @Builder
+    public UserDto(int id) {
+        this.id = id;
+    }
+
+    @Builder
     public UserDto(String username, String password, String email, String provider) {
         this.username = username;
         this.password = password;

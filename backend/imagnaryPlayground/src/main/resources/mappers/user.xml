@@ -29,7 +29,7 @@
         WHERE user_id = #{user_id}
     </select>
 
-    <update id="updateUserInfo" parameterType="UserDto">
+    <update id="updateUserInfo" parameterType="int">
         UPDATE imagination_playground.user
         SET username = #{username}, modified_date = NOW()
         WHERE id = #{id}
@@ -53,7 +53,7 @@
 
     <select id="findByEmail" parameterType="String" resultType="UserDto">
         SELECT *
-        FROM imagination_playground.user u
+        FROM imagination_playground.user
         WHERE email = #{email}
     </select>
 
