@@ -13,7 +13,7 @@ export const DolphinglTF =()=> {
     const scene = new THREE.Scene();
     
     const camera = new THREE.PerspectiveCamera(
-        59, // 앞뒤로 줌인줌아웃
+        100, // 앞뒤로 줌인줌아웃
         window.innerWidth/window.innerHeight,
         0.1,
         100
@@ -32,12 +32,12 @@ export const DolphinglTF =()=> {
 
     const assetLoader = new GLTFLoader();
     
-    // 왼쪽에서 두 번째 상어
+
     let mixer1;
-    assetLoader.load('/assets/ocean/dolphin.gltf', function(gltf) {
+    assetLoader.load('/assets/ocean/dolly.gltf', function(gltf) {
         const model = gltf.scene;
         // gltf.scene.scale.set(0.9, 0.9, 0.9); 
-        gltf.scene.scale.multiplyScalar(4); 
+        // gltf.scene.scale.multiplyScalar(4); 
         model.position.set(-7,5,10)
         scene.add(model);
         
@@ -75,13 +75,13 @@ export const DolphinglTF =()=> {
     
     }
 
+const Dolphin = () => {
+    return (
+<>
+<DolphinglTF></DolphinglTF>
+</>
 
-const dolphin =() => {
-    return(
-        <>
-            <DolphinglTF></DolphinglTF>
-        </>
     )
 }
 
-export default DolphinglTF
+export default Dolphin
