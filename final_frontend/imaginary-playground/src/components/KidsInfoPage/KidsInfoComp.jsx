@@ -19,6 +19,7 @@ import "../../css/KidsInfoPage/KidsInfoComp.css";
 import { config } from "../../util/config";
 import axios from "axios";
 import { loginUserToken } from "../../util/token";
+import swal from "sweetalert";
 
 const KidsInfoComp = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const KidsInfoComp = () => {
           age: 1,
           gender: "M",
           profile: "",
+          character: "",
         }
   );
 
@@ -53,18 +55,36 @@ const KidsInfoComp = () => {
     console.log("삭제API", kidInfoData);
 
     axios({
-      url: `${config.api}/user/care`, //마지막은 페이지번호
+      url: `${config.api}/user/care/`,
       method: "DELETE",
-      headers: "", //헤더에 토큰
+      headers: {
+        Auth: loginUserToken,
+      }, //헤더에 토큰
       data: {
-        baby_id: kidInfoData.id, //아이 id값 보내기
+        id: kidInfoData.id, //아이 id값 보내기
       },
     })
       .then((res) => {
         console.log(res);
+        if (res.data.status === "SUCCESS") {
+          swal({
+            title: "성공",
+            text: "삭제에 성공하였습니다.",
+            icon: "success",
+          }).then(() => {
+            navigate("/", { replace: true });
+          });
+        } else {
+          swal({
+            title: "에러",
+            text: "삭제에 실패하였습니다.",
+            icon: "error",
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
+        alert("서버 통신 에러!!");
       });
   };
   const handleOnSumbit = async (e) => {
@@ -73,71 +93,107 @@ const KidsInfoComp = () => {
       return;
     }
 
+    if (kidInfoData.faceImg === "/img/KidsInfoPage/default_img.jpg") {
+      swal({
+        title: "이미지 필요!",
+        text: "얼굴 인식AI를 위해 환자 얼굴 사진을 등록해주세요!",
+        icon: "info",
+      });
+      return;
+    }
+
+    //formdata로 변환해서 보내기(수정필요)
+    //생성 데이터
+    const createData = {
+      name: kidInfoData.name,
+      age: kidInfoData.age,
+      gender: kidInfoData.gender,
+      character: kidInfoData.profile,
+    };
+    //수정데이터
+    const modifiedData = {
+      name: kidInfoData.name,
+      age: kidInfoData.age,
+      gender: kidInfoData.gender,
+      character: kidInfoData.profile,
+      id: kidInfoData.id,
+    };
+
+    const formData = new FormData();
+
     if (state?.isEdit) {
       console.log("수정API", kidInfoData);
-      //formdata로 변환해서 보내기(수정필요)
-      axios({
-        url: `${config.api}/user/care`, //마지막은 페이지번호
-        method: "PUT",
-        headers: "", //헤더에 토큰
-        data: {
-          name: kidInfoData.name,
-          age: kidInfoData.age,
-          profile: kidInfoData.faceImg,
-          gender: kidInfoData.gender,
-          character: kidInfoData.profile,
-        },
-      })
-        .then((res) => {
-          console.log(res);
-          //받은 데이터들 입력
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      console.log("등록API", kidInfoData);
-      //formdata로 변환해서 보내기(수정필요)
-      const data = {
-        name: kidInfoData.name,
-        age: kidInfoData.age,
-        gender: kidInfoData.gender,
-        character: kidInfoData.profile,
-      };
 
-      const formData = new FormData();
       //blob객체의 타입을 application/json 형식으로 만들기
-      const blob = new Blob([JSON.stringify(data)], {
+      const blob = new Blob([JSON.stringify(modifiedData)], {
         type: "application/json",
       });
+
       //text데이터 추가
       formData.append("key", blob);
       //이미지 데이터 추가
       formData.append("file", kidInfoData.faceImg);
 
       axios({
-        url: `${config.api}/user/care/`, //마지막은 페이지번호
+        url: `${config.api}/user/care/`,
+        method: "PUT",
+        headers: {
+          Auth: loginUserToken,
+          "Content-Type": "multipart/form-data",
+        }, //헤더에 토큰
+        data: formData,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      console.log("등록API", kidInfoData);
+
+      //blob객체의 타입을 application/json 형식으로 만들기
+      const blob = new Blob([JSON.stringify(createData)], {
+        type: "application/json",
+      });
+
+      //text데이터 추가
+      formData.append("key", blob);
+      //이미지 데이터 추가
+      formData.append("file", kidInfoData.faceImg);
+
+      axios({
+        url: `${config.api}/user/care/`,
         method: "POST",
         headers: {
-          Auth: `${loginUserToken}`, //헤더에 토큰
+          Auth: loginUserToken, //헤더에 토큰
           "Content-Type": "multipart/form-data",
         },
         data: formData,
       })
         .then((res) => {
           console.log(res);
-          //받은 데이터들 입력
+          //받은 데이터들 등록
+          if (res.data.status === "SUCCESS") {
+            dispatch({ type: "SET_SELECTED_KID", data: kidInfoData });
+            dispatch({
+              type: "SET_CURRENT_PAGE",
+              data: { ...reducerCurrentPage, page: 1, scrollY: 0 },
+            });
+
+            swal({
+              title: "등록 성공",
+              text: `정상적으로 등록되었습니다.`,
+              icon: "success",
+            }).then((ok) => {
+              navigate("/kidinfo", { state: { isEdit: true } });
+            });
+          }
         })
         .catch((err) => {
           console.log(err);
+          alert("서버 통신 에러!!");
         });
-
-      // dispatch({ type: "SET_SELECTED_KID", data: kidInfoData });
-      // dispatch({
-      //   type: "SET_CURRENT_PAGE",
-      //   data: { ...reducerCurrentPage, page: 1, scrollY: 0 },
-      // });
-      // navigate("/kidinfo", { state: { isEdit: true } });
     }
   };
 
@@ -326,9 +382,9 @@ const KidsInfoComp = () => {
             minRows="10"
             maxRows="10"
             color="main"
-            value={kidInfoData.profile}
+            value={kidInfoData.character}
             onChange={handleOnChangeData}
-            name="profile"
+            name="character"
           />
         </Grid>
       </Grid>
