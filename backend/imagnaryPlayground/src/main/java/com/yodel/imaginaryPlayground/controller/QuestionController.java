@@ -121,7 +121,7 @@ public class QuestionController {
             if(pageDto.getValue() == null || pageDto.getValue().trim().equals("")){ //검색값이 없는 경우
                 if(pageDto.getQna_type() == 0){ //전체조회
                     questionList = questionService.lookupAllQuestion(pageDto.getPage());
-                    countQuestion = questionService.lookupAllQuestionCount();
+                    countQuestion = questionService.lookupAllQuestionCount(pageDto);
                 }else{ //만약 문의유형이 0이 아닌 경우
                     questionList = questionService.lookupAllQuestionWithEmail(pageDto);
                     countQuestion = questionService.lookupAllQuestionWithEmailCount(pageDto);
