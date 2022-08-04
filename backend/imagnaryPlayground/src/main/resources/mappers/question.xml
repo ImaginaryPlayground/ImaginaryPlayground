@@ -18,7 +18,7 @@
 
     <delete id="deleteQuestion" parameterType="IdVO">
         DELETE FROM imagination_playground.qna_question
-        WHERE id = #{question_id} AND user_id = #{user_id}
+        WHERE id = #{id} AND user_id = #{user_id}
     </delete>
 
     <select id="lookupQuestion" parameterType="int" resultType="QuestionDto">
