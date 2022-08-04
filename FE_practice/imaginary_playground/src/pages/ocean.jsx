@@ -10,11 +10,12 @@ function Ocean() {
     const [start, setStart ] = useState(false)
     const startGame = ()=> {
         setStart(!start)
+        // 지도 클릭하면 나올 효과음 구현
         const mapMusic = new Audio('/assets/ocean/map.mp3')
         mapMusic.play()
     }
 
-
+    // 전체 상어 클릭 횟수 구하기
     const [totalCount, totalCountSet] = useState(0)
 
     // 첫번째 상어
@@ -84,14 +85,14 @@ function Ocean() {
     var canvas = Array.prototype.slice.call(canvasNode);
 
     //만약 캔버스가 10개면 9,10빼고 나머지 0~8은 없애야하니까
+    // 
     if (canvas) {
         canvas.forEach(function(element, idx) {
             if ( idx <= canvas.length -2) {
                 console.log(idx)
-                // element.remove()
-                element.style.display = 'none'
+                element.remove()
+                // element.style.display = 'none'
             } 
-            // idx가 20번째를 맞이하면 
         })
     }
 
@@ -99,8 +100,10 @@ function Ocean() {
     return (
         <div className="ocean">
 
+            {/* 전체적인 배경음악 */}
             <iframe src="/assets/ocean/Calimba.mp3" allow="autoplay;" className="audio"></iframe>
             
+            {/* 상어 게임이 구현되는 동안(아직 상어가 20번 터치가 안되었을때) 상어 4마리를 보여주고*/}
             { start? (
             <>
             {totalCount < 20? (
@@ -122,21 +125,25 @@ function Ocean() {
             totalCount={totalCount}
             ></Shark>     
 
+            {/* 상어가 20번이 다 터치가 되면 게임 끝났다는 화면 보여주기 */}
             {totalCount === 20? (<div>
                 <h2 className="title1">게임 끝~</h2>
                 <iframe src="/assets/ocean/applaud.mp3" allow="autoplay;" className="audio"></iframe>
                 <Dolphin></Dolphin>
             </div>) : (<></>)}
 
+            {/* 홈으로 돌아가기 버튼 */}
             <button onClick={()=> navigate('/')}
             className="home-button"
             >돌아가기</button>
             </>
             ) : <>
+            {/* 가장 처음에 보여주는 스토리 설명 지도 화면 */}
             <img src="/assets/ocean/map.png" className="map" 
                 onClick={startGame}
             /> 
             </> }
+
 
 
             {/* 지금부터 배경 요소 시작 */}
