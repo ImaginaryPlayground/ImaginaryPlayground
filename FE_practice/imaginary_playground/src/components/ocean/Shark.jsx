@@ -121,6 +121,7 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
         console.error(error);
     });
 
+    
     const clock1 = new THREE.Clock();
     const clock2 = new THREE.Clock();
     const clock3 = new THREE.Clock();

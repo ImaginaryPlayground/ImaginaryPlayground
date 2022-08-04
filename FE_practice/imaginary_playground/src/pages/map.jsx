@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 const Map = () => {
     const navigate = useNavigate()
 
+    // 캔버스 각 맵에서 생성된거 맵에서 없애도록 구현
     var canvasNode = document.querySelectorAll('canvas')
     var canvas = Array.prototype.slice.call(canvasNode);
-
     if (canvas) {
         canvas.forEach(function(element) {
-            element.style.display = 'none'
+            // element.style.display = 'none'
             element.remove()
         })
     }
