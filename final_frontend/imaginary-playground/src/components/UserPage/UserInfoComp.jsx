@@ -18,40 +18,40 @@ const UserInfoComp = () => {
   const [modifyName, setmodifyName] = useState(loginUserDataReducer.username);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  useEffect(() => {
-    axios({
-      url: `${config.api}/user`,
-      method: "GET",
-      headers: { Auth: loginUserToken }, //헤더에 토큰
-    })
-      .then((res) => {
-        console.log(res); //이메일, 이름, 가입일자 , 가입경로, 병원이름, 병원주소, 재직 증명서(이미지)
-        if (res.data.status === "SUCCESS") {
-          const loginUserData = {
-            id: res.data.data.id,
-            email: res.data.data.email,
-            username: res.data.data.username,
-            join_data: res.data.data.join_data,
-            provider: res.data.data.provider,
-            hospital_id: res.data.data.hospital_id,
-            hospital_name: res.data.data.hospital_name,
-            hospital_address: res.data.data.hospital_address || "",
-            document: res.data.data.document,
-          };
-          dispatch({ type: "SET_LOGIN_USER", data: loginUserData });
-        } else {
-          swal({
-            title: "에러",
-            text: "유저 정보를 불러오지 못했습니다.",
-            icon: "error",
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("서버 통신 에러!");
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios({
+  //     url: `${config.api}/user`,
+  //     method: "GET",
+  //     headers: { Auth: loginUserToken }, //헤더에 토큰
+  //   })
+  //     .then((res) => {
+  //       console.log(res); //이메일, 이름, 가입일자 , 가입경로, 병원이름, 병원주소, 재직 증명서(이미지)
+  //       if (res.data.status === "SUCCESS") {
+  //         const loginUserData = {
+  //           id: res.data.data.id,
+  //           email: res.data.data.email,
+  //           username: res.data.data.username,
+  //           join_date: res.data.data.join_date.substring(0,10),
+  //           provider: res.data.data.provider,
+  //           hospital_id: res.data.data.hospital_id,
+  //           hospital_name: res.data.data.hospital_name,
+  //           hospital_address: res.data.data.hospital_address || "",
+  //           document: res.data.data.document,
+  //         };
+  //         dispatch({ type: "SET_LOGIN_USER", data: loginUserData });
+  //       } else {
+  //         swal({
+  //           title: "에러",
+  //           text: "유저 정보를 불러오지 못했습니다.",
+  //           icon: "error",
+  //         });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       alert("서버 통신 에러!");
+  //     });
+  // }, []);
 
   const nameInput = useRef();
   const handleUserInfoChange = (e) => {
@@ -79,17 +79,35 @@ const UserInfoComp = () => {
             Auth: loginUserToken,
           }, //헤더에 토큰
           data: {
+            id: loginUserDataReducer.id,
             username: modifyName,
           },
         })
           .then((res) => {
             console.log(res); //success
+
             if (res.data.status === "SUCCESS") {
-              swal("수정이 완료 되었습니다.", {
+              const loginUserData = {
+                id: res.data.data.id,
+                email: res.data.data.email,
+                username: res.data.data.username,
+                join_date: res.data.data.join_date.substring(0, 10),
+                provider: res.data.data.provider,
+                hospital_id: res.data.data.hospital_id,
+                hospital_name: res.data.data.hospital_name,
+                hospital_address: res.data.data.hospital_address || "",
+                document: res.data.data.document,
+              };
+              dispatch({ type: "SET_LOGIN_USER", data: loginUserData });
+              swal({
+                title: "성공",
+                text: "회원 정보를 수정하였습니다.",
                 icon: "success",
               });
             } else {
-              swal("오류가 발생 하였습니다.", {
+              swal({
+                title: "에러",
+                text: "회원 정보를 수정하지 못했습니다.",
                 icon: "error",
               });
             }
@@ -211,7 +229,7 @@ const UserInfoComp = () => {
               sx={{ width: "100%" }}
               type="date"
               disabled
-              value={loginUserDataReducer.join_data}
+              value={loginUserDataReducer.join_date}
             />
           </Grid>
         </Grid>
