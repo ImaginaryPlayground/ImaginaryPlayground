@@ -76,7 +76,7 @@ const KidsGridItem = ({ kidData }) => {
           </Grid>
           <Grid item sx={{ textAlign: "end" }}>
             <span style={{ color: "#f77", fontWeight: "bold" }}>
-              {(kidData.age % 15) + 1}
+              {kidData.age}
             </span>
             세
           </Grid>
