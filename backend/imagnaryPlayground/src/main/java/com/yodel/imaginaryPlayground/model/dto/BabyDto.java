@@ -26,4 +26,7 @@ public class BabyDto {
 
     @ApiModelProperty(value = "특이사항")
     private String character;
+
+    @ApiModelProperty(value = "병원id")
+    private int hospital_id;
 }
