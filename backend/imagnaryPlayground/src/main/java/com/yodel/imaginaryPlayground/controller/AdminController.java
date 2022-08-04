@@ -29,8 +29,11 @@ public class AdminController {
     @PostMapping("/")
     @ApiOperation(value = "정회원 등록", notes = "이메일 인증이 완료된 회원이 사이트를 이용할 수 있도록 정회원으로 승인한다.")
     public Map<String, Object> approveUserType(
-            @RequestParam(value="user[]") @ApiParam(value = "email 값을 user 이름의 배열을 통해 보내준다.", required = true) List<Integer> list){
+            @RequestBody @ApiParam(value = "email 값을 user 이름의 배열을 통해 보내준다.", required = true) List<String> list){
         Map<String, Object> result = new HashMap<>();
+        for(String s: list){
+            System.out.println(s);
+        }
         try {
             int res = adminService.approveUser(list);
             if(res == 1){
@@ -49,7 +52,7 @@ public class AdminController {
     @DeleteMapping("/")
     @ApiOperation(value = "회원 삭제", notes = "관리자 페이지에서 등록된 회원을 삭제한다.")
     public Map<String, Object> deleteUser(
-            @RequestParam(value="user[]") @ApiParam(value = "email 값을 user 이름의 배열을 통해 보내준다.", required = true) List<Integer> list){
+            @RequestBody @ApiParam(value = "email 값을 user 이름의 배열을 통해 보내준다.", required = true) List<String> list){
         Map<String, Object> result = new HashMap<>();
         try {
             int res = adminService.deleteUser(list);
