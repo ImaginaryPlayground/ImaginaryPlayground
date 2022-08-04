@@ -31,6 +31,11 @@
         WHERE user_id = #{user_id} AND title = #{title} AND content = #{content} AND qna_type = 0 AND completed = 0
     </select>
 
+    <select id="lookAllQuestion" resultType="QuestionDto">
+        SELECT *
+        FROM imagination_playground.qna_question
+    </select>
+
     <select id="lookupAllQuestion" parameterType="PageDto" resultType="QuestionDto">
         SELECT u.email, u.username, q.id, q.user_id, q.title, q.content, q.secret, q.completed, q.created_date, q.modified_date
         FROM imagination_playground.qna_question q
