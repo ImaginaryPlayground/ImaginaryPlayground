@@ -18,6 +18,7 @@ public interface UserCareMapper {
     int searchAllBabyCount(BabyVO babyVO) throws SQLException;
     List<BabyDto> lookupAllBaby(PageDto pageDto) throws SQLException;
     BabyDto lookupBaby(IdVO idVO) throws SQLException;
+    BabyDto getBaby(BabyDto babyDto) throws SQLException;
     List<BabyDto> searchByKeyword(PageDto pageDto) throws SQLException;
     int updateBabyInfo(BabyDto baby) throws SQLException;
     int deleteBabyInfo(BabyDto babyDto) throws SQLException;

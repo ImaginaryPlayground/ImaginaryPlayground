@@ -43,11 +43,11 @@ public class UserCareController{
     //https://gaemi606.tistory.com/entry/Spring-Boot-multipartform-data-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C-React-Axios-REST-API
     @ApiOperation(value = "아이 등록", notes = "회원 페이지에서 아이를 등록할 수 있다.")
     @PostMapping(value="/", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
-    public Map<String, String> saveBaby(
+    public Map<String, Object> saveBaby(
             @RequestPart(value="key", required=false) BabyDto baby,
             @RequestPart(value="file", required=true) MultipartFile file, HttpServletRequest request) throws Exception {
 
-        Map<String, String> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
 
         String fileName = file.getOriginalFilename();
         System.out.println(fileName);
@@ -66,6 +66,7 @@ public class UserCareController{
                 int res = userCareService.saveBaby(baby);
                 if (res == 1) {
                     result.put("status", success);
+                    result.put("data", userCareService.getBaby(baby));
                 } else {
                     result.put("status", fail);
                 }
@@ -81,22 +82,34 @@ public class UserCareController{
         }
     }
 
-    @PutMapping("/")
+    @PutMapping(value="/", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
     @ApiOperation(value = "아이 정보수정", notes = "회원 페이지에서 아이의 정보를 수정할 수 있다.")
     public Map<String, Object> updateBabyInfo(
-            @RequestBody @ApiParam(value = "아이의 {id}값과 정보들을 넣어준다.", required = true) BabyDto baby){
+            @RequestPart(value="key", required=false) BabyDto baby,
+            @RequestPart(value="file", required=false) MultipartFile file, HttpServletRequest request) throws Exception{
 
         Map<String, Object> result = new HashMap<>();
         try {
+
             UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String profile = null;
+
+            if(file != null){
+                String fileName = file.getOriginalFilename();
+                System.out.println(fileName);
+                System.out.println(request.getServletContext().getRealPath("/"));
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+                String uploadDate = simpleDateFormat.format(new Date());
+                profile = save(file, request.getServletContext().getRealPath("/"), uploadDate);
+            }
+
+            baby.setProfile(profile);
             baby.setUser_id(user.getId());
+
             int res = userCareService.updateBabyInfo(baby);
             if(res == 1){
                 result.put("status", success);
-                IdVO idVO = new IdVO();
-                idVO.setId(baby.getId());
-                idVO.setUser_id(user.getId());
-                result.put("data", userCareService.lookupBaby(idVO));
+                result.put("data", userCareService.getBaby(baby));
             }else{
                 result.put("status", fail);
             }
@@ -217,7 +230,7 @@ public class UserCareController{
             byte[] bytes = file.getBytes();
             Path path = Paths.get(contextPath + newFileName);
             Files.write(path, bytes);
-            return newFileName;
+            return path.toString();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
