@@ -32,6 +32,8 @@ public class QuestionController {
     private final QuestionService questionService;
     private final AnswerService answerService;
 
+    private final int PAGE = 9;
+
     @PostMapping("/")
     @ApiOperation(value = "질문 등록", notes = "회원이 질문을 등록할 수 있는 기능")
     public Map<String, Object> saveQuestion(
@@ -96,7 +98,6 @@ public class QuestionController {
             int res = questionService.deleteQuestion(idVO);
             if(res == 1){
                 result.put("status", success);
-                result.put("data", questionService.lookupAllQuestion(0));
             }else{
                 result.put("status", fail);
             }
@@ -122,7 +123,7 @@ public class QuestionController {
             pageDto.setEmail(user.getEmail());
             if(pageDto.getValue() == null || pageDto.getValue().trim().equals("")){ //검색값이 없는 경우
                 if(pageDto.getQna_type() == 0){ //전체조회
-                    questionList = questionService.lookupAllQuestion(pageDto.getPage());
+                    questionList = questionService.lookupAllQuestion(pageDto);
                     countQuestion = questionService.lookupAllQuestionCount(pageDto);
                 }else{ //만약 문의유형이 0이 아닌 경우
                     questionList = questionService.lookupAllQuestionWithEmail(pageDto);
