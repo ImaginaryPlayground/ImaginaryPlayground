@@ -29,7 +29,7 @@
         WHERE user_id = #{user_id}
     </select>
 
-    <update id="updateUserInfo" parameterType="int">
+    <update id="updateUserInfo" parameterType="String">
         UPDATE imagination_playground.user
         SET username = #{username}, modified_date = NOW()
         WHERE id = #{id}
