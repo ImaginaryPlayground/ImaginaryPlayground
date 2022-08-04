@@ -9,8 +9,8 @@ import java.util.Map;
 
 @Mapper
 public interface AdminMapper {
-    int approveUser(List<Integer> list) throws SQLException;
-    int deleteUser(List<Integer> list) throws SQLException;
+    int approveUser(List<String> list) throws SQLException;
+    int deleteUser(List<String> list) throws SQLException;
     int lookupUserNumber(String type) throws SQLException;
     List<UserDto> lookupUnapprovedUser(Map<String, Integer> map) throws SQLException;
     List<UserDto> lookupApprovedUser(Map<String, Integer> map) throws SQLException;
