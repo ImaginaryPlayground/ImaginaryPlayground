@@ -49,6 +49,11 @@ public class UserCareServiceImpl implements UserCareService {
     }
 
     @Override
+    public BabyDto getBaby(BabyDto babyDto) throws Exception {
+        return userCareMapper.getBaby(babyDto);
+    }
+
+    @Override
     public int updateBabyInfo(BabyDto baby) throws Exception {
         return userCareMapper.updateBabyInfo(baby);
     }
