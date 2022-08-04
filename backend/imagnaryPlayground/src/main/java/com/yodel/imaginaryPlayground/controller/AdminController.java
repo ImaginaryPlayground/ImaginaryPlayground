@@ -155,10 +155,11 @@ public class AdminController {
 
     @PostMapping("/user/edit")
     @ApiOperation(value = "회원 정보 수정", notes = "이름만 보내기 null 값 유효성 검사")
-    public Map<String, Object> editUserInfo(@RequestBody String username){
+    public Map<String, Object> editUserInfo(@RequestBody Map<String, String> map){
         Map<String, Object> result = new HashMap<>();
         int res = 0;
         UserDto user = null;
+        String username = map.get("username");
         try {
             if(username != null && !username.trim().equals("")){
                 user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
