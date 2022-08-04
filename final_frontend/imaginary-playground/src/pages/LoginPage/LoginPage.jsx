@@ -25,6 +25,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { config } from "../../util/config.jsx";
 import swal from "sweetalert";
 import { loginUserToken } from "../../util/token.jsx";
+import { useDispatch } from "react-redux";
 
 const theme = createTheme({
   palette: {
@@ -46,6 +47,7 @@ const { naver } = window;
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const savedStrogeUserId = localStorage.getItem("stored_id");
   const [isSaveUserId, setIsSaveUserId] = useState(!!savedStrogeUserId);
 
@@ -130,7 +132,20 @@ const LoginPage = () => {
             }, //헤더에 토큰
           })
             .then((res) => {
-              console.log("유저정보", res);
+              console.log("유저정보", res.data.data);
+              const loginData = res.data.data;
+              const loginUserDataMapping = {
+                id: loginData.id,
+                email: loginData.email,
+                username: loginData.username,
+                join_date: loginData.join_date.substring(0, 10),
+                modified_date: loginData.modified_date,
+                hospital_id: loginData.hospital_id,
+                hospital_name: loginData.hospital_name,
+                hospital_address: loginData.hospital_address,
+                provider: loginData.provider,
+              };
+              dispatch({ type: "SET_LOGIN_USER", data: loginUserDataMapping });
               //홈으로 이동
               navigate("/");
             })

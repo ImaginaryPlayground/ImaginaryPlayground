@@ -47,7 +47,9 @@ const KidsInfoComp = () => {
 
   const kidFaceImage = useRef();
   const isMobile_800 = useMediaQuery("(max-width:800px)");
-
+  const loginUserDataReducer = useSelector(
+    (state) => state.loginUserDataReducer
+  );
   const handleOnChangeData = (e) => {
     setkidInfoData({ ...kidInfoData, [e.target.name]: e.target.value });
   };
@@ -108,14 +110,15 @@ const KidsInfoComp = () => {
       name: kidInfoData.name,
       age: kidInfoData.age,
       gender: kidInfoData.gender,
-      character: kidInfoData.profile,
+      character: kidInfoData.character,
+      hospital_id: loginUserDataReducer.hospital_id,
     };
     //수정데이터
     const modifiedData = {
       name: kidInfoData.name,
       age: kidInfoData.age,
       gender: kidInfoData.gender,
-      character: kidInfoData.profile,
+      character: kidInfoData.character,
       id: kidInfoData.id,
     };
 
@@ -144,13 +147,26 @@ const KidsInfoComp = () => {
         data: formData,
       })
         .then((res) => {
-          console.log(res);
+          //받은 데이터들 수정
+          if (res.data.status === "SUCCESS") {
+            swal({
+              title: "수정 성공",
+              text: `정상적으로 수정되었습니다.`,
+              icon: "success",
+            });
+          } else {
+            swal({
+              title: "수정 실패",
+              text: `수정에 실패하였습니다.`,
+              icon: "error",
+            });
+          }
         })
         .catch((err) => {
           console.log(err);
         });
     } else {
-      console.log("등록API", kidInfoData);
+      console.log("등록API", createData);
 
       //blob객체의 타입을 application/json 형식으로 만들기
       const blob = new Blob([JSON.stringify(createData)], {
@@ -180,7 +196,6 @@ const KidsInfoComp = () => {
               type: "SET_CURRENT_PAGE",
               data: { ...reducerCurrentPage, page: 1, scrollY: 0 },
             });
-
             swal({
               title: "등록 성공",
               text: `정상적으로 등록되었습니다.`,
