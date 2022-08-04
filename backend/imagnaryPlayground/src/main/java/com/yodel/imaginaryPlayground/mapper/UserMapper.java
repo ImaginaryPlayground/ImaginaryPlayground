@@ -14,7 +14,7 @@ public interface UserMapper {
     int getUserId(String email);
     int savePassword(PasswordVO passwordVO);
     String getPassword(int user_id);
-    int updateUserInfo(UserDto user) throws SQLException;
+    int updateUserInfo(int user_id) throws SQLException;
     UserDto detailUser(int userId) throws SQLException;
     int deleteUser(int userId) throws SQLException;
     // 사용자 전체 검색은 사용하지 않을 것 같아서 제외

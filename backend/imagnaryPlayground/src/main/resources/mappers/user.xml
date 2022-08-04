@@ -29,7 +29,7 @@
         WHERE user_id = #{user_id}
     </select>
 
-    <update id="updateUserInfo" parameterType="UserDto">
+    <update id="updateUserInfo" parameterType="int">
         UPDATE imagination_playground.user
         SET username = #{username}, modified_date = NOW()
         WHERE id = #{id}
@@ -52,10 +52,8 @@
     </select>
 
     <select id="findByEmail" parameterType="String" resultType="UserDto">
-        SELECT u.email, u.id, u.username, u.provider, u.document, u.hospital_id, u.hospital_name, h.address, h.sido, h.gungu
-        FROM imagination_playground.user u
-        FULL OUTER JOIN imagination_playground.hospital h
-        ON u.hospital_id = h.id
+        SELECT *
+        FROM imagination_playground.user
         WHERE email = #{email}
     </select>
 
