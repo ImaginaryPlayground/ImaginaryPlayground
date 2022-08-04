@@ -47,6 +47,9 @@ public class UserDto implements UserDetails {
     @ApiModelProperty(value = "병원명")
     private String hospital_name;
 
+    @ApiModelProperty(value = "병원 주소")
+    private String hospital_address;
+
     @ApiModelProperty(value = "비밀번호")
     private String password;
 
@@ -80,7 +83,7 @@ public class UserDto implements UserDetails {
     }
 
     @Builder
-    public UserDto(String email, String password, String username, String provider, String document, int hospital_id, String hospital_name) {
+    public UserDto(String email, String password, String username, String provider, String document, int hospital_id, String hospital_name, String hospital_address) {
         this.email = email;
         this.password = password;
         this.username = username;
@@ -88,6 +91,7 @@ public class UserDto implements UserDetails {
         this.document = document;
         this.hospital_id = hospital_id;
         this.hospital_name = hospital_name;
+        this.hospital_address = hospital_address;
     }
 
     @Builder
