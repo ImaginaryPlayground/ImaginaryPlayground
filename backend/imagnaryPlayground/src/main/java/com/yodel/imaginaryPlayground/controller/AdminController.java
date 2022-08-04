@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -130,26 +131,6 @@ public class AdminController {
         return result;
     }
 
-    @GetMapping("/lookup/number/{mode}")
-    @ApiOperation(value = "회원 수 전체 조회", notes = "[0]: 전체 회원 조회, [1] 승인된 회원 조회, [2] 미승인 회원 조회")
-    public Map<String, Object> lookupUserNumber(@PathVariable int mode){
-        Map<String, Object> result = new HashMap<>();
-        int res = 0;
-        try {
-            res = adminService.lookupUserNumber(mode);
-            if(res != 0){
-                result.put("status", success);
-            }else{
-                result.put("status", fail);
-            }
-        } catch (Exception e) {
-            result.put("status", error);
-            result.put("message", e.toString());
-        }
-        result.put("data", res);
-        return result;
-    }
-
     @PostMapping("/lookup")
     @ApiOperation(value = "특정 회원 조회", notes = "관리자 페이지에서 특정 회원의 상세정보를 조회한다.")
     public Map<String, Object> lookupUser(
@@ -172,4 +153,32 @@ public class AdminController {
         return result;
     }
 
+    @PostMapping("/user/edit")
+    @ApiOperation(value = "회원 정보 수정", notes = "이름만 보내기 null 값 유효성 검사")
+    public Map<String, Object> editUserInfo(@RequestBody String username){
+        Map<String, Object> result = new HashMap<>();
+        int res = 0;
+        UserDto user = null;
+        try {
+            if(username != null && !username.trim().equals("")){
+                user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                user.setUsername(username);
+                res = adminService.editUserInfo(user);
+
+                if(res != 0){
+                    result.put("status", success);
+                }else{
+                    result.put("status", fail);
+                }
+            }else{
+                result.put("status", fail);
+                result.put("message", "유저이름 null");
+            }
+        } catch (Exception e) {
+            result.put("status", error);
+            result.put("message", e.toString());
+        }
+        result.put("data", user);
+        return result;
+    }
 }
