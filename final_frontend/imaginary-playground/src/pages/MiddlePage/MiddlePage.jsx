@@ -115,6 +115,7 @@ const MiddlePage = () => {
       password: signUpUserDataReducer.password,
       hospital_id: selectData.id,
       hospital_name: selectData.name,
+      hospital_address: selectData.address,
     };
 
     formData.append("data", JSON.stringify(data));
