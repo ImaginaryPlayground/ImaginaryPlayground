@@ -14,6 +14,7 @@ public interface QuestionMapper {
     int editQuestion(QuestionDto question) throws SQLException;
     int deleteQuestion(IdVO idVO) throws SQLException;
     QuestionDto lookupQuestion(int id) throws SQLException;
+    QuestionDto detailQuestion(QuestionDto questionDto) throws SQLException;
     List<QuestionDto> lookupAllQuestion(PageDto pageDto) throws SQLException;
     int lookupAllQuestionCount() throws SQLException;
     List<QuestionDto> lookupAllQuestionWithEmail(PageDto pageDto) throws SQLException;

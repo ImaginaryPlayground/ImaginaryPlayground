@@ -11,6 +11,7 @@ public interface QuestionService {
     int editQuestion(QuestionDto question) throws Exception;
     int deleteQuestion(IdVO idVO) throws Exception;
     QuestionDto lookupQuestion(int id) throws Exception;
+    QuestionDto detailQuestion(QuestionDto questionDto) throws Exception;
     List<QuestionDto> lookupAllQuestion(int page) throws Exception;
     int lookupAllQuestionCount() throws Exception;
     List<QuestionDto> lookupAllQuestionWithEmail(PageDto pageDto) throws Exception;
