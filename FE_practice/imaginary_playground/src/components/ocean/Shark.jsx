@@ -19,7 +19,7 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
         100
     );
     
-    const light = new THREE.HemisphereLight(0xffffff, 0x000000, 5);
+    const light = new THREE.HemisphereLight(0xffffff, 0x000000, 3);
     scene.add(light)
     
 
@@ -34,10 +34,8 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
     
     // 왼쪽에서 두 번째 상어
     let mixer1;
-    assetLoader.load('/assets/ocean/sharkTest.gltf', function(gltf) {
+    assetLoader.load('/assets/ocean/shark.gltf', function(gltf) {
         const model = gltf.scene;
-        // gltf.scene.scale.set(0.9, 0.9, 0.9); 
-        gltf.scene.scale.multiplyScalar(4); 
         model.position.set(-7,5,10)
         scene.add(model);
         
@@ -48,7 +46,7 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
         mixer1 = new THREE.AnimationMixer(model);
         const clips = gltf.animations;
      
-        const clip = THREE.AnimationClip.findByName(clips, 'ArmatureAction')
+        const clip = THREE.AnimationClip.findByName(clips, 'metarigAction')
         const action = mixer1.clipAction(clip)
         action.play()
     
@@ -60,10 +58,9 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
     // 왼쪽에서 세 번째 상어
     let mixer2;
 
-    assetLoader.load('/assets/ocean/sharkTest.gltf', function(gltf) {
+    assetLoader.load('/assets/ocean/shark.gltf', function(gltf) {
         const model2 = gltf.scene;
         model2.position.set(13,-1,10)
-        gltf.scene.scale.multiplyScalar(4); 
         scene.add(model2);
 
         if (countTwo.countTwo >= 4) {
@@ -73,7 +70,7 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
         mixer2 = new THREE.AnimationMixer(model2);
         const clips = gltf.animations;
      
-        const clip = THREE.AnimationClip.findByName(clips, 'ArmatureAction')
+        const clip = THREE.AnimationClip.findByName(clips, 'metarigAction')
         const action = mixer2.clipAction(clip)
         action.play()
     
@@ -84,10 +81,9 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
 
     // 왼쪽에서 네 번째 상어
     let mixer3;
-    assetLoader.load('/assets/ocean/sharkTest.gltf', function(gltf) {
+    assetLoader.load('/assets/ocean/shark.gltf', function(gltf) {
         const model3 = gltf.scene;
         model3.position.set(15,7,15)
-        gltf.scene.scale.multiplyScalar(4); 
         scene.add(model3);
 
         if (countThree.countThree >= 4) {
@@ -97,7 +93,7 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
         mixer3 = new THREE.AnimationMixer(model3);
         const clips = gltf.animations;
      
-        const clip = THREE.AnimationClip.findByName(clips, 'ArmatureAction')
+        const clip = THREE.AnimationClip.findByName(clips, 'metarigAction')
         const action = mixer3.clipAction(clip)
         action.play()
     }, undefined, function(error) {
@@ -106,10 +102,9 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
 
     // 왼쪽에서 첫 번째 상어
     let mixer4;
-    assetLoader.load('/assets/ocean/sharkTest.gltf', function(gltf) {
+    assetLoader.load('/assets/ocean/shark.gltf', function(gltf) {
         const model4 = gltf.scene;
         model4.position.set(-5,-3,10)
-        gltf.scene.scale.multiplyScalar(4); 
         scene.add(model4);
 
         if (countFour.countFour >= 4) {
@@ -118,7 +113,7 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
         mixer4 = new THREE.AnimationMixer(model4);
         const clips = gltf.animations;
      
-        const clip = THREE.AnimationClip.findByName(clips, 'ArmatureAction')
+        const clip = THREE.AnimationClip.findByName(clips, 'metarigAction')
         const action = mixer4.clipAction(clip)
         action.play()
     
