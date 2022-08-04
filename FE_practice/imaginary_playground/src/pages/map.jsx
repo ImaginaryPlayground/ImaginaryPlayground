@@ -5,13 +5,11 @@ const Map = () => {
 
     var canvasNode = document.querySelectorAll('canvas')
     var canvas = Array.prototype.slice.call(canvasNode);
-    var body = document.querySelector('body')
-    // canvas.splice(0,canvas.length)
-    // console.log(canvas)
-    
+
     if (canvas) {
         canvas.forEach(function(element) {
             element.style.display = 'none'
+            element.remove()
         })
     }
 
