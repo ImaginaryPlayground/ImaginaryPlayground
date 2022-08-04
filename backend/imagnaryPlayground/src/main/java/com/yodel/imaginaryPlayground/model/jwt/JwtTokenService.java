@@ -70,6 +70,18 @@ public class JwtTokenService { // JWT 토큰을 생성 및 검증 모듈
         }
     }
 
+    public void closeToken(String token) {
+        try {
+            Jws<Claims> claims = Jwts.parser()
+                    .setSigningKey(secretKey)
+                    .parseClaimsJws(token);
+            Date now = new Date();
+            claims.getBody().setExpiration(new Date(now.getTime()));
+        } catch (Exception e) {
+
+        }
+    }
+
     // Jwt 토큰에서 회원 구별 정보 추출
     public String getUserEmail(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
