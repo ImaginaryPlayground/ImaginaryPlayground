@@ -40,6 +40,7 @@ public class QuestionController {
         try {
             UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             question.setUser_id(user.getId());
+            question.setEmail(user.getEmail());
             int res = questionService.saveQuestion(question);
             if(res == 1){
                 result.put("status", success);
@@ -107,7 +108,7 @@ public class QuestionController {
     }
 
     @PostMapping("/lookup/all") //전체 조회도 같이 넣어줄 것
-    @ApiOperation(value = "전체 질문글을 조회한다.", notes = "질문들을 모두 조회하여 가져온다.")
+    @ApiOperation(value = "전체 질문글을 조회한다[페이징].", notes = "질문들을 모두 조회하여 가져온다[검색].")
     public Map<String, Object> lookupAllQuestion(
             @RequestBody @ApiParam(value = "page(필수), key: 검색할 제목/내용, value: 검색값, qna_type: 0은 전체 조회, 1은 나의 글 조회 / completed: 0-미해결, 1-해결, 2-전체", required = false)
             PageDto pageDto){
@@ -136,6 +137,30 @@ public class QuestionController {
                     countQuestion = questionService.searchAllQuestionWithEmailCount(pageDto);
                 }
             }
+
+            if(questionList != null){
+                result.put("status", success);
+            }else{
+                result.put("status", fail);
+            }
+        } catch (Exception e) {
+            result.put("status", error);
+            result.put("message", e.toString());
+        }
+        result.put("data", questionList);
+        result.put("searchedDataAllNum", countQuestion);
+        return result;
+    }
+
+    @GetMapping("/lookup/all") //전체 조회도 같이 넣어줄 것
+    @ApiOperation(value = "전체 질문글을 조회한다.", notes = "질문들을 모두 조회하여 가져온다.")
+    public Map<String, Object> lookupAllQuestion(){
+        Map<String, Object> result = new HashMap<>();
+        List<QuestionDto> questionList = new ArrayList<>();
+        int countQuestion = 0;
+        try {
+
+            questionList = questionService.lookAllQuestion();
 
             if(questionList != null){
                 result.put("status", success);

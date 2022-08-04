@@ -48,6 +48,11 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     @Override
+    public List<QuestionDto> lookAllQuestion() throws Exception {
+        return questionMapper.lookAllQuestion();
+    }
+
+    @Override
     public int lookupAllQuestionCount(PageDto pageDto) throws Exception {
         return questionMapper.lookupAllQuestionCount(pageDto);
     }

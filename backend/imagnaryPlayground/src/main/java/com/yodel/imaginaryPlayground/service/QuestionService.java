@@ -13,6 +13,7 @@ public interface QuestionService {
     QuestionDto lookupQuestion(int id) throws Exception;
     QuestionDto detailQuestion(QuestionDto questionDto) throws Exception;
     List<QuestionDto> lookupAllQuestion(int page) throws Exception;
+    List<QuestionDto> lookAllQuestion() throws Exception;
     int lookupAllQuestionCount(PageDto pageDto) throws Exception;
     List<QuestionDto> lookupAllQuestionWithEmail(PageDto pageDto) throws Exception;
     int lookupAllQuestionWithEmailCount(PageDto pageDto) throws Exception;
