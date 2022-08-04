@@ -43,7 +43,7 @@
 
     <select id="lookupAllQuestionCount" parameterType="PageDto" resultType="int">
         SELECT COUNT(*)
-        <if test="completed != 2">
+        <if test="completed != '2'">
             WHERE completed = #{completed}
         </if>
         FROM imagination_playground.qna_question
