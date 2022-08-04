@@ -6,9 +6,9 @@
 
     <insert id="saveUser" parameterType="UserDto">
         INSERT INTO imagination_playground.user
-            (email, username, provider, document, type, hospital_id, hospital_name, join_date, modified_date)
+            (email, username, provider, document, type, hospital_id, hospital_name, hospital_address, join_date, modified_date)
         VALUES
-            (#{email}, #{username}, #{provider}, #{document}, "CUSTOMER", #{hospital_id}, #{hospital_name}, NOW(), NOW());
+            (#{email}, #{username}, #{provider}, #{document}, "CUSTOMER", #{hospital_id}, #{hospital_name}, #{hospital_address}, NOW(), NOW());
 
     </insert>
 
