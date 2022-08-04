@@ -15,4 +15,5 @@ public interface AdminService {
     List<UserDto> lookupApprovedUser(int page) throws Exception;
     List<UserDto> lookupAllUser(int mode) throws Exception;
     UserDto lookupUser(String email) throws Exception;
+    int editUserInfo(UserDto user) throws Exception;
 }
