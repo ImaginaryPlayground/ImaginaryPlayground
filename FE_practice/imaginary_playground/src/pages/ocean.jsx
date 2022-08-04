@@ -1,14 +1,9 @@
 import React,{ useState} from "react"
 import { useNavigate } from "react-router-dom";
 import Shark from '../components/ocean/Shark.jsx'
-import Whale2 from '../components/ocean/Shark2.jsx'
-import { useRef } from 'react';
-import * as THREE from '../three';
-import {OrbitControls} from '../three/examples/jsm/controls/OrbitControls.js';
-import {GLTFLoader} from '../three/examples/jsm/loaders/GLTFLoader.js';
 
 import "../css/ocean.css"
-import { DolphinglTF } from "../components/ocean/Dolphin.jsx";
+import Dolphin from "../components/ocean/Dolphin.jsx";
 
 function Ocean() {
     // 게임 시작하는 게임 지도 구현
@@ -84,6 +79,22 @@ function Ocean() {
 
     const navigate = useNavigate()
 
+    // 캔버스 무한생성 없애기
+    var canvasNode = document.querySelectorAll('canvas')
+    var canvas = Array.prototype.slice.call(canvasNode);
+
+    //만약 캔버스가 10개면 9,10빼고 나머지 0~8은 없애야하니까
+    if (canvas) {
+        canvas.forEach(function(element, idx) {
+            if ( idx <= canvas.length -2) {
+                console.log(idx)
+                // element.remove()
+                element.style.display = 'none'
+            } 
+            // idx가 20번째를 맞이하면 
+        })
+    }
+
 
     return (
         <div className="ocean">
@@ -109,13 +120,12 @@ function Ocean() {
             countThree = {countThree}
             countFour = {countFour}
             totalCount={totalCount}
-            // className={{height:"100vw"}}
             ></Shark>     
 
             {totalCount === 20? (<div>
                 <h2 className="title1">게임 끝~</h2>
                 <iframe src="/assets/ocean/applaud.mp3" allow="autoplay;" className="audio"></iframe>
-                <DolphinglTF></DolphinglTF>
+                <Dolphin></Dolphin>
             </div>) : (<></>)}
 
             <button onClick={()=> navigate('/')}
