@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
@@ -363,6 +364,14 @@ public class UserController {
         }
 
         return result;
+    }
+
+    @GetMapping("/logout")
+    public RedirectView logout(@RequestHeader("Auth") String token){
+        System.out.println(token);
+        jwtTokenService.closeToken(token);
+        SecurityContextHolder.clearContext();
+        return new RedirectView("/");
     }
 
     private String save(MultipartFile file, String contextPath, String uploadDate) {
