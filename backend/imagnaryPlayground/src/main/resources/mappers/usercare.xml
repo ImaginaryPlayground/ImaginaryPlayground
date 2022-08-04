@@ -5,9 +5,9 @@
 <mapper namespace="com.yodel.imaginaryPlayground.mapper.UserCareMapper">
     <insert id="saveBaby" parameterType="BabyDto">
         INSERT INTO imagination_playground.user_baby
-        (user_id, name, age, gender, profile, `character`, registered_date, modified_date)
+        (user_id, name, age, gender, profile, `character`, `hospital_id`, registered_date, modified_date)
         VALUES
-        (#{user_id}, #{name}, #{age}, #{gender}, #{profile}, #{character}, NOW(), NOW())
+        (#{user_id}, #{name}, #{age}, #{gender}, #{profile}, #{character}, #{hospital_id}, NOW(), NOW())
     </insert>
 
     <select id="getBaby" parameterType="BabyDto" resultType="BabyDto">
@@ -54,7 +54,7 @@
         SELECT *
         FROM imagination_playground.user_baby
         WHERE
-            user_id = #{user_id} AND
+            `hospital_id` = #{hospital_id} AND
             (age BETWEEN #{age_1} AND #{age_2})
             AND name LIKE CONCAT("%", #{name}, "%")
             <if test="gender != 'A'">
@@ -66,7 +66,7 @@
         SELECT COUNT(*)
         FROM imagination_playground.user_baby
         WHERE
-            user_id = #{user_id} AND
+            `hospital_id` = #{hospital_id} AND
             (age BETWEEN #{age_1} AND #{age_2})
             AND name LIKE CONCAT("%", #{name}, "%")
             <if test="gender != 'A'">
