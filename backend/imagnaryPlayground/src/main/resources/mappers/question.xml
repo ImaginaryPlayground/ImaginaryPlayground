@@ -28,7 +28,7 @@
 
     <select id="detailQuestion" parameterType="QuestionDto" resultType="QuestionDto">
         SELECT * FROM imagination_playground.qna_question
-        WHERE user_id = #{user_id} AND title = #{titile} AND content = #{content} AND qna_type = 0 AND completed = 0
+        WHERE user_id = #{user_id} AND title = #{title} AND content = #{content} AND qna_type = 0 AND completed = 0
     </select>
 
     <select id="lookupAllQuestion" parameterType="PageDto" resultType="QuestionDto">
@@ -43,7 +43,7 @@
 
     <select id="lookupAllQuestionCount" parameterType="PageDto" resultType="int">
         SELECT COUNT(*)
-        <if test="completed != '2'">
+        <if test="completed != 2">
             WHERE completed = #{completed}
         </if>
         FROM imagination_playground.qna_question
