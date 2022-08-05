@@ -47,9 +47,13 @@
 
 <!-- 자유 양식 -->
 
+​                 
+
 # 프로젝트 상세 설명
 
 </br>
+
+​             
 
 ## 🌈 상상 놀이터
 
@@ -60,6 +64,8 @@
 </br>
 
 </br>
+
+​             
 
 ## 🛠 기술 환경
 
@@ -75,13 +81,19 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
+​             
+
 ## 📒 기술 스택
+
+​               
 
 ### Front
 
 <img alt="React" src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"><img alt="MUI" src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white"><img  alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"> <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
 
 </br>
+
+​             
 
 ### Back
 
@@ -104,6 +116,8 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 <img alt="AWS" src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white"><img alt="AWS" src="https://img.shields.io/badge/Amazon AWS-f7f7f7?style=for-the-badge&logo=Amazon AWS&logoColor=f89400"><img alt="Jenkins" src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white">
 
 </br>
+
+​                 
 
 ### IoT
 
@@ -129,13 +143,15 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-## 🎧 시스템 구상도
+​                 
 
-<br>
+## 🎧 시스템 구상도
 
 ### ... 플로우 차트 3개 제작 중에 있습니다
 
 </br>
+
+​                 
 
 ## 🕋 ERD 구조
 
@@ -144,6 +160,8 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 </br>
 
 </br>
+
+​                 
 
 ## 🎪 기능 상세
 
