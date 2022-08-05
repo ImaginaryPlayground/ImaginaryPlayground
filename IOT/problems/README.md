@@ -55,4 +55,11 @@ no-cache-dir=true 설정의 경우에는 본인이 사용하고 싶어서 넣은
 
 이후 경로 `pip config -v list`으로 pip 설정파일에 대한 파일 리스트를 볼 수 있다는 글을 보고 `/etc/pip.conf`에 작성된 설정파일 때문에 문제가 생긴것을 알게되어 해결이 가능했다. 이전에 봤던 블로그는 `/.pip/pip.conf` 폴더만 알려주어서 해맷는데 좀 슬프다..
 
-## 
+## Wemos D1 mini 보드 테스트
+
+Wemos D1 mini 보드에 초음파 센서가 작동하는지 확인하고 wifi로 통신하는 것을 보려고 했으나..
+
+[설정](https://glorlfy.tistory.com/4
+)과 [회로도](http://www.esp8266learning.com/wemos-mini-hc-sr04-ultrasonic-sensor.php)를 구글링해서 잘 적용한 것 같은데도 너무 안되서 진행이 막혔다..
+
+값이 0만 뜨고있다..
