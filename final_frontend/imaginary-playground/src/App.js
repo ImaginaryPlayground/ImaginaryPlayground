@@ -23,7 +23,6 @@ import { useEffect } from "react";
 function App() {
   //const dispatch = useDispatch();
   useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem("token"));
     //console.log(currentUser);
     // //비동기로 유저 정보 불러옴 그 후 토큰저장
   }, []);

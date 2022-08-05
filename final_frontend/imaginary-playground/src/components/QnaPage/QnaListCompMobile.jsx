@@ -11,6 +11,7 @@ const QnaListCompMobile = ({ qnaListData }) => {
     dispatch({ type: "SET_SELECTED_QNADATA", data });
     navigate("/qnadetailpage");
   };
+
   return (
     <Paper className="QnaListCompMobile" elevation={6}>
       {qnaListData.map((data) => (

@@ -7,18 +7,18 @@ import {
   TextField,
   useMediaQuery,
 } from "@mui/material";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../css/Homepage/KidsGridList.css";
 import KidsGridItem from "./KidsGridItem";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import CloseIcon from "@mui/icons-material/Close";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import axios from "axios";
 import { config } from "../../util/config";
-import { loginUserToken } from "../../util/token";
+// import { loginUserToken } from "../../util/token";
 import swal from "sweetalert";
 
 const genderMenu = [
@@ -48,24 +48,25 @@ const KidsGridList = () => {
     age_2: 20,
     gender: "A", //F,M,A
   });
-
+  const { state } = useLocation();
   const [page, setPage] = useState(currentPage.page);
   const loginUserDataReducer = useSelector(
     (state) => state.loginUserDataReducer
   );
   const allKidDataNum = useRef(0);
   const selectedKidDataNum = useRef(0);
+  const loginUserToken = localStorage.getItem("token");
   const totalPageNum =
     parseInt(
-      (selectedKidDataNum.current ? selectedKidDataNum.current : 0) % 9,
+      (selectedKidDataNum.current ? selectedKidDataNum.current : 0) % 12,
       10
     ) === 0
       ? parseInt(
-          (selectedKidDataNum.current ? selectedKidDataNum.current : 0) / 9,
+          (selectedKidDataNum.current ? selectedKidDataNum.current : 0) / 12,
           10
         )
       : parseInt(
-          (selectedKidDataNum.current ? selectedKidDataNum.current : 0) / 9,
+          (selectedKidDataNum.current ? selectedKidDataNum.current : 0) / 12,
           10
         ) + 1;
   const isMobile_655 = useMediaQuery("(max-width:655px)");
@@ -114,11 +115,12 @@ const KidsGridList = () => {
   }, [page]);
 
   useEffect(() => {
+    //console.log(loginUserToken);
     selectedKidDataNum.current = 0;
     allKidDataNum.current = 0;
     //페이지 리로드 감지
     window.onpageshow = function (event) {
-      console.log(loginUserDataReducer);
+      //console.log(loginUserDataReducer);
       if (event.persisted || window.performance) {
         setPage(1);
         setTimeout(() => {
@@ -137,7 +139,7 @@ const KidsGridList = () => {
       url: `${config.api}/user/care/lookup/all`,
       method: "POST",
       headers: {
-        Auth: loginUserToken,
+        Auth: state?.token || loginUserToken,
       }, //헤더에 토큰
       data: {
         name: "",
@@ -159,7 +161,7 @@ const KidsGridList = () => {
         } else {
           swal({
             title: "에러!",
-            text: "오류가 발생했습니다.!",
+            text: "환자 데이터 오류가 발생했습니다.!",
             icon: "error",
           });
         }
