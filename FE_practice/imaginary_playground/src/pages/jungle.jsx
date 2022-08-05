@@ -1,9 +1,15 @@
 import ".././css/jungle.css"
+import Sample from "../components/jungle/Sample";
 
 const Jungle = () => {
     return(
         <>
             <div className="jungle">
+
+
+
+                <Sample></Sample>
+
                 {/* 가장 앞 첫번째 구간 */}
                 <img src="/assets/jungle/firstHill.png" className="firstHill" />
                 <img src="/assets/jungle/firstCeil.png" className="firstCeil" />
