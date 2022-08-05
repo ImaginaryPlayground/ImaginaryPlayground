@@ -50,6 +50,7 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const savedStrogeUserId = localStorage.getItem("stored_id");
   const [isSaveUserId, setIsSaveUserId] = useState(!!savedStrogeUserId);
+  const loginUserToken = localStorage.getItem("token");
 
   const [loginUserInfo, setLoginUserInfo] = useState({
     userEmail: !!savedStrogeUserId ? savedStrogeUserId : "",
@@ -101,6 +102,8 @@ const LoginPage = () => {
       return;
     }
 
+    let token = "";
+
     //비동기 처리
     axios({
       url: `${config.api}/user/login`,
@@ -113,10 +116,13 @@ const LoginPage = () => {
       .then((res) => {
         console.log(res);
         if (res.data.status === "SUCCESS") {
-          sessionStorage.setItem("token", res.data.data);
+          localStorage.setItem("token", res.data.data);
+          //console.log("로컬 토큰값: ", localStorage.getItem("token"));
           //회원정보 가져오는 비동기 처리
-          //console.log("로그인 성공!");
 
+          //토큰 저장
+          token = res.data.data;
+          //console.log("토큰값:", res.data.data);
           // 로컬 스토리지에 저장되어있는 아이디 삭제 혹은 생성
           if (isSaveUserId) {
             localStorage.setItem("stored_id", loginUserInfo.userEmail);
@@ -146,8 +152,10 @@ const LoginPage = () => {
                 provider: loginData.provider,
               };
               dispatch({ type: "SET_LOGIN_USER", data: loginUserDataMapping });
+
               //홈으로 이동
-              navigate("/");
+
+              navigate("/", { state: { token: token } });
             })
             .catch((err) => {
               console.log(err);

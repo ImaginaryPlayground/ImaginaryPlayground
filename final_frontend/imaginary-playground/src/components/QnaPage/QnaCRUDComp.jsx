@@ -7,7 +7,6 @@ import swal from "sweetalert";
 import "../../css/QnaPage/QnaCRUDComp.css";
 import axios from "axios";
 import { config } from "../../util/config";
-import { loginUserToken } from "../../util/token";
 
 const QnaCRUDComp = ({ isEdit }) => {
   const loginUserDataReducer = useSelector((state) => {
@@ -15,6 +14,7 @@ const QnaCRUDComp = ({ isEdit }) => {
   });
 
   const nowDate = new Date();
+  const loginUserToken = localStorage.getItem("token");
 
   const nowDateConvert =
     nowDate.getFullYear() +
@@ -55,6 +55,14 @@ const QnaCRUDComp = ({ isEdit }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!loginUserDataReducer) {
+      navigate("/login");
+      return;
+    } else if (isEdit && !selectedQnaData.title) {
+      navigate(-1);
+      return;
+    }
+
     if (isEdit) {
       //특정 글에 대한 정보와 그에 대한 답변을 불러온다.
       axios({
@@ -70,24 +78,28 @@ const QnaCRUDComp = ({ isEdit }) => {
         .catch((err) => {
           console.log(err);
         });
-    }
 
-    if (!loginUserDataReducer) {
-      navigate("/login");
-      return;
-    } else if (isEdit && !selectedQnaData.title) {
-      navigate(-1);
-      return;
-    }
-
-    if (isEdit && selectedQnaData.completed) {
-      setAnswerData({
-        admin_id: 1,
-        content:
-          "안녕하세요. 해당 문의글 잘 읽어 보았습니다. 해당 문제는 현재 기술팀에서 알아보고 있는 중입니다. 잠시만 기다려 주시면 감사하겠습니다.",
-        created_date: "2022-08-01 22:09:30",
-        modified_date: "2022-08-01 22:09:30",
-      });
+      //답변 받아오기
+      axios({
+        url: `${config.api}/answer/detail/${selectedQnaData.id}`, //마지막은 페이지번호
+        method: "GET",
+        headers: {
+          Auth: loginUserToken, //로그인이됐으면 요청
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          if (res.data.status === "SUCCESS") {
+            setAnswerData(res.data.data);
+          } else if (res.data.status === "NULL") {
+          } else {
+            swal("에러", "답변을 불러오지 못했습니다.!", "error");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("서버 통신 에러!");
+        });
     }
   }, []);
 
@@ -209,20 +221,39 @@ const QnaCRUDComp = ({ isEdit }) => {
 
   const handleDeleteQnaData = () => {
     //질문 삭제 버튼
-    axios({
-      url: `${config.api}/question`, //마지막은 페이지번호
-      method: "DELETE",
-      headers: "", //헤더에 토큰
-      data: {
-        id: selectedQnaData.id,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    swal({
+      title: "삭제",
+      text: `정말로 1:1문의 삭제하시겠습니까?`,
+      icon: "warning",
+      buttons: true,
+    }).then((ok) => {
+      if (ok) {
+        axios({
+          url: `${config.api}/question/`, //마지막은 페이지번호
+          method: "DELETE",
+          headers: {
+            Auth: loginUserToken,
+          },
+          data: {
+            id: selectedQnaData.id,
+          },
+        })
+          .then((res) => {
+            console.log(res);
+            if (res.data.status === "SUCCESS") {
+              swal("성공!", "정상적으로 문의가 삭제되었습니다", "success");
+              sessionStorage.setItem("qna_list_page", 1);
+              navigate("/qnapage", { replace: true });
+            } else {
+              swal("에러!", "문의글을 삭제하지 못했습니다.", "error");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("서버 통신 에러!");
+          });
+      }
+    });
   };
 
   return (
@@ -262,8 +293,21 @@ const QnaCRUDComp = ({ isEdit }) => {
               </span>
             )}
           </Grid>
+          <Grid
+            item
+            textAlign={"end"}
+            sx={{
+              fontSize: "16px",
+              textDecoration: "underline",
+              cursor: "pointer",
+            }}
+            onClick={handleDeleteQnaData}
+          >
+            삭제하기
+          </Grid>
         </Grid>
       )}
+
       <Grid
         item
         display={"flex"}
@@ -293,7 +337,7 @@ const QnaCRUDComp = ({ isEdit }) => {
           </Button>
         </Grid>
         {isEdit && (
-          <Grid item textAlign="end">
+          <Grid item textAlign="end" ml={2}>
             <Grid className="qna_date">
               <span style={{ marginRight: "5px" }} className="text_custom">
                 작성일
@@ -417,7 +461,7 @@ const QnaCRUDComp = ({ isEdit }) => {
           p={2}
           sx={{
             borderRadius: "5px",
-            backgroundColor: "palevioletred",
+            backgroundColor: "slategray",
             color: "white",
           }}
           my={4}
