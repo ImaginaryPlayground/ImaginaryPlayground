@@ -23,6 +23,9 @@ import { pink } from "@mui/material/colors";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { config } from "../../util/config.jsx";
+import swal from "sweetalert";
+import { loginUserToken } from "../../util/token.jsx";
+import { useDispatch } from "react-redux";
 
 const theme = createTheme({
   palette: {
@@ -43,9 +46,14 @@ const ColorButton = styled(Button)(({ theme }) => ({
 const { naver } = window;
 
 const LoginPage = () => {
-  const [isSaveUserId, setIsSaveUserId] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const savedStrogeUserId = localStorage.getItem("stored_id");
+  const [isSaveUserId, setIsSaveUserId] = useState(!!savedStrogeUserId);
+  const loginUserToken = localStorage.getItem("token");
+
   const [loginUserInfo, setLoginUserInfo] = useState({
-    userEmail: "",
+    userEmail: !!savedStrogeUserId ? savedStrogeUserId : "",
     userPassword: "",
   });
 
@@ -85,15 +93,17 @@ const LoginPage = () => {
     userEmailInput.current.focus();
     userPasswordInput.current.focus();
 
-    if (!loginUserInfo.userEmail) {
+    if (!loginUserInfo.userEmail.length) {
       userEmailInput.current.focus();
       return;
     }
-    if (!loginUserInfo.userPassword) {
+    if (!loginUserInfo.userPassword.length) {
       userPasswordInput.current.focus();
       return;
     }
-    console.log("로그인 직전");
+
+    let token = "";
+
     //비동기 처리
     axios({
       url: `${config.api}/user/login`,
@@ -104,12 +114,64 @@ const LoginPage = () => {
       },
     })
       .then((res) => {
-        console.log("연결 성공!!");
         console.log(res);
-        //localStorage.setItem("token", JSON.stringify(res?.data));
+        if (res.data.status === "SUCCESS") {
+          localStorage.setItem("token", res.data.data);
+          //console.log("로컬 토큰값: ", localStorage.getItem("token"));
+          //회원정보 가져오는 비동기 처리
+
+          //토큰 저장
+          token = res.data.data;
+          //console.log("토큰값:", res.data.data);
+          // 로컬 스토리지에 저장되어있는 아이디 삭제 혹은 생성
+          if (isSaveUserId) {
+            localStorage.setItem("stored_id", loginUserInfo.userEmail);
+          } else {
+            localStorage.setItem("stored_id", "");
+          }
+
+          axios({
+            url: `${config.api}/user/token`, //마지막은 페이지번호
+            method: "POST",
+            headers: {
+              Auth: res.data.data,
+            }, //헤더에 토큰
+          })
+            .then((res) => {
+              console.log("유저정보", res.data.data);
+              const loginData = res.data.data;
+              const loginUserDataMapping = {
+                id: loginData.id,
+                email: loginData.email,
+                username: loginData.username,
+                join_date: loginData.join_date.substring(0, 10),
+                modified_date: loginData.modified_date,
+                hospital_id: loginData.hospital_id,
+                hospital_name: loginData.hospital_name,
+                hospital_address: loginData.hospital_address,
+                provider: loginData.provider,
+              };
+              dispatch({ type: "SET_LOGIN_USER", data: loginUserDataMapping });
+
+              //홈으로 이동
+
+              navigate("/", { state: { token: token } });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
+          //window.location.href = "/";
+        } else {
+          swal(
+            "로그인에 실패하였습니다.",
+            "아이디와 비밀번호를 확인해주세요",
+            "error"
+          );
+        }
       })
       .catch((err) => {
-        console.log("에러!!");
+        alert("서버와 통신에러 발생");
         console.log(err);
       });
   };
@@ -180,6 +242,7 @@ const LoginPage = () => {
         <FormControlLabel
           control={
             <Checkbox
+              checked={isSaveUserId}
               value={isSaveUserId}
               onClick={() => {
                 setIsSaveUserId(!isSaveUserId);

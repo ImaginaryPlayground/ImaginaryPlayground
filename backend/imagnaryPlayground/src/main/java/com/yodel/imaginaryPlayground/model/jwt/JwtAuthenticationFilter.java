@@ -19,7 +19,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{ //request 이
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = ((HttpServletRequest)request).getHeader("Auth");
-        System.out.println("필터 발동: " + token);
+
+        if(token != null && token.charAt(0) == '"' && token.charAt(token.length() - 1) == '"' ){
+            System.out.println("필터 발동: " + token.subSequence(1,token.length() - 1));
+            token = (String) token.subSequence(1,token.length() - 1);
+        }
+
 
         try{
             if (token != null && jwtTokenService.verifyToken(token)) { //토큰이 존재하면 일단 검증

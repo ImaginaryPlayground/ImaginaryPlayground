@@ -1,0 +1,231 @@
+.universe {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("https://user-images.githubusercontent.com/26748614/96337246-f14d4580-1085-11eb-8793-a86d929e034d.jpg");
+}
+
+.planetH2, .universegame-title {
+    position: absolute;
+    z-index: 1000;
+    color: white;
+    top: 10vh;
+    left: 30vw;
+    font-size: 300%;
+}
+
+/* 행성들 리스트 */
+
+.mercury {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 50vh;
+}
+
+.venus {
+    position: absolute;
+    z-index: 10000;
+    left: 7%;
+    width: 6vw;
+    top: 49vh;
+}
+
+.earth {
+    position: absolute;
+    z-index: 10000;
+    left: 15%;
+    width: 7vw;
+    top: 48vh;
+}
+
+.mars {
+    position: absolute;
+    z-index: 10000;
+    left: 25%;
+    top: 50vh;
+    width: 4vw;
+}
+
+.jupyter {
+    position: absolute;
+    z-index: 10000;
+    left: 31vw;
+    top: 30vh;
+    width: 27vw;
+}
+
+.saturn {
+    position: absolute;
+    z-index: 10000;
+    left: 59vw;
+    top: 40vh;
+    width: 23vw;
+}
+
+.uranus {
+    position: absolute;
+    z-index: 10000;
+    left: 79vw;
+    width: 11vw;
+    top: 50vh;
+}
+
+.neptune {
+    position: absolute;
+    z-index: 10000;
+    left: 91vw;
+    width: 7vw;
+    top: 50vh;
+}
+
+/* 
+.universe-canvas {
+    position: absolute;
+    z-index: 1;
+} */
+
+
+/* 게임 시작 버튼 */
+.gamestart {
+    position: absolute;
+    z-index: 100;
+    left: 40%;
+    top: 80vh;
+}
+
+
+/* 우주쓰레기 게임 이미지들 */
+.paper1 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 50vh;
+}
+
+.paper2 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 50vh;
+    left: 20vw;
+}
+
+.paper3 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 50vh;
+    left: 40vw;
+}
+
+.paper4 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 50vh;
+    left: 50vw;
+}
+
+
+
+.plastic1 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 50vh;
+    left: 50vw;
+}
+
+.plastic2 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 40vh;
+    left: 30vw;
+}
+
+.plastic3 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 50vh;
+    left: 50vw;
+}
+
+.plastic4 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 50vh;
+    left: 50vw;
+}
+
+
+.metal1 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 52vh;
+    left: 30vw;
+}
+
+.metal2 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 40vh;
+    left: 60vw;
+}
+
+.metal3 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 60vh;
+    left: 20vw;
+}
+
+.metal4 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 57vh;
+    left: 30vw;
+}
+
+
+/* 게임 쓰레기통 */
+.paperbin {
+    position: absolute;
+    z-index: 1000;
+    top: 80vh;
+    left: 30vw;
+}
+
+.plasticbin {
+    position: absolute;
+    z-index: 1000;
+    top: 80vh;
+    left: 45vw;
+}
+
+.metalbin {
+    position: absolute;
+    z-index: 1000;
+    top: 80vh;
+    left: 60vw;
+}
+
+/* 게임 안내 문구 */
+.paper-title {
+    position: absolute;
+    color: white;
+}
+
+.plastic-title {
+    position: absolute;
+    color: white;
+}
+
+

@@ -41,6 +41,15 @@ public class UserDto implements UserDetails {
     @ApiModelProperty(value = "회원구분")
     private String type;
 
+    @ApiModelProperty(value = "병원 아이디")
+    private int hospital_id;
+
+    @ApiModelProperty(value = "병원명")
+    private String hospital_name;
+
+    @ApiModelProperty(value = "병원 주소")
+    private String hospital_address;
+
     @ApiModelProperty(value = "비밀번호")
     private String password;
 
@@ -55,11 +64,45 @@ public class UserDto implements UserDetails {
     }
 
     @Builder
+    public UserDto(int id) {
+        this.id = id;
+    }
+
+    @Builder
     public UserDto(String username, String password, String email, String provider) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.provider = provider;
+    }
+
+    @Builder
+    public UserDto(String password, String email) {
+        this.email = email;
+        this.password = password;
+    }
+
+    @Builder
+    public UserDto(int id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+
+    @Builder
+    public UserDto(String email, String password, String username, String provider, String document, int hospital_id, String hospital_name, String hospital_address) {
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.provider = provider;
+        this.document = document;
+        this.hospital_id = hospital_id;
+        this.hospital_name = hospital_name;
+        this.hospital_address = hospital_address;
+    }
+
+    @Builder
+    public UserDto(String username) {
+        this.username = username;
     }
 
     @Override

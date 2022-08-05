@@ -8,17 +8,15 @@ import com.yodel.imaginaryPlayground.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
-
-import org.apache.catalina.User;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
@@ -58,12 +56,15 @@ public class UserController {
 
         String fileName = file.getOriginalFilename();
         System.out.println(fileName);
-        System.out.println(request.getServletContext().getRealPath("/"));
+        System.out.println(request.getServletContext().getRealPath("/"));   //경로
 
         String email = "";
         String password = "";
         String username = "";
         String provider = "SITE";
+        int hospital_id = 0;
+        String hospital_name = "";
+        String hospital_address = "";
 
         Iterator it = signupData.keys();
         while (it.hasNext()) {
@@ -74,24 +75,52 @@ public class UserController {
                 email = signupData.getString(key);
             } else if (key.equals("username")) {
                 username = signupData.getString(key);
+            } else if (key.equals("hospital_id")) {
+                hospital_id = signupData.getInt(key);
+            } else if (key.equals("hospital_name")) {
+                hospital_name = signupData.getString(key);
+            } else if (key.equals("hospital_address")) {
+                hospital_address = signupData.getString(key);
             }
         }
 
         System.out.println("email: " + email);
         System.out.println(" password: " + password);
         System.out.println(" username: " + username);
+        System.out.println(" hospital_id: " + hospital_id);
+        System.out.println(" hospital_name: " + hospital_name);
+        System.out.println(" hospital_name: " + hospital_address);
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
             String uploadDate = simpleDateFormat.format(new Date());
-            String document = save(file, request.getServletContext().getRealPath("/"), uploadDate);
+            String document = request.getServletContext().getRealPath("/");
 
-            userService.saveFile(document, email);
+//            userService.saveFile(document, email);
 
-            UserDto user = new UserDto(email, password, username, provider);
-            result.put("status", success);
-            result.put("data", user);
+            UserDto user = new UserDto(email, password, username, provider, document, hospital_id, hospital_name, hospital_address);
 
+            int chkEmail = userService.countByEmail(user.getEmail());
+            if(chkEmail != 1){    //기존 사용자가 아닌 경우 회원가입 진행
+                int res = userService.saveUser(user);    // 유저정보 저장
+
+                if(res == 1) {       // 저장 성공
+                    //id 가져오기
+                    int id = userService.getUserId(user.getEmail());
+                    //password 저장
+                    int res2 = userService.savePassword(id, password);
+                    if(res2 == 1) {
+                        result.put("status", success);   //저장 성공
+                        result.put("data", user);
+                    }else {
+                        result.put("status", fail);
+                    }
+                } else {
+                    result.put("status", fail);
+                }
+            } else {
+                result.put("status", fail);
+            }
         } catch (IllegalStateException e) {
             result.put("status", error);
             result.put("message", e.toString());
@@ -113,18 +142,31 @@ public class UserController {
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "로그인을 한다.")
     public Map<String, Object> login(
-            @RequestBody @ApiParam(value = "로그인 정보를 입력한다.") UserDto user) {
+            @RequestBody @ApiParam(value = "로그인 정보를 입력한다.") UserDto userInfo) {
+
         Map<String, Object> result = new HashMap<>();
+        String password = userInfo.getPassword();   // 입력한 비밀번호
 
         try {
-            int res = userService.countByEmail(user.getEmail());
-            if(res == 1){
-                //공통으로 토큰이 들어간다(로그인 성공시 따로 넣어준다).
-                String token = jwtTokenService.createToken(user.getEmail(), user.getType());
-                result.put("data", token);
-                result.put("status", success);
+            int res = userService.countByEmail(userInfo.getEmail());
+            if(res == 1){   //가입한 회원이면
+                //id 가져오기
+                int id = userService.getUserId(userInfo.getEmail());
+                //비밀번호 가져오기
+                String user_password = userService.getPassword(id);
+
+                if(password.equals(user_password)){    //비밀번호 유효성 검사
+                    //공통으로 토큰이 들어간다(로그인 성공시 따로 넣어준다).
+                    String token = jwtTokenService.createToken(userInfo.getEmail(), userInfo.getType());
+
+                    //병원주소(이메일을 이용해서 병원 아이디를 가져오고, 병원 아이디를 이용해서 병원 주소를 가져온다)
+
+                    result.put("status", success);
+                    result.put("data", token);
+                }else{
+                    result.put("status", fail);
+                }
             }else{
-                // 실패했을 때 사용자 정보?
                 result.put("status", fail);
             }
         } catch (Exception e) {
@@ -134,22 +176,18 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/detail/{email}")
+    @GetMapping("")
     @ApiOperation(value = "회원 정보 조회", notes = "회원 정보를 조회한다.")
-    public Map<String, Object> detailUser(
-            @RequestHeader String token,  //헤더X
-            @PathVariable String email) {
+    public Map<String, Object> detailUser() {
 
-        System.out.println("token::" + token);
-        Authentication auth_data = jwtTokenService.getAuthentication(token);
+//        System.out.println("token::" + token);
+//        Authentication auth_data = jwtTokenService.getAuthentication(token);
 
         Map<String, Object> result = new HashMap<>();
 
-        UserDto user = new UserDto();
-
         try {
-            user = userService.findByEmail(email);
-            if(auth_data != null){
+            UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if(user != null){
                 result.put("status", success);
                 result.put("data", user);
             }else{
@@ -162,20 +200,28 @@ public class UserController {
         return result;
     }
 
-    @PutMapping("/update")
+    @PutMapping("")
     @ApiOperation(value = "회원 정보 수정", notes = "회원 페이지에서 사용자의 정보를 수정할 수 있다.")
-    public Map<String, Object> updateUserInfo(
-            //헤더에 토큰
-            @PathVariable int id, @RequestBody String username){
+    public Map<String, Object> updateUserInfo(@RequestBody Map<String, String> map){
 
         Map<String, Object> result = new HashMap<>();
+        String username = map.get("username");
         try {
-            int res = userService.updateUserInfo(username);
-            if(res == 1){
-                result.put("status", success);
-                result.put("data", userService.detailUser(id));
-            }else{
-                result.put("status", fail);
+
+            if(username != null && !username.trim().equals("")) {
+                UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                user.setUsername(username);
+
+                int res = userService.updateUserInfo(user);
+
+                if (res == 1) {
+                    userService.findByEmail(user.getEmail());
+                    result.put("status", success);
+                    result.put("data", user);
+                } else {
+                    result.put("status", fail);
+                }
+
             }
         } catch (Exception e) {
             result.put("status", error);
@@ -186,16 +232,19 @@ public class UserController {
     }
 
     @DeleteMapping("")
-    @ApiOperation(value = "회원 정보 삭제", notes = "회원 페이지에서 사용자의 정보를 삭제한다.")
-    public Map<String, String> deleteUser(
-            @RequestHeader int id){    // 토큰
+    @ApiOperation(value = "회원 탈퇴", notes = "회원 페이지에서 사용자의 정보를 삭제한다.")
+    public Map<String, String> deleteUser(@RequestHeader("Auth") String token){
 
         Map<String, String> result = new HashMap<>();
 
         try {
-            int res = userService.deleteUser(id);
+            UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            int userId = user.getId();
+            int res = userService.deleteUser(userId);
             if(res == 1) {
                 result.put("status", success);
+                jwtTokenService.closeToken(token);
+                SecurityContextHolder.clearContext();
             } else {
                 result.put("status", fail);
             }
@@ -259,29 +308,35 @@ public class UserController {
     }
 
     @PostMapping("/authEmail/send")
-    public Map<String, Object> sendEmail(@RequestBody String email){
+    public Map<String, Object> sendEmail(@RequestBody UserDto user){
         Map<String, Object> result = new HashMap<>();
-        System.out.println("이메일 인증 진행 :"+ email);
 
-        //먼저 관련 email 인증을 삭제한다
-        userService.deleteEmailCode(email);
+        String email = user.getEmail();
+        int chkEmail = userService.countByEmail(email);
+        if(chkEmail != 1) {
+            System.out.println("이메일 인증 진행 :"+ email);
 
-        final int CODE = (int) ( 100000 + Math.random()*899999); //임의의 6자리 코드 생성
+            //먼저 관련 email 인증을 삭제한다
+            userService.deleteEmailCode(email);
 
-        if(emailService.sendEmail( email // 메일 인증 성공
-                , "[상상놀이터] 이메일 인증 안내"
-                , "인증코드는 [ "+CODE+" ] 입니다.").get("status").equals(success)){
-            int res = userService.saveEmailAuth(email, Integer.toString(CODE));
-            if(res == 1){
-                result.put("status", success);
+            final int CODE = (int) ( 100000 + Math.random()*899999); //임의의 6자리 코드 생성
+
+            if(emailService.sendEmail( email // 메일 인증 성공
+                    , "[상상놀이터] 이메일 인증 안내"
+                    , "인증코드는 [ "+CODE+" ] 입니다.").get("status").equals(success)){
+                int res = userService.saveEmailAuth(email, Integer.toString(CODE));
+                if(res == 1){
+                    result.put("status", success);
+                }else{
+                    result.put("status", error);
+                }
             }else{
-                result.put("status", error);
+                // 메일 인증 실패
+                result.put("status", fail);
             }
-        }else{
-            // 메일 인증 실패
+        }else {
             result.put("status", fail);
         }
-
         return result;
     }
 
@@ -309,10 +364,29 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
         System.out.println("들어왔냐");
         UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(user.toString());
-        //UserDto user2 = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //System.out.println("login Service :" + user2.toString());
 
+        if(user != null){
+            result.put("status", success);
+            result.put("data", user);
+        }else{
+            result.put("status", fail);
+        }
+
+        return result;
+    }
+
+    @PostMapping("/logout")
+    public Map<String, Object> logout(@RequestHeader("Auth") String token){
+        System.out.println(token);
+        Map<String, Object> result = new HashMap<>();
+
+        if(token != null){
+            result.put("status", success);
+            jwtTokenService.closeToken(token);
+            SecurityContextHolder.clearContext();
+        }else {
+            result.put("status", fail);
+        }
         return result;
     }
 

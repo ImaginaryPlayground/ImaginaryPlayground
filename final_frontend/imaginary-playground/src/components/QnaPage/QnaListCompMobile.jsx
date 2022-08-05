@@ -11,6 +11,7 @@ const QnaListCompMobile = ({ qnaListData }) => {
     dispatch({ type: "SET_SELECTED_QNADATA", data });
     navigate("/qnadetailpage");
   };
+
   return (
     <Paper className="QnaListCompMobile" elevation={6}>
       {qnaListData.map((data) => (
@@ -34,12 +35,12 @@ const QnaListCompMobile = ({ qnaListData }) => {
               item
               mr={1}
               className={
-                data.completed
+                data.completed === 0
                   ? ["custom_font_gray"].join(" ")
                   : ["custom_font"].join(" ")
               }
             >
-              {data.completed ? (
+              {data.completed === 0 ? (
                 <span className="completed_animation">처리전</span>
               ) : (
                 "처리완료"
@@ -49,7 +50,7 @@ const QnaListCompMobile = ({ qnaListData }) => {
               {data.username}
             </Grid>
             <Grid item mr={1} className="custom_font_black">
-              {data.created_date}
+              {data.created_date.split(".")[0]}
             </Grid>
           </Grid>
         </Grid>

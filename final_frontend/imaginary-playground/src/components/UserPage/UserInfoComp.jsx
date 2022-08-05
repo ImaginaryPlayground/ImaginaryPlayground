@@ -7,34 +7,50 @@ import axios from "axios";
 import { config } from "../../util/config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-const initialData = {
-  id: 2,
-  email: "jimdac@ssafy.com",
-  usename: "우영우",
-  join_data: "2022-07-31",
-  provider: "카카오",
-  document: "/img/AdminPage/재직증명서.jpg",
-  hospital_id: 1,
-  hospital_name: "순천향병원",
-  hospital_address: "인천광역시 부평구 동수로 56-(부평동)",
-};
 const UserInfoComp = () => {
-  const [loginUserData, setLoginUserData] = useState({});
-  const [modifyName, setmodifyName] = useState(initialData.usename);
   const loginUserDataReducer = useSelector(
     (state) => state.loginUserDataReducer
   );
+  const [modifyName, setmodifyName] = useState(loginUserDataReducer.username);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  useEffect(() => {
-    axios({
-      url: `${config.api}/user/detail/`, //마지막은 페이지번호
-      method: "GET",
-      headers: "", //헤더에 토큰
-    }).then((res) => {
-      console.log(res); //이메일, 이름, 가입일자 , 가입경로, 병원이름, 병원주소, 재직 증명서(이미지)
-    });
-  }, []);
+  const loginUserToken = localStorage.getItem("token");
+  // useEffect(() => {
+  //   axios({
+  //     url: `${config.api}/user`,
+  //     method: "GET",
+  //     headers: { Auth: loginUserToken }, //헤더에 토큰
+  //   })
+  //     .then((res) => {
+  //       console.log(res); //이메일, 이름, 가입일자 , 가입경로, 병원이름, 병원주소, 재직 증명서(이미지)
+  //       if (res.data.status === "SUCCESS") {
+  //         const loginUserData = {
+  //           id: res.data.data.id,
+  //           email: res.data.data.email,
+  //           username: res.data.data.username,
+  //           join_date: res.data.data.join_date.substring(0,10),
+  //           provider: res.data.data.provider,
+  //           hospital_id: res.data.data.hospital_id,
+  //           hospital_name: res.data.data.hospital_name,
+  //           hospital_address: res.data.data.hospital_address || "",
+  //           document: res.data.data.document,
+  //         };
+  //         dispatch({ type: "SET_LOGIN_USER", data: loginUserData });
+  //       } else {
+  //         swal({
+  //           title: "에러",
+  //           text: "유저 정보를 불러오지 못했습니다.",
+  //           icon: "error",
+  //         });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       alert("서버 통신 에러!");
+  //     });
+  // }, []);
 
   const nameInput = useRef();
   const handleUserInfoChange = (e) => {
@@ -54,25 +70,50 @@ const UserInfoComp = () => {
       buttons: true,
     }).then((ok) => {
       if (ok) {
+        console.log(localStorage.getItem("token"));
         //비동기 통신(수정)
         axios({
-          url: `${config.api}/user/update/`, //마지막은 페이지번호
-          method: "POST",
-          headers: "", //헤더에 토큰
+          url: `${config.api}/user`, //마지막은 페이지번호
+          method: "PUT",
+          headers: {
+            Auth: loginUserToken,
+          }, //헤더에 토큰
           data: {
             username: modifyName,
           },
         })
           .then((res) => {
             console.log(res); //success
+
+            if (res.data.status === "SUCCESS") {
+              const loginUserData = {
+                id: res.data.data.id,
+                email: res.data.data.email,
+                username: res.data.data.username,
+                join_date: res.data.data.join_date.substring(0, 10),
+                provider: res.data.data.provider,
+                hospital_id: res.data.data.hospital_id,
+                hospital_name: res.data.data.hospital_name,
+                hospital_address: res.data.data.hospital_address || "",
+                document: res.data.data.document,
+              };
+              dispatch({ type: "SET_LOGIN_USER", data: loginUserData });
+              swal({
+                title: "성공",
+                text: "회원 정보를 수정하였습니다.",
+                icon: "success",
+              });
+            } else {
+              swal({
+                title: "에러",
+                text: "회원 정보를 수정하지 못했습니다.",
+                icon: "error",
+              });
+            }
           })
           .catch((err) => {
             console.log(err);
           });
-
-        swal("수정이 완료 되었습니다.", {
-          icon: "success",
-        });
       }
     });
   };
@@ -87,23 +128,35 @@ const UserInfoComp = () => {
       if (ok) {
         //비동기 통신(회원 탈퇴)
         axios({
-          url: `${config.api}/user/delete`, //마지막은 페이지번호
-          method: "POST",
-          headers: "", //헤더에 토큰
+          url: `${config.api}/user`, //마지막은 페이지번호
+          method: "DELETE",
+          headers: {
+            Auth: loginUserToken,
+          }, //헤더에 토큰
         })
           .then((res) => {
             console.log(res);
-            //세션스토리지에 있는 토큰값 삭제
-            //로그인으로 이동
-            navigate("/login");
+            if (res.data.status === "SUCCESS") {
+              swal("탈퇴가 완료 되었습니다.", {
+                icon: "success",
+              }).then(() => {
+                //세션스토리지에 있는 토큰값 삭제
+                localStorage.removeItem("token");
+                //로그인으로 이동
+                navigate("/login");
+              });
+            } else {
+              swal({
+                title: "에러",
+                text: `회원 탈퇴에 실패하였습니다.`,
+                icon: "error",
+              });
+            }
           })
           .catch((err) => {
             console.log(err);
+            alert("서버 통신 에러");
           });
-
-        swal("탈퇴가 완료 되었습니다.", {
-          icon: "success",
-        });
       }
     });
     //회원정보 수정 비동기 통신
@@ -134,13 +187,13 @@ const UserInfoComp = () => {
             <TextField
               color="main"
               size="small"
-              value={initialData.email.split("@")[0]}
+              value={loginUserDataReducer.email.split("@")[0]}
             />
             <span>@</span>
             <TextField
               color="main"
               size="small"
-              value={initialData.email.split("@")[1]}
+              value={loginUserDataReducer.email.split("@")[1]}
             />
           </Grid>
         </Grid>
@@ -175,7 +228,7 @@ const UserInfoComp = () => {
               sx={{ width: "100%" }}
               type="date"
               disabled
-              value={initialData.join_data}
+              value={loginUserDataReducer.join_date}
             />
           </Grid>
         </Grid>
@@ -189,7 +242,7 @@ const UserInfoComp = () => {
               size="small"
               sx={{ width: "100%" }}
               disabled
-              value={initialData.provider}
+              value={loginUserDataReducer.provider}
             />
           </Grid>
         </Grid>
@@ -202,7 +255,7 @@ const UserInfoComp = () => {
               color="main"
               size="small"
               sx={{ width: "100%" }}
-              value={initialData.hospital_name}
+              value={loginUserDataReducer.hospital_name}
             />
           </Grid>
         </Grid>
@@ -215,7 +268,7 @@ const UserInfoComp = () => {
               color="main"
               size="small"
               sx={{ width: "100%" }}
-              value={initialData.hospital_address}
+              value={loginUserDataReducer.hospital_address}
             />
           </Grid>
         </Grid>
@@ -225,7 +278,7 @@ const UserInfoComp = () => {
           </Grid>
           <Grid item className="input_box">
             <img
-              src={initialData.document}
+              src={loginUserDataReducer.document}
               alt="재직증명서"
               width={"100%"}
               style={{ backgroundColor: "#E4E4E4" }}

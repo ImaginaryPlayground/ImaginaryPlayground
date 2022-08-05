@@ -32,6 +32,8 @@ public class QuestionController {
     private final QuestionService questionService;
     private final AnswerService answerService;
 
+    private final int PAGE = 9;
+
     @PostMapping("/")
     @ApiOperation(value = "질문 등록", notes = "회원이 질문을 등록할 수 있는 기능")
     public Map<String, Object> saveQuestion(
@@ -40,10 +42,11 @@ public class QuestionController {
         try {
             UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             question.setUser_id(user.getId());
+            question.setEmail(user.getEmail());
             int res = questionService.saveQuestion(question);
             if(res == 1){
                 result.put("status", success);
-                result.put("data", questionService.lookupAllQuestion(0));
+                result.put("data", questionService.detailQuestion(question));
             }else{
                 result.put("status", fail);
             }
@@ -62,6 +65,7 @@ public class QuestionController {
         try {
             UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             question.setUser_id(user.getId());
+            question.setEmail(user.getEmail());
             if(question.getCompleted() == 1){
                 result.put("status", fail);
                 result.put("message", "답변이 완료된 글의 질문은 수정할 수 없습니다.");
@@ -94,7 +98,6 @@ public class QuestionController {
             int res = questionService.deleteQuestion(idVO);
             if(res == 1){
                 result.put("status", success);
-                result.put("data", questionService.lookupAllQuestion(0));
             }else{
                 result.put("status", fail);
             }
@@ -106,7 +109,7 @@ public class QuestionController {
     }
 
     @PostMapping("/lookup/all") //전체 조회도 같이 넣어줄 것
-    @ApiOperation(value = "전체 질문글을 조회한다.", notes = "질문들을 모두 조회하여 가져온다.")
+    @ApiOperation(value = "전체 질문글을 조회한다[페이징].", notes = "질문들을 모두 조회하여 가져온다[검색].")
     public Map<String, Object> lookupAllQuestion(
             @RequestBody @ApiParam(value = "page(필수), key: 검색할 제목/내용, value: 검색값, qna_type: 0은 전체 조회, 1은 나의 글 조회 / completed: 0-미해결, 1-해결, 2-전체", required = false)
             PageDto pageDto){
@@ -120,14 +123,14 @@ public class QuestionController {
             pageDto.setEmail(user.getEmail());
             if(pageDto.getValue() == null || pageDto.getValue().trim().equals("")){ //검색값이 없는 경우
                 if(pageDto.getQna_type() == 0){ //전체조회
-                    questionList = questionService.lookupAllQuestion(pageDto.getPage());
-                    countQuestion = questionService.lookupAllQuestionCount();
+                    questionList = questionService.lookupAllQuestion(pageDto);
+                    countQuestion = questionService.lookupAllQuestionCount(pageDto);
                 }else{ //만약 문의유형이 0이 아닌 경우
                     questionList = questionService.lookupAllQuestionWithEmail(pageDto);
                     countQuestion = questionService.lookupAllQuestionWithEmailCount(pageDto);
                 }
             }else if(pageDto.getKey().equals("title") || pageDto.getKey().equals("content")){ //검색값이 있는 경우: 유효성 검사 기회
-                if(pageDto.getEmail() == null || pageDto.getEmail().trim().equals("")){ //문의유형이 0인 경우
+                if(pageDto.getQna_type() == 0){ //문의유형이 0인 경우
                     questionList = questionService.searchAllQuestion(pageDto);
                     countQuestion = questionService.searchAllQuestionCount(pageDto);
                 }else{ //만약 문의유형이 0이 아닌 경우
@@ -135,6 +138,30 @@ public class QuestionController {
                     countQuestion = questionService.searchAllQuestionWithEmailCount(pageDto);
                 }
             }
+
+            if(questionList != null){
+                result.put("status", success);
+            }else{
+                result.put("status", fail);
+            }
+        } catch (Exception e) {
+            result.put("status", error);
+            result.put("message", e.toString());
+        }
+        result.put("data", questionList);
+        result.put("searchedDataAllNum", countQuestion);
+        return result;
+    }
+
+    @GetMapping("/lookup/all") //전체 조회도 같이 넣어줄 것
+    @ApiOperation(value = "전체 질문글을 조회한다.", notes = "질문들을 모두 조회하여 가져온다.")
+    public Map<String, Object> lookupAllQuestion(){
+        Map<String, Object> result = new HashMap<>();
+        List<QuestionDto> questionList = new ArrayList<>();
+        int countQuestion = 0;
+        try {
+
+            questionList = questionService.lookAllQuestion();
 
             if(questionList != null){
                 result.put("status", success);
