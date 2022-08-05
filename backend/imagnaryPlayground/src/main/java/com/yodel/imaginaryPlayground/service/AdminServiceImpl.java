@@ -73,8 +73,8 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public int editUserInfo(UserDto user) throws Exception {
-        return adminMapper.editUserInfo(user);
+    public int editUserInfo(Map<String, String> map) throws Exception {
+        return adminMapper.editUserInfo(map);
     }
 
 }
