@@ -10,6 +10,7 @@ const KidsInfoPage = () => {
   const selectedkidStore = useSelector((state) => state.selectedKidReducer);
   const currentPage = useSelector((state) => state.HomePageCurrentPageReducer);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!selectedkidStore) {
       navigate(-1, { replace: true });

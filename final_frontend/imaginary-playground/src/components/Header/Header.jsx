@@ -22,7 +22,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { config } from "../../util/config";
-import { loginUserToken } from "../../util/token";
 import swal from "sweetalert";
 
 const drawerWidth = 240;
@@ -35,6 +34,8 @@ const Header = (props) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const loginUserToken = localStorage.getItem("token");
+
   const currentPage = useSelector((state) => state.HomePageCurrentPageReducer);
   const dispatch = useDispatch();
 
@@ -70,7 +71,8 @@ const Header = (props) => {
             //세션스토리지 토큰값 비우고
             //로그인 페이지로 이동
             if (res.data.status === "SUCCESS") {
-              sessionStorage.removeItem("token");
+              localStorage.removeItem("token");
+              dispatch({ type: "SET_LOGIN_USER", data: null });
               navigate("/login");
             } else {
               swal({
@@ -82,6 +84,7 @@ const Header = (props) => {
           })
           .catch((err) => {
             console.log(err);
+            alert("서버와 통신에러!!");
           });
         break;
       }
