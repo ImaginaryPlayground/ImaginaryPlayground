@@ -43,7 +43,8 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public List<QuestionDto> lookupAllQuestion(PageDto pageDto) throws Exception {
-        pageDto.setPage_last(pageDto.getPage() + PAGE);
+        pageDto.setPage(pageDto.getPage()*PAGE);
+        pageDto.setPage_last(PAGE);
         return questionMapper.lookupAllQuestion(pageDto);
     }
 
@@ -59,7 +60,8 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public List<QuestionDto> lookupAllQuestionWithEmail(PageDto pageDto) throws Exception {
-        pageDto.setPage_last(pageDto.getPage() + PAGE);
+        pageDto.setPage(pageDto.getPage()*PAGE);
+        pageDto.setPage_last(PAGE);
         return questionMapper.lookupAllQuestionWithEmail(pageDto);
     }
 
@@ -70,7 +72,8 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public List<QuestionDto> searchAllQuestion(PageDto pageDto) throws Exception {
-        pageDto.setPage_last(pageDto.getPage() + PAGE);
+        pageDto.setPage(pageDto.getPage()*PAGE);
+        pageDto.setPage_last(PAGE);
         return questionMapper.searchAllQuestion(pageDto);
     }
 
@@ -81,7 +84,8 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public List<QuestionDto> searchAllQuestionWithEmail(PageDto pageDto) throws Exception {
-        pageDto.setPage_last(pageDto.getPage() + PAGE);
+        pageDto.setPage(pageDto.getPage()*PAGE);
+        pageDto.setPage_last(PAGE);
         return questionMapper.searchAllQuestionWithEmail(pageDto);
     }
 
