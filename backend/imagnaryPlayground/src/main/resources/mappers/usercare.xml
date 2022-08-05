@@ -60,6 +60,7 @@
             <if test="gender != 'A'">
                 AND gender = #{gender}
             </if>
+        LIMIT #{page}, #{page_last}
     </select>
 
     <select id="searchAllBabyCount" parameterType="BabyVO" resultType="int">
