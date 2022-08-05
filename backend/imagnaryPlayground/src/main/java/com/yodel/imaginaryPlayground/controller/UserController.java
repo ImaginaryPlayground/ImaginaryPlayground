@@ -205,23 +205,24 @@ public class UserController {
     public Map<String, Object> updateUserInfo(@RequestBody Map<String, String> map){
 
         Map<String, Object> result = new HashMap<>();
-        UserDto user = null;
         String username = map.get("username");
         try {
 
-            if(username != null && !username.trim().equals("")){
-                user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if(username != null && !username.trim().equals("")) {
+                UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 user.setUsername(username);
 
                 int res = userService.updateUserInfo(user);
 
-                if(res == 1){
+                if (res == 1) {
                     userService.findByEmail(user.getEmail());
                     result.put("status", success);
                     result.put("data", user);
-                }else{
+                } else {
                     result.put("status", fail);
                 }
+
+            }
         } catch (Exception e) {
             result.put("status", error);
             result.put("message", e.toString());

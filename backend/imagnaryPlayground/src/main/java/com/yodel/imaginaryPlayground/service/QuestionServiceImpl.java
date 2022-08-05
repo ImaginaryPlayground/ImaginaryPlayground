@@ -43,8 +43,7 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public List<QuestionDto> lookupAllQuestion(PageDto pageDto) throws Exception {
-        pageDto.setPage(0);
-        pageDto.setPage_last(PAGE);
+        pageDto.setPage_last(pageDto.getPage() + PAGE);
         return questionMapper.lookupAllQuestion(pageDto);
     }
 
