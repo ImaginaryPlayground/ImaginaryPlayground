@@ -101,7 +101,7 @@ function Ocean() {
         <div className="ocean">
 
             {/* 전체적인 배경음악 */}
-            <iframe src="/assets/ocean/Calimba.mp3" allow="autoplay;" className="audio"></iframe>
+            {/* <iframe src="/assets/ocean/Calimba.mp3" allow="autoplay;" className="audio"></iframe> */}
             
             {/* 상어 게임이 구현되는 동안(아직 상어가 20번 터치가 안되었을때) 상어 4마리를 보여주고*/}
             { start? (
@@ -110,7 +110,8 @@ function Ocean() {
             <h2 className="title">상어를 터치하여 쫓아주세요!</h2>
             ) : (<></>)}
             {/* 왼쪽에서 2번째 상어 */}
-            {countOne <= 4? (<div className="Shark2" onClick={toggleOne}></div>) : <></>}
+            {countOne <= 4? (<div className="Shark2" onClick={toggleOne}>
+            </div>) : <></>}
             {/* 왼쪽에서 3번째 상어 */}
             {countTwo <= 4? (<div className="Shark3" onClick={toggleTwo}></div>) : <></>}
             {/* 왼쪽에서 4번째 상어 */}
