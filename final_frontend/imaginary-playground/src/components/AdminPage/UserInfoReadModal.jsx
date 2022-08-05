@@ -10,6 +10,7 @@ const UserInfoReadModal = ({ userInfo, setSelectedUserInfo }) => {
     });
   };
   const isMobile = useMediaQuery("(max-width: 600px)");
+
   return (
     <Grid className="UserInfoReadModal">
       <Grid item>
@@ -38,9 +39,9 @@ const UserInfoReadModal = ({ userInfo, setSelectedUserInfo }) => {
       <Grid item className="grid" mt={2}>
         <span className="menu">*이름</span>
         <TextField
-          value={userInfo.name}
+          value={userInfo.username}
           sx={isMobile ? { width: "80%" } : { width: "60%" }}
-          name="name"
+          name="username"
           onChange={handleChangeUserInfo}
           color="primary"
           focused
@@ -57,18 +58,27 @@ const UserInfoReadModal = ({ userInfo, setSelectedUserInfo }) => {
         <span style={isMobile ? { width: "0%" } : { width: "20%" }}></span>
       </Grid>
       <Grid item className="grid" mt={2}>
-        <span className="menu">병원 종류</span>
+        <span className="menu">병원 주소</span>
         <TextField
-          value={userInfo.hospital_type}
+          value={userInfo.hospital_address}
           sx={isMobile ? { width: "80%" } : { width: "60%" }}
           error
         />
         <span style={isMobile ? { width: "0%" } : { width: "20%" }}></span>
       </Grid>
       <Grid item className="grid" mt={2}>
-        <span className="menu">병원 주소</span>
+        <span className="menu">가입 경로</span>
         <TextField
-          value={userInfo.address}
+          value={userInfo.provider}
+          sx={isMobile ? { width: "80%" } : { width: "60%" }}
+          error
+        />
+        <span style={isMobile ? { width: "0%" } : { width: "20%" }}></span>
+      </Grid>
+      <Grid item className="grid" mt={2}>
+        <span className="menu">가입 날짜</span>
+        <TextField
+          value={userInfo.join_date}
           sx={isMobile ? { width: "80%" } : { width: "60%" }}
           error
         />

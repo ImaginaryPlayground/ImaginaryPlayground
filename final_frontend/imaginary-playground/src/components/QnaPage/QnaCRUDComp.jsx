@@ -9,12 +9,12 @@ import axios from "axios";
 import { config } from "../../util/config";
 
 const QnaCRUDComp = ({ isEdit }) => {
-  const currentLoginUser = useSelector((state) => {
-    console.log(state);
+  const loginUserDataReducer = useSelector((state) => {
     return state.loginUserDataReducer;
   });
 
   const nowDate = new Date();
+  const loginUserToken = localStorage.getItem("token");
 
   const nowDateConvert =
     nowDate.getFullYear() +
@@ -29,18 +29,18 @@ const QnaCRUDComp = ({ isEdit }) => {
     ":" +
     nowDate.getSeconds();
 
-  const selectedQnaDataRedux = useSelector(
+  const selectedQnaDataReducer = useSelector(
     (state) => state.QnaPageSelectedDataReducer
   );
   const [selectedQnaData, setSelectedQnaData] = useState(
     isEdit
-      ? selectedQnaDataRedux
+      ? selectedQnaDataReducer
       : {
           title: "",
           content: "",
-          username: currentLoginUser.username,
+          username: loginUserDataReducer.username,
           completed: false,
-          email: currentLoginUser.email,
+          email: loginUserDataReducer.email,
           created_date: nowDateConvert,
           modified_date: nowDateConvert,
         }
@@ -55,20 +55,7 @@ const QnaCRUDComp = ({ isEdit }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //특정 글에 대한 정보와 그에 대한 답변을 불러온다.
-    axios({
-      url: `${config.api}/question/lookup/${selectedQnaData.id}`, //마지막은 페이지번호
-      method: "GET",
-      headers: "", //헤더에 토큰
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    if (!currentLoginUser) {
+    if (!loginUserDataReducer) {
       navigate("/login");
       return;
     } else if (isEdit && !selectedQnaData.title) {
@@ -76,14 +63,43 @@ const QnaCRUDComp = ({ isEdit }) => {
       return;
     }
 
-    if (isEdit && selectedQnaData.completed) {
-      setAnswerData({
-        admin_id: 1,
-        content:
-          "안녕하세요. 해당 문의글 잘 읽어 보았습니다. 해당 문제는 현재 기술팀에서 알아보고 있는 중입니다. 잠시만 기다려 주시면 감사하겠습니다.",
-        created_date: "2022-08-01 22:09:30",
-        modified_date: "2022-08-01 22:09:30",
-      });
+    if (isEdit) {
+      //특정 글에 대한 정보와 그에 대한 답변을 불러온다.
+      axios({
+        url: `${config.api}/question/lookup/${selectedQnaData.id}`, //마지막은 페이지번호
+        method: "GET",
+        headers: {
+          Auth: loginUserToken,
+        }, //헤더에 토큰
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      //답변 받아오기
+      axios({
+        url: `${config.api}/answer/detail/${selectedQnaData.id}`, //마지막은 페이지번호
+        method: "GET",
+        headers: {
+          Auth: loginUserToken, //로그인이됐으면 요청
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          if (res.data.status === "SUCCESS") {
+            setAnswerData(res.data.data);
+          } else if (res.data.status === "NULL") {
+          } else {
+            swal("에러", "답변을 불러오지 못했습니다.!", "error");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("서버 통신 에러!");
+        });
     }
   }, []);
 
@@ -125,9 +141,11 @@ const QnaCRUDComp = ({ isEdit }) => {
         if (isEdit) {
           //수정상태라면
           axios({
-            url: `${config.api}/question`, //마지막은 페이지번호
+            url: `${config.api}/question/`,
             method: "PUT",
-            headers: "", //헤더에 토큰
+            headers: {
+              Auth: loginUserToken,
+            }, //헤더에 토큰
             data: {
               id: selectedQnaData.id,
               title: selectedQnaData.title,
@@ -136,15 +154,34 @@ const QnaCRUDComp = ({ isEdit }) => {
           })
             .then((res) => {
               console.log(res);
+              if (res.data.status === "SUCCESS") {
+                dispatch({
+                  type: "SET_SELECTED_QNADATA",
+                  data: selectedQnaData,
+                });
+                swal({
+                  title: "성공!",
+                  text: "글 수정이 완료되었습니다.",
+                  icon: "success",
+                });
+              } else {
+                swal({
+                  title: "에러!",
+                  text: "글 수정중 오류가 발생했습니다.",
+                  icon: "error",
+                });
+              }
             })
             .catch((err) => {
               console.log(err);
             });
         } else {
+          //작성상태라면
+
           axios({
-            url: `${config.api}/question`, //마지막은 페이지번호
+            url: `${config.api}/question/`, //마지막은 페이지번호
             method: "POST",
-            headers: "", //헤더에 토큰
+            headers: { Auth: loginUserToken }, //헤더에 토큰
             data: {
               title: selectedQnaData.title,
               content: selectedQnaData.content,
@@ -152,44 +189,71 @@ const QnaCRUDComp = ({ isEdit }) => {
           })
             .then((res) => {
               console.log(res);
+              if (res.data.status === "SUCCESS") {
+                const createdQnaData = {
+                  ...selectedQnaData,
+                  created_date: res.data.data.created_date,
+                  modified_date: res.data.data.modified_date,
+                  id: res.data.data.id,
+                };
+                setSelectedQnaData({
+                  ...createdQnaData,
+                });
+                dispatch({
+                  type: "SET_SELECTED_QNADATA",
+                  data: createdQnaData,
+                });
+                swal("성공", "문의글이 생성되었습니다.", "success").then(() => {
+                  navigate("/qnadetailpage");
+                });
+              } else {
+                swal("에러!", "문의글 생성에 실패하였습니다.", "error");
+              }
             })
             .catch((err) => {
               console.log(err);
+              alert("서버 통신 에러");
             });
-
-          //작성상태라면
-          setSelectedQnaData({
-            ...selectedQnaData,
-            created_date: nowDateConvert,
-          });
-          dispatch({ type: "SET_SELECTED_QNADATA", data: selectedQnaData });
-          navigate("/qnadetailpage");
         }
-
-        // swal(`${isEdit ? "수정" : "작성"}이 완료 되었습니다.`, {
-        //   icon: "success",
-        // });
       }
     });
-    //비동기 처리
   };
 
   const handleDeleteQnaData = () => {
     //질문 삭제 버튼
-    axios({
-      url: `${config.api}/question`, //마지막은 페이지번호
-      method: "DELETE",
-      headers: "", //헤더에 토큰
-      data: {
-        id: selectedQnaData.id,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    swal({
+      title: "삭제",
+      text: `정말로 1:1문의 삭제하시겠습니까?`,
+      icon: "warning",
+      buttons: true,
+    }).then((ok) => {
+      if (ok) {
+        axios({
+          url: `${config.api}/question/`, //마지막은 페이지번호
+          method: "DELETE",
+          headers: {
+            Auth: loginUserToken,
+          },
+          data: {
+            id: selectedQnaData.id,
+          },
+        })
+          .then((res) => {
+            console.log(res);
+            if (res.data.status === "SUCCESS") {
+              swal("성공!", "정상적으로 문의가 삭제되었습니다", "success");
+              sessionStorage.setItem("qna_list_page", 1);
+              navigate("/qnapage", { replace: true });
+            } else {
+              swal("에러!", "문의글을 삭제하지 못했습니다.", "error");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("서버 통신 에러!");
+          });
+      }
+    });
   };
 
   return (
@@ -208,18 +272,18 @@ const QnaCRUDComp = ({ isEdit }) => {
               해당 문의는
               <span
                 className={
-                  selectedQnaDataRedux.completed
+                  selectedQnaDataReducer.completed
                     ? ["compeleted_after"].join(" ")
                     : ["compeleted_before"].join(" ")
                 }
               >
-                {selectedQnaDataRedux.completed ? "처리완료" : "처리 전"}
+                {selectedQnaDataReducer.completed ? "처리완료" : "처리 전"}
               </span>
               상태 입니다.
             </span>
           </Grid>
           <Grid>
-            {!selectedQnaDataRedux.completed ? (
+            {!selectedQnaDataReducer.completed ? (
               <span>
                 내용 수정이 <span className="modified_ok">가능</span>합니다.
               </span>
@@ -229,8 +293,21 @@ const QnaCRUDComp = ({ isEdit }) => {
               </span>
             )}
           </Grid>
+          <Grid
+            item
+            textAlign={"end"}
+            sx={{
+              fontSize: "16px",
+              textDecoration: "underline",
+              cursor: "pointer",
+            }}
+            onClick={handleDeleteQnaData}
+          >
+            삭제하기
+          </Grid>
         </Grid>
       )}
+
       <Grid
         item
         display={"flex"}
@@ -260,19 +337,23 @@ const QnaCRUDComp = ({ isEdit }) => {
           </Button>
         </Grid>
         {isEdit && (
-          <Grid item textAlign="end">
+          <Grid item textAlign="end" ml={2}>
             <Grid className="qna_date">
               <span style={{ marginRight: "5px" }} className="text_custom">
                 작성일
               </span>
-              <span className="text_custom_date">{`${selectedQnaData.created_date}`}</span>
+              <span className="text_custom_date">{`${
+                selectedQnaData.created_date.split(".")[0]
+              }`}</span>
             </Grid>
             {selectedQnaData.created_date !== selectedQnaData.modified_date && (
-              <Grid item>
+              <Grid item mt={1}>
                 <span style={{ marginRight: "5px" }} className="text_custom">
                   마지막 수정일
                 </span>
-                <span className="text_custom_date">{`${selectedQnaData.modified_date}`}</span>
+                <span className="text_custom_date">{`${
+                  selectedQnaData.modified_date.split(".")[0]
+                }`}</span>
               </Grid>
             )}
           </Grid>
@@ -299,7 +380,7 @@ const QnaCRUDComp = ({ isEdit }) => {
       <Grid item my={1}>
         <TextField
           color="main"
-          value={currentLoginUser?.hospital_name}
+          value={loginUserDataReducer?.hospital_name}
           sx={isMobile_780 ? { width: "80%" } : { width: "50%" }}
           placeholder="병원이름"
           disabled
@@ -308,7 +389,7 @@ const QnaCRUDComp = ({ isEdit }) => {
       <Grid item my={1}>
         <TextField
           color="main"
-          value={currentLoginUser?.hospital_address}
+          value={loginUserDataReducer?.hospital_address}
           sx={isMobile_780 ? { width: "100%" } : { width: "80%" }}
           placeholder="병원주소"
           disabled
@@ -357,7 +438,7 @@ const QnaCRUDComp = ({ isEdit }) => {
       {!selectedQnaData.completed ? (
         <Grid item my={1} width={"100%"} height="50px">
           <Button
-            disabled={selectedQnaData.completed}
+            disabled={selectedQnaData.completed === 1}
             onClick={handleOnSubmit}
             variant="contained"
             color="main"
@@ -380,7 +461,7 @@ const QnaCRUDComp = ({ isEdit }) => {
           p={2}
           sx={{
             borderRadius: "5px",
-            backgroundColor: "palevioletred",
+            backgroundColor: "slategray",
             color: "white",
           }}
           my={4}

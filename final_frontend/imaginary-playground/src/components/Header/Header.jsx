@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { config } from "../../util/config";
+import swal from "sweetalert";
 
 const drawerWidth = 240;
 const navItems = ["내정보", "1:1문의", "로그아웃"];
@@ -33,6 +34,8 @@ const Header = (props) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const loginUserToken = localStorage.getItem("token");
+
   const currentPage = useSelector((state) => state.HomePageCurrentPageReducer);
   const dispatch = useDispatch();
 
@@ -54,27 +57,37 @@ const Header = (props) => {
         navigate("/qnapage");
         sessionStorage.setItem("qna_list_page", 1);
         break;
-      case "로그아웃":
+      case "로그아웃": {
         //로그아웃
         axios({
-          url: `${config.api}/question`, //마지막은 페이지번호
+          url: `${config.api}/user/logout`,
           method: "POST",
-          headers: "", //헤더에 토큰
-          data: {
-            id: 1, //로그인된 유저 ID 번호()
-          },
+          headers: {
+            Auth: loginUserToken,
+          }, //헤더에 토큰
         })
           .then((res) => {
             console.log(res);
             //세션스토리지 토큰값 비우고
-
             //로그인 페이지로 이동
-            navigate("/login");
+            if (res.data.status === "SUCCESS") {
+              localStorage.removeItem("token");
+              dispatch({ type: "SET_LOGIN_USER", data: null });
+              navigate("/login");
+            } else {
+              swal({
+                title: "에러",
+                text: "로그아웃에 실패하였습니다.",
+                icon: "error",
+              });
+            }
           })
           .catch((err) => {
             console.log(err);
+            alert("서버와 통신에러!!");
           });
         break;
+      }
       default:
         break;
     }

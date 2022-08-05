@@ -7,7 +7,7 @@
     <update id="approveUser">
         UPDATE imagination_playground.user
         SET type = 'ROLE_USER'
-        WHERE email = #{email} IN
+        WHERE email IN
         <foreach item="email" collection="list"
                  open="(" separator="," close=")">
             #{email}
@@ -16,7 +16,7 @@
 
     <delete id="deleteUser">
         DELETE FROM imagination_playground.user
-        WHERE email = #{email} IN
+        WHERE email IN
         <foreach item="email" collection="list"
                  open="(" separator="," close=")">
             #{email}
@@ -26,7 +26,7 @@
     <update id="approveUserType">
         UPDATE imagination_playground.user
         SET type = #{type}
-        WHERE email = #{email} IN
+        WHERE email IN
         <foreach item="email" collection="list"
                  open="(" separator="," close=")">
             #{email}
@@ -62,5 +62,11 @@
         SELECT * FROM imagination_playground.user
         WHERE email = #{email}
     </select>
+
+    <update id="editUserInfo" parameterType="Map">
+        UPDATE imagination_playground.user
+        SET username = #{username}
+        WHERE id = #{id}
+    </update>
 
 </mapper>

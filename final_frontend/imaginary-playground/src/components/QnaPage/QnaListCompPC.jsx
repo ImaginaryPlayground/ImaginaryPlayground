@@ -41,18 +41,39 @@ const QnaListCompPC = ({ qnaListData }) => {
           <Grid
             item
             className="title_td text_constrained"
-            sx={{ textAlign: "left", marginRight: "15px", cursor: "pointer" }}
+            sx={{
+              textAlign: "left",
+              marginRight: "15px",
+              cursor: "pointer",
+              paddingLeft: "10px",
+            }}
             onClick={() => {
               handleOnClickQnaData(data);
             }}
           >
             <span>{data.title}</span>
           </Grid>
-          <Grid item className="writer_td font_custom">
-            <span>{data.username}</span>
+          <Grid
+            item
+            className="writer_td font_custom"
+            style={{
+              wordWrap: "break-word",
+            }}
+          >
+            <span>
+              <span style={{ display: "inline-block" }}>
+                {data.email.split("@")[0]}@
+              </span>
+              <span style={{ display: "inline-block" }}>
+                {data.email.split("@")[1].split(".")[0]}.
+              </span>
+              <span style={{ display: "inline-block" }}>
+                {data.email.split("@")[1].split(".")[1]}
+              </span>
+            </span>
           </Grid>
           <Grid item className="username_td font_bold">
-            <span>{data.created_date}</span>
+            <span>{data.created_date.split(".")[0]}</span>
           </Grid>
           <Grid
             item

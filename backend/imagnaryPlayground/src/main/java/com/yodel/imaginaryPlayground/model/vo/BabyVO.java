@@ -15,7 +15,7 @@ public class BabyVO {
     private char gender;
     private int id;
     private int user_id;
-
+    private int hospital_id;
     //조회문: 검색한 아이에 대한 개수
     private int searchedDataAllNum;
 }

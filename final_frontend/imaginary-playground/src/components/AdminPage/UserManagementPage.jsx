@@ -13,84 +13,31 @@ import swal from "sweetalert";
 import { useEffect } from "react";
 import axios from "axios";
 import { config } from "../../util/config";
+import qs from "qs";
 
 const columns = [
   { field: "id", headerName: "id", width: 50 },
   { field: "email", headerName: "이메일", width: 180 },
-  { field: "name", headerName: "이름", width: 130 },
+  { field: "username", headerName: "이름", width: 130 },
   {
     field: "hospital_name",
     headerName: "병원 이름",
     width: 250,
   },
   {
-    field: "hospital_type",
-    headerName: "병원 종류",
-    width: 100,
-  },
-  {
-    field: "address",
+    field: "hospital_address",
     headerName: "병원 주소",
     width: 600,
   },
   {
-    field: "signup_path",
+    field: "join_date",
+    headerName: "가입 날짜",
+    width: 175,
+  },
+  {
+    field: "provider",
     headerName: "가입 경로",
     width: 100,
-  },
-];
-
-const rows = [
-  {
-    id: 1,
-    email: "jimdac@naver.com",
-    name: "유지홍",
-    hospital_name: "순천향병원",
-    hospital_type: "상급 병원",
-    address: "인천광역시 부평구 동수로 56-(부평동)",
-    signup_path: "kakao",
-  },
-  {
-    id: 2,
-    email: "jimdac@naver.com",
-    name: "유지홍",
-    hospital_name: "순천향병원",
-    hospital_type: "상급 병원",
-    address: "인천광역시 부평구 동수로 56-(부평동)",
-    signup_path: "naver",
-  },
-  {
-    id: 3,
-    email: "jimdac@naver.com",
-    name: "유지홍",
-    hospital_name: "순천향병원",
-    hospital_type: "상급 병원",
-    address: "인천광역시 부평구 동수로 56-(부평동)",
-    signup_path: "nomal",
-  },
-  {
-    id: 4,
-    email: "jimdac@naver.com",
-    name: "유지홍",
-    hospital_name: "순천향병원",
-    hospital_type: "상급 병원",
-    address: "인천광역시 부평구 동수로 56-(부평동)",
-  },
-  {
-    id: 5,
-    email: "jimdac@naver.com",
-    name: "유지홍",
-    hospital_name: "순천향병원",
-    hospital_type: "상급 병원",
-    address: "인천광역시 부평구 동수로 56-(부평동)",
-  },
-  {
-    id: 6,
-    email: "jimdac@naver.com",
-    name: "유지홍",
-    hospital_name: "순천향병원",
-    hospital_type: "상급 병원",
-    address: "인천광역시 부평구 동수로 56-(부평동)",
   },
 ];
 
@@ -98,59 +45,67 @@ const UserManagementPage = () => {
   const [open, setOpen] = useState(false);
   const [selectedUserInfo, setSelectedUserInfo] = useState({});
   const [page, setPage] = useState(0);
-
+  const [allUserData, setAllUserData] = useState([]);
+  const [isUpdate, setIsUpdate] = useState(false);
   const handleClickOpen = (e) => {
     setOpen(true);
     setSelectedUserInfo(e.row);
   };
+  const loginUserToken = localStorage.getItem("token");
 
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleModifyUserInfo = () => {
-    if (!selectedUserInfo.name.length || selectedUserInfo.name.length > 15) {
+    if (
+      !selectedUserInfo.username.length ||
+      selectedUserInfo.username.length > 15
+    ) {
       alert("이름은 1~15자 여야 합니다.");
       return;
     }
 
-    //전체 승인된 전체 회원 개수
+    //회원 정보 관리자가 수정
     axios({
-      url: `${config.api}/admin/user/update`, //마지막은 페이지번호
-      method: "GET",
+      url: `${config.api}/admin/user/edit`,
+      method: "POST",
       headers: {
-        token: "", //로그인이됐으면 요청
+        Auth: loginUserToken, //로그인이됐으면 요청
       },
       data: {
-        id: selectedUserInfo.id,
         username: selectedUserInfo.username,
+        id: selectedUserInfo.id,
       },
     }).then((res) => {
       console.log(res);
+      if (res.data.status === "SUCCESS") {
+        setIsUpdate(!isUpdate);
+        swal("성공", "정상적으로 회원정보를 수정하였습니다.", "success");
+      } else {
+        swal("에러!", "회원 정보를 수정하는데 실패하였습니다.", "error");
+      }
     });
-
-    //console.log(selectedUserInfo);
-    //setOpen(false);
   };
 
   useEffect(() => {
     //비동기 회원관리
     //전체 승인된 전체 회원 개수
     axios({
-      url: `${config.api}/admin/lookup/all`, //마지막은 페이지번호
+      url: `${config.api}/admin/lookup/all/1`,
       method: "GET",
+      headers: {
+        Auth: loginUserToken, //로그인이됐으면 요청
+      },
     }).then((res) => {
       console.log(res);
+      if (res.data.status === "SUCCESS") {
+        setAllUserData(res.data.data);
+      } else {
+        swal("에러!", "회원 정보를 로드하는데 실패하였습니다.", "error");
+      }
     });
-
-    //승인안된 회원 조회
-    axios({
-      url: `${config.api}/admin/lookup/approved/${page}`, //마지막은 페이지번호
-      method: "GET",
-    }).then((res) => {
-      console.log(res);
-    });
-  }, []);
+  }, [isUpdate]);
 
   const handleDeleteUserInfo = () => {
     //console.log(selectedUserInfo);
@@ -161,11 +116,25 @@ const UserManagementPage = () => {
       buttons: true,
     }).then((Approval) => {
       if (Approval) {
-        //비동기 통신(회원가입 승인)
-        swal("삭제가 완료 되었습니다.", {
-          icon: "success",
+        axios({
+          url: `${config.api}/admin/`, //마지막은 페이지번호
+          method: "DELETE",
+          headers: {
+            Auth: loginUserToken, //로그인이됐으면 요청
+          },
+          data: [selectedUserInfo.email],
+        }).then((res) => {
+          console.log(res);
+          if (res.data.status === "SUCCESS") {
+            setIsUpdate(!isUpdate);
+            swal("삭제가 완료 되었습니다.", {
+              icon: "success",
+            });
+            setOpen(false);
+          } else {
+            swal("에러!", "회원을 삭제하는데 실패하였습니다!", "error");
+          }
         });
-        setOpen(false);
       }
     });
   };
@@ -178,7 +147,7 @@ const UserManagementPage = () => {
     >
       <DataGrid
         sx={{ cursor: "pointer" }}
-        rows={rows}
+        rows={allUserData}
         columns={columns}
         pageSize={15}
         rowsPerPageOptions={[15]}

@@ -37,19 +37,31 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     @Override
-    public List<QuestionDto> lookupAllQuestion(int page) throws Exception {
-        PageDto pageDto = new PageDto(0, PAGE, "", "", 0, "", 0);
+    public QuestionDto detailQuestion(QuestionDto questionDto) throws Exception {
+        return questionMapper.detailQuestion(questionDto);
+    }
+
+    @Override
+    public List<QuestionDto> lookupAllQuestion(PageDto pageDto) throws Exception {
+        pageDto.setPage(pageDto.getPage()*PAGE);
+        pageDto.setPage_last(PAGE);
         return questionMapper.lookupAllQuestion(pageDto);
     }
 
     @Override
-    public int lookupAllQuestionCount() throws Exception {
-        return questionMapper.lookupAllQuestionCount();
+    public List<QuestionDto> lookAllQuestion() throws Exception {
+        return questionMapper.lookAllQuestion();
+    }
+
+    @Override
+    public int lookupAllQuestionCount(PageDto pageDto) throws Exception {
+        return questionMapper.lookupAllQuestionCount(pageDto);
     }
 
     @Override
     public List<QuestionDto> lookupAllQuestionWithEmail(PageDto pageDto) throws Exception {
-        pageDto.setPage_last(pageDto.getPage() + PAGE);
+        pageDto.setPage(pageDto.getPage()*PAGE);
+        pageDto.setPage_last(PAGE);
         return questionMapper.lookupAllQuestionWithEmail(pageDto);
     }
 
@@ -60,7 +72,8 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public List<QuestionDto> searchAllQuestion(PageDto pageDto) throws Exception {
-        pageDto.setPage_last(pageDto.getPage() + PAGE);
+        pageDto.setPage(pageDto.getPage()*PAGE);
+        pageDto.setPage_last(PAGE);
         return questionMapper.searchAllQuestion(pageDto);
     }
 
@@ -71,7 +84,8 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public List<QuestionDto> searchAllQuestionWithEmail(PageDto pageDto) throws Exception {
-        pageDto.setPage_last(pageDto.getPage() + PAGE);
+        pageDto.setPage(pageDto.getPage()*PAGE);
+        pageDto.setPage_last(PAGE);
         return questionMapper.searchAllQuestionWithEmail(pageDto);
     }
 

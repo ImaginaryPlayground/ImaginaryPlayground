@@ -37,9 +37,9 @@ no-cache-dir=true 설정의 경우에는 본인이 사용하고 싶어서 넣은
 + https://kjk92.tistory.com/83 (pip.conf 설정)
 + https://foxybearkim.tistory.com/14 (mirror 서버 설정 및 trusted-host 설정)
 
-### 해결과정
+### `–no-cache-dir` 옵션
 
-해시값 에러에는 –no-cache-dir 옵션을 사용하면 된다는 말이 지배적이었으나 안 되서 pip 업데이트 시도도 해보았으나 업데이트에도 어김없이 sha 에러가 생겼다.
+해시값 에러에는 `–no-cache-dir` 옵션을 사용하면 된다는 말이 지배적이었으나 안 되서 pip 업데이트 시도도 해보았으나 업데이트에도 어김없이 sha 에러가 생겼다.
 
 <img src='https://user-images.githubusercontent.com/19484971/182135615-fe9eaed5-70c5-4c8e-883e-e09e0f04ddeb.png' width=600>
 
@@ -55,4 +55,70 @@ no-cache-dir=true 설정의 경우에는 본인이 사용하고 싶어서 넣은
 
 이후 경로 `pip config -v list`으로 pip 설정파일에 대한 파일 리스트를 볼 수 있다는 글을 보고 `/etc/pip.conf`에 작성된 설정파일 때문에 문제가 생긴것을 알게되어 해결이 가능했다. 이전에 봤던 블로그는 `/.pip/pip.conf` 폴더만 알려주어서 해맷는데 좀 슬프다..
 
-## 
+## cryptography 에러
+
+[google assistant 서비스 공식 홈페이지](https://developers.google.com/assistant/sdk/guides/service/python/embed/setup?hardware=rpi)와 [참고하는 동영상](https://www.youtube.com/watch?v=wavlbH0M1Zg)을 보면서 라즈베리에 google assistant 서비스를 적용해보려고 했다.
+
+### 에러 1
+
+그런데 설치 중 `python -m pip install --upgrade google-assistant-sdk[samples]
+` 명령어에 아래와 같은 버그가 발생하였다.
+
+```
+... 생략
+          =============================DEBUG ASSISTANCE=============================
+      
+      error: can't find Rust compiler
+      
+      If you are using an outdated pip version, it is possible a prebuilt wheel is available for this package but pip is not able to install from it. Installing from the wheel would avoid the need for a Rust compiler.
+      
+      To update pip, run:
+      
+          pip install --upgrade pip
+      
+      and then retry package installation.
+      
+      If you did intend to build this package from source, try installing a Rust compiler from your system package manager and ensure it is on the PATH during installation. Alternatively, rustup (available at https://rustup.rs) is the recommended way to download and update the Rust compiler toolchain.
+      
+      This package requires Rust >=1.41.0.
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+  ERROR: Failed building wheel for cryptography
+Successfully built CFFI
+Failed to build cryptography
+ERROR: Could not build wheels for cryptography, which is required to install pyproject.toml-based projects
+```
+
+`error: Can not find Rust compiler`와 `ERROR: Failed building wheel for cryptography`가 키워드라고 생각하여 해당 문장을 위주로 검색해보니 아래의 가이드를 볼 수 있었다.
+
+[cryptography 공식홈페이지의 FQA](https://cryptography.io/en/35.0.0/faq/#installing-cryptography-fails-with-error-can-not-find-rust-compiler)
+
+다양한 에러 중에서 원하던 키워드 `error: Can not find Rust compiler`을 찾을 수 있었고 안내하는 링크를 따라 Rust를 설치하여 해결하였다.
+
+### 에러 2
+
+대충 긴 에러가 나왔는데 중요한 부분은 아래의 에러였다.
+
+ImportError: /lib/arm-linux-gnueabihf/libc.so.6: version `GLIBC_2.33' not found
+
+구글링하다가 아래의 글을 봤는데 해결이 되어서 그대로 진행하였다.
+
+https://groups.google.com/g/grpc-io/c/T91EyO81c8I?pli=1
+
+참고로 numpy를 다운로드받거나 다른 것을 다운로드 받으라는 글도 있었는데, 그것들은 다운로드 받을 때 다른 에러가 났다;
+
+동영상은 16분인데.. 나는 왜 4시간이나.. ^ㅠ^
+
+## Wemos D1 mini 보드 테스트
+
+Wemos D1 mini 보드에 초음파 센서가 작동하는지 확인하고 wifi로 통신하는 것을 보려고 했으나..
+
+[설정](https://glorlfy.tistory.com/4
+)과 [회로도](http://www.esp8266learning.com/wemos-mini-hc-sr04-ultrasonic-sensor.php)를 구글링해서 잘 적용한 것 같은데도 너무 안되서 진행이 막혔다..
+
+값이 0만 뜨고있다..
+
+납땜을 작업할 도구가 없어 납땜없이 wemos D1 mini 보드만을 사용했는데 이 때문에 보드와 전선이 잘 연결이 되지 않아 값이 0만 측정되는 것이었다..
+
+정확히 하루 날렸다.

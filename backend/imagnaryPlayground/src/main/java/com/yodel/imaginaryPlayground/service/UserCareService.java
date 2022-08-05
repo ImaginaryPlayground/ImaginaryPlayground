@@ -17,6 +17,7 @@ public interface UserCareService {
     List<BabyDto> lookupAllBaby(PageDto pageDto) throws Exception;
     List<BabyDto> searchByKeyword(PageDto pageDto) throws Exception;
     BabyDto lookupBaby(IdVO idVO) throws Exception;
+    BabyDto getBaby(BabyDto babyDto) throws Exception;
     int updateBabyInfo(BabyDto baby) throws Exception;
 
     int deleteBabyInfo(BabyDto babyDto) throws Exception;

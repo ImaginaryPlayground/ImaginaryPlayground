@@ -5,9 +5,9 @@
 <mapper namespace="com.yodel.imaginaryPlayground.mapper.QuestionMapper">
     <insert id="saveQuestion" parameterType="QuestionDto">
         INSERT INTO imagination_playground.qna_question
-            (user_id, title, content, secret, completed, created_date, modified_date)
+            (user_id, title, content, secret, email, completed, created_date, modified_date)
         VALUES
-            (#{user_id}, #{title}, #{content}, #{secret}, 0, NOW(), NOW())
+            (#{user_id}, #{title}, #{content}, #{secret}, #{email}, 0, NOW(), NOW())
     </insert>
 
     <update id="editQuestion" parameterType="QuestionDto">
@@ -18,7 +18,7 @@
 
     <delete id="deleteQuestion" parameterType="IdVO">
         DELETE FROM imagination_playground.qna_question
-        WHERE id = #{question_id} AND user_id = #{user_id}
+        WHERE id = #{id} AND user_id = #{user_id}
     </delete>
 
     <select id="lookupQuestion" parameterType="int" resultType="QuestionDto">
@@ -26,84 +26,102 @@
         WHERE id = #{id}
     </select>
 
-    <select id="lookupAllQuestion" parameterType="PageDto" resultType="QuestionDto">
+    <select id="detailQuestion" parameterType="QuestionDto" resultType="QuestionDto">
         SELECT * FROM imagination_playground.qna_question
+        WHERE user_id = #{user_id} AND title = #{title} AND content = #{content} AND qna_type = 0 AND completed = 0
+    </select>
+
+    <select id="lookAllQuestion" resultType="QuestionDto">
+        SELECT u.email, u.username, q.id, q.user_id, q.title, q.content, q.secret, q.completed, q.created_date, q.modified_date
+        FROM imagination_playground.qna_question q
+        LEFT OUTER JOIN imagination_playground.user u
+        ON u.id = q.user_id
+    </select>
+
+    <select id="lookupAllQuestion" parameterType="PageDto" resultType="QuestionDto">
+        SELECT u.email, u.username, q.id, q.user_id, q.title, q.content, q.secret, q.completed, q.created_date, q.modified_date
+        FROM imagination_playground.qna_question q
+        LEFT OUTER JOIN imagination_playground.user u
+        ON u.id = q.user_id
         <if test="completed != 2">
             WHERE completed = #{completed}
         </if>
         ORDER BY created_date
-        ASC
+        DESC
         LIMIT #{page}, #{page_last}
     </select>
 
     <select id="lookupAllQuestionCount" parameterType="PageDto" resultType="int">
         SELECT COUNT(*)
+        FROM imagination_playground.qna_question
         <if test="completed != 2">
             WHERE completed = #{completed}
         </if>
-        FROM imagination_playground.qna_question
     </select>
 
     <select id="lookupAllQuestionWithEmail" parameterType="PageDto" resultType="QuestionDto">
-        SELECT q.email, u.id, u.user_id, u.title, u.content, u.secret, u.completed, u.created_date, u.modified_date
+        SELECT u.email, u.username, q.id, q.user_id, q.title, q.content, q.secret, q.completed, q.created_date, q.modified_date
                  FROM imagination_playground.qna_question q
                  LEFT OUTER JOIN imagination_playground.user u
                  ON u.id = q.user_id
-        WHERE email = #{email}
+        WHERE q.email = #{email}
         <if test="completed != 2">
-            AND completed = #{completed}
+            AND q.completed = #{completed}
         </if>
         ORDER BY created_date
-        ASC
+        DESC
     </select>
 
     <select id="lookupAllQuestionWithEmailCount" parameterType="PageDto" resultType="int">
         SELECT COUNT(*)
         FROM imagination_playground.qna_question q
-        WHERE email = #{email}
+        WHERE q.email = #{email}
         <if test="completed != 2">
             AND completed = #{completed}
         </if>
     </select>
 
     <select id="searchAllQuestion" parameterType="PageDto" resultType="QuestionDto">
-        SELECT * FROM imagination_playground.qna_question
-        WHERE ${key} LIKE(CONCAT("%", ${value}, "%"))
+        SELECT u.email, u.username, q.id, q.user_id, q.title, q.content, q.secret, q.completed, q.created_date, q.modified_date
+        FROM imagination_playground.qna_question q
+        LEFT OUTER JOIN imagination_playground.user u
+        ON u.id = q.user_id
+        WHERE ${key} LIKE(CONCAT("%", #{value}, "%"))
         <if test="completed != 2">
             AND completed = #{completed}
         </if>
         ORDER BY created_date
-        ASC
+        DESC
         LIMIT #{page}, #{page_last}
     </select>
 
     <select id="searchAllQuestionCount" parameterType="PageDto" resultType="int">
         SELECT COUNT(*)
         FROM imagination_playground.qna_question
-        WHERE ${key} LIKE(CONCAT("%", ${value}, "%"))
+        WHERE ${key} LIKE(CONCAT("%", #{value}, "%"))
         <if test="completed != 2">
             AND completed = #{completed}
         </if>
     </select>
 
     <select id="searchAllQuestionWithEmail" parameterType="PageDto" resultType="QuestionDto">
-        SELECT q.email, u.id, u.user_id, u.title, u.content, u.secret, u.completed, u.created_date, u.modified_date
+        SELECT u.email, u.username, q.id, q.user_id, q.title, q.content, q.secret, q.completed, q.created_date, q.modified_date
                  FROM imagination_playground.qna_question q
                  LEFT OUTER JOIN imagination_playground.user u
                  ON u.id = q.user_id
-        WHERE ${key} LIKE(CONCAT("%", ${value}, "%")) AND email = #{email}
+        WHERE ${key} LIKE(CONCAT("%", #{value}, "%")) AND q.email = #{email}
         <if test="completed != 2">
             AND completed = #{completed}
         </if>
         ORDER BY created_date
-        ASC
+        DESC
         LIMIT #{page}, #{page_last}
     </select>
 
     <select id="searchAllQuestionWithEmailCount" parameterType="PageDto" resultType="int">
         SELECT COUNT(*)
         FROM imagination_playground.qna_question q
-        WHERE ${key} LIKE(CONCAT("%", ${value}, "%")) AND email = #{email}
+        WHERE ${key} LIKE(CONCAT("%", #{value}, "%")) AND q.email = #{email}
         <if test="completed != 2">
             AND completed = #{completed}
         </if>

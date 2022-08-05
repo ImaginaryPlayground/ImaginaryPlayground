@@ -3,10 +3,10 @@ package com.yodel.imaginaryPlayground.service;
 import com.yodel.imaginaryPlayground.mapper.UserMapper;
 import com.yodel.imaginaryPlayground.model.dto.UserDto;
 import com.yodel.imaginaryPlayground.model.vo.EmailCodeVO;
+import com.yodel.imaginaryPlayground.model.vo.PasswordVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,8 +26,24 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int updateUserInfo(String username) throws Exception {
-        return userMapper.updateUserInfo(username);
+    public int updateUserInfo(UserDto user) throws Exception {
+        return userMapper.updateUserInfo(user);
+    }
+
+    @Override
+    public int getUserId(String email) {
+        return userMapper.getUserId(email);
+    }
+
+    @Override
+    public int savePassword(int user_id, String password) {
+        PasswordVO passwordVO = new PasswordVO(user_id, password);
+        return userMapper.savePassword(passwordVO);
+    }
+
+    @Override
+    public String getPassword(int user_id) {
+        return userMapper.getPassword(user_id);
     }
 
     @Override

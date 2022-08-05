@@ -43,19 +43,16 @@ const QnaPageSelectedDataReducer = (state = null, action) => {
   }
 };
 
-const initailLoginUserdata = {
-  email: "jimdac@naver.com",
-  username: "우영우",
-  join_date: "2022-07-31",
-  modified_date: "2022-07-31",
-  hospital_id: 1,
-  hospital_name: "순천향병원",
-  hospital_address: "인천광역시 부평구 동수로 56-(부평동)",
-};
-const loginUserDataReducer = (state, action) => {
-  if (!state) {
-    state = initailLoginUserdata;
-  }
+// const initailLoginUserdata = {
+//   email: "jimdac@naver.com",
+//   username: "우영우",
+//   join_date: "2022-07-31",
+//   modified_date: "2022-07-31",
+//   hospital_id: 1,
+//   hospital_name: "순천향병원",
+//   hospital_address: "인천광역시 부평구 동수로 56-(부평동)",
+// };
+const loginUserDataReducer = (state = null, action) => {
   switch (action.type) {
     case "SET_LOGIN_USER":
       return action.data;

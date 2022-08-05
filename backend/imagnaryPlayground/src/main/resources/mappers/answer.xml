@@ -25,8 +25,8 @@
 
     <update id="editAnswer" parameterType="AnswerDto">
         UPDATE imagination_playground.qna_answer
-        SET content = #{content}, modified_date = NOW()
-        WHERE id = #{id} AND question_id = #{question_id}
+        SET content = #{content}, admin_id = #{admin_id}, modified_date = NOW()
+        WHERE id = #{id}
     </update>
 
     <delete id="deleteAnswer" parameterType="int">
@@ -73,6 +73,6 @@
                           LEFT OUTER JOIN imagination_playground.baby_recoed record
                                           ON baby.id = record.baby_id
         WHERE id = #{baby_id} AND user_id = #{user_id}
-        ORDER BY recorded_date ASC
+        ORDER BY recorded_date DESC
     </select>
 </mapper>
