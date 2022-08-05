@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int updateUserInfo(UserDto userDto) throws Exception {
-        return userMapper.updateUserInfo(userDto);
+    public int updateUserInfo(UserDto user) throws Exception {
+        return userMapper.updateUserInfo(user);
     }
 
     @Override

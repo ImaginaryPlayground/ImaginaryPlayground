@@ -63,7 +63,7 @@
         WHERE email = #{email}
     </select>
 
-    <update id="editUserInfo" parameterType="UserDto">
+    <update id="editUserInfo" parameterType="Map">
         UPDATE imagination_playground.user
         SET username = #{username}
         WHERE id = #{id}

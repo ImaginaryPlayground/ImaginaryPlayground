@@ -16,5 +16,5 @@ public interface AdminMapper {
     List<UserDto> lookupApprovedUser(Map<String, Integer> map) throws SQLException;
     List<UserDto> lookupAllUser(String type) throws SQLException;
     UserDto lookupUser(String email) throws SQLException;
-    int editUserInfo(UserDto user) throws Exception;
+    int editUserInfo(Map<String, String> map) throws Exception;
 }
