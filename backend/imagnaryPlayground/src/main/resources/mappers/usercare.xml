@@ -60,6 +60,8 @@
             <if test="gender != 'A'">
                 AND gender = #{gender}
             </if>
+        ORDER BY registered_date
+        DESC
         LIMIT #{page}, #{page_last}
     </select>
 
