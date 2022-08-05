@@ -62,6 +62,8 @@ public class JwtTokenService { // JWT 토큰을 생성 및 검증 모듈
             Jws<Claims> claims = Jwts.parser()
                     .setSigningKey(secretKey)
                     .parseClaimsJws(token);
+            System.out.println("베리파이");
+            System.out.println(claims.getBody().getExpiration().after(new Date()));
             return claims.getBody()
                     .getExpiration()
                     .after(new Date());

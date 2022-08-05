@@ -48,6 +48,8 @@
             <if test="gender != 'A'">
                 AND gender = #{gender}
             </if>
+        ORDER BY registered_date
+        DESC
     </select>
 
     <select id="searchAllBabyCount" parameterType="BabyVO" resultType="int">
