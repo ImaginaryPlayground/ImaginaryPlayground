@@ -5,6 +5,15 @@
     background-image: url("https://user-images.githubusercontent.com/26748614/96337246-f14d4580-1085-11eb-8793-a86d929e034d.jpg");
 }
 
+.planetH2, .universegame-title {
+    position: absolute;
+    z-index: 1000;
+    color: white;
+    top: 10vh;
+    left: 30vw;
+    font-size: 300%;
+}
+
 /* 행성들 리스트 */
 
 .mercury {
@@ -151,3 +160,72 @@
     top: 50vh;
     left: 50vw;
 }
+
+
+.metal1 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 52vh;
+    left: 30vw;
+}
+
+.metal2 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 40vh;
+    left: 60vw;
+}
+
+.metal3 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 60vh;
+    left: 20vw;
+}
+
+.metal4 {
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 57vh;
+    left: 30vw;
+}
+
+
+/* 게임 쓰레기통 */
+.paperbin {
+    position: absolute;
+    z-index: 1000;
+    top: 80vh;
+    left: 30vw;
+}
+
+.plasticbin {
+    position: absolute;
+    z-index: 1000;
+    top: 80vh;
+    left: 45vw;
+}
+
+.metalbin {
+    position: absolute;
+    z-index: 1000;
+    top: 80vh;
+    left: 60vw;
+}
+
+/* 게임 안내 문구 */
+.paper-title {
+    position: absolute;
+    color: white;
+}
+
+.plastic-title {
+    position: absolute;
+    color: white;
+}
+
+
