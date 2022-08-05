@@ -162,9 +162,8 @@ public class AdminController {
         String username = map.get("username");
         try {
             if(username != null && !username.trim().equals("")){
-                user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                user.setUsername(username);
-                res = adminService.editUserInfo(user);
+
+                res = adminService.editUserInfo(map);
 
                 if(res != 0){
                     result.put("status", success);
