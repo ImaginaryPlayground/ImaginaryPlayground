@@ -51,11 +51,11 @@
 
 
 
-![header](README.assets/api)
+![header](README.assets/api-20220805175626257)
 
 </br>
 
-![header](README.assets/api-20220805174552959)
+![header](README.assets/api-20220805175645275)
 
 ```
 프론트엔드: React, Three.JS(3D 웹 실행), Blender(3D 캐릭터 구현) Axios (API 통신 라이브러리), Mui(리액트 CSS 라이브러리), Javascript, Redux(리액트 상태관리 라이브러리), HTML5, CSS3
@@ -69,7 +69,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-![header](README.assets/api-20220805174602441)
+![header](README.assets/api-20220805175754998)
 
 ## Front
 
@@ -121,7 +121,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-![header](README.assets/api-20220805174614973)
+![header](README.assets/api-20220805175847778)
 
 <br>
 
@@ -129,7 +129,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-![header](README.assets/api-20220805174620722)
+![header](README.assets/api-20220805175922025)
 
 ![image-20220805171927453](README.assets/image-20220805171927453.png)
 
@@ -137,7 +137,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-![header](README.assets/api-20220805174626454)
+![header](README.assets/api-20220805175941259)
 
 ### 서비스 설명 / 주요기능
 
