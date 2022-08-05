@@ -38,7 +38,7 @@ public class UserCareController{
     private final String fail = "FAIL";
     private final String error = "ERROR";
     private final UserCareService userCareService;
-    private final int PAGE = 9; //Pagination을 위한 변수
+    private final int PAGE = 12; //Pagination을 위한 변수
 
     //https://gaemi606.tistory.com/entry/Spring-Boot-multipartform-data-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C-React-Axios-REST-API
     @ApiOperation(value = "아이 등록", notes = "회원 페이지에서 아이를 등록할 수 있다.")
