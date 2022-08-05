@@ -51,11 +51,11 @@
 
 
 
-![header](https://capsule-render.vercel.app/api?type=transparent&height=270&section=header&text=상상 놀이터&fontSize=80&fontColor=0679C0&animation=fadeIn&desc=🌈%20소아병동%20아이들을%20위한%20교육,%20심리치료,%20놀이%20통합형%20IoT%20서비스&descAlignY=69&descSize=17)
+![header](README.assets/api-20220805175626257)
 
 </br>
 
-![header](https://capsule-render.vercel.app/api?type=transparent&height=100&section=header&text=🛠 기술 환경&fontSize=40&fontColor=0679C0&animation=fadeIn&&fontAlign=12)
+![header](README.assets/api-20220805175645275)
 
 ```
 프론트엔드: React, Three.JS(3D 웹 실행), Blender(3D 캐릭터 구현) Axios (API 통신 라이브러리), Mui(리액트 CSS 라이브러리), Javascript, Redux(리액트 상태관리 라이브러리), HTML5, CSS3
@@ -69,7 +69,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-### ![header](https://capsule-render.vercel.app/api?type=transparent&height=100&section=header&text=📒 기술 스택&fontSize=40&fontColor=0679C0&animation=fadeIn&&fontAlign=12)
+![header](README.assets/api-20220805175754998)
 
 ## Front
 
@@ -121,7 +121,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-![header](https://capsule-render.vercel.app/api?type=transparent&height=100&section=header&text=🎧 시스템 구성도&fontSize=40&fontColor=E0B0FF&animation=fadeIn&&fontAlign=15)
+![header](README.assets/api-20220805175847778)
 
 <br>
 
@@ -129,7 +129,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-![header](https://capsule-render.vercel.app/api?type=transparent&height=100&section=header&text=🕋 ERD 구조&fontSize=40&fontColor=001833&animation=fadeIn&&fontAlign=12)
+![header](README.assets/api-20220805175922025)
 
 ![image-20220805171927453](README.assets/image-20220805171927453.png)
 
@@ -137,7 +137,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-![header](https://capsule-render.vercel.app/api?type=transparent&height=100&section=header&text=🎪 기능 상세&fontSize=40&fontColor=ff9d5c&animation=fadeIn&&fontAlign=12)
+![header](README.assets/api-20220805175941259)
 
 ### 서비스 설명 / 주요기능
 
