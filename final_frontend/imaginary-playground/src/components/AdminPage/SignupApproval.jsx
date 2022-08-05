@@ -33,24 +33,24 @@ function PaperComponent(props) {
 const columns = [
   { field: "id", headerName: "id", width: 50 },
   { field: "email", headerName: "이메일", width: 180 },
-  { field: "name", headerName: "이름", width: 130 },
+  { field: "username", headerName: "이름", width: 130 },
   {
     field: "hospital_name",
     headerName: "병원 이름",
     width: 250,
   },
   {
-    field: "hospital_type",
-    headerName: "병원 종류",
-    width: 100,
-  },
-  {
-    field: "address",
+    field: "hospital_address",
     headerName: "병원 주소",
     width: 600,
   },
   {
-    field: "image_file_url",
+    field: "join_date",
+    headerName: "가입 날짜",
+    width: 200,
+  },
+  {
+    field: "document",
     headerName: "이미지 파일 (셀 클릭하여 이미지 보기)",
     width: 250,
     sortable: false,
@@ -60,65 +60,15 @@ const columns = [
   },
 ];
 
-const rows = [
-  {
-    id: 1,
-    email: "jimdac@naver.com",
-    name: "유지홍",
-    hospital_name: "순천향병원",
-    hospital_type: "상급 병원",
-    address: "인천광역시 부평구 동수로 56-(부평동)",
-    image_file_url: "/img/middlePage/default.jpg",
-  },
-  {
-    id: 2,
-    email: "jimdac@naver.com",
-    name: "유지홍",
-    hospital_name: "순천향병원",
-    hospital_type: "상급 병원",
-    address: "인천광역시 부평구 동수로 56-(부평동)",
-  },
-  {
-    id: 3,
-    email: "jimdac@naver.com",
-    name: "유지홍",
-    hospital_name: "순천향병원",
-    hospital_type: "상급 병원",
-    address: "인천광역시 부평구 동수로 56-(부평동)",
-  },
-  {
-    id: 4,
-    email: "jimdac@naver.com",
-    name: "유지홍",
-    hospital_name: "순천향병원",
-    hospital_type: "상급 병원",
-    address: "인천광역시 부평구 동수로 56-(부평동)",
-  },
-  {
-    id: 5,
-    email: "jimdac@naver.com",
-    name: "유지홍",
-    hospital_name: "순천향병원",
-    hospital_type: "상급 병원",
-    address: "인천광역시 부평구 동수로 56-(부평동)",
-  },
-  {
-    id: 6,
-    email: "jimdac@naver.com",
-    name: "유지홍",
-    hospital_name: "순천향병원",
-    hospital_type: "상급 병원",
-    address: "인천광역시 부평구 동수로 56-(부평동)",
-  },
-];
-
 const SignupApproval = () => {
   const [selectedRowData, setSelectedRowData] = useState([]);
   const [open, setOpen] = useState(false);
   const [dataUpdate, setDataUpdate] = useState(false);
-  const [ApprovalUserData, setApprovalUserData] = useState(rows);
+  const [ApprovalUserData, setApprovalUserData] = useState([]);
   const [page, setPage] = useState(0);
   const isMobile = useMediaQuery("(max-width: 600px)");
+  const loginUserToken = localStorage.getItem("token");
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -130,26 +80,33 @@ const SignupApproval = () => {
   useEffect(() => {
     //전체 승인안된 전체 회원 개수
     axios({
-      url: `${config.api}/admin/lookup/all`, //마지막은 페이지번호
+      url: `${config.api}/admin/lookup/all/2`, //마지막은 페이지번호
       method: "GET",
     }).then((res) => {
-      console.log(res);
+      //console.log(res);
+      if (res.data.status === "SUCCESS") {
+        setApprovalUserData(res.data.data);
+      } else {
+        swal("에러!", "문의글 생성에 실패하였습니다.", "error");
+      }
     });
 
-    //승인안된 회원 조회
-    axios({
-      url: `${config.api}/admin/lookup/unapproved/${page}`, //마지막은 페이지번호
-      method: "GET",
-    }).then((res) => {
-      console.log(res);
-      setApprovalUserData(res);
-    });
-  }, [dataUpdate, page]);
+    //승인안된 회원 페이지별 조회
+    // axios({
+    //   url: `${config.api}/admin/lookup/w/${page}`, //마지막은 페이지번호
+    //   method: "GET",
+    // }).then((res) => {
+    //   console.log(res);
+    //   setApprovalUserData(res);
+    // });
+  }, [dataUpdate]);
 
   const handleSelectRow = (id) => {
     const tempSelectedRowData = [];
     id.forEach((element) => {
-      const RowData = rows.filter((row) => row.id === parseInt(element, 10));
+      const RowData = ApprovalUserData.filter(
+        (row) => row.id === parseInt(element, 10)
+      );
       tempSelectedRowData.push(...RowData);
     });
 
@@ -162,6 +119,7 @@ const SignupApproval = () => {
       swal("에러!", "회원가입 승인할 유저를 선택해주세요", "error");
       return;
     }
+
     swal({
       title: "",
       text: `현재 선택된 유저수는 ${selectedRowData.length}명 입니다.`,
@@ -172,30 +130,30 @@ const SignupApproval = () => {
         //비동기 통신(회원가입 승인, params로 받는다)
 
         const axiosRowData = selectedRowData.map((data) => {
-          return data.eamil;
+          return data.email;
         });
 
-        console.log(axiosRowData);
-
-        axios({
-          url: `${config.api}/admin/auth/type`,
-          method: "POST",
-          params: {
-            user: axiosRowData,
-          },
-        })
+        axios
+          .post(`${config.api}/admin/`, axiosRowData, {
+            headers: {
+              Auth: loginUserToken,
+            },
+          })
           .then((res) => {
             console.log(res);
-            //데이터 업데이트 토글
-            setDataUpdate(!dataUpdate);
+            if (res.data.status === "SUCCESS") {
+              //데이터 업데이트 토글
+              setDataUpdate(!dataUpdate);
+              swal("승인이 완료 되었습니다.", {
+                icon: "success",
+              });
+            } else {
+              swal("에러!", "승인이 완료되지 않았습니다.", "error");
+            }
           })
           .catch((err) => {
             console.log(err);
           });
-
-        swal("승인이 완료 되었습니다.", {
-          icon: "success",
-        });
       }
     });
   };
@@ -221,20 +179,25 @@ const SignupApproval = () => {
         });
 
         axios({
-          url: `${config.api}/admin/auth/type`,
-          method: "POST",
-          params: {
-            user: axiosRowData,
-          },
-        }).then((res) => {
-          console.log(res);
-          //업데이트 처리
-          setDataUpdate(!dataUpdate);
-        });
-
-        swal("거절이 완료 되었습니다.", {
-          icon: "success",
-        });
+          url: `${config.api}/admin/`,
+          method: "DELETE",
+          data: axiosRowData,
+        })
+          .then((res) => {
+            console.log(res);
+            if (res.data.status === "SUCCESS") {
+              //데이터 업데이트 토글
+              setDataUpdate(!dataUpdate);
+              swal("거절이 완료 되었습니다.", {
+                icon: "success",
+              });
+            } else {
+              swal("에러!", "거절이 완료되지 않았습니다.", "error");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     });
   };

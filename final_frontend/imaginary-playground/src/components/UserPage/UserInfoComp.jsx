@@ -7,17 +7,16 @@ import axios from "axios";
 import { config } from "../../util/config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUserToken } from "../../util/token";
 import { useDispatch } from "react-redux";
 
 const UserInfoComp = () => {
-  const [loginUserData, setLoginUserData] = useState({});
   const loginUserDataReducer = useSelector(
     (state) => state.loginUserDataReducer
   );
   const [modifyName, setmodifyName] = useState(loginUserDataReducer.username);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const loginUserToken = localStorage.getItem("token");
   // useEffect(() => {
   //   axios({
   //     url: `${config.api}/user`,
@@ -71,6 +70,7 @@ const UserInfoComp = () => {
       buttons: true,
     }).then((ok) => {
       if (ok) {
+        console.log(localStorage.getItem("token"));
         //비동기 통신(수정)
         axios({
           url: `${config.api}/user`, //마지막은 페이지번호
@@ -79,7 +79,6 @@ const UserInfoComp = () => {
             Auth: loginUserToken,
           }, //헤더에 토큰
           data: {
-            id: loginUserDataReducer.id,
             username: modifyName,
           },
         })
@@ -142,7 +141,7 @@ const UserInfoComp = () => {
                 icon: "success",
               }).then(() => {
                 //세션스토리지에 있는 토큰값 삭제
-                sessionStorage.removeItem("token");
+                localStorage.removeItem("token");
                 //로그인으로 이동
                 navigate("/login");
               });

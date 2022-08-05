@@ -18,7 +18,6 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import "../../css/KidsInfoPage/KidsInfoComp.css";
 import { config } from "../../util/config";
 import axios from "axios";
-import { loginUserToken } from "../../util/token";
 import swal from "sweetalert";
 
 const KidsInfoComp = () => {
@@ -26,6 +25,7 @@ const KidsInfoComp = () => {
   const { state } = useLocation();
   const nameInput = useRef();
   const dispatch = useDispatch();
+  const loginUserToken = localStorage.getItem("token");
 
   const selectedkidStore = useSelector((state) => state.selectedKidReducer);
   const reducerCurrentPage = useSelector(

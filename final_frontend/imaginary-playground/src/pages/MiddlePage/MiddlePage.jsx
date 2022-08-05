@@ -43,6 +43,7 @@ const MiddlePage = () => {
   const signUpUserDataReducer = useSelector(
     (state) => state.signUpUserDataReducer
   );
+  const loginUserToken = localStorage.getItem("token");
 
   const getHospitalDataApi = () => {
     //병원데이터 주소 받아오기
