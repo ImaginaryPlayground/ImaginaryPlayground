@@ -157,7 +157,8 @@ public class UserCareController{
         try {
             UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             babyVO.setUser_id(user.getId());
-            babyVO.setPage_last(babyVO.getPage() + PAGE);
+            babyVO.setPage(babyVO.getPage()*PAGE);
+            babyVO.setPage_last(PAGE);
             System.out.println(babyVO);
             babyList = userCareService.searchAllBaby(babyVO);
 
