@@ -1,25 +1,21 @@
 import React,{ useState} from "react"
 import { useNavigate } from "react-router-dom";
 import Shark from '../components/ocean/Shark.jsx'
-import Whale2 from '../components/ocean/Shark2.jsx'
-import { useRef } from 'react';
-import * as THREE from '../three';
-import {OrbitControls} from '../three/examples/jsm/controls/OrbitControls.js';
-import {GLTFLoader} from '../three/examples/jsm/loaders/GLTFLoader.js';
 
 import "../css/ocean.css"
-import { DolphinglTF } from "../components/ocean/Dolphin.jsx";
+import Dolphin from "../components/ocean/Dolphin.jsx";
 
 function Ocean() {
     // 게임 시작하는 게임 지도 구현
     const [start, setStart ] = useState(false)
     const startGame = ()=> {
         setStart(!start)
+        // 지도 클릭하면 나올 효과음 구현
         const mapMusic = new Audio('/assets/ocean/map.mp3')
         mapMusic.play()
     }
 
-
+    // 전체 상어 클릭 횟수 구하기
     const [totalCount, totalCountSet] = useState(0)
 
     // 첫번째 상어
@@ -84,12 +80,30 @@ function Ocean() {
 
     const navigate = useNavigate()
 
+    // 캔버스 무한생성 없애기
+    var canvasNode = document.querySelectorAll('canvas')
+    var canvas = Array.prototype.slice.call(canvasNode);
+
+    //만약 캔버스가 10개면 9,10빼고 나머지 0~8은 없애야하니까
+    // 
+    if (canvas) {
+        canvas.forEach(function(element, idx) {
+            if ( idx <= canvas.length -2) {
+                console.log(idx)
+                element.remove()
+                // element.style.display = 'none'
+            } 
+        })
+    }
+
 
     return (
         <div className="ocean">
 
+            {/* 전체적인 배경음악 */}
             <iframe src="/assets/ocean/Calimba.mp3" allow="autoplay;" className="audio"></iframe>
             
+            {/* 상어 게임이 구현되는 동안(아직 상어가 20번 터치가 안되었을때) 상어 4마리를 보여주고*/}
             { start? (
             <>
             {totalCount < 20? (
@@ -109,24 +123,27 @@ function Ocean() {
             countThree = {countThree}
             countFour = {countFour}
             totalCount={totalCount}
-            // className={{height:"100vw"}}
             ></Shark>     
 
+            {/* 상어가 20번이 다 터치가 되면 게임 끝났다는 화면 보여주기 */}
             {totalCount === 20? (<div>
                 <h2 className="title1">게임 끝~</h2>
                 <iframe src="/assets/ocean/applaud.mp3" allow="autoplay;" className="audio"></iframe>
-                <DolphinglTF></DolphinglTF>
+                <Dolphin></Dolphin>
             </div>) : (<></>)}
 
+            {/* 홈으로 돌아가기 버튼 */}
             <button onClick={()=> navigate('/')}
             className="home-button"
             >돌아가기</button>
             </>
             ) : <>
+            {/* 가장 처음에 보여주는 스토리 설명 지도 화면 */}
             <img src="/assets/ocean/map.png" className="map" 
                 onClick={startGame}
             /> 
             </> }
+
 
 
             {/* 지금부터 배경 요소 시작 */}

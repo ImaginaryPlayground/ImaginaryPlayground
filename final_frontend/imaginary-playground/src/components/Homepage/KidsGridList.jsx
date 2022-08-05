@@ -19,6 +19,7 @@ import ContactsIcon from "@mui/icons-material/Contacts";
 import axios from "axios";
 import { config } from "../../util/config";
 import { loginUserToken } from "../../util/token";
+import swal from "sweetalert";
 
 const genderMenu = [
   {
@@ -49,6 +50,9 @@ const KidsGridList = () => {
   });
 
   const [page, setPage] = useState(currentPage.page);
+  const loginUserDataReducer = useSelector(
+    (state) => state.loginUserDataReducer
+  );
   const allKidDataNum = useRef(0);
   const selectedKidDataNum = useRef(0);
   const totalPageNum =
@@ -85,14 +89,23 @@ const KidsGridList = () => {
           age_2: searchData.age_2,
           gender: searchData.gender,
           page: page - 1,
+          hospital_id: loginUserDataReducer.hospital_id,
         },
       })
         .then((res) => {
           //전체 데이터를 배열로 반환(아이 이미지)
           console.log(res);
-          selectedKidDataNum.current = res.data.searchedDataAllNum;
-          //받은 데이터들 입력(전체 데이터 수도 같이 준다)
-          setKidsData(res.data.data);
+          if (res.data.status === "SUCCESS") {
+            selectedKidDataNum.current = res.data.searchedDataAllNum;
+            //받은 데이터들 입력(전체 데이터 수도 같이 준다)
+            setKidsData(res.data.data);
+          } else {
+            swal({
+              title: "에러!",
+              text: "오류가 발생했습니다.!",
+              icon: "error",
+            });
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -105,6 +118,7 @@ const KidsGridList = () => {
     allKidDataNum.current = 0;
     //페이지 리로드 감지
     window.onpageshow = function (event) {
+      console.log(loginUserDataReducer);
       if (event.persisted || window.performance) {
         setPage(1);
         setTimeout(() => {
@@ -131,15 +145,24 @@ const KidsGridList = () => {
         age_2: 50,
         gender: "A",
         page: 0,
+        hospital_id: loginUserDataReducer.hospital_id,
       },
     })
       .then((res) => {
-        //전체 데이터를 배열로 반환(아이 이미지)
         console.log(res);
-        allKidDataNum.current = res.data.searchedDataAllNum;
-        selectedKidDataNum.current = res.data.searchedDataAllNum;
-        //받은 데이터들 입력(전체 데이터 수도 같이 준다)
-        setKidsData(res.data.data);
+        if (res.data.status === "SUCCESS") {
+          //전체 데이터를 배열로 반환(아이 이미지)
+          allKidDataNum.current = res.data.searchedDataAllNum;
+          selectedKidDataNum.current = res.data.searchedDataAllNum;
+          //받은 데이터들 입력(전체 데이터 수도 같이 준다)
+          setKidsData(res.data.data);
+        } else {
+          swal({
+            title: "에러!",
+            text: "오류가 발생했습니다.!",
+            icon: "error",
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -194,14 +217,23 @@ const KidsGridList = () => {
         age_2: searchData.age_2,
         gender: searchData.gender,
         page: page,
+        hospital_id: loginUserDataReducer.hospital_id,
       },
     })
       .then((res) => {
-        //전체 데이터를 배열로 반환(아이 이미지)
         console.log(res);
-        //받은 데이터들 입력
-        setKidsData(res.data.data);
-        selectedKidDataNum.current = res.data.searchedDataAllNum;
+        if (res.data.status === "SUCCESS") {
+          //전체 데이터를 배열로 반환(아이 이미지)
+          //받은 데이터들 입력
+          setKidsData(res.data.data);
+          selectedKidDataNum.current = res.data.searchedDataAllNum;
+        } else {
+          swal({
+            title: "에러!",
+            text: "오류가 발생했습니다.!",
+            icon: "error",
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -223,21 +255,30 @@ const KidsGridList = () => {
         age_2: 20,
         gender: "A",
         page: 0,
+        hospital_id: loginUserDataReducer.hospital_id,
       },
     })
       .then((res) => {
         //전체 데이터를 배열로 반환(아이 이미지)
         console.log(res);
-        setSearchData({
-          name: "",
-          age_1: 1,
-          age_2: 20,
-          gender: "A",
-          page: 0,
-        });
-        //받은 데이터들 입력
-        setKidsData(res.data.data);
-        selectedKidDataNum.current = res.data.searchedDataAllNum;
+        if (res.data.status === "SUCCESS") {
+          setSearchData({
+            name: "",
+            age_1: 1,
+            age_2: 20,
+            gender: "A",
+            page: 0,
+          });
+          //받은 데이터들 입력
+          setKidsData(res.data.data);
+          selectedKidDataNum.current = res.data.searchedDataAllNum;
+        } else {
+          swal({
+            title: "에러!",
+            text: "오류가 발생했습니다.!",
+            icon: "error",
+          });
+        }
       })
       .catch((err) => {
         console.log(err);

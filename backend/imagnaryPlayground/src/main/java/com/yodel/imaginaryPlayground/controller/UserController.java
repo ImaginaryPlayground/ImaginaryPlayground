@@ -208,6 +208,7 @@ public class UserController {
         UserDto user = null;
         String username = map.get("username");
         try {
+
             if(username != null && !username.trim().equals("")){
                 user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 user.setUsername(username);
@@ -221,7 +222,6 @@ public class UserController {
                 }else{
                     result.put("status", fail);
                 }
-            }
         } catch (Exception e) {
             result.put("status", error);
             result.put("message", e.toString());
@@ -232,17 +232,18 @@ public class UserController {
 
     @DeleteMapping("")
     @ApiOperation(value = "회원 탈퇴", notes = "회원 페이지에서 사용자의 정보를 삭제한다.")
-    public Map<String, String> deleteUser(){
+    public Map<String, String> deleteUser(@RequestHeader("Auth") String token){
 
         Map<String, String> result = new HashMap<>();
 
         try {
             UserDto user = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            int id = user.getId();
-            int res = userService.deleteUser(id);
+            int userId = user.getId();
+            int res = userService.deleteUser(userId);
             if(res == 1) {
                 result.put("status", success);
-                userService.deleteUser(id);
+                jwtTokenService.closeToken(token);
+                SecurityContextHolder.clearContext();
             } else {
                 result.put("status", fail);
             }
@@ -373,12 +374,19 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/logout")
-    public RedirectView logout(@RequestHeader("Auth") String token){
+    @PostMapping("/logout")
+    public Map<String, Object> logout(@RequestHeader("Auth") String token){
         System.out.println(token);
-        jwtTokenService.closeToken(token);
-        SecurityContextHolder.clearContext();
-        return new RedirectView("/");
+        Map<String, Object> result = new HashMap<>();
+
+        if(token != null){
+            result.put("status", success);
+            jwtTokenService.closeToken(token);
+            SecurityContextHolder.clearContext();
+        }else {
+            result.put("status", fail);
+        }
+        return result;
     }
 
     private String save(MultipartFile file, String contextPath, String uploadDate) {
