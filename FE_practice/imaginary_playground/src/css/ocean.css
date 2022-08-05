@@ -74,7 +74,7 @@ html, body {
 .Shark1 {
     width: 30%;
     height: 15vw;
-    /* background-color: red; */
+    background-color: red;
     opacity: 30%;
     position: absolute;
     z-index: 100;
@@ -86,7 +86,7 @@ html, body {
 .Shark2 {
     width: 30%;
     height: 15vw;
-    /* background-color: red; */
+    background-color: red;
     opacity: 30%;
     position: absolute;
     z-index: 100;
@@ -373,5 +373,7 @@ html, body {
     position: absolute; 
     z-index: -7;
 }
+
+
 
 

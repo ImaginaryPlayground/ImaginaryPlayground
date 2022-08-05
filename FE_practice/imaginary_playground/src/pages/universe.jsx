@@ -13,7 +13,7 @@ const Universe =() => {
     const clickPlanet = () => {
         setPlanetCount(planetCount+1)
     }
-    console.log(planetCount)
+
     
     // 수성(mercury) 클릭
     const [mercury, setMercury] = useState(false)
@@ -54,6 +54,8 @@ const Universe =() => {
     // 목성(jupyter) 클릭
     const [jupyter, setJupyter] = useState(false)
     const jupyterClick = () => {
+        const planetAudio = new Audio('/assets/universe/touchPlanet.mp4')
+        planetAudio.play()
         setJupyter(!jupyter)
         clickPlanet()
     }
@@ -91,12 +93,13 @@ const Universe =() => {
         <>
             <div className="universe">
 
-                <iframe src="/assets/universe/universe.mp3" allow="autoplay;" className="audio"></iframe>
+                {/* <iframe src="/assets/universe/universe.mp3" allow="autoplay;" className="audio"></iframe> */}
 
                 {planetCount !== 9? (<>
+                
                 {/* 수성 mercury 흑백 */}
                 {mercury === true? (<>
-                    <img src="/assets/universe/mercury.png" className="mercury"/>
+                    <img src="/assets/universe/mercury.png" className="mercury animate__animated animate__pulse"/>
                 </>) : (
                     <img src="/assets/universe/mercury.png" className="mercury" 
                     onClick={mercuryClick} style={{filter:'grayscale(100%)'}}
@@ -105,7 +108,7 @@ const Universe =() => {
 
                 {/* 금성 venus 흑백 */}
                 {venus === true? (<>
-                    <img src="/assets/universe/venus.png" className="venus" />
+                    <img src="/assets/universe/venus.png" className="venus animate__animated animate__pulse" />
                 </>) : (
                     <img src="/assets/universe/venus.png" className="venus" 
                     onClick={venusClick} style={{filter:'grayscale(100%)'}}
@@ -114,7 +117,7 @@ const Universe =() => {
 
                 {/* 지구 earth 흑백 */}
                 {earth === true? (<>
-                    <img src="/assets/universe/earth.png" className="earth" />
+                    <img src="/assets/universe/earth.png" className="earth animate__animated animate__pulse" />
                 </>) : (
                     <img src="/assets/universe/earth.png" className="earth" 
                     onClick={earthClick} style={{filter:'grayscale(100%)'}}
@@ -123,7 +126,7 @@ const Universe =() => {
 
                 {/* 화성 mars 흑백 */}
                 {mars === true? (<>
-                    <img src="/assets/universe/mars.png" className="mars" />
+                    <img src="/assets/universe/mars.png" className="mars animate__animated animate__pulse" />
                 </>):(
                     <img src="/assets/universe/mars.png" className="mars" 
                     onClick={marsClick} style={{filter:'grayscale(100%)'}}
@@ -132,7 +135,7 @@ const Universe =() => {
 
                 {/* 목성 jupyter 흑백 */}
                 {jupyter === true? (<>
-                    <img src="/assets/universe/jupyter.png" className="jupyter" />
+                    <img src="/assets/universe/jupyter.png" className="jupyter animate__animated animate__pulse" />
                 </>) : (<>
                     <img src="/assets/universe/jupyter.png" className="jupyter" 
                     onClick={jupyterClick} style={{filter:'grayscale(100%)'}}
@@ -141,7 +144,7 @@ const Universe =() => {
 
                 {/* 토성 saturn 흑백 */}
                 {saturn === true? (<>
-                    <img src="/assets/universe/saturn.png" className="saturn" />
+                    <img src="/assets/universe/saturn.png" className="saturn animate__animated animate__pulse" />
                 </>) : (<>
                     <img src="/assets/universe/saturn.png" className="saturn" 
                     onClick={saturnClick} style={{filter:'grayscale(100%)'}}
@@ -150,7 +153,7 @@ const Universe =() => {
 
                 {/* 천왕성 uranus 흑백 */}
                 {uranus === true? (<>
-                    <img src="/assets/universe/uranus.png" className="uranus" />
+                    <img src="/assets/universe/uranus.png" className="uranus animate__animated animate__pulse" />
                 </>) : (<>
                     <img src="/assets/universe/uranus.png" className="uranus" 
                     onClick={uranusClick} style={{filter:'grayscale(100%)'}}
@@ -159,7 +162,7 @@ const Universe =() => {
 
                 {/* 해왕성 neptune 흑백 */}
                 {neptune === true? (<>
-                    <img src="/assets/universe/neptune.png" className="neptune" />
+                    <img src="/assets/universe/neptune.png" className="neptune animate__animated animate__pulse" />
                 </>) : (<>
                     <img src="/assets/universe/neptune.png" className="neptune" 
                     onClick={neptuneClick} style={{filter:'grayscale(100%)'}}/>
@@ -167,7 +170,9 @@ const Universe =() => {
 
                 {planetCount === 8? (<button 
                 className="gamestart"
-                onClick={()=>{setPlanetCount(planetCount+1)}}>게임 시작</button>) : (<></>)}
+                onClick={()=>{setPlanetCount(planetCount+1)}}>게임 시작</button>) : (<>
+                <h2 className="planetH2">태양계 행성을 터치해보세요!</h2>
+                </>)}
                 </>) : (<>
                 
                 {/* 만약 행성을 다 클릭하면???? 이제 게임으로 넘어갑니다. */}

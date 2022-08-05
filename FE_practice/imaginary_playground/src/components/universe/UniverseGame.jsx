@@ -1,39 +1,96 @@
 import "../../css/universe.css"
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 const UniverseGame = ()=> {
-    // 전체적인 흐름
-    // 플라스틱, 유리, 캔 3개 통이 있고
-    // 그에 맞게 각 쓰레기들이 4개씩 있다.
-    // 쓰레기들은 우주 배경에 둥둥 떠다닐거고 쓰레기통은 하단에 있음
-    // 맞는 쓰레기를 클릭할 때마다 그 쓰레기는 사라지고 쓰레기통에 쓰레기가 점점 쌓여감.
-    // 각 쓰레기마다 카운트 4를 세고 4를 채우면 다음 쓰레기로 넘어감
-    // 전체 쓰레기 카운트가 12가 되면 게임이 끝난 것으로 간주
-    // 플라스틱 시작. if trashCount <4일때 플라스틱을 클릭하면 플라스틱 빈은 +1 될때마다 다른 이미지로 교체되고
-    // 클릭된 플라스틱 이미지는 사라지며 count는 +1이 된다.
-    // 이렇게 return문 안에서 일일이 코드를 작성해줘야할듯하다.
-
+    
     const [ totalTrash, setTotalTrash ] = useState(0)
-    const clickTrash = () =>{
-        setTotalTrash(totalTrash+1)
-        console.log(totalTrash)
+    console.log('토탈 카운트가 지금 ',totalTrash)
+
+    const [ nowStage, setNowStage ] = useState('paper')
+
+    const clickPaper = (e) =>{
+        console.log(e.target.id)
+        document.getElementById(e.target.id).style.display = 'none'
+        if(totalTrash <= 3) {
+            setTotalTrash(totalTrash+1)
+            console.log('페이퍼')
+        } else {
+            console.log('페이퍼 차례 아님')
+            setNowStage('plastic')
+        }
     }
+
+    const clickPlastic =() => {
+        if (3 < totalTrash && totalTrash < 8) {
+            setTotalTrash(totalTrash+1)
+            console.log('플라스틱')
+        } else if (totalTrash <=3 ){
+            console.log('아직 플라스틱 아님')
+        } else {
+            console.log('플라스틱 끝남')
+            setNowStage('plastic')
+        }
+    }
+
+    const clickMetal =()=> {
+        if (7 < totalTrash && totalTrash < 12) {
+            setTotalTrash(totalTrash+1)
+            console.log('캔')
+        } else if (totalTrash <= 7) {
+            console.log('아직 캔 아님')
+        } else {
+            console.log('캔 끝남 === 게임 끝남')
+            setNowStage('plastic')
+        }
+    }
+
     
     return(<div style={{position:"relative"}}>
-        {totalTrash <= 3? (<>
-        <h2 style={{color:"white"}}>종이쓰레기를 잡아라</h2>
-            <img src="/assets/universe/paper.png" className="paper1" onClick={clickTrash}></img>
-            <img src="/assets/universe/paper.png" className="paper2"></img>
-            <img src="/assets/universe/paper.png" className="paper3"></img>
-            <img src="/assets/universe/paper.png" className="paper4"></img>
+            {totalTrash <= 3 ? (<>
+                <h2 className="universegame-title">종이 쓰레기를 버려주세요</h2>
+            </>) : (<></>)}
 
-            <img src="/assets/universe/plastic.png" className="plastic1" />
-            <img src="/assets/universe/plastic.png" className="plastic2" />
-            <img src="/assets/universe/plastic.png" className="plastic3" />
-            <img src="/assets/universe/plastic.png" className="plastic4" />
-        
-        </>):(<></>)}
+            <img src="/assets/universe/paper.png" className="paper1" onClick={clickPaper} id={'paper1'}></img>
+            <img src="/assets/universe/paper.png" className="paper2" onClick={clickPaper} id={'paper2'}></img>
+            <img src="/assets/universe/paper.png" className="paper3" onClick={clickPaper} id={'paper3'}></img>
+            <img src="/assets/universe/paper.png" className="paper4" onClick={clickPaper} id={'paper4'}></img>
+
+            {(totalTrash === 0)? (<><img src="/assets/universe/paperBin.png" className="paperbin" /></>):(<></>)}
+            {(totalTrash === 1)? (<><img src="/assets/universe/paperBin1.png" className="paperbin" /></>):(<></>)}
+            {(totalTrash === 2)? (<><img src="/assets/universe/paperBin2.png" className="paperbin" /></>):(<></>)}
+            {(totalTrash === 3)? (<><img src="/assets/universe/paperBin3.png" className="paperbin" /></>):(<></>)}
+            {(totalTrash >= 4)? (<><img src="/assets/universe/paperBin4.png" className="paperbin" /></>):(<></>)}
+
+            {3< totalTrash && totalTrash < 8? (<>
+                <h2 className="universegame-title">플라스틱 쓰레기를 버려주세요</h2>
+            </>) : (<></>)}
+            <img src="/assets/universe/plastic.png" className="plastic1" onClick={clickPlastic} id={'plastic1'}/>
+            <img src="/assets/universe/plastic.png" className="plastic2" onClick={clickPlastic} id={'plastic2'}/>
+            <img src="/assets/universe/plastic.png" className="plastic3" onClick={clickPlastic} id={'plastic3'}/>
+            <img src="/assets/universe/plastic.png" className="plastic4" onClick={clickPlastic} id={'plastic4'}/>
+
+            {(totalTrash <= 4)? (<><img src="/assets/universe/plasticBin.png" className="plasticbin" /></>):(<></>)}
+            {(totalTrash === 5)? (<><img src="/assets/universe/plasticBin1.png" className="plasticbin" /></>):(<></>)}
+            {(totalTrash === 6)? (<><img src="/assets/universe/plasticBin2.png" className="plasticbin" /></>):(<></>)}
+            {(totalTrash === 7)? (<><img src="/assets/universe/plasticBin3.png" className="plasticbin" /></>):(<></>)}
+            {(totalTrash >= 8)? (<><img src="/assets/universe/plasticBin4.png" className="plasticbin" /></>):(<></>)}
+
+            {7< totalTrash && totalTrash <12 ? (<>
+                <h2 className="universegame-title">캔 쓰레기를 버려주세요</h2>
+            </>) : (<></>)}
+
+            <img src="/assets/universe/can.png" className="metal1" onClick={clickMetal} id={'metal1'} />
+            <img src="/assets/universe/can.png" className="metal2" onClick={clickMetal} id={'metal2'} />
+            <img src="/assets/universe/can.png" className="metal3" onClick={clickMetal} id={'metal3'} />
+            <img src="/assets/universe/can.png" className="metal4" onClick={clickMetal} id={'metal4'} />
+
+            {(totalTrash <= 8)? (<><img src="/assets/universe/glassBin.png" className="metalbin" /></>):(<></>)}
+            {(totalTrash === 9)? (<><img src="/assets/universe/metalBin1.png" className="metalbin" /></>):(<></>)}
+            {(totalTrash === 10)? (<><img src="/assets/universe/metalBin2.png" className="metalbin" /></>):(<></>)}
+            {(totalTrash === 11)? (<><img src="/assets/universe/metalBin3.png" className="metalbin" /></>):(<></>)}
+            {(totalTrash === 12)? (<><img src="/assets/universe/metalBin4.png" className="metalbin" /></>):(<></>)}
+
     </div>)
 }
 

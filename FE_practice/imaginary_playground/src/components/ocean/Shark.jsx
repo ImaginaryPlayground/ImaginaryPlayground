@@ -5,13 +5,13 @@ import {GLTFLoader} from '../../three/examples/jsm/loaders/GLTFLoader.js';
 export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-
     renderer.setSize(window.innerWidth, window.innerHeight);
-    
     document.body.appendChild(renderer.domElement);
     
+    // 화면
     const scene = new THREE.Scene();
     
+    // 카메라
     const camera = new THREE.PerspectiveCamera(
         59, // 앞뒤로 줌인줌아웃
         window.innerWidth/window.innerHeight,
@@ -19,6 +19,7 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
         100
     );
     
+    // 빛조명
     const light = new THREE.HemisphereLight(0xffffff, 0x000000, 3);
     scene.add(light)
     
@@ -30,27 +31,30 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
     // 좌우 / 위아래 / 앞뒤
     camera.position.set(5, 6, 30);
 
+    // glTF 파일 로더
     const assetLoader = new GLTFLoader();
     
     // 왼쪽에서 두 번째 상어
     let mixer1;
     assetLoader.load('/assets/ocean/shark.gltf', function(gltf) {
+        // 모델(상어) 로더
         const model = gltf.scene;
         model.position.set(-7,5,10)
         scene.add(model);
         
+        // 5회 클릭이 되면 사라지도록 구현
         if (countOne.countOne >= 4) {
             scene.remove(model)
         }
 
+        // 리깅된 애니메이션 구현
         mixer1 = new THREE.AnimationMixer(model);
         const clips = gltf.animations;
-     
         const clip = THREE.AnimationClip.findByName(clips, 'metarigAction')
         const action = mixer1.clipAction(clip)
         action.play()
     
-    },
+    }, // 에러잡기
     undefined, function(error) {
         console.error(error);
     });
@@ -81,7 +85,7 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
 
     // 왼쪽에서 네 번째 상어
     let mixer3;
-    assetLoader.load('/assets/ocean/shark.gltf', function(gltf) {
+    assetLoader.load('/assets/ocean/shark2.gltf', function(gltf) {
         const model3 = gltf.scene;
         model3.position.set(15,7,15)
         scene.add(model3);
@@ -102,7 +106,7 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
 
     // 왼쪽에서 첫 번째 상어
     let mixer4;
-    assetLoader.load('/assets/ocean/shark.gltf', function(gltf) {
+    assetLoader.load('/assets/ocean/shark1.gltf', function(gltf) {
         const model4 = gltf.scene;
         model4.position.set(-5,-3,10)
         scene.add(model4);
@@ -121,12 +125,14 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
         console.error(error);
     });
 
-    
+    // 애니메이션 구현을 위한 시계
     const clock1 = new THREE.Clock();
     const clock2 = new THREE.Clock();
     const clock3 = new THREE.Clock();
     const clock4 = new THREE.Clock();
 
+    // 애니메이션 구현을 위한 함수(있어야 전체 작동이 됨)
+    // 각 상어 업로더 안에서 찾은 애니메이션들을 이 곳에서 시계를 돌려 구현하는 것
     function animate() {
         if(mixer1)
             mixer1.update(clock1.getDelta());
@@ -141,7 +147,7 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
         }
         renderer.setAnimationLoop(animate);
 
-    
+    // 반응형 구현
     window.addEventListener('resize',onResize,false)
     function onResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -152,7 +158,9 @@ export const SharkglTF =({ countTwo, countOne, countThree, countFour}) => {
     
     }
 
-const Shark =({countOne, countTwo, countThree, countFour, totalCount})=>{
+// 위의 glTF 로더된 상어를 하나의 컴포넌트로 export
+const Shark =({countOne, countTwo, countThree, countFour})=>{
+    // 캔버스 선택
     var cnvs = document.querySelectorAll('Canvas')
     var arr = Array.prototype.slice.call(cnvs);
 

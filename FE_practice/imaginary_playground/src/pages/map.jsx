@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import '../css/map.css'
 
 const Map = () => {
     const navigate = useNavigate()
@@ -25,7 +26,20 @@ const Map = () => {
             <button onClick={()=> navigate('/universe')}
                 style={{ backgroundColor: "navy"}}
             >우주</button>
-            
+            <div class="firework" id="firework1">
+	<div class="explosion"></div>
+	<div class="explosion"></div>
+	<div class="explosion"></div>
+	<div class="explosion"></div>
+	<div class="explosion"></div>
+	<div class="explosion"></div>
+	<div class="explosion"></div>
+	<div class="explosion"></div>
+	<div class="explosion"></div>
+	<div class="explosion"></div>
+	<div class="explosion"></div>
+	<div class="explosion"></div>
+</div>
         </div>
     )
 }
