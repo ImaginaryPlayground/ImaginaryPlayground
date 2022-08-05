@@ -20,7 +20,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { config } from "../../util/config";
-import { loginUserToken } from "../../util/token";
 import swal from "sweetalert";
 import { useSelector } from "react-redux";
 
@@ -29,34 +28,31 @@ const QnaListPage = () => {
   const loginUserDataReducer = useSelector(
     (state) => state.loginUserDataReducer
   );
+  const loginUserToken = localStorage.getItem("token");
+
   const isMobile_700 = useMediaQuery("(max-width:700px)");
   const isMobile_750 = useMediaQuery("(max-width:750px)");
   const storagePage = sessionStorage.getItem("qna_list_page")
     ? parseInt(sessionStorage.getItem("qna_list_page"))
     : 1;
-  const searchedDataAllNum = useRef(0);
+
   const [searchData, setSearchData] = useState({
     searchCondition: "title",
     searchWord: "",
     myQna: false,
     completed: "all",
   });
+  const searchedDataAllNum = useRef(0);
   const [page, setPage] = useState(storagePage);
+  const totalPageNum =
+    parseInt(searchedDataAllNum.current % 9, 10) === 0
+      ? parseInt(searchedDataAllNum.current / 9, 10)
+      : parseInt(searchedDataAllNum.current / 9, 10) + 1;
+
   const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log({
-      key: searchData.searchCondition,
-      qna_type: searchData.myQna ? 1 : 0, //0 은 전체조회 1은, 내qna조회
-      completed:
-        searchData.completed === "all"
-          ? 2
-          : searchData.completed === "before"
-          ? 0
-          : 1, //0처리안된거, 1이 처리된거, 2가 전체
-      value: searchData.searchWord,
-      page: page - 1,
-    });
+
     //비동기로 데이터를 가져옴
     axios({
       url: `${config.api}/question/lookup/all`, //마지막은 페이지번호
@@ -116,20 +112,8 @@ const QnaListPage = () => {
       setSearchData({ ...searchData, [e.target.name]: e.target.value });
     }
   };
-  const handleOnSearchClick = (e) => {
-    console.log({
-      key: searchData.searchCondition,
-      qna_type: searchData.myQna ? 1 : 0, //0 은 전체조회 1은, 내qna조회
-      completed:
-        searchData.completed === "all"
-          ? 2
-          : searchData.completed === "before"
-          ? 0
-          : 1, //0처리안된거, 1이 처리된거, 2가 전체
-      value: searchData.searchWord,
-      page: 1,
-    });
 
+  const handleOnSearchClick = (e) => {
     //비동기로 검색된 데이터 설정
     //비동기로 데이터를 가져옴
     axios({
@@ -146,7 +130,7 @@ const QnaListPage = () => {
             ? 0
             : 1, //0처리안된거, 1이 처리된거, 2가 전체
         value: searchData.searchWord,
-        page: 1,
+        page: 0,
       },
     })
       .then((res) => {
@@ -167,6 +151,12 @@ const QnaListPage = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const EnterPress = (e) => {
+    if (e.key === "Enter") {
+      handleOnSearchClick();
+    }
   };
 
   const handleOnClickQnaCreateBtn = (e) => {
@@ -250,6 +240,7 @@ const QnaListPage = () => {
             value={searchData.searchWord}
             onChange={handleOnSearchChange}
             name="searchWord"
+            onKeyPress={EnterPress}
           />
           <SearchIcon
             onClick={handleOnSearchClick}
@@ -312,11 +303,7 @@ const QnaListPage = () => {
       )}
       <Grid display={"flex"} justifyContent="center" my={4}>
         <Pagination
-          count={
-            parseInt(searchedDataAllNum.current % 9 === 0, 10)
-              ? parseInt(searchedDataAllNum.current / 9, 10)
-              : parseInt(searchedDataAllNum.current / 9, 10) + 1
-          }
+          count={totalPageNum}
           color="main"
           size={isMobile_700 ? "small" : "large"}
           shape={"rounded"}
