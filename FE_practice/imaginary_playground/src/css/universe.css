@@ -49,7 +49,7 @@
 
 .jupyter {
     position: absolute;
-    z-index: 10000;
+    z-index: 10002;
     left: 31vw;
     top: 30vh;
     width: 27vw;
@@ -57,7 +57,7 @@
 
 .saturn {
     position: absolute;
-    z-index: 10000;
+    z-index: 10001;
     left: 59vw;
     top: 40vh;
     width: 23vw;
@@ -100,23 +100,24 @@
     position: absolute;
     z-index: 10000;
     width: 5vw;
-    top: 50vh;
+    top: 70vh;
+    left: 10vw;
 }
 
 .paper2 {
     position: absolute;
     z-index: 10000;
     width: 5vw;
-    top: 50vh;
-    left: 20vw;
+    top: 40vh;
+    left: 30vw;
 }
 
 .paper3 {
     position: absolute;
     z-index: 10000;
     width: 5vw;
-    top: 50vh;
-    left: 40vw;
+    top: 55vh;
+    left: 60vw;
 }
 
 .paper4 {
@@ -124,7 +125,7 @@
     z-index: 10000;
     width: 5vw;
     top: 50vh;
-    left: 50vw;
+    left: 80vw;
 }
 
 
@@ -132,66 +133,66 @@
 .plastic1 {
     position: absolute;
     z-index: 10000;
-    width: 5vw;
-    top: 50vh;
-    left: 50vw;
+    width: 3vw;
+    top: 40vh;
+    left: 20vw;
 }
 
 .plastic2 {
     position: absolute;
     z-index: 10000;
-    width: 5vw;
-    top: 40vh;
-    left: 30vw;
+    width: 3vw;
+    top: 60vh;
+    left: 90vw;
 }
 
 .plastic3 {
     position: absolute;
     z-index: 10000;
-    width: 5vw;
+    width: 3vw;
     top: 50vh;
-    left: 50vw;
+    left: 40vw;
 }
 
 .plastic4 {
     position: absolute;
     z-index: 10000;
-    width: 5vw;
-    top: 50vh;
-    left: 50vw;
+    width: 3vw;
+    top: 40vh;
+    left: 70vw;
 }
 
 
 .metal1 {
     position: absolute;
     z-index: 10000;
-    width: 5vw;
-    top: 52vh;
-    left: 30vw;
+    width: 4vw;
+    top: 58vh;
+    left: 26vw;
 }
 
 .metal2 {
     position: absolute;
     z-index: 10000;
-    width: 5vw;
-    top: 40vh;
-    left: 60vw;
+    width: 4vw;
+    top: 35vh;
+    left: 50vw;
 }
 
 .metal3 {
     position: absolute;
     z-index: 10000;
-    width: 5vw;
-    top: 60vh;
-    left: 20vw;
+    width: 4vw;
+    top: 46vh;
+    left: 8vw;
 }
 
 .metal4 {
     position: absolute;
     z-index: 10000;
-    width: 5vw;
-    top: 57vh;
-    left: 30vw;
+    width: 4vw;
+    top: 70vh;
+    left: 80vw;
 }
 
 
@@ -229,3 +230,12 @@
 }
 
 
+
+/* UFO */
+
+.ufo {
+    position: absolute;
+    z-index: 1;
+    top: 80vh;
+    left: 80vw;
+}
