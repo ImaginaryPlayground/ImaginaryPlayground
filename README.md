@@ -47,15 +47,21 @@
 
 <!-- 자유 양식 -->
 
-## 프로젝트 상세 설명
-
-
-
-![header](README.assets/api-20220805175626257)
+# 프로젝트 상세 설명
 
 </br>
 
-![header](README.assets/api-20220805175645275)
+## 🌈 상상 놀이터
+
+```
+소아병동 아이들을 위한 교육, 심리치료 놀이 통합형 IoT 서비스
+```
+
+</br>
+
+</br>
+
+## 🛠 기술 환경
 
 ```
 프론트엔드: React, Three.JS(3D 웹 실행), Blender(3D 캐릭터 구현) Axios (API 통신 라이브러리), Mui(리액트 CSS 라이브러리), Javascript, Redux(리액트 상태관리 라이브러리), HTML5, CSS3
@@ -69,15 +75,15 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-![header](README.assets/api-20220805175754998)
+## 📒 기술 스택
 
-## Front
+### Front
 
 <img alt="React" src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"><img alt="MUI" src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white"><img  alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"> <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
 
 </br>
 
-## Back
+### Back
 
 </br>
 
@@ -99,7 +105,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-## IoT
+### IoT
 
 </br>
 
@@ -121,7 +127,9 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-![header](README.assets/api-20220805175847778)
+</br>
+
+## 🎧 시스템 구상도
 
 <br>
 
@@ -129,17 +137,19 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-![header](README.assets/api-20220805175922025)
+## 🕋 ERD 구조
 
-![image-20220805171927453](README.assets/image-20220805171927453.png)
-
-</br>
+![image-20220805181040600](backend/asset/image-20220805181040600.png)
 
 </br>
 
-![header](README.assets/api-20220805175941259)
+</br>
 
-### 서비스 설명 / 주요기능
+## 🎪 기능 상세
+
+</br>
+
+### - 서비스 설명 / 주요기능
 
 1. 소아병동 아이들이 실시간 참여할 수 있는 IOT 놀이공간
 2. 약 6개의 테마, 각 맵마다 다른 게임으로
@@ -153,7 +163,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-#### 서비스의 특징 / 독창성
+#### - 서비스의 특징 / 독창성
 
 1. 개인모드와 공용모드로 나눠져있어 개인 또는 다수가 동시에 플레이 가능
 2. 6종류의 다양한 테마를 구성하여 아이들이 다양한 환경에서 게임 플레이 가능
