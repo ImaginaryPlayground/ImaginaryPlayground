@@ -1,18 +1,20 @@
 import React from "react";
-import * as THREE from "../../three";
-import { GLTFLoader } from "../../three/examples/jsm/loaders/GLTFLoader.js";
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-export const SampleglTF = ({ order }) => {
+export const SampleglTF = ({ id }) => {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   const dom = document.body.appendChild(renderer.domElement);
-  dom.setAttribute("id", `${order}`);
+  dom.setAttribute("id", `${id}`);
   dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
   dom.style.left = "0%";
-  dom.style.top = "-10%";
+  dom.style.top = "39%";
+  dom.style.zIndex = "-3";
+  dom.setAttribute("class", "initial_hide");
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -35,13 +37,14 @@ export const SampleglTF = ({ order }) => {
   const assetLoader = new GLTFLoader();
 
   let mixer1;
+  let model;
   assetLoader.load(
     "/assets/ocean/Whale1.gltf",
     function (gltf) {
-      const model = gltf.scene;
+      model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
       // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(4, 5, 12);
+      model.position.set(4, 8, 12);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
@@ -58,9 +61,10 @@ export const SampleglTF = ({ order }) => {
   );
 
   const clock1 = new THREE.Clock();
-
+  let left = 0;
   function animate() {
     if (mixer1) mixer1.update(clock1.getDelta());
+
     renderer.render(scene, camera);
   }
   renderer.setAnimationLoop(animate);
@@ -73,10 +77,10 @@ export const SampleglTF = ({ order }) => {
   }
 };
 
-const Sample = ({ order }) => {
+const Sample = ({ id }) => {
   return (
     <>
-      <SampleglTF order={order}></SampleglTF>
+      <SampleglTF id={id}></SampleglTF>
     </>
   );
 };
