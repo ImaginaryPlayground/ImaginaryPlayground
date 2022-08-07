@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-	// boot
+	// Spring Boot
 	implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -29,26 +29,25 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 
-	// jwt
+	// Jwt
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
 
-	// oauth
+	// OAuth
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2'
 	implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	// swagger
+	// Swagger
 	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
-	//email 인증
 
-	// mail
+	// mail 인증
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-	// security
+	// Security
 	implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.7.1'
 
 	// File upload
