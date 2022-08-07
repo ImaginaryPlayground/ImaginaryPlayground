@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Single+Day&display=swap");
 
 body {
   overflow: hidden;
@@ -8,6 +10,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100vh;
+  font-family: "Single Day", cursive;
 }
 
 /* 고래 */
@@ -21,20 +24,29 @@ body {
   z-index: 1;
 }
 
+/* 텍스트 박스 */
+.jungle .text_box {
+  font-size: 60px;
+  margin-top: 10px;
+  border: 15px solid green;
+  border-radius: 50px;
+  padding: 15px;
+  background-color: lightgoldenrodyellow;
+}
 /* 텍스트 위치 */
 .jungle .text_location {
   position: absolute;
-  left: 0%;
+  left: -50%;
   top: 32%;
-  width: 400px;
+  width: 850px;
   height: 200px;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 30px;
   font-weight: bold;
+  z-index: -1;
 }
 
 /* 등장 애니메이션 */
@@ -51,14 +63,32 @@ body {
   animation: speech infinite 1s linear alternate;
 }
 
-@keyframes appear {
+.appear_text {
+  animation: appear_text 1s linear alternate;
+}
+
+/* 텍스트 떨어지는 애니메이션 */
+@keyframes appear_text {
   0% {
-    transform: translateY(-300px) rotateY(-180deg);
+    transform: scale(0) translateY(-500px);
     opacity: 0;
   }
 
   100% {
-    transform: translateY(0px);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 등장애니메이션 */
+@keyframes appear {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
     opacity: 1;
   }
 }
