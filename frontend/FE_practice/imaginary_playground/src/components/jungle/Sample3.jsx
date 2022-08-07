@@ -11,7 +11,7 @@ export const SampleglTF = ({ id }) => {
   dom.setAttribute("id", `${id}`);
   dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "15%";
+  dom.style.left = "-24%";
   dom.style.top = "39%";
   dom.style.zIndex = "-3";
   dom.setAttribute("class", "initial_hide");
@@ -68,13 +68,6 @@ export const SampleglTF = ({ id }) => {
     renderer.render(scene, camera);
   }
   renderer.setAnimationLoop(animate);
-
-  window.addEventListener("resize", onResize, false);
-  function onResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  }
 };
 
 const Sample = ({ id }) => {

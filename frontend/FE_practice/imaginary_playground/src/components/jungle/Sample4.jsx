@@ -68,13 +68,6 @@ export const SampleglTF = ({ id }) => {
     renderer.render(scene, camera);
   }
   renderer.setAnimationLoop(animate);
-
-  window.addEventListener("resize", onResize, false);
-  function onResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  }
 };
 
 const Sample = ({ id }) => {
