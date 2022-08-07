@@ -2,7 +2,7 @@ import React from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-export const SampleglTF = ({ id }) => {
+export const SampleglTF2 = ({ id }) => {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -11,10 +11,10 @@ export const SampleglTF = ({ id }) => {
   dom.setAttribute("id", `${id}`);
   dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "-10%";
-  dom.style.top = "39%";
-  dom.style.zIndex = "-3";
-  dom.setAttribute("class", "initial_hide");
+  dom.style.left = "30%";
+  dom.style.top = "-4%";
+  dom.style.zIndex = "1";
+  dom.setAttribute("class", "appear");
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -44,7 +44,7 @@ export const SampleglTF = ({ id }) => {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
       // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(4, 8, 12);
+      model.position.set(4, 7, 16);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
@@ -68,14 +68,21 @@ export const SampleglTF = ({ id }) => {
     renderer.render(scene, camera);
   }
   renderer.setAnimationLoop(animate);
+
+  window.addEventListener("resize", onResize, false);
+  function onResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
 };
 
-const Sample = ({ id }) => {
+const Sample2 = ({ id }) => {
   return (
     <>
-      <SampleglTF id={id}></SampleglTF>
+      <SampleglTF2 id={id}></SampleglTF2>
     </>
   );
 };
 
-export default React.memo(Sample);
+export default React.memo(Sample2);
