@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap');
+
 .universe {
     position: relative;
     width: 100vw;
@@ -11,7 +13,9 @@
     color: white;
     top: 10vh;
     left: 30vw;
-    font-size: 300%;
+    font-size: 3vw;
+    font-family: 'Noto Serif KR', serif;
+
 }
 
 /* 행성들 리스트 */
@@ -21,22 +25,50 @@
     z-index: 10000;
     width: 5vw;
     top: 50vh;
+    left: 1%;
+}
+
+.mercury-title {
+    position: absolute;
+    z-index: 10000;
+    color: white;
+    top: 59vh;
+    left: 2.5%;
+    font-family: 'Noto Serif KR', serif;
 }
 
 .venus {
     position: absolute;
     z-index: 10000;
-    left: 7%;
+    left: 8%;
     width: 6vw;
     top: 49vh;
+}
+
+.venus-title {
+    position: absolute;
+    z-index: 10000;
+    color: white;
+    top: 60vh;
+    left: 10%;
+    font-family: 'Noto Serif KR', serif;
 }
 
 .earth {
     position: absolute;
     z-index: 10000;
-    left: 15%;
+    left: 16%;
     width: 7vw;
     top: 48vh;
+}
+
+.earth-title {
+    position: absolute;
+    z-index: 10000;
+    color: white;
+    top: 61vh;
+    left: 18.5%;
+    font-family: 'Noto Serif KR', serif;
 }
 
 .mars {
@@ -47,12 +79,30 @@
     width: 4vw;
 }
 
+.mars-title {
+    position: absolute;
+    z-index: 10000;
+    color: white;
+    top: 57vh;
+    left: 26%;
+    font-family: 'Noto Serif KR', serif;
+}
+
 .jupyter {
     position: absolute;
     z-index: 10002;
     left: 31vw;
     top: 30vh;
     width: 27vw;
+}
+
+.jupyter-title {
+    position: absolute;
+    z-index: 10000;
+    color: white;
+    top: 80vh;
+    left: 43%;
+    font-family: 'Noto Serif KR', serif;
 }
 
 .saturn {
@@ -63,6 +113,15 @@
     width: 23vw;
 }
 
+.saturn-title {
+    position: absolute;
+    z-index: 10000;
+    color: white;
+    top: 70vh;
+    left: 70%;
+    font-family: 'Noto Serif KR', serif;
+}
+
 .uranus {
     position: absolute;
     z-index: 10000;
@@ -71,19 +130,32 @@
     top: 50vh;
 }
 
+.uranus-title {
+    position: absolute;
+    z-index: 10000;
+    color: white;
+    top: 65vh;
+    left: 83.5%;
+    font-family: 'Noto Serif KR', serif;
+}
+
 .neptune {
     position: absolute;
     z-index: 10000;
     left: 91vw;
     width: 7vw;
-    top: 50vh;
+    top: 51vh;
 }
 
-/* 
-.universe-canvas {
+.neptune-title {
     position: absolute;
-    z-index: 1;
-} */
+    z-index: 10000;
+    color: white;
+    top: 64vh;
+    left: 93%;
+    font-family: 'Noto Serif KR', serif;
+}
+
 
 
 /* 게임 시작 버튼 */
@@ -96,15 +168,19 @@
 
 
 /* 우주쓰레기 게임 이미지들 */
+
 .paper1 {
+    animation: trash 1400ms linear alternate infinite;
     position: absolute;
     z-index: 10000;
-    width: 5vw;
+    width: 5%;
     top: 70vh;
     left: 10vw;
 }
 
 .paper2 {
+    animation: trash 1500ms linear alternate infinite;
+
     position: absolute;
     z-index: 10000;
     width: 5vw;
@@ -113,6 +189,8 @@
 }
 
 .paper3 {
+    animation: trash 1650ms linear alternate infinite;
+
     position: absolute;
     z-index: 10000;
     width: 5vw;
@@ -121,6 +199,8 @@
 }
 
 .paper4 {
+    animation: trash 1700ms linear alternate infinite;
+
     position: absolute;
     z-index: 10000;
     width: 5vw;
@@ -131,6 +211,8 @@
 
 
 .plastic1 {
+    animation: trash 2350ms linear alternate infinite;
+
     position: absolute;
     z-index: 10000;
     width: 3vw;
@@ -139,6 +221,8 @@
 }
 
 .plastic2 {
+    animation: trash 1900ms linear alternate infinite;
+
     position: absolute;
     z-index: 10000;
     width: 3vw;
@@ -147,6 +231,8 @@
 }
 
 .plastic3 {
+    animation: trash 2300ms linear alternate infinite;
+
     position: absolute;
     z-index: 10000;
     width: 3vw;
@@ -155,6 +241,8 @@
 }
 
 .plastic4 {
+    animation: trash 2500ms linear alternate infinite;
+
     position: absolute;
     z-index: 10000;
     width: 3vw;
@@ -164,6 +252,8 @@
 
 
 .metal1 {
+    animation: trash 3000ms linear alternate infinite;
+
     position: absolute;
     z-index: 10000;
     width: 4vw;
@@ -172,6 +262,8 @@
 }
 
 .metal2 {
+    animation: trash 2300ms linear alternate infinite;
+
     position: absolute;
     z-index: 10000;
     width: 4vw;
@@ -180,6 +272,8 @@
 }
 
 .metal3 {
+    animation: trash 2500ms linear alternate infinite;
+
     position: absolute;
     z-index: 10000;
     width: 4vw;
@@ -188,6 +282,8 @@
 }
 
 .metal4 {
+    animation: trash 2700ms linear alternate infinite;
+
     position: absolute;
     z-index: 10000;
     width: 4vw;
@@ -195,27 +291,39 @@
     left: 80vw;
 }
 
+@keyframes trash {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(45deg);
+    }
+}
+
 
 /* 게임 쓰레기통 */
 .paperbin {
     position: absolute;
     z-index: 1000;
-    top: 80vh;
+    top: 75vh;
     left: 30vw;
+    width: 13vw;
 }
 
 .plasticbin {
     position: absolute;
     z-index: 1000;
-    top: 80vh;
+    top: 75vh;
     left: 45vw;
+    width: 13vw;
 }
 
 .metalbin {
     position: absolute;
     z-index: 1000;
-    top: 80vh;
+    top: 75vh;
     left: 60vw;
+    width: 13vw;
 }
 
 /* 게임 안내 문구 */
