@@ -1,14 +1,20 @@
+import React from "react";
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-export const DolphinglTF = () => {
+export const SampleglTF2 = ({ id }) => {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  document.body.appendChild(renderer.domElement);
-
+  const dom = document.body.appendChild(renderer.domElement);
+  dom.setAttribute("id", `${id}`);
+  dom.setAttribute("class", "whale_3d");
+  dom.style.position = "absolute";
+  dom.style.left = "14%";
+  dom.style.top = "-4%";
+  dom.style.zIndex = "-3";
+  dom.setAttribute("class", "appear");
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -31,19 +37,20 @@ export const DolphinglTF = () => {
   const assetLoader = new GLTFLoader();
 
   let mixer1;
+  let model;
   assetLoader.load(
-    "/assets/ocean/dolly.gltf",
+    "/assets/ocean/Whale1.gltf",
     function (gltf) {
-      const model = gltf.scene;
+      model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
       // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(-7, 5, 10);
+      model.position.set(4, 7, 16);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
       const clips = gltf.animations;
 
-      const clip = THREE.AnimationClip.findByName(clips, "metarigAction.001");
+      const clip = THREE.AnimationClip.findByName(clips, "Swim");
       const action = mixer1.clipAction(clip);
       action.play();
     },
@@ -54,9 +61,10 @@ export const DolphinglTF = () => {
   );
 
   const clock1 = new THREE.Clock();
-
+  let left = 0;
   function animate() {
     if (mixer1) mixer1.update(clock1.getDelta());
+
     renderer.render(scene, camera);
   }
   renderer.setAnimationLoop(animate);
@@ -69,12 +77,12 @@ export const DolphinglTF = () => {
   }
 };
 
-const Dolphin = () => {
+const Sample2 = ({ id }) => {
   return (
     <>
-      <DolphinglTF></DolphinglTF>
+      <SampleglTF2 id={id}></SampleglTF2>
     </>
   );
 };
 
-export default Dolphin;
+export default React.memo(Sample2);
