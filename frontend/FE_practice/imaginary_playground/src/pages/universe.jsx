@@ -18,7 +18,7 @@ const Universe =() => {
     // 수성(mercury) 클릭
     const [mercury, setMercury] = useState(false)
     const mercuryClick = () => {
-        const planetAudio = new Audio('/assets/universe/touchPlanet.mp4')
+        const planetAudio = new Audio('/assets/audio/universe/touchPlanet.mp4')
         planetAudio.play()
         setMercury(!mercury)
         clickPlanet()
@@ -27,7 +27,7 @@ const Universe =() => {
     // 금성(venus) 클릭
     const [venus, setVenus] = useState(false)
     const venusClick = () => {
-        const planetAudio = new Audio('/assets/universe/touchPlanet.mp4')
+        const planetAudio = new Audio('/assets/audio/universe/touchPlanet.mp4')
         planetAudio.play()
         setVenus(!venus)
         clickPlanet()
@@ -36,7 +36,7 @@ const Universe =() => {
     // 지구(earth) 클릭
     const [earth, setEarth ] = useState(false)
     const earthClick = () => {
-        const planetAudio = new Audio('/assets/universe/touchPlanet.mp4')
+        const planetAudio = new Audio('/assets/audio/universe/touchPlanet.mp4')
         planetAudio.play()
         setEarth(!earth)
         clickPlanet()
@@ -45,7 +45,7 @@ const Universe =() => {
     // 화성(mars) 클릭
     const [mars, setMars] = useState(false)
     const marsClick = () => {
-        const planetAudio = new Audio('/assets/universe/touchPlanet.mp4')
+        const planetAudio = new Audio('/assets/audio/universe/touchPlanet.mp4')
         planetAudio.play()
         setMars(!mars)
         clickPlanet()
@@ -54,7 +54,7 @@ const Universe =() => {
     // 목성(jupyter) 클릭
     const [jupyter, setJupyter] = useState(false)
     const jupyterClick = () => {
-        const planetAudio = new Audio('/assets/universe/touchPlanet.mp4')
+        const planetAudio = new Audio('/assets/audio/universe/touchPlanet.mp4')
         planetAudio.play()
         setJupyter(!jupyter)
         clickPlanet()
@@ -63,7 +63,7 @@ const Universe =() => {
     // 토성(Saturn) 클릭
     const [saturn, setSaturn] = useState(false)
     const saturnClick = () => {
-        const planetAudio = new Audio('/assets/universe/touchPlanet.mp4')
+        const planetAudio = new Audio('/assets/audio/universe/touchPlanet.mp4')
         planetAudio.play()
         setSaturn(!saturn)
         clickPlanet()
@@ -72,7 +72,7 @@ const Universe =() => {
     // 천왕성(uranus) 클릭
     const [uranus, setUranus] = useState(false)
     const uranusClick = () => {
-        const planetAudio = new Audio('/assets/universe/touchPlanet.mp4')
+        const planetAudio = new Audio('/assets/audio/universe/touchPlanet.mp4')
         planetAudio.play()
         setUranus(!uranus)
         clickPlanet()
@@ -81,7 +81,7 @@ const Universe =() => {
     // 해왕성(neptune) 클릭
     const [neptune, setNeptune] = useState(false)
     const neptuneClick = () => {
-        const planetAudio = new Audio('/assets/universe/touchPlanet.mp4')
+        const planetAudio = new Audio('/assets/audio/universe/touchPlanet.mp4')
         planetAudio.play()
         setNeptune(!neptune)
         clickPlanet()
@@ -94,7 +94,7 @@ const Universe =() => {
         <>
             <div className="universe">
 
-                <iframe src="/assets/universe/universe.mp3" allow="autoplay;" className="audio"></iframe>
+                <iframe src="/assets/audio/universe/universe.mp3" allow="autoplay;" className="audio"></iframe>
 
                 {planetCount !== 9? (<>
                 
