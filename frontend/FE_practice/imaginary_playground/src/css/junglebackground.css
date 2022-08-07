@@ -1,0 +1,120 @@
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* 움직이지 않는 배경 */
+
+.jungle-background {
+    width: 100vw;
+    height: 100vh;
+
+    position: absolute;
+    z-index: -30;
+}
+
+.tree {
+    width: 100vw;
+    height: 100vh;
+
+    position: absolute;
+    z-index: -27;
+}
+ 
+
+/* 요소  */
+
+.bush1 {
+    width: 100vw;
+    height: 100vh;
+
+    position: absolute;
+    z-index: -1;
+}
+
+.bush2 {
+    width: 100vw;
+    height: 100vh;
+
+    position: absolute;
+    z-index: -1;
+}
+
+/*  움직이는 요소 */
+
+.jungle-bird {
+    animation: bird 6500ms linear infinite;
+    position: absolute;
+    width: 100%;
+    z-index: -25;
+  }
+  
+  @keyframes bird {
+    from {
+      right: -50%;
+    }
+  
+    to {
+      right: 60%;
+    }
+  }
+
+.ceil1{
+    animation: ceilleft 1000ms alternate infinite;
+
+    width: 105vw;
+    height: 100vh;
+
+    position: absolute;
+    z-index: -2;
+}
+
+.ceil2{
+    animation: ceilright 1200ms alternate infinite;
+
+    width: 105vw;
+    height: 100vh;
+
+    position: absolute;
+    z-index: -2;
+}
+
+.ceil3{
+    animation: ceilleft 1800ms alternate infinite;
+
+    width: 105vw;
+    height: 100vh;
+
+    position: absolute;
+    z-index: -2;
+}
+
+.ceil4{
+    animation: ceilright 1300ms alternate infinite;
+
+    width: 105vw;
+    height: 100vh;
+
+    position: absolute;
+    z-index: -2;
+}
+
+@keyframes ceilleft {
+    from {
+        right: 0%;
+    }
+  
+    to {
+        right: 1%;
+    }
+  }
+
+@keyframes ceilright {
+from {
+    left: 0%;
+}
+
+to {
+    left: 1%;
+}
+}
