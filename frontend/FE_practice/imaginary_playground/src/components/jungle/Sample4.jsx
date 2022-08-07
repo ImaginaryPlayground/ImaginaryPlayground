@@ -2,7 +2,7 @@ import React from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-export const SampleglTF2 = ({ id }) => {
+export const SampleglTF = ({ id }) => {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -11,10 +11,10 @@ export const SampleglTF2 = ({ id }) => {
   dom.setAttribute("id", `${id}`);
   dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "24%";
-  dom.style.top = "-4%";
-  dom.style.zIndex = "1";
-  dom.setAttribute("class", "appear");
+  dom.style.left = "20%";
+  dom.style.top = "39%";
+  dom.style.zIndex = "-3";
+  dom.setAttribute("class", "initial_hide");
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -44,7 +44,7 @@ export const SampleglTF2 = ({ id }) => {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
       // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(4, 7, 16);
+      model.position.set(4, 8, 12);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
@@ -77,12 +77,12 @@ export const SampleglTF2 = ({ id }) => {
   }
 };
 
-const Sample2 = ({ id }) => {
+const Sample = ({ id }) => {
   return (
     <>
-      <SampleglTF2 id={id}></SampleglTF2>
+      <SampleglTF id={id}></SampleglTF>
     </>
   );
 };
 
-export default React.memo(Sample2);
+export default React.memo(Sample);
