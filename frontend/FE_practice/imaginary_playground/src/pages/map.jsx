@@ -26,20 +26,9 @@ const Map = () => {
             <button onClick={()=> navigate('/universe')}
                 style={{ backgroundColor: "navy"}}
             >우주</button>
-            <div class="firework" id="firework1">
-	<div class="explosion"></div>
-	<div class="explosion"></div>
-	<div class="explosion"></div>
-	<div class="explosion"></div>
-	<div class="explosion"></div>
-	<div class="explosion"></div>
-	<div class="explosion"></div>
-	<div class="explosion"></div>
-	<div class="explosion"></div>
-	<div class="explosion"></div>
-	<div class="explosion"></div>
-	<div class="explosion"></div>
-</div>
+            <button onClick={()=> navigate('/junglebackground')}
+            style={{ background : 'yellow'}}
+            >정글배경</button>
         </div>
     )
 }
