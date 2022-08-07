@@ -16,6 +16,7 @@ import Sample6_tori_main from "../components/jungle/Sample6_tori_main";
 import Sample3_main from "../components/jungle/Sample3_main";
 import Sample4_main from "../components/jungle/Sample4_main";
 import Sample5_main from "../components/jungle/Sample5_main";
+import JungleBackground from "../components/jungle/JungleBackground";
 const Jungle = () => {
   //음성인식 시작하는 state
   const [nowSpeechStart, setNowSpeechStart] = useState(false);
@@ -368,7 +369,7 @@ const Jungle = () => {
       toriMain.setAttribute("class", "disappear");
       setTimeout(() => {
         navigate("/");
-      }, 1000);
+      }, 1500);
     }
 
     return () => {};
@@ -778,26 +779,28 @@ const Jungle = () => {
         </div>
       )}
 
-      {/* 가장 앞 첫번째 구간 */}
+      {/* 가장 앞 첫번째 구간
       <img src="/assets/jungle/firstHill.png" alt="" className="firstHill" />
       <img src="/assets/jungle/firstCeil.png" alt="" className="firstCeil" />
 
       {/* 햇빛 */}
-      <img src="/assets/jungle/sun1.png" alt="" className="sun1" />
+      {/* <img src="/assets/jungle/sun1.png" alt="" className="sun1" />
       <img src="/assets/jungle/sun2.png" alt="" className="sun2" />
-      <img src="/assets/jungle/sun3.png" alt="" className="sun3" />
+      <img src="/assets/jungle/sun3.png" alt="" className="sun3" /> */}
 
       {/* 두 번째 구간 */}
-      <img src="/assets/jungle/secondCeil.png" alt="" className="secondCeil" />
-      <img src="/assets/jungle/secondHill.png" alt="" className="secondHill" />
+      {/* <img src="/assets/jungle/secondCeil.png" alt="" className="secondCeil" />
+      <img src="/assets/jungle/secondHill.png" alt="" className="secondHill" /> */}
 
       {/* 세 번째 구간 */}
-      <img src="/assets/jungle/onlyTree.png" alt="" className="onlyTree" />
+      {/* <img src="/assets/jungle/onlyTree.png" alt="" className="onlyTree" />
       <img src="/assets/jungle/bird.png" alt="" className="bird" />
-      <img src="/assets/jungle/palmTree.png" alt="" className="palmTree" />
+      <img src="/assets/jungle/palmTree.png" alt="" className="palmTree" /> */}
 
       {/* 배경 */}
-      <img src="/assets/jungle/background.png" alt="" className="background" />
+      {/* <img src="/assets/jungle/background.png" alt="" className="background" /> */}
+
+      <JungleBackground />
     </div>
   );
 };
