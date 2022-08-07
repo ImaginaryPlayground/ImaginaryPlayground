@@ -1,8 +1,8 @@
-# 백엔드 명세서 작성을 위한 작업들
+# 백엔드 명세서 작성을 위한 작업
 
 
 
-## 1. OAuth 플랫폼 프로필 데이터 정리
+## OAuth 플랫폼 프로필 데이터 정리
 
 | NAVER       | KAKAO       | Google              |
 | ----------- | ----------- | ------------------- |
@@ -16,25 +16,21 @@
 
 ​                
 
-## 2. ERD 구조 및 설명
+## ERD 구조 및 설명
 
 * PK 기본 명칭은 id로 명명한다.
   * FK로 연결할 때는 `대표값_PK`로 명명한다.
 * 세부사항
-  * user 테이블의 `provider`: 플랫폼, NAVER, KAKAO 등을 분류
+  * user 테이블의 `provider`: 플랫폼명을 나타냄. NAVER, KAKAO, GOOGLE로 분류
+  * user 테이블의 `type`: GUEST, USER, ADMIN으로 분류
   * qna_question 테이블의 `secret`: 비밀글 여부
   * qna_question 테이블의 `completed`: 관리자 답글이 달렸다면 true로 변경
   * baby_click 테이블의 `click_pos_x/y`: 아이가 클릭한 데이터를 x, y좌표로 나누어 저장
+  * status 테이블의 `status_type`: int형으로 게임 중이면 0, 게임을 종료했으면 1로 저장
 
 ​       
 
-## 3. Controller
-
-* uri 협의(프로젝트 참고)
-
-​                                
-
-## 4. SQL문 조회
+## SQL문 조회
 
 * 추후 논의
 

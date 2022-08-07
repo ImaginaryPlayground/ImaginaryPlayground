@@ -8,18 +8,13 @@ import com.yodel.imaginaryPlayground.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -279,33 +274,6 @@ public class UserController {
 //        }
 //        return result;
 //    }
-
-    @GetMapping("/getFile")
-    @ApiOperation(value = "재직 증명서 가져오기")
-    public Map<String, Object> getFile(@RequestParam String email, HttpServletRequest request) throws Exception{
-
-        Map<String, Object> result = new HashMap<>();
-        HttpHeaders header = new HttpHeaders();
-
-        try {
-            UserDto user = userService.findByEmail(email);
-            String filePath = request.getServletContext().getRealPath("/") + user.getDocument();
-            System.out.println(filePath);
-            String mimeType = Files.probeContentType(Paths.get(filePath));  //파일 확장자
-            System.out.println(mimeType);
-            FileInputStream input = new FileInputStream(filePath);
-            header.setContentType(MediaType.parseMediaType(mimeType));
-
-            result.put("byte", IOUtils.toByteArray(input));
-            result.put("header", header);
-            result.put("status", success);
-
-        } catch (IllegalStateException e) {
-            result.put("status", error);
-            result.put("message", e.toString());
-        }
-        return result;
-    }
 
     @PostMapping("/authEmail/send")
     public Map<String, Object> sendEmail(@RequestBody UserDto user){
