@@ -20,6 +20,9 @@ const OceanCopy = () => {
   // 전체 상어 클릭 횟수 구하기
   const [totalCount, totalCountSet] = useState(0);
 
+  // 클릭하면 나오는 버블 효과음
+  const bubbleAudio = new Audio("/assets/audio/ocean/bubble.mp3");
+
   // 첫번째 상어
   const [isClickOne, setIsClickOne] = useState(false);
   const [countOne, setCountOne] = useState(0);
@@ -27,8 +30,6 @@ const OceanCopy = () => {
     setCountOne(countOne + 1);
     totalCountSet(totalCount + 1);
 
-    // 클릭하면 나오는 버블 효과음
-    const bubbleAudio = new Audio("/assets/ocean/bubble.mp4");
     bubbleAudio.play();
     if (countOne >= 4) {
       setIsClickOne(!isClickOne);
@@ -45,7 +46,7 @@ const OceanCopy = () => {
     totalCountSet(totalCount + 1);
 
     // 클릭하면 나오는 버블 효과음
-    const bubbleAudio = new Audio("/assets/ocean/bubble.mp4");
+
     bubbleAudio.play();
     if (countTwo >= 4) {
       setIsClickTwo(!isClickTwo);
@@ -62,7 +63,7 @@ const OceanCopy = () => {
     totalCountSet(totalCount + 1);
 
     // 클릭하면 나오는 버블 효과음
-    const bubbleAudio = new Audio("/assets/ocean/bubble.mp4");
+
     bubbleAudio.play();
     if (countThree >= 4) {
       setIsClickThree(!isClickThree);
@@ -79,7 +80,7 @@ const OceanCopy = () => {
     totalCountSet(totalCount + 1);
 
     // 클릭하면 나오는 버블 효과음
-    const bubbleAudio = new Audio("/assets/ocean/bubble.mp4");
+
     bubbleAudio.play();
     if (countFour >= 4) {
       setIsClickFour(!isClickFour);
@@ -116,19 +117,19 @@ const OceanCopy = () => {
           )}
           {/* 왼쪽에서 3번째 상어 */}
           {countTwo <= 4 ? (
-            <div className="copy_Shark2 shark_move" onClick={toggleTwo}></div>
+            <div className="copy_Shark2 " onClick={toggleTwo}></div>
           ) : (
             <></>
           )}
           {/* 왼쪽에서 4번째 상어 */}
           {countThree <= 4 ? (
-            <div className="copy_Shark3 shark_move" onClick={toggleThree}></div>
+            <div className="copy_Shark3 " onClick={toggleThree}></div>
           ) : (
             <></>
           )}
           {/* 왼쪽에서 1번째 상어 */}
           {countFour <= 4 ? (
-            <div className="copy_Shark4 shark_move" onClick={toggleFour}></div>
+            <div className="copy_Shark4 " onClick={toggleFour}></div>
           ) : (
             <></>
           )}

@@ -8,6 +8,8 @@
   "dependencies": {
     "@react-three/drei": "^9.19.0",
     "@react-three/fiber": "^8.2.2",
+    "@teachablemachine/pose": "^0.8.6",
+    "@tensorflow/tfjs": "^3.19.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
