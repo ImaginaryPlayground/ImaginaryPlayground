@@ -21,7 +21,7 @@ const int mWidth = 1920;   // 모니터 가로 해상도
 const int mHeight = 1080;   // 모니터 세로 해상도
 
 const int pX = (pWidth / 2) + (number - numbers / 2) * 50 - 25; // 초음파 센서의 프로젝터 가로 위치
-const int mX = pX / 200 * 1920; // 초음파 센서의 모니터 화면 가로 위치
+const int mX = pX * mWidth / pWidth; // 초음파 센서의 모니터 화면 가로 위치
 const String strX = (String) mX; // 단순히 String으로 만든 x
 
 // wifi를 통한 웹소켓 통신시 사용하는 변수들
@@ -117,7 +117,7 @@ void loop() {
   if (client.connected() && webSocketServer.handshake(client)) {
     float distance; // 물체까지의 거리
 //    float pY; // 거리를 프로젝터 화면 크기에 맞게 변환시킨 값
-    float mY; //모니터 화면 크기에 맞게 변환 시킨 값
+    int mY; //모니터 화면 크기에 맞게 변환 시킨 값
     // 터치 그룹들, 그룹의 수가 3이상이 되면 터치를 했다고 인식한다.
     TouchGroup t1 = { .top = -6, .bottom = -6, .sum = 0, .cnt = 0 };
     // 잠시 튀는 값 혹은 다음 터치 값을 저장하기 위한 터치 그룹
@@ -149,7 +149,7 @@ void loop() {
       // 화면 크기에 비례하여 x축의 위치와 y축의 위치를 계산한다.
       // x축은 초음파 번호(number)와 비례하고 y축은 터치 위치에 비례한다.
       // x의 경우 상수들을 사용하여 구할 수 있는 수이기에 미리 계산이 끝난 상태이다.
-      mY = convert(touchY);
+      mY = (int) (touchY / pHeight * mHeight);
       Serial.print("mY : ");
       Serial.println(mY);
 
@@ -272,10 +272,4 @@ void addDataTemp(TouchGroup* temp, float distance){
   }
   
   return;
-}
-
-int convert(float distance){
-  
-  
-  return -1;  
 }
