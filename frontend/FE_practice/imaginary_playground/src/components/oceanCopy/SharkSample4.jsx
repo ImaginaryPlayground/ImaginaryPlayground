@@ -49,6 +49,9 @@ export const SampleglTF = ({ id }) => {
 
       mixer1 = new THREE.AnimationMixer(model);
       const clips = gltf.animations;
+      const clip = THREE.AnimationClip.findByName(clips, "metarigAction");
+      const action = mixer1.clipAction(clip);
+      action.play();
     },
     undefined,
     function (error) {
