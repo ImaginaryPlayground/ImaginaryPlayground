@@ -15,6 +15,7 @@ export const SampleglTF = ({ id }) => {
   dom.style.top = "39%";
   dom.style.zIndex = "-3";
   dom.setAttribute("class", "shark_move");
+
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -44,11 +45,14 @@ export const SampleglTF = ({ id }) => {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
       // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(4, 8, 12);
+      model.position.set(9, 8, 18);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
       const clips = gltf.animations;
+      const clip = THREE.AnimationClip.findByName(clips, "metarigAction");
+      const action = mixer1.clipAction(clip);
+      action.play();
     },
     undefined,
     function (error) {

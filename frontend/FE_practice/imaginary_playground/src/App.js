@@ -5,6 +5,7 @@ import Map from "./pages/map";
 import Universe from "./pages/universe";
 import JungleBackground from "./components/jungle/JungleBackground";
 import OceanCopy from "./pages/OceanCopy";
+import Test_yjh from "./pages/Test_yjh";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/universe" element={<Universe />} />
           <Route path="/junglebackground" element={<JungleBackground />} />
           <Route path="/ocean-copy" element={<OceanCopy />} />
+          <Route path="/test-yjh" element={<Test_yjh />} />
         </Routes>
       </BrowserRouter>
     </div>
