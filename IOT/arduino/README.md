@@ -17,9 +17,10 @@ wifi를 통해서 데이터를 주고 받을 수 있다는 이야기를 듣고 �
 
 ### WebSocket 통신
 
-[한 블로그](https://www.hardcopyworld.com/?p=3215)에서 `Wemos D1 mini`와 라즈베리파이 간 `WebSocket`통신을 진행한 코드를 보고 진행하였다. 
+[한 블로그](https://www.hardcopyworld.com/?p=3215)에서 `Wemos D1 mini`와 라즈베리파이 간 `WebSocket`통신을 진행한 코드를 보고 진행하였다. 아두이노 [esp8266에서 사용하는 websocket 라이브러리](https://github.com/morrissinger/ESP8266-Websocket)와 [라즈베리파이에서 사용하는 websocket 라이브러리](https://github.com/websocket-client/websocket-client) 고하였다고 한다.
+
+esp8266에서의 기본 라이브러리인 [ESP8266WiFi](https://arduino-esp8266.readthedocs.io/en/latest/esp8266wifi/readme.html)도 사용해야 하므로 공식홈페이지도 조금 읽어보고 진행하였다.
 
 문제는 블로그 주인은 ESP32를, 필자는 ESP8266을 사용하였기 때문에 `WiFi.h` 대신 `ESP8266WiFi.h`을 사용하고 파일의 함수명도 바꿀 필요가 없었다.
 
 이를 토대로 필자에게 맞는 [서버 코드](./codes/esp8266_server_test/esp8266_server_test.ino)를 만들었고 무사히 진행할 수 있었다.
-
