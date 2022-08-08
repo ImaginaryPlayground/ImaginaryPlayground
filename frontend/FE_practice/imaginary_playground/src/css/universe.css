@@ -18,31 +18,38 @@
 
 }
 
+.universe-background {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+}
+
 /* 행성들 리스트 */
 
 .mercury {
     position: absolute;
     z-index: 10000;
-    width: 5vw;
-    top: 50vh;
-    left: 1%;
+    width: 4vw;
+    top: 70vh;
+    left: 13%;
 }
 
 .mercury-title {
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 59vh;
-    left: 2.5%;
+    top: 77vh;
+    left: 14%;
     font-family: 'Noto Serif KR', serif;
+    font-size: 100%;
 }
 
 .venus {
     position: absolute;
     z-index: 10000;
-    left: 8%;
-    width: 6vw;
-    top: 49vh;
+    left: 3%;
+    width: 4vw;
+    top: 53vh;
 }
 
 .venus-title {
@@ -50,24 +57,24 @@
     z-index: 10000;
     color: white;
     top: 60vh;
-    left: 10%;
+    left: 4%;
     font-family: 'Noto Serif KR', serif;
 }
 
 .earth {
     position: absolute;
     z-index: 10000;
-    left: 16%;
-    width: 7vw;
-    top: 48vh;
+    left: 31%;
+    width: 6vw;
+    top: 82vh;
 }
 
 .earth-title {
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 61vh;
-    left: 18.5%;
+    top: 92vh;
+    left: 33%;
     font-family: 'Noto Serif KR', serif;
 }
 
@@ -75,7 +82,7 @@
     position: absolute;
     z-index: 10000;
     left: 25%;
-    top: 50vh;
+    top: 45vh;
     width: 4vw;
 }
 
@@ -83,7 +90,7 @@
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 57vh;
+    top: 52vh;
     left: 26%;
     font-family: 'Noto Serif KR', serif;
 }
@@ -91,9 +98,9 @@
 .jupyter {
     position: absolute;
     z-index: 10002;
-    left: 31vw;
-    top: 30vh;
-    width: 27vw;
+    left: 43vw;
+    top: 45vh;
+    width: 18vw;
 }
 
 .jupyter-title {
@@ -101,58 +108,58 @@
     z-index: 10000;
     color: white;
     top: 80vh;
-    left: 43%;
+    left: 51%;
     font-family: 'Noto Serif KR', serif;
 }
 
 .saturn {
     position: absolute;
     z-index: 10001;
-    left: 59vw;
-    top: 40vh;
-    width: 23vw;
+    left: 68vw;
+    top: 78vh;
+    width: 11vw;
 }
 
 .saturn-title {
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 70vh;
-    left: 70%;
+    top: 71vh;
+    left: 72%;
     font-family: 'Noto Serif KR', serif;
 }
 
 .uranus {
     position: absolute;
     z-index: 10000;
-    left: 79vw;
-    width: 11vw;
-    top: 50vh;
+    left: 78vw;
+    width: 9vw;
+    top: 40vh;
 }
 
 .uranus-title {
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 65vh;
-    left: 83.5%;
+    top: 52vh;
+    left: 81.5%;
     font-family: 'Noto Serif KR', serif;
 }
 
 .neptune {
     position: absolute;
     z-index: 10000;
-    left: 91vw;
-    width: 7vw;
-    top: 51vh;
+    left: 93vw;
+    width: 5vw;
+    top: 59vh;
 }
 
 .neptune-title {
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 64vh;
-    left: 93%;
+    top: 67vh;
+    left: 94%;
     font-family: 'Noto Serif KR', serif;
 }
 
@@ -174,8 +181,8 @@
     position: absolute;
     z-index: 10000;
     width: 5%;
-    top: 70vh;
-    left: 10vw;
+    top: 80vh;
+    left: 16vw;
 }
 
 .paper2 {
@@ -184,8 +191,8 @@
     position: absolute;
     z-index: 10000;
     width: 5vw;
-    top: 40vh;
-    left: 30vw;
+    top: 50vh;
+    left: 35vw;
 }
 
 .paper3 {
@@ -195,10 +202,10 @@
     z-index: 10000;
     width: 5vw;
     top: 55vh;
-    left: 60vw;
+    left: 65vw;
 }
 
-.paper4 {
+/* .paper4 {
     animation: trash 1700ms linear alternate infinite;
 
     position: absolute;
@@ -206,7 +213,7 @@
     width: 5vw;
     top: 50vh;
     left: 80vw;
-}
+} */
 
 
 
@@ -226,7 +233,7 @@
     position: absolute;
     z-index: 10000;
     width: 3vw;
-    top: 60vh;
+    top: 70vh;
     left: 90vw;
 }
 
@@ -236,11 +243,11 @@
     position: absolute;
     z-index: 10000;
     width: 3vw;
-    top: 50vh;
-    left: 40vw;
+    top: 30vh;
+    left: 80vw;
 }
 
-.plastic4 {
+/* .plastic4 {
     animation: trash 2500ms linear alternate infinite;
 
     position: absolute;
@@ -248,17 +255,17 @@
     width: 3vw;
     top: 40vh;
     left: 70vw;
-}
+} */
 
 
 .metal1 {
-    animation: trash 3000ms linear alternate infinite;
+    animation: trash 2500ms linear alternate infinite;
 
     position: absolute;
     z-index: 10000;
     width: 4vw;
-    top: 58vh;
-    left: 26vw;
+    top: 55vh;
+    left: 2.5vw;
 }
 
 .metal2 {
@@ -268,19 +275,19 @@
     z-index: 10000;
     width: 4vw;
     top: 35vh;
-    left: 50vw;
+    left: 52vw;
 }
 
-.metal3 {
+/* .metal3 {
     animation: trash 2500ms linear alternate infinite;
 
     position: absolute;
     z-index: 10000;
     width: 4vw;
-    top: 46vh;
-    left: 8vw;
-}
-
+    top: 55vh;
+    left: 2.5vw;
+} */
+/* 
 .metal4 {
     animation: trash 2700ms linear alternate infinite;
 
@@ -289,7 +296,7 @@
     width: 4vw;
     top: 70vh;
     left: 80vw;
-}
+} */
 
 @keyframes trash {
     from {
@@ -344,6 +351,11 @@
 .ufo {
     position: absolute;
     z-index: 1;
-    top: 80vh;
-    left: 80vw;
+    top: 50vh;
+    left: 50vw;
 }
+
+
+
+
+

@@ -1,4 +1,6 @@
 import "../../css/universe.css"
+import '../../css/UniverseEffect.css'
+import UniverseEffect from "./UniverseEffect"
 
 import { useState, useNavigate} from 'react'
 
@@ -9,11 +11,12 @@ const UniverseGame = ()=> {
 
     const clickPaper = (e) =>{
         console.log(e.target.id)
-        if(totalTrash <= 3) {
+        if(totalTrash <= 2) {
             setTotalTrash(totalTrash+1)
             const planetAudio = new Audio('/assets/universe/true.mp3')
             planetAudio.play()
-            document.getElementById(e.target.id).style.opacity = '0%'
+            // document.getElementById(e.target.id).style.opacity = '0%'
+            document.getElementById('paper1').style.display = 'none'
             console.log('페이퍼')
 
         } else {
@@ -22,13 +25,13 @@ const UniverseGame = ()=> {
     }
 
     const clickPlastic =(e) => {
-        if (3 < totalTrash && totalTrash < 8) {
+        if (2 < totalTrash && totalTrash < 6) {
             setTotalTrash(totalTrash+1)
             console.log('플라스틱')
             document.getElementById(e.target.id).style.opacity = '0%'
             const planetAudio = new Audio('/assets/universe/true.mp3')
             planetAudio.play()
-        } else if (totalTrash <=3 ){
+        } else if (totalTrash <=2 ){
             console.log('아직 플라스틱 아님')
             const planetAudio = new Audio('/assets/universe/false.mp3')
             planetAudio.play()
@@ -38,13 +41,13 @@ const UniverseGame = ()=> {
     }
 
     const clickMetal =(e)=> {
-        if (7 < totalTrash && totalTrash < 12) {
+        if (5 < totalTrash && totalTrash < 9) {
             setTotalTrash(totalTrash+1)
             console.log('캔')
             const planetAudio = new Audio('/assets/universe/true.mp3')
             planetAudio.play()
             document.getElementById(e.target.id).style.display = 'none'
-        } else if (totalTrash <= 7) {
+        } else if (totalTrash <= 5) {
             console.log('아직 캔 아님')
             const planetAudio = new Audio('/assets/universe/false.mp3')
             planetAudio.play()
@@ -53,72 +56,73 @@ const UniverseGame = ()=> {
         }
     }
     
-    
     return(<div style={{position:"relative"}}>
-            {totalTrash <= 3 ? (<>
+            {totalTrash <= 2 ? (<>
                 <h2 className="universegame-title">종이 쓰레기를 버려주세요</h2>
             </>) : (<></>)}
 
+
+            <div id={'paper1'}>
+            <UniverseEffect className="trash1" onClick={clickPaper} id={'effect1'}></UniverseEffect>
             <img src="/assets/universe/paper.png" className="paper1 " onClick={clickPaper} id={'paper1'}></img>
+            </div>
             <img src="/assets/universe/paper.png" className="paper2" onClick={clickPaper} id={'paper2'}></img>
             <img src="/assets/universe/paper.png" className="paper3" onClick={clickPaper} id={'paper3'}></img>
-            <img src="/assets/universe/paper.png" className="paper4 " onClick={clickPaper} id={'paper4'}></img>
+            {/* <img src="/assets/universe/paper.png" className="paper4 " onClick={clickPaper} id={'paper4'}></img> */}
             
 
-            {3< totalTrash && totalTrash < 8? (<>
+            {2< totalTrash && totalTrash < 6? (<>
                 <h2 className="universegame-title">플라스틱 쓰레기를 버려주세요</h2>
             </>) : (<></>)}
 
             <img src="/assets/universe/plastic.png" className="plastic1" onClick={clickPlastic} id={'plastic1'}/>
             <img src="/assets/universe/plastic.png" className="plastic2" onClick={clickPlastic} id={'plastic2'}/>
             <img src="/assets/universe/plastic.png" className="plastic3" onClick={clickPlastic} id={'plastic3'}/>
-            <img src="/assets/universe/plastic.png" className="plastic4" onClick={clickPlastic} id={'plastic4'}/>
+            {/* <img src="/assets/universe/plastic.png" className="plastic4" onClick={clickPlastic} id={'plastic4'}/> */}
 
 
 
-            {7< totalTrash && totalTrash <12 ? (<>
+            {5< totalTrash && totalTrash <8 ? (<>
                 <h2 className="universegame-title">캔 쓰레기를 버려주세요</h2>
             </>) : (<></>)}
 
             <img src="/assets/universe/can.png" className="metal1" onClick={clickMetal} id={'metal1'} />
             <img src="/assets/universe/can.png" className="metal2" onClick={clickMetal} id={'metal2'} />
-            <img src="/assets/universe/can.png" className="metal3" onClick={clickMetal} id={'metal3'} />
-            <img src="/assets/universe/can.png" className="metal4" onClick={clickMetal} id={'metal4'} />
+            {/* <img src="/assets/universe/can.png" className="metal3" onClick={clickMetal} id={'metal3'} /> */}
+            {/* <img src="/assets/universe/can.png" className="metal4" onClick={clickMetal} id={'metal4'} /> */}
 
 
             {/* 게임이 끝이 나면??? */}
-            {totalTrash === 12? (<>
+            {totalTrash === 8? (<>
                 <h2 className="universegame-title">외계인과 하이파이브를 해보세요!</h2>
-                <img src="/assets/universe/paperBin4.png" className="paperbin animate__animated animate__fadeOutDown" />
-                <img src="/assets/universe/plasticBin4.png" className="plasticbin animate__animated animate__fadeOutDown" />
-                <img src="/assets/universe/metalBin4.png" className="metalbin animate__animated animate__fadeOutDown" />
+                <img src="/assets/universe/paperBin3.png" className="paperbin animate__animated animate__fadeOutDown" />
+                <img src="/assets/universe/plasticBin3.png" className="plasticbin animate__animated animate__fadeOutDown" />
+                <img src="/assets/universe/metalBin3.png" className="metalbin animate__animated animate__fadeOutDown" />
 
                 <img src="/assets/universe/UFO.png " className="ufo animate__animated animate__fadeInRight"
 
 
                 ></img>
-                {/* <button onClick={()=> navigate('/')}
-                className="home-button"
-                >돌아가기</button> */}
+
             </>) : (<>
                 {/* 게임이 아직 진행 중일때 보여줄 화면(분리수거통) */}
                 {(totalTrash === 0)? (<><img src="/assets/universe/paperBin.png" className="paperbin animate__animated animate__fadeInUp" /></>):(<></>)}
                 {(totalTrash === 1)? (<><img src="/assets/universe/paperBin1.png" className="paperbin" /></>):(<></>)}
                 {(totalTrash === 2)? (<><img src="/assets/universe/paperBin2.png" className="paperbin" /></>):(<></>)}
-                {(totalTrash === 3)? (<><img src="/assets/universe/paperBin3.png" className="paperbin" /></>):(<></>)}
-                {(totalTrash >= 4)? (<><img src="/assets/universe/paperBin4.png" className="paperbin" /></>):(<></>)}
+                {(totalTrash >= 3)? (<><img src="/assets/universe/paperBin3.png" className="paperbin" /></>):(<></>)}
+                {/* {(totalTrash >= 4)? (<><img src="/assets/universe/paperBin4.png" className="paperbin" /></>):(<></>)} */}
 
-                {(totalTrash <= 4)? (<><img src="/assets/universe/plasticBin.png" className="plasticbin animate__animated animate__fadeInUp" /></>):(<></>)}
-                {(totalTrash === 5)? (<><img src="/assets/universe/plasticBin1.png" className="plasticbin" /></>):(<></>)}
-                {(totalTrash === 6)? (<><img src="/assets/universe/plasticBin2.png" className="plasticbin" /></>):(<></>)}
-                {(totalTrash === 7)? (<><img src="/assets/universe/plasticBin3.png" className="plasticbin" /></>):(<></>)}
-                {(totalTrash >= 8)? (<><img src="/assets/universe/plasticBin4.png" className="plasticbin" /></>):(<></>)}
+                {(totalTrash <= 3)? (<><img src="/assets/universe/plasticBin.png" className="plasticbin animate__animated animate__fadeInUp" /></>):(<></>)}
+                {(totalTrash === 4)? (<><img src="/assets/universe/plasticBin1.png" className="plasticbin" /></>):(<></>)}
+                {(totalTrash === 5)? (<><img src="/assets/universe/plasticBin2.png" className="plasticbin" /></>):(<></>)}
+                {(totalTrash >= 6)? (<><img src="/assets/universe/plasticBin3.png" className="plasticbin" /></>):(<></>)}
+                {/* {(totalTrash >= 8)? (<><img src="/assets/universe/plasticBin4.png" className="plasticbin" /></>):(<></>)} */}
                 
-                {(totalTrash <= 8)? (<><img src="/assets/universe/metalBin.png" className="metalbin animate__animated animate__fadeInUp" /></>):(<></>)}
-                {(totalTrash === 9)? (<><img src="/assets/universe/metalBin1.png" className="metalbin" /></>):(<></>)}
-                {(totalTrash === 10)? (<><img src="/assets/universe/metalBin2.png" className="metalbin" /></>):(<></>)}
-                {(totalTrash === 11)? (<><img src="/assets/universe/metalBin3.png" className="metalbin" /></>):(<></>)}
-                {(totalTrash === 12)? (<><img src="/assets/universe/metalBin4.png" className="metalbin" /></>):(<></>)}
+                {(totalTrash <= 6)? (<><img src="/assets/universe/metalBin.png" className="metalbin animate__animated animate__fadeInUp" /></>):(<></>)}
+                {(totalTrash === 7)? (<><img src="/assets/universe/metalBin1.png" className="metalbin" /></>):(<></>)}
+                {(totalTrash === 8)? (<><img src="/assets/universe/metalBin2.png" className="metalbin" /></>):(<></>)}
+                {/* {(totalTrash === 9)? (<><img src="/assets/universe/metalBin3.png" className="metalbin" /></>):(<></>)} */}
+                {/* {(totalTrash === 12)? (<><img src="/assets/universe/metalBin4.png" className="metalbin" /></>):(<></>)} */}
 
 
             </>)}
