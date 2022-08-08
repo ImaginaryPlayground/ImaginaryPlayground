@@ -9,12 +9,11 @@ export const SampleglTF = ({ id }) => {
 
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
-  dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "30%";
+  dom.style.left = "40%";
   dom.style.top = "10%";
   dom.style.zIndex = "-3";
-  dom.setAttribute("class", "initial_hide");
+  dom.setAttribute("class", "shark_move_4");
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -32,7 +31,7 @@ export const SampleglTF = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(5, 6, 30);
+  camera.position.set(5, 0, 30);
 
   const assetLoader = new GLTFLoader();
 
@@ -44,7 +43,7 @@ export const SampleglTF = ({ id }) => {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
       // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(4, 8, 12);
+      model.position.set(4, 11, 12);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
