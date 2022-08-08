@@ -9,14 +9,20 @@
 // 코드 업로드 하기전 정해야하는 상수
 const char* ssid     = "MERCUSYS_5ABA"; // Galaxy Quantum33143
 const char* password = "dudtjs972972@";  // qwertyuiop
-const char number = '1';  // 초음파 번호(순서)
+const int numbers = 4;  // 사용하는 초음파 수, 기본적으로 초음파 센서의 개수는 4개
+const int number = 1;  // 초음파 번호(순서)
 const int touchRecognizeCnt = 3;  // 터치라고 인식하기 위한 TouchGroup구조체의 최소 cnt
+// *터치 가능 높이는 빔 프로젝터의 세로길이의 5~70퍼라고 가정하고 진행한다.*
+const int pWidth = 200; // 빔 프로젝터 화면의 가로 길이
+const int pHeight = 112;  // 빔 프로젝터 화면의 세로 길이
+const int minDistance = pHeight * 0.3; // 터치가능한 초음파로부터의 최소 거리
+const int maxDistance = pHeight * 0.95;  // 터치가능한 초음파로부터의 최대 거리
+const int mWidth = 1920;   // 모니터 가로 해상도
+const int mHeight = 1080;   // 모니터 세로 해상도
 
-// TODO 여기서부터 계속하기
-const int projectorWidth = 200; // 빔 프로젝터 화면의 가로 길이
-const int projectorHeight = 112;  // 빔 프로젝터 화면의 세로 길이
-const int width = 1080;   // 모니터 가로 해상도
-const int height = 1080;   // 모니터 세로 해상도
+const int pX = (pWidth / 2) + (number - numbers / 2) * 50 - 25; // 초음파 센서의 프로젝터 가로 위치
+const int mX = pX * mWidth / pWidth; // 초음파 센서의 모니터 화면 가로 위치
+const String strX = (String) mX; // 단순히 String으로 만든 x
 
 // wifi를 통한 웹소켓 통신시 사용하는 변수들
 IPAddress local_IP(192, 168, 1, 111);     // 사용할 IP 주소
@@ -109,7 +115,9 @@ void loop() {
 
   // 클라이언트가 연결되면 파일 전송 시작
   if (client.connected() && webSocketServer.handshake(client)) {
-    float distance; // 물체 거리
+    float distance; // 물체까지의 거리
+//    float pY; // 거리를 프로젝터 화면 크기에 맞게 변환시킨 값
+    int mY; //모니터 화면 크기에 맞게 변환 시킨 값
     // 터치 그룹들, 그룹의 수가 3이상이 되면 터치를 했다고 인식한다.
     TouchGroup t1 = { .top = -6, .bottom = -6, .sum = 0, .cnt = 0 };
     // 잠시 튀는 값 혹은 다음 터치 값을 저장하기 위한 터치 그룹
@@ -128,24 +136,25 @@ void loop() {
       
       // 초음파로 측정한 거리를 기반으로 터치가 있는지 계산한다. 
       // (터치가 없다고 판단되면 -1 반환)
-      float tempDist = touchPos(distance, &t1, &temp);
+      float touchY = touchPos(distance, &t1, &temp);
       Serial.print("터치 : ");
-      Serial.println(tempDist);
-      Serial.printf("top: %f, bottom: %f, cnt: %d\n", t1.top, t1.bottom, t1.cnt);
-      Serial.printf("top: %f, bottom: %f, cnt: %d\n", temp.top, temp.bottom, temp.cnt);
+      Serial.println(touchY);
+//      Serial.printf("top: %f, bottom: %f, cnt: %d\n", t1.top, t1.bottom, t1.cnt);
+//      Serial.printf("top: %f, bottom: %f, cnt: %d\n", temp.top, temp.bottom, temp.cnt);
       // 터치가 없다고 판단되면 바로 다음 측정을 시작한다.
-      if (tempDist == -1){
+      if (touchY == -1){
         continue;
       }
 
       // 화면 크기에 비례하여 x축의 위치와 y축의 위치를 계산한다.
       // x축은 초음파 번호(number)와 비례하고 y축은 터치 위치에 비례한다.
-//      x = 
-//      y = convert(tempDist);
+      // x의 경우 상수들을 사용하여 구할 수 있는 수이기에 미리 계산이 끝난 상태이다.
+      mY = (int) (touchY / pHeight * mHeight);
+      Serial.print("mY : ");
+      Serial.println(mY);
 
-      // 소켓을 통해 터치 데이터를 송신한다.(화면 크기 고려 요망)
-      String sendD = String(tempDist);
-      webSocketServer.sendData(sendD);
+      // 소켓을 통해 터치 데이터를 송신한다.
+      webSocketServer.sendData(strX + " " + String(mY));
     }
     
     Serial.println("The client is disconnected");
@@ -233,7 +242,7 @@ float touchPos(float distance, TouchGroup* t1, TouchGroup* temp){
 
     // 만약 유효하지 못한 거리라면 -1 반환(터치 안함)
     float avg = (*t1).sum / (*t1).cnt;
-    if(avg < 10 || 60 < avg){
+    if(avg < minDistance || maxDistance < avg){
       return -1;
     }
     // 유효한 거리라면 터치 데이터 반환
