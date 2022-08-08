@@ -45,6 +45,18 @@
 6. 초음파 센서 입구가 막히거나 이물질이 들어가면 어떻게 되는지   
 3cm~700대의 cm 까지 다양한 오류값이 산출되버린다;;   
 
+## 코드 이해
+
+[한 블로그를](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=eduino&logNo=220858628911)참고하여 echo를 통해 시간을 어떻게 측정하는지 이해를 하였다.
+
+<img src='https://user-images.githubusercontent.com/19484971/183069159-4ae10f3d-1a53-4b50-bfd4-f79553f7fc56.png' width=600>
+
+필자는 echo가 초음파를 수신하면 `HIGH`상태가 되는줄 알았으나..
+
+반대로 trig에서 초음파를 켰을 때 `HIGH`가 되고 그 초음파를 수신할 때 `LOW`가 되어 `HIGH`인 상태의 기간을 구하면 초음파의 왕복 시간을 구할 수 있는 것이었다.
+
+.. 설마.. 나만 모르고 있던 건 아니겠지..?
+
 ## 다수의 초음파 센서 작동 코드
 
 처음에는 `Thread` 라이브러리를 사용했는데 코드를 실행만 시킬 수 있고 결과 값을 반환해주는 기능이 없어서 `concurrent.futures` 라이브러리로 바꾸어서 코딩하였다.
