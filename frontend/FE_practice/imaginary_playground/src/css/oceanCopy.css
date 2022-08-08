@@ -1,0 +1,378 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap");
+
+html,
+body {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vw;
+}
+
+.title {
+  position: absolute;
+  z-index: 105;
+  font-family: "Noto Serif KR", serif;
+  width: 100vw;
+  margin-top: 7vw;
+  margin-left: 30vw;
+  /* display: flex;
+    justify-content: center; */
+  font-size: 3vw;
+}
+
+.title1 {
+  position: absolute;
+  z-index: 105;
+  font-family: "Noto Serif KR", serif;
+  width: 100%;
+  font-size: 300%;
+  margin-top: 7%;
+  display: flex;
+  justify-content: center;
+}
+
+/* .ocean {
+    width: 100%;
+    height: 100%;
+} */
+
+.home-button {
+  position: absolute;
+  z-index: 10;
+  font-family: "Noto Serif KR", serif;
+  font-size: 2vw;
+  /* display: flex;
+    justify-content: center; */
+  border-radius: 27px;
+  border: 0 none;
+  padding-left: 4vw;
+  padding-right: 4vw;
+  cursor: pointer;
+  left: 75vw;
+  margin-top: 52vw;
+  background-color: #f28123;
+  color: white;
+}
+
+.map {
+  position: absolute;
+  z-index: 10000;
+  width: 100%;
+  /* height: 100%; */
+  padding-bottom: 20%;
+}
+
+.audio {
+  position: absolute;
+  z-index: -1000;
+  opacity: 0%;
+}
+
+/* 상어떼가 나타났다 */
+
+.ocean_copy .copy_Shark1 {
+  width: 290px;
+  height: 100px;
+  border: 10px solid red;
+  opacity: 30%;
+  position: absolute;
+  z-index: 100;
+  left: 38%;
+  top: 79%;
+  cursor: pointer;
+}
+
+.ocean_copy .copy_Shark2 {
+  width: 290px;
+  height: 100px;
+  border: 10px solid red;
+  opacity: 30%;
+  position: absolute;
+  z-index: 100;
+  left: 48%;
+  top: 55%;
+  cursor: pointer;
+}
+
+.ocean_copy .copy_Shark3 {
+  width: 290px;
+  height: 100px;
+  border: 10px solid red;
+  opacity: 30%;
+  position: absolute;
+  z-index: 100;
+  left: 58%;
+  top: 79%;
+  cursor: pointer;
+}
+
+.ocean_copy .copy_Shark4 {
+  width: 290px;
+  height: 100px;
+  border: 10px solid red;
+  opacity: 30%;
+  position: absolute;
+  z-index: 100;
+  left: 68%;
+  top: 49%;
+  cursor: pointer;
+}
+
+/* 배경 */
+
+.ocean {
+  position: relative;
+}
+
+.cliff1 {
+  width: 100%;
+  position: absolute;
+  z-index: -17;
+}
+
+.cliff2 {
+  width: 100%;
+  position: absolute;
+  z-index: -29;
+}
+
+.background {
+  width: 100%;
+  position: absolute;
+  z-index: -30;
+  pointer-events: none;
+}
+
+/* 햇빛 */
+
+.sun1 {
+  animation: sun 700ms linear infinite alternate;
+  width: 100%;
+  position: absolute;
+  /* z-index: -35; */
+}
+
+.sun2 {
+  animation: sun 1300ms linear infinite alternate;
+  width: 100%;
+  position: absolute;
+  /* z-index: -35; */
+}
+
+.sun3 {
+  animation: sun 1200ms linear infinite alternate;
+  width: 100%;
+  position: absolute;
+  /* z-index: -1350; */
+}
+
+.sun4 {
+  animation: sun 1700ms linear infinite alternate;
+  width: 100%;
+  position: absolute;
+}
+
+.sun5 {
+  animation: sun 1000ms linear infinite alternate;
+  width: 100%;
+  position: absolute;
+}
+
+@keyframes sun {
+  from {
+    opacity: 100%;
+  }
+
+  to {
+    opacity: 10%;
+  }
+}
+
+/* 물고기 */
+
+.fish {
+  animation: fish 17000ms linear infinite;
+  width: 100%;
+  position: absolute;
+  z-index: -24;
+}
+
+@keyframes fish {
+  from {
+    right: -30%;
+  }
+
+  to {
+    right: 60%;
+  }
+}
+
+.trashfish {
+  animation: trashfish 10000ms linear infinite;
+  width: 100%;
+  position: absolute;
+  z-index: -24;
+}
+
+@keyframes trashfish {
+  from {
+    left: -30%;
+  }
+
+  to {
+    left: 65%;
+  }
+}
+
+.whale {
+  animation: whale 40000ms linear infinite;
+  width: 100%;
+  position: absolute;
+  z-index: -23;
+}
+
+@keyframes whale {
+  from {
+    left: -45%;
+  }
+
+  to {
+    left: 50%;
+  }
+}
+
+/* 방울 */
+.bubble1 {
+  animation: bubble 15000ms linear infinite;
+  width: 100%;
+  position: absolute;
+  z-index: -10;
+}
+
+.bubble2 {
+  animation: bubble 10000ms linear infinite;
+  width: 100%;
+  position: absolute;
+  z-index: -10;
+}
+
+.bubble3 {
+  animation: bubble 20000ms linear infinite;
+  width: 100%;
+  position: absolute;
+  z-index: -10;
+}
+
+@keyframes bubble {
+  from {
+    margin-top: 10%;
+  }
+
+  to {
+    margin-top: -50%;
+  }
+}
+
+/* 다양 식물군 */
+
+.yellow {
+  animation: moving 1000ms linear infinite alternate;
+  transform-origin: 100% 0%;
+  width: 100%;
+  position: absolute;
+  z-index: -8;
+}
+
+.red {
+  animation: moving 2000ms linear infinite alternate;
+  transform-origin: 100% 0%;
+  width: 100%;
+  position: absolute;
+  z-index: -7;
+}
+
+@keyframes moving {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-1deg);
+  }
+}
+
+.blueleaf1 {
+  animation: moving 1000ms linear infinite alternate;
+  transform-origin: 100% 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -7;
+}
+
+.blueleaf2 {
+  animation: moving 1500ms linear infinite alternate;
+  transform-origin: 100% 0%;
+  width: 100%;
+  position: absolute;
+  z-index: -7;
+}
+
+.blueleaf3 {
+  animation: moving 800ms linear infinite alternate;
+  width: 100%;
+  position: absolute;
+  z-index: -7;
+}
+
+.cucumber {
+  animation: moving 1000ms linear infinite alternate;
+  width: 100%;
+  position: absolute;
+  z-index: -6;
+}
+
+.rainbow {
+  animation: moving 1500ms linear infinite alternate;
+  width: 100%;
+  position: absolute;
+  z-index: -9;
+}
+
+.cactus {
+  animation: moving 1300ms linear infinite alternate;
+  width: 100%;
+  position: absolute;
+  z-index: -6;
+}
+
+.pink {
+  width: 100%;
+  position: absolute;
+  z-index: -7;
+}
+
+.shark_move {
+  animation: shark_move 4s infinite linear alternate;
+}
+/* 상어 움직이는 애니메이션 */
+
+@keyframes shark_move {
+  0% {
+    transform: translateX(-300px);
+  }
+
+  50% {
+    transform: translateY(-300px);
+  }
+
+  75% {
+    transform: translateY(-100px);
+  }
+
+  85% {
+    transform: translateY(-150px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}
