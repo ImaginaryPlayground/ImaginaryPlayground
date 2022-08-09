@@ -10,6 +10,12 @@ import MainDolphinSide from "../components/oceanCopy/MainDolphinSide";
 
 import "../css/oceanCopy.css";
 import { Howl, Howler } from "howler";
+import MainDolphinNextStage from "../components/oceanCopy/MainDolphinNextStage";
+import DanceMainDolphin from "../components/oceanCopy/DanceMainDolphin";
+import Motion1Dolphin from "../components/oceanCopy/Motion1Dolphin";
+import Motion2Dolphin from "../components/oceanCopy/Motion2Dolphin";
+import Motion3Dolphin from "../components/oceanCopy/Motion3Dolphin";
+import EndGameMainDolphin from "../components/oceanCopy/EndGameMainDolphin";
 
 const OceanCopy = () => {
   // 게임 시작하는 게임 지도 구현
@@ -19,6 +25,23 @@ const OceanCopy = () => {
   const [totalCount, totalCountSet] = useState(0);
   const [totalSharkCount, setTotalSharkCount] = useState(4);
   const [isNiceText, setIsNiceText] = useState(false);
+  const [DanceStart, setDanceStart] = useState(false);
+  const [DanceStartBefore, setDanceStartBefore] = useState(false);
+
+  //첫번째 모션 인식 시작
+  const [motionStart1, setMotionStart1] = useState(false);
+  const [motionStartBefore, setMotionStartBefore] = useState(false);
+
+  //두번째 모션 인식 시작
+  const [motionStart2, setMotionStart2] = useState(false);
+
+  //세번째 모션 인식 시작
+  const [motionStart3, setMotionStart3] = useState(false);
+
+  //마지막 게임 음성 부분
+  const [endGameAudio, setEndGameAudio] = useState(false);
+
+  const [isMotionLoading, setisMotionLoading] = useState(false);
 
   const mapMusic = new Audio("/assets/ocean/map.mp3");
   //게임 시작 음성
@@ -58,17 +81,236 @@ const OceanCopy = () => {
   //상어 3마리 남은 음성
   const restThreeSharkAudio = new Howl({
     src: ["/assets/audio/ocean/상어 3마리 남음.wav"],
-    onend: () => {},
+    onend: () => {
+      mainGameAudio.play();
+    },
   });
   //상어 2마리 남은 음성
   const restTwoSharkAudio = new Howl({
     src: ["/assets/audio/ocean/상어2마리 남음.wav"],
-    onend: () => {},
+    onend: () => {
+      mainGameAudio.play();
+    },
   });
   //상어 1마리 남은 음성
   const restOneSharkAudio = new Howl({
     src: ["/assets/audio/ocean/마지막 상어 처리.wav"],
+    onend: () => {
+      mainGameAudio.play();
+    },
+  });
+
+  //동요 오디오
+  const singAudio = new Howl({
+    src: ["/assets/audio/ocean/돌고래와 함께 춤을 춰요 동요.mp3"],
     onend: () => {},
+  });
+
+  //자세 따라하라는 오디오
+  const MotionStartBeforeAudio = new Howl({
+    src: ["/assets/audio/ocean/자세따라하라는 음성.mp3"],
+    onend: () => {
+      document.getElementById("main_dolphin_next_stage_1")?.remove();
+
+      setMotionStartBefore(false);
+      setMotionStart1(true);
+      mainGameAudio.play();
+    },
+  });
+
+  // 자세따라할때 맞는지 IOT 와 웹소켓 통신 하기
+  useEffect(() => {
+    if (motionStart1) {
+      //웹소켓하기
+      const motion1Dolphin = document.getElementById("motion1_dolphin_0");
+      setTimeout(() => {
+        //모션 로딩 처리
+        setisMotionLoading(true);
+        nextMotionAudio.play();
+        motion1Dolphin?.remove();
+      }, 8000);
+    } else if (motionStart2) {
+      const motion2Dolphin = document.getElementById("motion2_dolphin_0");
+
+      setTimeout(() => {
+        //모션 로딩 처리
+        setisMotionLoading(true);
+        lastMotionAudio.play();
+        motion2Dolphin?.remove();
+      }, 8000);
+    } else if (motionStart3) {
+      setTimeout(() => {
+        setMotionStart3(false);
+        setEndGameAudio(true);
+        Howler.stop();
+        document.getElementById("motion3_dolphin_0")?.remove();
+        setTimeout(() => {
+          document.getElementById("endGame_text1").style.display = "none";
+          document.getElementById("endGame_text2").style.display = "block";
+        }, 14000);
+        endGameSound.play();
+        setTimeout(() => {
+          document
+            .getElementById("endGame_dolphin_0")
+            .setAttribute("class", "disappear");
+        }, 30000);
+        setTimeout(() => {
+          document.getElementById("endGame_dolphin_0").remove();
+          navigate("/", { replace: "true" });
+        }, 31300);
+      }, 8000);
+    }
+
+    return () => {};
+  }, [motionStart1, motionStart2, motionStart3]);
+
+  const endGameSound = new Howl({
+    src: ["/assets/audio/ocean/오션맵 마무리 멘트.mp3"],
+    onend: () => {},
+  });
+
+  const nextMotionAudio = new Howl({
+    src: ["/assets/audio/ocean/다음자세 나갑니다.mp3"],
+    onend: () => {
+      setMotionStart1(false);
+      setMotionStart2(true);
+      setisMotionLoading(false);
+    },
+  });
+
+  const lastMotionAudio = new Howl({
+    src: ["/assets/audio/ocean/한자세만 더 따라하기.mp3"],
+    onend: () => {
+      setMotionStart2(false);
+      setMotionStart3(true);
+      setisMotionLoading(false);
+    },
+  });
+
+  //메인 게임 음악
+  const mainGameAudio = new Howl({
+    src: ["/assets/audio/ocean/Calimba.mp3"],
+    onend: () => {},
+    volume: 0.1,
+  });
+
+  //다음 스테이지 율동시작전 음성
+  const nextStageAudio = new Howl({
+    src: ["/assets/audio/ocean/상어물리친후음성.mp3"],
+    onend: () => {
+      //댄스 시작전 카운트다운 설정
+      setDanceStartBefore(true);
+
+      //돌리 삭제
+      const doli = document.getElementById("main_dolphin_next_stage_0");
+      doli.remove();
+
+      //카운트 다운
+      const countDown1 = document.getElementById("countdown_1");
+      const countDown2 = document.getElementById("countdown_2");
+      const countDown3 = document.getElementById("countdown_3");
+
+      countDown3.style.display = "block";
+
+      setTimeout(() => {
+        countDown3.style.display = "none";
+        countDown2.style.display = "block";
+      }, 1000);
+      setTimeout(() => {
+        countDown2.style.display = "none";
+        countDown1.style.display = "block";
+      }, 2000);
+      setTimeout(() => {
+        countDown1.style.display = "none";
+        //노래 가사 박스 보이기
+        document.getElementById("sing_box").style.display = "block";
+        document.getElementById("sing_1").style.display = "block";
+        //춤 텍스트 시작
+        setDanceStart(true);
+      }, 3000);
+
+      //동요 시작
+      singAudio.play();
+
+      //1분뒤 동요 종료
+      setTimeout(() => {
+        singAudio.stop();
+        document.getElementById("sing_box").style.display = "none";
+        setDanceStart(false);
+        //모션인식 시작 전 화면 보여주기
+        setMotionStartBefore(true);
+        //댄스 돌핀 제거
+        document.getElementById("dance_main_dolphin_0").remove();
+
+        setTimeout(() => {
+          MotionStartBeforeAudio.play();
+        }, 700);
+      }, 60000);
+
+      //노래 가사 div에 접근
+      const sing_1 = document.getElementById("sing_1");
+      const sing_2 = document.getElementById("sing_2");
+      const sing_3 = document.getElementById("sing_3");
+      const sing_4 = document.getElementById("sing_4");
+      const sing_5 = document.getElementById("sing_5");
+      const sing_6 = document.getElementById("sing_6");
+      const sing_7 = document.getElementById("sing_7");
+      const sing_8 = document.getElementById("sing_8");
+      const sing_9 = document.getElementById("sing_9");
+      const sing_10 = document.getElementById("sing_10");
+      const sing_11 = document.getElementById("sing_11");
+      const sing_12 = document.getElementById("sing_12");
+      const sing_13 = document.getElementById("sing_13");
+
+      setTimeout(() => {
+        sing_1.style.display = "none";
+        sing_2.style.display = "block";
+      }, 7600);
+      setTimeout(() => {
+        sing_2.style.display = "none";
+        sing_3.style.display = "block";
+      }, 13700);
+      setTimeout(() => {
+        sing_3.style.display = "none";
+        sing_4.style.display = "block";
+      }, 18900);
+      setTimeout(() => {
+        sing_4.style.display = "none";
+        sing_5.style.display = "block";
+      }, 24900);
+      setTimeout(() => {
+        sing_5.style.display = "none";
+        sing_6.style.display = "block";
+      }, 29500);
+      setTimeout(() => {
+        sing_6.style.display = "none";
+        sing_7.style.display = "block";
+      }, 36500);
+      setTimeout(() => {
+        sing_7.style.display = "none";
+        sing_8.style.display = "block";
+      }, 40200);
+      setTimeout(() => {
+        sing_8.style.display = "none";
+        sing_9.style.display = "block";
+      }, 43500);
+      setTimeout(() => {
+        sing_9.style.display = "none";
+        sing_10.style.display = "block";
+      }, 45500);
+      setTimeout(() => {
+        sing_10.style.display = "none";
+        sing_11.style.display = "block";
+      }, 48500);
+      setTimeout(() => {
+        sing_11.style.display = "none";
+        sing_12.style.display = "block";
+      }, 52000);
+      setTimeout(() => {
+        sing_12.style.display = "none";
+        sing_13.style.display = "block";
+      }, 54500);
+    },
   });
 
   //사이드 돌리 상어 처치시 한바퀴 돌기
@@ -93,6 +335,15 @@ const OceanCopy = () => {
     } else if (totalSharkCount === 1) {
       Howler.stop();
       restOneSharkAudio.play();
+    } else if (totalSharkCount === 0) {
+      Howler.stop();
+      const mainDolphinSide = document.getElementById("main_dolphin_side_0");
+      mainDolphinSide.remove();
+      setIsNiceText(false);
+      //다음 스테이지 시작 음성
+      setTimeout(() => {
+        nextStageAudio.play();
+      }, 800);
     }
   }, [totalSharkCount]);
 
@@ -102,7 +353,9 @@ const OceanCopy = () => {
   //게임 설명 음성
   const gameDescriptionAudio = new Howl({
     src: ["/assets/audio/ocean/오션맵-게임설명오디오-0.9배속.mp3"],
-    onend: () => {},
+    onend: () => {
+      mainGameAudio.play();
+    },
   });
 
   // 첫번째 상어
@@ -195,6 +448,10 @@ const OceanCopy = () => {
     }
   };
 
+  // useEffect(() => {
+  //   console.log(document.elementFromPoint(320, 320));
+  // }, [countOne, countTwo, countThree, countFour]);
+
   const navigate = useNavigate();
 
   return (
@@ -206,31 +463,35 @@ const OceanCopy = () => {
       {start ? (
         <>
           {/* 캐릭터 로드 */}
-          {!document.getElementById("main_dolphin_side_0") && (
-            <div>{<MainDolphinSide id="main_dolphin_side_0" />}</div>
-          )}
+          {!document.getElementById("main_dolphin_side_0") &&
+            totalSharkCount !== 0 && (
+              <div>{<MainDolphinSide id="main_dolphin_side_0" />}</div>
+            )}
           <div>{<SharkSample id="shark1" />}</div>
-          {/* <div>{<SharkSample2 id="shark2" />}</div> */}
-          {/* <div>{<SharkSample3 id="shark3" />}</div> */}
+          {/* <div>{<SharkSample2 id="shark2" />}</div>
+          <div>{<SharkSample3 id="shark3" />}</div> */}
           {/* <div>{<SharkSample4 id="shark4" />}</div> */}
-
           {/* 메인돌리 남은 상어 텍스트 */}
-          {!isNiceText ? (
+          {totalSharkCount !== 0 && (
             <>
-              <div className="main_dolphin_text">
-                <div>
-                  현재 남은 <span style={{ color: "aqua" }}>상어</span>는{" "}
-                  <span style={{ color: "red", fontSize: "45px" }}>
-                    {totalSharkCount}
-                  </span>
-                  마리야!
+              {!isNiceText ? (
+                <>
+                  <div className="main_dolphin_text">
+                    <div>
+                      현재 남은 <span style={{ color: "aqua" }}>상어</span>는{" "}
+                      <span style={{ color: "red", fontSize: "45px" }}>
+                        {totalSharkCount}
+                      </span>
+                      마리야!
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="main_dolphin_good_text">
+                  상어를 물리쳤어! 신난다!!
                 </div>
-              </div>
+              )}
             </>
-          ) : (
-            <div className="main_dolphin_good_text">
-              상어를 물리쳤어! 신난다!!
-            </div>
           )}
           {totalCount < 12 ? (
             <h2 className="title move_down_up">
@@ -322,7 +583,6 @@ const OceanCopy = () => {
           ) : (
             <></>
           )}
-
           {/* 왼쪽에서 4번째 상어 */}
           {countFour <= 2 ? (
             <div
@@ -350,22 +610,263 @@ const OceanCopy = () => {
           ) : (
             <></>
           )}
-
-          {/* 상어가 20번이 다 터치가 되면 게임 끝났다는 화면 보여주기 */}
-          {totalCount === 12 ? (
+          {/* 상어가 12번 다 터치가 되면 게임 끝났다는 화면 보여주기 */}
+          {totalSharkCount === 0 ? (
             <div>
-              <h2 className="title1">게임 끝~</h2>
-              <iframe
+              {!DanceStart &&
+                !motionStart1 &&
+                !motionStart2 &&
+                !motionStart3 &&
+                !motionStartBefore &&
+                !endGameAudio && (
+                  <h2 className="complete_title">
+                    너가 <span style={{ color: "aqua" }}>해</span>
+                    <span style={{ color: "blanchedalmond" }}>냈</span>
+                    <span style={{ color: "blue" }}>어</span>!! 모든{" "}
+                    <span style={{ color: "brown" }}>상어</span>를 물리쳤어!{" "}
+                  </h2>
+                )}
+              {/* <iframe
                 title="end_game"
-                src="/assets/ocean/applaud.mp3"
+                src="/assets/audio/ocean/applaud.mp3"
                 allow="autoplay;"
                 className="audio"
-              ></iframe>
-              <Dolphin></Dolphin>
+              ></iframe> */}
+
+              {/* 다음 스테이지의 돌리 로딩 */}
+              {!document.getElementById("main_dolphin_next_stage_0") &&
+                !DanceStartBefore && (
+                  <MainDolphinNextStage id="main_dolphin_next_stage_0" />
+                )}
+
+              {/* 이제 곧 춤춘다는 돌리 로딩  */}
+              {DanceStartBefore &&
+                !DanceStart &&
+                !motionStart1 &&
+                !motionStart2 &&
+                !motionStart3 &&
+                !motionStartBefore &&
+                !endGameAudio && (
+                  <div className="dance_before">
+                    이제 곧 <span style={{ color: "hotpink" }}>돌리</span>가
+                    춤을 춥니다
+                  </div>
+                )}
+
+              {/* 카운트다운 박스 */}
+              <div className="countdown_box">
+                <span className="text_countdown_1" id="countdown_1">
+                  1
+                </span>
+                <span className="text_countdown_2" id="countdown_2">
+                  2
+                </span>
+                <span className="text_countdown_3" id="countdown_3">
+                  3
+                </span>
+              </div>
             </div>
           ) : (
             <></>
           )}
+          {/* 돌리 춤을 따라하는 텍스트 */}
+          {DanceStart && (
+            <>
+              <h2 className="dance_start_text text_size_change">
+                <span style={{ color: "darkcyan" }}>돌리</span>의&nbsp;
+                <span style={{ color: "midnightblue" }}>춤</span>을
+                <span style={{ color: "hotpink" }}> 따</span>
+                <span style={{ color: "greenyellow" }}>라</span>하세요!!
+              </h2>
+              {/* 댄스 돌핀 로드 */}
+              <DanceMainDolphin id="dance_main_dolphin_0" />
+            </>
+          )}
+
+          {/* 자세를 따라하기 전 안내 텍스트 및 돌핀 로드 */}
+          {motionStartBefore && (
+            <>
+              <h2
+                className="complete_title"
+                style={{ textAlign: "center", left: "34%", top: "23%" }}
+              >
+                <div>
+                  아주 <span style={{ color: "midnightblue" }}>훌륭해</span>!!
+                </div>
+                <div style={{ fontSize: "55px" }}>
+                  그럼 이젠 나의{" "}
+                  <span style={{ color: "palevioletred", fontSize: "70px" }}>
+                    자세
+                  </span>
+                  를 따라해봐!!
+                </div>
+              </h2>
+              {/* 다음 스테이지 넘어가기전 돌리 로드 */}
+              <div>
+                {!document.getElementById("main_dolphin_next_stage_1") && (
+                  <MainDolphinNextStage id="main_dolphin_next_stage_1" />
+                )}
+              </div>
+            </>
+          )}
+          {(motionStart1 || motionStart2 || motionStart3) && !isMotionLoading && (
+            <h2 className="dance_start_text text_size_change">
+              <span style={{ color: "darkcyan" }}>돌리</span>의&nbsp;
+              <span style={{ color: "midnightblue" }}>자세</span>를
+              <span style={{ color: "hotpink" }}> 따</span>
+              <span style={{ color: "greenyellow" }}>라</span>하세요!!
+            </h2>
+          )}
+
+          {isMotionLoading && (
+            <>
+              <h2
+                className="dance_start_text text_size_change"
+                style={{ left: "25%", top: "41%", fontSize: "100px" }}
+              >
+                다음
+                <span style={{ color: "midnightblue" }}> 자세</span>를
+                <span style={{ color: "hotpink" }}> 준비</span>
+                하세요!!
+              </h2>
+            </>
+          )}
+
+          {/* 모션 돌핀1 로드 */}
+          {motionStart1 &&
+            !motionStart2 &&
+            !document.getElementById("motion1_dolphin_0") &&
+            !isMotionLoading && (
+              <>
+                <Motion1Dolphin id="motion1_dolphin_0" />
+              </>
+            )}
+          {/* 모션 돌핀2 로드 */}
+          {motionStart2 &&
+            !motionStart3 &&
+            !document.getElementById("motion2_dolphin_0") &&
+            !isMotionLoading && (
+              <>
+                <Motion2Dolphin id="motion2_dolphin_0" />
+              </>
+            )}
+          {/* 모션 돌핀3 로드 */}
+          {motionStart3 &&
+            !endGameAudio &&
+            !document.getElementById("motion3_dolphin_0") && (
+              <>
+                <Motion3Dolphin id="motion3_dolphin_0" />
+              </>
+            )}
+
+          {endGameAudio && (
+            <>
+              <div>
+                <EndGameMainDolphin id={"endGame_dolphin_0"} />
+              </div>
+              <h2
+                className="complete_title endGame_text"
+                style={{ display: "block" }}
+                id="endGame_text1"
+              >
+                <div>
+                  너무 <span style={{ color: "midnightblue" }}>재밌었어</span>
+                  !!
+                </div>
+                <div style={{ fontSize: "55px", marginTop: "20px" }}>
+                  <div className="mt-10">
+                    이제 <span style={{ color: "aqua" }}>바다</span> 맵 여행은
+                    끝이 났어!
+                  </div>
+                  <div className="mt-10">
+                    덕분에 <span style={{ color: "brown" }}>돌고래</span>{" "}
+                    친구들이 다시 마을에서 편하게 지낼 수 있게 되었어!
+                  </div>
+                  <div className="mt-10">
+                    또 <span style={{ color: "red" }}>상어</span>가 괴롭힌다면
+                    너가 와서 도와줘야 해!
+                  </div>
+                </div>
+              </h2>
+              <h2
+                className="complete_title endGame_text"
+                style={{ display: "none" }}
+                id="endGame_text2"
+              >
+                <div>
+                  항상 <span style={{ color: "midnightblue" }}>건강해</span>!!
+                </div>
+                <div style={{ fontSize: "55px", marginTop: "20px" }}>
+                  <div className="mt-10">
+                    <div>
+                      너도 항상 <span style={{ color: "hotpink" }}>건강</span>
+                      해야 해!{" "}
+                    </div>
+                    우리 아프지말고
+                    <span style={{ color: "pink" }}>행복</span>하게 지내자!
+                  </div>{" "}
+                  <div className="mt-10">
+                    그럼 이제 다른 곳을{" "}
+                    <span style={{ color: "violet" }}>여행</span>
+                    하러 가봐
+                    <div>
+                      나는 <span style={{ color: "brown" }}>친구들</span>에게
+                      돌아갈께!!
+                    </div>
+                  </div>
+                  <div className="mt-10">
+                    우리 꼭 <span style={{ color: "limegreen" }}>언젠가</span>{" "}
+                    다시 볼 수 있기를...
+                  </div>
+                </div>
+              </h2>
+            </>
+          )}
+
+          {/* 동요 가사 보여주기 */}
+          <div className="sing_text" id="sing_box">
+            <div className="sing_title">노래 가사</div>
+            <div className="sing_1  sing_common" id="sing_1">
+              돌고래와 춤을 춰요. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;태양을 향해
+              쑥쑥쑥, 쑥쑥쑥,
+            </div>
+            <div className="sing_2  sing_common" id="sing_2">
+              바다와 함께 으쓱쓱,으쓱쓱, 다같이 함께 콩콩콩, 콩콩콩
+            </div>
+            <div className="sing_3  sing_common" id="sing_3">
+              물고기도 신나 춤을 춰요 하늘을 향해 쑥쑥쑥, 쑥쑥쑥,
+            </div>
+            <div className="sing_4  sing_common" id="sing_4">
+              파도와 함께 으쓱쓱, 으쓱쓱, 다같이 함께 콩콩콩, 콩콩콩
+            </div>
+            <div className="sing_5  sing_common" id="sing_5">
+              미역도 신나 춤을 춰요 별을 향해 쑥쑥쑥, 쑥쑥쑥,
+            </div>
+            <div className="sing_6  sing_common" id="sing_6">
+              돌고래와 함께 으쓱쓱, 으쓱쓱, 다같이 함께 콩콩콩, 콩콩콩
+            </div>
+            <div className="sing_7  sing_common" id="sing_7">
+              언더더씨 돌고래 마을에 오신 것을 환영합니다.
+            </div>
+            <div className="sing_8  sing_common" id="sing_8">
+              여기는 웃음이 넘치는 돌고래 마을
+            </div>
+            <div className="sing_9  sing_common" id="sing_9">
+              모두가 친구되는 돌고래마을
+            </div>
+            <div className="sing_10  sing_common" id="sing_10">
+              신나고 재밌는 돌고래마을,
+            </div>
+            <div className="sing_11  sing_common" id="sing_11">
+              언더더씨 돌고래 마을에 오신 것을 환영합니다.
+            </div>
+            <div className="sing_12 sing_common" id="sing_12">
+              뚜루뚜루 뚜뚜뚜 뚜뚜
+            </div>
+            <div className="sing_13 sing_common" id="sing_13">
+              뚜뚜뚜루 뚜뚜루 뚜뚜
+            </div>
+          </div>
 
           {/* 홈으로 돌아가기 버튼 */}
           <button onClick={() => navigate("/")} className="home-button">
