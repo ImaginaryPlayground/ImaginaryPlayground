@@ -38,10 +38,10 @@
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 77vh;
-    left: 14%;
+    top: 60vh;
+    left: 13%;
     font-family: 'Noto Serif KR', serif;
-    font-size: 100%;
+    font-size: 200%;
 }
 
 .venus {
@@ -56,9 +56,10 @@
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 60vh;
-    left: 4%;
+    top: 42.5vh;
+    left: 3%;
     font-family: 'Noto Serif KR', serif;
+    font-size: 200%;
 }
 
 .earth {
@@ -73,9 +74,10 @@
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 92vh;
-    left: 33%;
+    top: 72vh;
+    left: 32%;
     font-family: 'Noto Serif KR', serif;
+    font-size: 200%;
 }
 
 .mars {
@@ -90,9 +92,10 @@
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 52vh;
-    left: 26%;
+    top: 35vh;
+    left: 25%;
     font-family: 'Noto Serif KR', serif;
+    font-size: 200%;
 }
 
 .jupyter {
@@ -107,9 +110,10 @@
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 80vh;
-    left: 51%;
+    top: 33vh;
+    left: 50%;
     font-family: 'Noto Serif KR', serif;
+    font-size: 200%;
 }
 
 .saturn {
@@ -124,9 +128,10 @@
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 71vh;
-    left: 72%;
+    top: 67vh;
+    left: 71.2%;
     font-family: 'Noto Serif KR', serif;
+    font-size: 200%;
 }
 
 .uranus {
@@ -141,9 +146,10 @@
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 52vh;
-    left: 81.5%;
+    top: 29vh;
+    left: 79.5%;
     font-family: 'Noto Serif KR', serif;
+    font-size: 200%;
 }
 
 .neptune {
@@ -158,9 +164,10 @@
     position: absolute;
     z-index: 10000;
     color: white;
-    top: 67vh;
-    left: 94%;
+    top: 49vh;
+    left: 92%;
     font-family: 'Noto Serif KR', serif;
+    font-size: 200%;
 }
 
 
@@ -352,5 +359,68 @@
 }
 
 
+/* 팡팡 터지는 효과 */
 
+.paper-effect1 {
+    position: absolute;
+    z-index: 1000;
+    width: 5%;
+    top: 86vh;
+    left: 18vw;
+}
 
+.paper-effect2 {
+    position: absolute;
+    z-index: 1000;
+    width: 5%;
+    top: 54vh;
+    left: 38vw;
+}
+
+.paper-effect3 {
+    position: absolute;
+    z-index: 1000;
+    width: 5%;
+    top: 59vh;
+    left: 68vw;
+}
+
+.plastic-effect1 {
+    position: absolute;
+    z-index: 1000;
+    width: 5%;
+    top: 47vh;
+    left: 22vw;
+}
+
+.plastic-effect2 {
+    position: absolute;
+    z-index: 1000;
+    width: 5%;
+    top: 79vh;
+    left: 92vw;
+}
+
+.plastic-effect3 {
+    position: absolute;
+    z-index: 1000;
+    width: 5%;
+    top: 39vh;
+    left: 81vw;
+}
+
+.metal-effect1 {
+    position: absolute;
+    z-index: 1000;
+    width: 5%;
+    top: 58vh;
+    left: 5vw;
+}
+
+.metal-effect2 {
+    position: absolute;
+    z-index: 1000;
+    width: 5%;
+    top: 40vh;
+    left: 54vw;
+}

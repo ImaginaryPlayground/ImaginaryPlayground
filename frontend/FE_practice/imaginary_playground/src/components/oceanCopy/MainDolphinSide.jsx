@@ -51,7 +51,7 @@ export const DolphinglTF = ({ id }) => {
 
       const clip = THREE.AnimationClip.findByName(clips, "metarigAction.001");
       const action = mixer1.clipAction(clip);
-      action.play();
+      action?.play();
     },
     undefined,
     function (error) {
