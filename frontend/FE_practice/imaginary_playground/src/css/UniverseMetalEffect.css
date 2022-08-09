@@ -55,7 +55,7 @@
 	right: 0; */
 	top: 100%;
 	height: 4vh;
-	background-color: rgb(231, 228, 24);
+	background-color: rgb(255, 255, 255);
 }
 @keyframes explosion {
 	0% {
