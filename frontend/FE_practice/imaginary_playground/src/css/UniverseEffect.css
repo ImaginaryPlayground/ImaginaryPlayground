@@ -1,12 +1,12 @@
 /*  게임 효과 팡팡 */
 .firework {
-	/* position: relative; */
-    /* left: 20vw;
-    top: 80vh; */
+	position: relative;
+    left: 20vw;
+    top: 80vh;
 }
 
 .explosion {
-	/* position: absolute; */
+	position: absolute;
 	width: 1vw;
 	height: 10vh;
 	/* overflow: hidden; */
@@ -49,8 +49,8 @@
 }
 
 .explosion::before {
-	/* content: ''; */
-	/* position: absolute; */
+	content: '';
+	position: absolute;
 	/* left: 0;
 	right: 0; */
 	top: 100%;
@@ -67,6 +67,6 @@
 }
 
 
- .explosion::before {
+#firework .explosion::before {
 	animation: explosion 2s ease-in-out infinite;
 }

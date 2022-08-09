@@ -62,14 +62,11 @@ const UniverseGame = ()=> {
             </>) : (<></>)}
 
 
-            <div id={'paper1'} onClick={clickPaper}>
-                <UniverseEffect style={{left:'50vw'}}></UniverseEffect>
-                <img src="/assets/universe/paper.png" className="paper1 "></img>
+            <div id={'paper1'}>
+            <UniverseEffect className="trash1" onClick={clickPaper} id={'effect1'}></UniverseEffect>
+            <img src="/assets/universe/paper.png" className="paper1 " onClick={clickPaper} id={'paper1'}></img>
             </div>
-            <div>
-                {/* <UniverseEffect></UniverseEffect> */}
-                <img src="/assets/universe/paper.png" className="paper2" onClick={clickPaper} id={'paper2'}></img>
-            </div>
+            <img src="/assets/universe/paper.png" className="paper2" onClick={clickPaper} id={'paper2'}></img>
             <img src="/assets/universe/paper.png" className="paper3" onClick={clickPaper} id={'paper3'}></img>
             {/* <img src="/assets/universe/paper.png" className="paper4 " onClick={clickPaper} id={'paper4'}></img> */}
             
