@@ -7,6 +7,7 @@ import JungleBackground from "./components/jungle/JungleBackground";
 import OceanCopy from "./pages/OceanCopy";
 import Test_yjh from "./pages/Test_yjh";
 import OceanCopyIntro from "./pages/OceanCopyIntro";
+import JungleIntro from "./pages/JungleIntro";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Map />} />
           <Route path="/ocean" element={<Ocean />} />
           <Route path="/jungle" element={<Jungle />} />
+          <Route path="/jungle-intro" element={<JungleIntro />} />
           <Route path="/universe" element={<Universe />} />
           <Route path="/junglebackground" element={<JungleBackground />} />
           <Route path="/ocean-copy" element={<OceanCopy />} />
