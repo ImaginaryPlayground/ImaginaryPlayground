@@ -8,10 +8,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class ImaginaryPlaygroundApplication {
+public class backend {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ImaginaryPlaygroundApplication.class, args);
+		SpringApplication.run(backend.class, args);
 	}
 
 	@Bean
