@@ -1,21 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import ".././css/jungle.css";
-import Sample from "../components/jungle/Sample";
+import HideMonkey from "../components/jungle/HideMonkey";
 //음성인식 라이브러리
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { Howl, Howler } from "howler";
 import { useNavigate } from "react-router";
-import Sample2 from "../components/jungle/Sample2";
-import Sample3 from "../components/jungle/Sample3";
+import Monkey from "../components/jungle/Monkey";
+import HideLion from "../components/jungle/HideLion";
 import Sample4 from "../components/jungle/Sample4";
-import Sample5 from "../components/jungle/Sample5";
+import HideElephant from "../components/jungle/HideElephant";
 
-import Sample6_tori_main from "../components/jungle/Sample6_tori_main";
-import Sample3_main from "../components/jungle/Sample3_main";
-import Sample4_main from "../components/jungle/Sample4_main";
-import Sample5_main from "../components/jungle/Sample5_main";
+import ToriMain from "../components/jungle/ToriMain";
+import Lion from "../components/jungle/Lion";
+import Wolf from "../components/jungle/Wolf";
+import Elephant from "../components/jungle/Elephant";
 import JungleBackground from "../components/jungle/JungleBackground";
 const Jungle = () => {
   //음성인식 시작하는 state
@@ -653,7 +653,7 @@ const Jungle = () => {
             <div className="text_box">
               <div>
                 나는 정글의 외로운
-                <span style={{ color: "saddlebrown" }}>늑대</span>야
+                <span style={{ color: "saddlebrown" }}> 늑대</span>야
               </div>
               <div style={{ fontSize: "55px", marginTop: "20px" }}>
                 나는 친구가 없어. 하지만 너가 내 친구가 되어줄 수 있어!
@@ -724,81 +724,58 @@ const Jungle = () => {
           </div>
         )}
       </div>
-      {/* 숨겨진 사자 로딩 */}
-      <div>
-        <Sample3 id={`lion_0`} />
-      </div>
-
       {/* 숨겨진 원숭이 로딩 */}
       <div>
-        <Sample id={`whale_0`} />
+        <HideMonkey id={`whale_0`} />
       </div>
-
-      {/* 숨겨진 늑대 로딩 */}
+      {/* 숨겨진 사자 로딩 */}
       <div>
-        <Sample4 id={`wolf_0`} />
+        <HideLion id={`lion_0`} />
       </div>
+      {/* 숨겨진 늑대 로딩 */}
+      {/* <div>
+        <Sample4 id={`wolf_0`} />
+      </div> */}
 
       {/* 숨겨진 코끼리 로딩 */}
-      {/* <div>
-          <Sample5 id={`eliphant_0`} />
-        </div> */}
+      <div>
+        <HideElephant id={`elephant_0`} />
+      </div>
 
       {/* 메인원숭이 출현 */}
       {isMonkyMain && (
         <div>
-          <Sample2 id={`monky_main`} />
+          <Monkey id={`monky_main`} />
         </div>
       )}
 
       {/* 메인사자 출현 */}
       {isLionMain && (
         <div>
-          <Sample3_main id={`lion_main`} />
+          <Lion id={`lion_main`} />
         </div>
       )}
 
       {/* 메인늑대 출현 */}
       {isWolfMain && (
         <div>
-          <Sample4_main id={`wolf_main`} />
+          <Wolf id={`wolf_main`} />
         </div>
       )}
 
       {/* 메인코끼리 출현 */}
       {isElephantMain && (
         <div>
-          <Sample5_main id={`elephant_main`} />
+          <Elephant id={`elephant_main`} />
         </div>
       )}
 
       {/* 메인토리 출현 */}
       {(end_1 || end_2) && (
         <div>
-          <Sample6_tori_main id={`main_tori`} />
+          <ToriMain id={`main_tori`} />
         </div>
       )}
-
-      {/* 가장 앞 첫번째 구간
-      <img src="/assets/jungle/firstHill.png" alt="" className="firstHill" />
-      <img src="/assets/jungle/firstCeil.png" alt="" className="firstCeil" />
-
-      {/* 햇빛 */}
-      {/* <img src="/assets/jungle/sun1.png" alt="" className="sun1" />
-      <img src="/assets/jungle/sun2.png" alt="" className="sun2" />
-      <img src="/assets/jungle/sun3.png" alt="" className="sun3" /> */}
-
-      {/* 두 번째 구간 */}
-      {/* <img src="/assets/jungle/secondCeil.png" alt="" className="secondCeil" />
-      <img src="/assets/jungle/secondHill.png" alt="" className="secondHill" /> */}
-
-      {/* 세 번째 구간 */}
-      {/* <img src="/assets/jungle/onlyTree.png" alt="" className="onlyTree" />
-      <img src="/assets/jungle/bird.png" alt="" className="bird" />
-      <img src="/assets/jungle/palmTree.png" alt="" className="palmTree" /> */}
-
-      {/* 배경 */}
-      {/* <img src="/assets/jungle/background.png" alt="" className="background" /> */}
 
       <JungleBackground />
     </div>
