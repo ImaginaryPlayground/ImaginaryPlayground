@@ -1,0 +1,19 @@
+.JungleIntro {
+  font-family: "Single Day", cursive;
+}
+
+/* 텍스트 위치 */
+.JungleIntro .text_location {
+  position: absolute;
+  left: 30%;
+  top: 30%;
+  width: 850px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  font-weight: bold;
+  z-index: -1;
+}

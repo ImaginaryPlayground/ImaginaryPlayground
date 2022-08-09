@@ -81,23 +81,17 @@ const OceanCopy = () => {
   //상어 3마리 남은 음성
   const restThreeSharkAudio = new Howl({
     src: ["/assets/audio/ocean/상어 3마리 남음.wav"],
-    onend: () => {
-      mainGameAudio.play();
-    },
+    onend: () => {},
   });
   //상어 2마리 남은 음성
   const restTwoSharkAudio = new Howl({
     src: ["/assets/audio/ocean/상어2마리 남음.wav"],
-    onend: () => {
-      mainGameAudio.play();
-    },
+    onend: () => {},
   });
   //상어 1마리 남은 음성
   const restOneSharkAudio = new Howl({
     src: ["/assets/audio/ocean/마지막 상어 처리.wav"],
-    onend: () => {
-      mainGameAudio.play();
-    },
+    onend: () => {},
   });
 
   //동요 오디오
@@ -327,13 +321,10 @@ const OceanCopy = () => {
     }
 
     if (totalSharkCount === 3) {
-      Howler.stop();
       restThreeSharkAudio.play();
     } else if (totalSharkCount === 2) {
-      Howler.stop();
       restTwoSharkAudio.play();
     } else if (totalSharkCount === 1) {
-      Howler.stop();
       restOneSharkAudio.play();
     } else if (totalSharkCount === 0) {
       Howler.stop();
@@ -468,8 +459,8 @@ const OceanCopy = () => {
               <div>{<MainDolphinSide id="main_dolphin_side_0" />}</div>
             )}
           <div>{<SharkSample id="shark1" />}</div>
-          {/* <div>{<SharkSample2 id="shark2" />}</div>
-          <div>{<SharkSample3 id="shark3" />}</div> */}
+          <div>{<SharkSample2 id="shark2" />}</div>
+          <div>{<SharkSample3 id="shark3" />}</div>
           {/* <div>{<SharkSample4 id="shark4" />}</div> */}
           {/* 메인돌리 남은 상어 텍스트 */}
           {totalSharkCount !== 0 && (

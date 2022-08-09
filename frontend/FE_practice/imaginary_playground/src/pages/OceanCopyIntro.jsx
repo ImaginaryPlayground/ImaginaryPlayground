@@ -9,7 +9,7 @@ const OceanCopyIntro = () => {
 
   //메인 토리 음성
   const mainToriAudio = new Howl({
-    src: ["/assets/audio/ocean/오션맵_인트로_음성.wav"],
+    src: ["/assets/audio/ocean/오션맵_인트로_음성.mp3"],
     onend: () => {},
   });
 
