@@ -1,15 +1,9 @@
 /*  게임 효과 팡팡 */
-.firework {
-	/* position: relative; */
-    /* left: 20vw;
-    top: 80vh; */
-}
 
-.explosion {
-	/* position: absolute; */
+.explosion { 
 	width: 0.5vw;
 	height: 10vh;
-	/* overflow: hidden; */
+
 }
 .explosion:nth-child(1) {
 	transform: rotate(0deg) translateY(-5vh);
@@ -49,10 +43,6 @@
 }
 
 .explosion::before {
-	/* content: ''; */
-	/* position: absolute; */
-	/* left: 0;
-	right: 0; */
 	top: 100%;
 	height: 4vh;
 	background-color: rgb(24, 97, 231);
