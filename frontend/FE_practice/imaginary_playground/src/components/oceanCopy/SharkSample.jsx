@@ -9,12 +9,11 @@ export const SampleglTF = ({ id }) => {
 
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
-  dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "0%";
+  dom.style.left = "-20%";
   dom.style.top = "39%";
   dom.style.zIndex = "-3";
-  dom.setAttribute("class", "shark_move");
+  dom.setAttribute("class", "shark_move_1");
 
   const scene = new THREE.Scene();
 
@@ -33,7 +32,7 @@ export const SampleglTF = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(5, 6, 30);
+  camera.position.set(5, 6, 29);
 
   const assetLoader = new GLTFLoader();
 

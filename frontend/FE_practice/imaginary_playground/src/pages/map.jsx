@@ -33,7 +33,7 @@ const Map = () => {
         언더더씨
       </button>
       <button
-        onClick={() => navigate("/ocean-copy")}
+        onClick={() => navigate("/ocean-intro")}
         style={{ backgroundColor: "skyblue" }}
       >
         언더더씨최적화
