@@ -1,19 +1,19 @@
-import React from "react";
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-export const SampleglTF = ({ id }) => {
+export const DolphinglTF = ({ id }) => {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
+  dom.setAttribute("class", `appear`);
   dom.style.position = "absolute";
-  dom.style.left = "0%";
-  dom.style.top = "4%";
+  dom.style.left = "53%";
+  dom.style.top = "11%";
   dom.style.zIndex = "-3";
-  dom.setAttribute("class", "shark_move_2");
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -31,24 +31,24 @@ export const SampleglTF = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(5, 6, 29);
+  camera.position.set(5, 6, 30);
 
   const assetLoader = new GLTFLoader();
 
   let mixer1;
-  let model;
   assetLoader.load(
-    "/assets/ocean/shark1.gltf",
+    "/assets/ocean/dolly.gltf",
     function (gltf) {
-      model = gltf.scene;
+      const model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
       // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(12, 4, 18);
+      model.position.set(-7, 5, 10);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
       const clips = gltf.animations;
-      const clip = THREE.AnimationClip.findByName(clips, "metarigAction");
+
+      const clip = THREE.AnimationClip.findByName(clips, "metarigAction.001");
       const action = mixer1.clipAction(clip);
       action.play();
     },
@@ -59,21 +59,27 @@ export const SampleglTF = ({ id }) => {
   );
 
   const clock1 = new THREE.Clock();
-  let left = 0;
+
   function animate() {
     if (mixer1) mixer1.update(clock1.getDelta());
-
     renderer.render(scene, camera);
   }
   renderer.setAnimationLoop(animate);
+
+  window.addEventListener("resize", onResize, false);
+  function onResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
 };
 
-const Sample = ({ id }) => {
+const MainDolphin = ({ id }) => {
   return (
     <>
-      <SampleglTF id={id}></SampleglTF>
+      <DolphinglTF id={id}></DolphinglTF>
     </>
   );
 };
 
-export default React.memo(Sample);
+export default MainDolphin;

@@ -1,378 +1,358 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap");
 
-html,
-body {
-  overflow: hidden;
-  width: 100vw;
-  height: 100vw;
-}
-
-.title {
-  position: absolute;
-  z-index: 105;
-  font-family: "Noto Serif KR", serif;
-  width: 100vw;
-  margin-top: 7vw;
-  margin-left: 30vw;
-  /* display: flex;
-    justify-content: center; */
-  font-size: 3vw;
-}
-
-.title1 {
-  position: absolute;
-  z-index: 105;
-  font-family: "Noto Serif KR", serif;
-  width: 100%;
-  font-size: 300%;
-  margin-top: 7%;
-  display: flex;
-  justify-content: center;
-}
-
-/* .ocean {
-    width: 100%;
-    height: 100%;
-} */
-
-.home-button {
-  position: absolute;
-  z-index: 10;
-  font-family: "Noto Serif KR", serif;
-  font-size: 2vw;
-  /* display: flex;
-    justify-content: center; */
-  border-radius: 27px;
-  border: 0 none;
-  padding-left: 4vw;
-  padding-right: 4vw;
-  cursor: pointer;
-  left: 75vw;
-  margin-top: 52vw;
-  background-color: #f28123;
-  color: white;
-}
-
-.map {
-  position: absolute;
-  z-index: 10000;
-  width: 100%;
-  /* height: 100%; */
-  padding-bottom: 20%;
-}
-
-.audio {
-  position: absolute;
-  z-index: -1000;
-  opacity: 0%;
-}
-
 /* 상어떼가 나타났다 */
+.ocean_copy {
+  font-family: "Single Day", cursive;
+}
+
+.ocean_copy .title {
+  font-family: "Single Day", cursive;
+  font-size: 80px;
+}
 
 .ocean_copy .copy_Shark1 {
-  width: 290px;
-  height: 100px;
-  border: 10px solid red;
-  opacity: 30%;
+  width: 390px;
+  height: 200px;
+
   position: absolute;
   z-index: 100;
-  left: 38%;
-  top: 79%;
+  left: 22%;
+  top: 70%;
   cursor: pointer;
+  border-radius: 50px;
 }
 
 .ocean_copy .copy_Shark2 {
-  width: 290px;
-  height: 100px;
-  border: 10px solid red;
-  opacity: 30%;
+  width: 390px;
+  height: 180px;
+  /* border: 1px solid black; */
+
   position: absolute;
   z-index: 100;
   left: 48%;
-  top: 55%;
+  top: 53%;
+  border-radius: 50px;
   cursor: pointer;
 }
 
 .ocean_copy .copy_Shark3 {
-  width: 290px;
-  height: 100px;
-  border: 10px solid red;
-  opacity: 30%;
+  width: 340px;
+  height: 120px;
+  /* border: 1px solid black; */
+
   position: absolute;
   z-index: 100;
   left: 58%;
-  top: 79%;
+  top: 80%;
+  border-radius: 50px;
   cursor: pointer;
 }
 
 .ocean_copy .copy_Shark4 {
-  width: 290px;
-  height: 100px;
-  border: 10px solid red;
-  opacity: 30%;
+  width: 340px;
+  height: 110px;
+  /* border: 1px solid black; */
+
   position: absolute;
   z-index: 100;
-  left: 68%;
-  top: 49%;
+  left: 78%;
+  top: 28%;
+  border-radius: 50px;
   cursor: pointer;
 }
 
-/* 배경 */
-
-.ocean {
-  position: relative;
+.shark_move_1 {
+  animation: shark_move_1 15s infinite linear alternate;
 }
 
-.cliff1 {
-  width: 100%;
-  position: absolute;
-  z-index: -17;
+.shark_move_1_box {
+  animation: shark_move_1 15s infinite linear alternate;
 }
+/* 상어 움직이는 애니메이션1 */
 
-.cliff2 {
-  width: 100%;
-  position: absolute;
-  z-index: -29;
-}
-
-.background {
-  width: 100%;
-  position: absolute;
-  z-index: -30;
-  pointer-events: none;
-}
-
-/* 햇빛 */
-
-.sun1 {
-  animation: sun 700ms linear infinite alternate;
-  width: 100%;
-  position: absolute;
-  /* z-index: -35; */
-}
-
-.sun2 {
-  animation: sun 1300ms linear infinite alternate;
-  width: 100%;
-  position: absolute;
-  /* z-index: -35; */
-}
-
-.sun3 {
-  animation: sun 1200ms linear infinite alternate;
-  width: 100%;
-  position: absolute;
-  /* z-index: -1350; */
-}
-
-.sun4 {
-  animation: sun 1700ms linear infinite alternate;
-  width: 100%;
-  position: absolute;
-}
-
-.sun5 {
-  animation: sun 1000ms linear infinite alternate;
-  width: 100%;
-  position: absolute;
-}
-
-@keyframes sun {
-  from {
-    opacity: 100%;
-  }
-
-  to {
-    opacity: 10%;
-  }
-}
-
-/* 물고기 */
-
-.fish {
-  animation: fish 17000ms linear infinite;
-  width: 100%;
-  position: absolute;
-  z-index: -24;
-}
-
-@keyframes fish {
-  from {
-    right: -30%;
-  }
-
-  to {
-    right: 60%;
-  }
-}
-
-.trashfish {
-  animation: trashfish 10000ms linear infinite;
-  width: 100%;
-  position: absolute;
-  z-index: -24;
-}
-
-@keyframes trashfish {
-  from {
-    left: -30%;
-  }
-
-  to {
-    left: 65%;
-  }
-}
-
-.whale {
-  animation: whale 40000ms linear infinite;
-  width: 100%;
-  position: absolute;
-  z-index: -23;
-}
-
-@keyframes whale {
-  from {
-    left: -45%;
-  }
-
-  to {
-    left: 50%;
-  }
-}
-
-/* 방울 */
-.bubble1 {
-  animation: bubble 15000ms linear infinite;
-  width: 100%;
-  position: absolute;
-  z-index: -10;
-}
-
-.bubble2 {
-  animation: bubble 10000ms linear infinite;
-  width: 100%;
-  position: absolute;
-  z-index: -10;
-}
-
-.bubble3 {
-  animation: bubble 20000ms linear infinite;
-  width: 100%;
-  position: absolute;
-  z-index: -10;
-}
-
-@keyframes bubble {
-  from {
-    margin-top: 10%;
-  }
-
-  to {
-    margin-top: -50%;
-  }
-}
-
-/* 다양 식물군 */
-
-.yellow {
-  animation: moving 1000ms linear infinite alternate;
-  transform-origin: 100% 0%;
-  width: 100%;
-  position: absolute;
-  z-index: -8;
-}
-
-.red {
-  animation: moving 2000ms linear infinite alternate;
-  transform-origin: 100% 0%;
-  width: 100%;
-  position: absolute;
-  z-index: -7;
-}
-
-@keyframes moving {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(-1deg);
-  }
-}
-
-.blueleaf1 {
-  animation: moving 1000ms linear infinite alternate;
-  transform-origin: 100% 100%;
-  width: 100%;
-  position: absolute;
-  z-index: -7;
-}
-
-.blueleaf2 {
-  animation: moving 1500ms linear infinite alternate;
-  transform-origin: 100% 0%;
-  width: 100%;
-  position: absolute;
-  z-index: -7;
-}
-
-.blueleaf3 {
-  animation: moving 800ms linear infinite alternate;
-  width: 100%;
-  position: absolute;
-  z-index: -7;
-}
-
-.cucumber {
-  animation: moving 1000ms linear infinite alternate;
-  width: 100%;
-  position: absolute;
-  z-index: -6;
-}
-
-.rainbow {
-  animation: moving 1500ms linear infinite alternate;
-  width: 100%;
-  position: absolute;
-  z-index: -9;
-}
-
-.cactus {
-  animation: moving 1300ms linear infinite alternate;
-  width: 100%;
-  position: absolute;
-  z-index: -6;
-}
-
-.pink {
-  width: 100%;
-  position: absolute;
-  z-index: -7;
-}
-
-.shark_move {
-  animation: shark_move 4s infinite linear alternate;
-}
-/* 상어 움직이는 애니메이션 */
-
-@keyframes shark_move {
+@keyframes shark_move_1 {
   0% {
-    transform: translateX(-300px);
+    transform: translateX(0px) translateY(0px);
   }
 
-  50% {
-    transform: translateY(-300px);
+  20% {
+    transform: translateX(-150px) translateY(-100px);
   }
 
-  75% {
-    transform: translateY(-100px);
+  40% {
+    transform: translateX(-300px) translateY(-250px);
   }
 
-  85% {
-    transform: translateY(-150px);
+  60% {
+    transform: translateX(-200px) translateY(-400px);
+  }
+
+  80% {
+    transform: translateX(-100px) translateY(-150px);
   }
 
   100% {
-    transform: translateX(0px);
+    transform: translateX(0px) translateY(-0px);
+  }
+}
+
+.shark_move_2 {
+  animation: shark_move_2 15s infinite linear alternate;
+}
+
+.shark_move_2_box {
+  animation: shark_move_2 15s infinite linear alternate;
+}
+
+/* 상어 움직이는 애니메이션2 */
+
+@keyframes shark_move_2 {
+  0% {
+    transform: translateX(0px) translateY(0px);
+  }
+
+  20% {
+    transform: translateX(-150px) translateY(-100px);
+  }
+
+  40% {
+    transform: translateX(-200px) translateY(-150px);
+  }
+
+  60% {
+    transform: translateX(-250px) translateY(-200px);
+  }
+
+  80% {
+    transform: translateX(-100px) translateY(-100px);
+  }
+
+  100% {
+    transform: translateX(-70px) translateY(0px);
+  }
+}
+
+.shark_move_3 {
+  animation: shark_move_3 15s infinite linear alternate;
+}
+
+.shark_move_3_box {
+  animation: shark_move_3 15s infinite linear alternate;
+}
+
+/* 상어 움직이는 애니메이션3 */
+
+@keyframes shark_move_3 {
+  0% {
+    transform: translateX(0px) translateY(0px);
+  }
+
+  20% {
+    transform: translateX(-200px) translateY(0px);
+  }
+
+  40% {
+    transform: translateX(-400px) translateY(0px);
+  }
+
+  60% {
+    transform: translateX(-600px) translateY(0px);
+  }
+
+  80% {
+    transform: translateX(-250px) translateY(0px);
+  }
+
+  100% {
+    transform: translateX(0px) translateY(0px);
+  }
+}
+
+.shark_move_4 {
+  animation: shark_move_4 15s infinite linear alternate;
+}
+
+.shark_move_4_box {
+  animation: shark_move_4 15s infinite linear alternate;
+}
+
+/* 상어 움직이는 애니메이션4 */
+
+@keyframes shark_move_4 {
+  0% {
+    transform: translateX(0px) translateY(250px);
+  }
+
+  20% {
+    transform: translateX(-100px) translateY(300px);
+  }
+
+  40% {
+    transform: translateX(-200px) translateY(350px);
+  }
+
+  60% {
+    transform: translateX(-100px) translateY(400px);
+  }
+
+  80% {
+    transform: translateX(-0px) translateY(450px);
+  }
+
+  100% {
+    transform: translateX(100px) translateY(550px);
+  }
+}
+
+.ocean_copy .touch_message {
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  margin-top: -40px;
+}
+
+/* 하트 애니메이션 */
+.attack_effect {
+  display: none;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: pink;
+  height: 50px;
+  width: 50px;
+  transform: rotate(-45deg);
+  animation-name: beat;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+.attack_effect:after {
+  background-color: pink;
+  content: "";
+  border-radius: 50%;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0px;
+  left: 25px;
+}
+.attack_effect:before {
+  background-color: pink;
+  content: "";
+  border-radius: 50%;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 0px;
+}
+
+@keyframes backdiv {
+  50% {
+    background: #ffe6f2;
+  }
+}
+
+@keyframes beat {
+  0% {
+    transform: scale(1) rotate(-45deg);
+  }
+  50% {
+    transform: scale(0.6) rotate(-45deg);
+  }
+}
+
+/* 사이즈 변화 애니메이션 */
+
+.text_size_change {
+  animation: text_size_change 1s infinite alternate linear;
+  display: inline-block;
+}
+
+@keyframes text_size_change {
+  0% {
+    transform: scale(0.7);
+  }
+
+  100% {
+    transform: scale(1.2);
+  }
+}
+/* 터치 숫자 텍스트 애니메이션 */
+@keyframes touch_num_animation {
+  0% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* 몇번 터치해야하는지 숫자 텍스트 css */
+.ocean_copy .touch_num_text {
+  color: red;
+  font-size: 60px;
+  font-weight: bold;
+  animation: touch_num_animation 0.5s infinite alternate linear;
+}
+
+.move_down_up {
+  animation: move_down_up 0.7s linear infinite alternate;
+}
+
+/* 위아래 흔들리는 애니메이션 */
+@keyframes move_down_up {
+  0% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.ocean_copy .main_dolphin_text {
+  border-radius: 30px;
+  padding: 10px;
+  position: absolute;
+  right: 0%;
+  top: 20%;
+  width: 420px;
+  font-size: 40px;
+  font-weight: bold;
+  background-color: royalblue;
+}
+
+.ocean_copy .main_dolphin_good_text {
+  border-radius: 30px;
+  padding: 10px;
+  position: absolute;
+  right: 0%;
+  top: 20%;
+  width: 260px;
+  font-size: 40px;
+  font-weight: bold;
+  color: whitesmoke;
+}
+
+.rotate_dolphin {
+  animation: rotate_dolphin 1.7s linear infinite alternate-reverse;
+}
+
+/* 돌고래 360도 회전*/
+@keyframes rotate_dolphin {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  50% {
+    transform: rotateZ(180deg);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
   }
 }

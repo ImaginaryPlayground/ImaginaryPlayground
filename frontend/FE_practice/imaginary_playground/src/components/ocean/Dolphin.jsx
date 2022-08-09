@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-export const DolphinglTF = () => {
+export const DolphinglTF = ({ id }) => {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -69,10 +69,10 @@ export const DolphinglTF = () => {
   }
 };
 
-const Dolphin = () => {
+const Dolphin = ({ id }) => {
   return (
     <>
-      <DolphinglTF></DolphinglTF>
+      <DolphinglTF id={id}></DolphinglTF>
     </>
   );
 };
