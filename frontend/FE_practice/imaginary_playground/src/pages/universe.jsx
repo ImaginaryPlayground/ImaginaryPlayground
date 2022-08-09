@@ -94,7 +94,9 @@ const Universe =() => {
         <>
             <div className="universe">
 
-                <iframe src="/assets/audio/universe/universe.mp3" allow="autoplay;" className="audio"></iframe>
+                {/* <iframe src="/assets/audio/universe/universe.mp3" allow="autoplay;" className="audio"></iframe> */}
+
+            
 
                 {planetCount !== 9? (<>
                 
@@ -189,6 +191,8 @@ const Universe =() => {
                     onClick={neptuneClick} style={{filter:'grayscale(100%)'}}/>
                     <p className="neptune-title animate__animated animate__bounceIn">해왕성</p>
                 </>)}
+
+                <img src="/assets/universe/background.png" alt="" className="universe-background " />
                 </>) :(<></>)}
 
                 
@@ -206,6 +210,8 @@ const Universe =() => {
                     <img src="/assets/universe/saturn.png" className="saturn animate__animated animate__bounceOut" />
                     <img src="/assets/universe/uranus.png" className="uranus animate__animated animate__bounceOut" />
                     <img src="/assets/universe/neptune.png" className="neptune animate__animated animate__bounceOut" />
+
+                    <img src="/assets/universe/background.png" alt="" className="universe-background animate__animated animate__fadeOut" />
 
                     <p className="mercury-title animate__animated animate__bounceOut">수성</p>
                     <p className="venus-title animate__animated animate__bounceOut">금성</p>
