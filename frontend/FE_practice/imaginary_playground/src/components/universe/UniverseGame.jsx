@@ -1,8 +1,9 @@
 import "../../css/universe.css"
-import '../../css/UniverseEffect.css'
-import UniverseEffect from "./UniverseEffect"
+import UniversePaperEffect from "./UniversePaperEffect"
+import UniversePlasticEffect from "./UniversePlasticEffect"
+import UniverseMetalEffect from './UniverseMetalEffect'
 
-import { useState, useNavigate} from 'react'
+import { useState} from 'react'
 
 const UniverseGame = ()=> {
     
@@ -15,8 +16,7 @@ const UniverseGame = ()=> {
             setTotalTrash(totalTrash+1)
             const planetAudio = new Audio('/assets/universe/true.mp3')
             planetAudio.play()
-            // document.getElementById(e.target.id).style.opacity = '0%'
-            document.getElementById('paper1').style.display = 'none'
+            document.getElementById(e.target.id).style.opacity = '0%'
             console.log('페이퍼')
 
         } else {
@@ -60,24 +60,40 @@ const UniverseGame = ()=> {
             {totalTrash <= 2 ? (<>
                 <h2 className="universegame-title">종이 쓰레기를 버려주세요</h2>
             </>) : (<></>)}
-
+ 
 
             <div id={'paper1'}>
-            <UniverseEffect className="trash1" onClick={clickPaper} id={'effect1'}></UniverseEffect>
-            <img src="/assets/universe/paper.png" className="paper1 " onClick={clickPaper} id={'paper1'}></img>
+                {totalTrash <= 2 ? (<div className="paper-effect1" ><UniversePaperEffect></UniversePaperEffect></div>):(<></>)}
+                <img src="/assets/universe/paper.png" id={'paper1'} className="paper1" onClick={clickPaper}></img>
             </div>
-            <img src="/assets/universe/paper.png" className="paper2" onClick={clickPaper} id={'paper2'}></img>
-            <img src="/assets/universe/paper.png" className="paper3" onClick={clickPaper} id={'paper3'}></img>
+            <div id={'paper2'}>
+                {totalTrash <= 2 ? (<div className="paper-effect2"><UniversePaperEffect></UniversePaperEffect></div>):(<></>)}    
+                <img src="/assets/universe/paper.png" id={'paper2'} className="paper2" onClick={clickPaper}></img>
+            </div>
+            <div id={'paper3'}>
+                {totalTrash <= 2 ? (<div className="paper-effect3"><UniversePaperEffect></UniversePaperEffect></div>):(<></>)}   
+                <img src="/assets/universe/paper.png" id={'paper3'} className="paper3" onClick={clickPaper}></img>
+            </div>
             {/* <img src="/assets/universe/paper.png" className="paper4 " onClick={clickPaper} id={'paper4'}></img> */}
             
 
             {2< totalTrash && totalTrash < 6? (<>
                 <h2 className="universegame-title">플라스틱 쓰레기를 버려주세요</h2>
             </>) : (<></>)}
-
-            <img src="/assets/universe/plastic.png" className="plastic1" onClick={clickPlastic} id={'plastic1'}/>
-            <img src="/assets/universe/plastic.png" className="plastic2" onClick={clickPlastic} id={'plastic2'}/>
-            <img src="/assets/universe/plastic.png" className="plastic3" onClick={clickPlastic} id={'plastic3'}/>
+            <div id={'plastic1'}>
+                {2 < totalTrash && totalTrash < 6? (<div className="plastic-effect1"><UniversePlasticEffect></UniversePlasticEffect></div>) : (<></>)}
+                <img src="/assets/universe/plastic.png" className="plastic1" id={'plastic1'} onClick={clickPlastic}/>
+            </div>
+            <div id={'plastic2'}>
+                {2 < totalTrash && totalTrash < 6? (<div className="plastic-effect2"><UniversePlasticEffect></UniversePlasticEffect></div>) : (<></>)}
+                <img src="/assets/universe/plastic.png" className="plastic2" onClick={clickPlastic} id={'plastic2'}/>
+            </div>
+            <div id={'plastic3'}>
+                {2 < totalTrash && totalTrash < 6? (<div className="plastic-effect3"><UniversePlasticEffect></UniversePlasticEffect></div>) : (<></>)}
+                <img src="/assets/universe/plastic.png" className="plastic3" onClick={clickPlastic} id={'plastic3'}/>
+            </div>
+            
+            
             {/* <img src="/assets/universe/plastic.png" className="plastic4" onClick={clickPlastic} id={'plastic4'}/> */}
 
 
@@ -85,9 +101,14 @@ const UniverseGame = ()=> {
             {5< totalTrash && totalTrash <8 ? (<>
                 <h2 className="universegame-title">캔 쓰레기를 버려주세요</h2>
             </>) : (<></>)}
-
-            <img src="/assets/universe/can.png" className="metal1" onClick={clickMetal} id={'metal1'} />
-            <img src="/assets/universe/can.png" className="metal2" onClick={clickMetal} id={'metal2'} />
+            <div id={'metal1'}>
+                {5< totalTrash && totalTrash <8? (<div className="metal-effect1"><UniverseMetalEffect></UniverseMetalEffect></div>) : (<></>)}
+                <img src="/assets/universe/can.png" className="metal1" onClick={clickMetal} id={'metal1'} />
+            </div>
+            <div id={'metal2'}>
+                {5< totalTrash && totalTrash <8? (<div className="metal-effect2"><UniverseMetalEffect></UniverseMetalEffect></div>) : (<></>)}
+                <img src="/assets/universe/can.png" className="metal2" onClick={clickMetal} id={'metal2'} />
+            </div>
             {/* <img src="/assets/universe/can.png" className="metal3" onClick={clickMetal} id={'metal3'} /> */}
             {/* <img src="/assets/universe/can.png" className="metal4" onClick={clickMetal} id={'metal4'} /> */}
 

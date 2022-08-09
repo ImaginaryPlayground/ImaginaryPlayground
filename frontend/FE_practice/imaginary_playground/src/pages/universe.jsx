@@ -3,11 +3,13 @@ import ".././css/universe.css"
 import {Stars, OrbitControls} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber';
 
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import UniverseGame from "../components/universe/UniverseGame";
 import { useNavigate } from "react-router-dom";
 
 const Universe =() => {
+
+
     // 힐링 파트(행성 클릭 이벤트) 횟수 카운트
     const [planetCount, setPlanetCount] = useState(0)
     const clickPlanet = () => {
@@ -219,8 +221,8 @@ const Universe =() => {
                     <p className="mars-title animate__animated animate__bounceOut">화성</p>
                     <p className="jupyter-title animate__animated animate__bounceOut">목성</p>
                     <p className="saturn-title animate__animated animate__bounceOut">토성</p>
-                    <p className="neptune-title animate__animated animate__bounceOut">천왕성</p>
-                    <p className="uranus-title animate__animated animate__bounceOut">해왕성</p>
+                    <p className="uranus-title animate__animated animate__bounceOut">천왕성</p>
+                    <p className="neptune-title animate__animated animate__bounceOut">해왕성</p>
 
 
                     <img src="/assets/universe/UFO.png" className="ufo animate__animated animate__fadeInRight"></img>
