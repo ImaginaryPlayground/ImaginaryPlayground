@@ -35,8 +35,8 @@ body {
 /* 텍스트 위치 */
 .jungle .text_location {
   position: absolute;
-  left: -50%;
-  top: 32%;
+  left: -48%;
+  top: -121%;
   width: 850px;
   height: 200px;
   display: flex;
