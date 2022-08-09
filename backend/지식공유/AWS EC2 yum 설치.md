@@ -76,7 +76,7 @@ $ sudo apt install yum
   $ sudo apt install python-urlgrabber
   ```
 
-* yum 설치
+* yum 설치.
   
   ```bash
   $ sudo apt install yum
