@@ -1,13 +1,21 @@
-> 전체적인 흐름 참고
-https://dev-overload.tistory.com/40
-https://postlude.github.io/2020/12/26/docker-in-docker/
-https://choseongho93.tistory.com/m/303
+```
+# 참고
+https://ragu.notion.site/Docker-Jenkins-12dc3d52a0a54b03946dd132d9ef6f1e
+```
 
-- 도커 설치
+
+
+- 필수 패키지 설치
+
 ```
-$ sudo snap install docker
+sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 ```
-- 도커 버전 확인
+
+- docker 설치
+```
+$ sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+- docker 설치 확인
 ```
 $ docker -v
 ```
@@ -28,7 +36,12 @@ $ newgrp docker
 
   https://serina-the-best.tistory.com/16
 
-  
+
+
+
+- Jenkins 컨테이너 설치
+
+
 
 - docker-compose install
 
