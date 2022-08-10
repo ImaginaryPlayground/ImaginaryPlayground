@@ -365,7 +365,7 @@
     position: absolute;
     z-index: 1000;
     width: 5%;
-    top: 86vh;
+    top: 75vh;
     left: 18vw;
 }
 
@@ -373,39 +373,39 @@
     position: absolute;
     z-index: 1000;
     width: 5%;
-    top: 54vh;
-    left: 38vw;
+    top: 45vh;
+    left: 37vw;
 }
 
 .paper-effect3 {
     position: absolute;
     z-index: 1000;
     width: 5%;
-    top: 59vh;
-    left: 68vw;
+    top: 50vh;
+    left: 67vw;
 }
 
 .plastic-effect1 {
     position: absolute;
     z-index: 1000;
     width: 5%;
-    top: 47vh;
-    left: 22vw;
+    top: 40vh;
+    left: 21vw;
 }
 
 .plastic-effect2 {
     position: absolute;
     z-index: 1000;
     width: 5%;
-    top: 79vh;
-    left: 92vw;
+    top: 72vh;
+    left: 90vw;
 }
 
 .plastic-effect3 {
     position: absolute;
     z-index: 1000;
     width: 5%;
-    top: 39vh;
+    top: 32vh;
     left: 81vw;
 }
 
@@ -413,14 +413,14 @@
     position: absolute;
     z-index: 1000;
     width: 5%;
-    top: 58vh;
-    left: 5vw;
+    top: 50vh;
+    left: 4vw;
 }
 
 .metal-effect2 {
     position: absolute;
     z-index: 1000;
     width: 5%;
-    top: 40vh;
+    top: 31vh;
     left: 54vw;
 }
