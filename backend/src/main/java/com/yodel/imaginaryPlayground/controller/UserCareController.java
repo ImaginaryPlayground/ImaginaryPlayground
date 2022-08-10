@@ -30,7 +30,6 @@ import java.util.*;
 @RestController
 @RequestMapping("/user/care")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class UserCareController{
 
     /* 유저 케어 서비스를 이용할 때마다 토큰의 있는 email과 id값과 제출하는 id값이 일치하는지 확인한다 */
