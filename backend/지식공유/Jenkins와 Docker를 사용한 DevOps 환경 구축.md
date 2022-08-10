@@ -124,3 +124,31 @@ $ docker exec -it -u jenkins jenkins bash
 https://not-to-be-reset.tistory.com/336?category=916741
 ```
 
+
+
+- Dockerfile에서 사용되는 기본적인 내용 정리
+
+```
+# base로 사용할 Image name을 설정
+FROM [image name]
+
+# 이미지를 생성할 때 실행할 코드를 지정한다.
+RUN [command]
+
+# 작업 디렉토리를 설정하며 설정된 디렉토리 위치를 기준으로 명령어가 실행된다.
+# 만약 해당 디렉토리가 없을 경우 새로 생성한다.
+WORKDIR [dir]
+
+# 파일이나 폴더를 이미지에 복사한다.
+COPY [host file/dir path] [container file/dir path]
+
+# 이미지에서 사용할 환경 변수를 지정한다.
+ENV HELLO=hello
+
+# 컨테이너를 구동할 때 실행할 명령어를 지정한다.
+# ENTRYPOINT : 해당 이미지로 컨테이너 실행 시, 무조건 이 명령어를 실행
+# CMD : 해당 이미지로 컨테이너 실행 시, 실행 명령어를 설정하지 않았을 때만 이 명령어 실행
+ENTRYPOINT ["명령어","arg","arg2",...]
+CMD ["ls","arg","arg2",...]
+```
+
