@@ -9,9 +9,10 @@ export const SampleglTF2 = ({ id }) => {
 
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
+  dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "-18%";
-  dom.style.top = "17%";
+  dom.style.left = "30%";
+  dom.style.top = "-4%";
   dom.style.zIndex = "1";
   dom.setAttribute("class", "appear");
   const scene = new THREE.Scene();
@@ -31,25 +32,25 @@ export const SampleglTF2 = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(10, 6, 30);
+  camera.position.set(5, 6, 30);
 
   const assetLoader = new GLTFLoader();
 
   let mixer1;
   let model;
   assetLoader.load(
-    "/assets/jungle/토끼.gltf",
+    "/assets/ocean/Whale1.gltf",
     function (gltf) {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
       // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(13, 5, 24);
+      model.position.set(4, 7, 16);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
       const clips = gltf.animations;
 
-      const clip = THREE.AnimationClip.findByName(clips, "metarigAction");
+      const clip = THREE.AnimationClip.findByName(clips, "Swim");
       const action = mixer1.clipAction(clip);
       action.play();
     },
@@ -76,7 +77,7 @@ export const SampleglTF2 = ({ id }) => {
   }
 };
 
-const AlienMain = ({ id }) => {
+const Sample2 = ({ id }) => {
   return (
     <>
       <SampleglTF2 id={id}></SampleglTF2>
@@ -84,4 +85,4 @@ const AlienMain = ({ id }) => {
   );
 };
 
-export default React.memo(AlienMain);
+export default React.memo(Sample2);

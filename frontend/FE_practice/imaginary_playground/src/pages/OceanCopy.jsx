@@ -453,7 +453,7 @@ const OceanCopy = () => {
       {/* 상어 게임이 구현되는 동안(아직 상어가 20번 터치가 안되었을때) 상어 4마리를 보여주고*/}
       {start ? (
         <>
-          {/* 캐릭터 로드 */}
+          {/* 상어 캐릭터 로드 */}
           {!document.getElementById("main_dolphin_side_0") &&
             totalSharkCount !== 0 && (
               <div>{<MainDolphinSide id="main_dolphin_side_0" />}</div>
@@ -461,7 +461,7 @@ const OceanCopy = () => {
           <div>{<SharkSample id="shark1" />}</div>
           <div>{<SharkSample2 id="shark2" />}</div>
           <div>{<SharkSample3 id="shark3" />}</div>
-          {/* <div>{<SharkSample4 id="shark4" />}</div> */}
+          <div>{<SharkSample4 id="shark4" />}</div>
           {/* 메인돌리 남은 상어 텍스트 */}
           {totalSharkCount !== 0 && (
             <>
