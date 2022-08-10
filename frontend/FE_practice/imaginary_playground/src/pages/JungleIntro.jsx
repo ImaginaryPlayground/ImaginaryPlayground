@@ -36,7 +36,9 @@ const JungleIntro = () => {
       jungleIntroAudio.play();
     }, 3000);
 
-    return () => {};
+    return () => {
+      Howler.stop();
+    };
   }, []);
 
   return (
