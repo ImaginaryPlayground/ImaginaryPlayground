@@ -27,6 +27,12 @@ const Map = () => {
         정글맵
       </button>
       <button
+        onClick={() => navigate("/jungle-intro")}
+        style={{ background: "yellow" }}
+      >
+        정글 인트로
+      </button>
+      <button
         onClick={() => navigate("/ocean")}
         style={{ backgroundColor: "blue" }}
       >
@@ -39,16 +45,16 @@ const Map = () => {
         언더더씨최적화
       </button>
       <button
+        onClick={() => navigate("/universe-intro")}
+        style={{ backgroundColor: "yellowgreen" }}
+      >
+        우주 인트로
+      </button>
+      <button
         onClick={() => navigate("/universe")}
         style={{ backgroundColor: "gray" }}
       >
         우주
-      </button>
-      <button
-        onClick={() => navigate("/junglebackground")}
-        style={{ background: "yellow" }}
-      >
-        정글배경
       </button>
     </div>
   );
