@@ -22,7 +22,7 @@ const JungleIntro = () => {
 
       setTimeout(() => {
         document.getElementById("jungleIntroTori").remove();
-        navigate("/jungle");
+        navigate("/jungle", { replace: true });
       }, 1000);
     },
   });
@@ -37,7 +37,11 @@ const JungleIntro = () => {
     }, 3000);
 
     return () => {
+      //모든 음성 종료
       Howler.stop();
+
+      //토리 제거
+      document.getElementById("jungleIntroTori")?.remove();
     };
   }, []);
 
