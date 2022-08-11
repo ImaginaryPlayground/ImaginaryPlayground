@@ -36,14 +36,6 @@ const Map = () => {
         정글 인트로
       </button>
       <button
-        onClick={() => navigate("/ocean")}
-        style={{ backgroundColor: "blue" }}
-        className="ocean-button"
-
-      >
-        언더더씨
-      </button>
-      <button
         onClick={() => navigate("/ocean-intro")}
         style={{ backgroundColor: "skyblue" }}
         className="ocean-real-button"
@@ -67,17 +59,30 @@ const Map = () => {
       >
         우주
       </button>
-      {/* <img src="/assets/map/leaf.png" alt="" className="map-leaf"/>
-      <img src="/assets/map/bubble.png" alt="" className="map-bubble"/> */}
-      <img src="/assets/map/jungle.png" alt="" className="jungle-island" />
 
-      <img src="/assets/map/cloud1.png" alt="" className="cloud1"/>
-      <img src="/assets/map/cloud2.png" alt="" className="cloud2"/>
-      <img src="/assets/map/cloud3.png" alt="" className="cloud3"/>
-      <img src="/assets/map/cloud4.png" alt="" className="cloud4"/>
+      {/* 클릭 대체할 div 태그 */}
 
-      <img src="/assets/map/island.png" alt="" className="island" />
-      <img src="/assets/map/background.png" alt=""  className="map-background"/>
+      <div className="ocean-click" onClick={() => navigate("/ocean-intro")}></div>
+      <div className="jungle-click" onClick={() => navigate("/jungle")}></div>
+      <div className="christmas-click" ></div>
+      <div className="universe-click" onClick={() => navigate("/universe")}></div>
+
+      {/* 배경화면 사진 요소 */}
+      <img src="/assets/map/foot.png" alt="" className="map-foot"/>
+
+      <img src="/assets/map/leaf.png" alt="" className="map-leaf"/>
+      <img src="/assets/map/bubble.png" alt="" className="map-bubble"/>
+
+      <img src="/assets/map/rocket.png" alt="" className="map-rocket"/>
+
+      <img src="/assets/map/snow.png" alt="" className="map-snow"/>
+
+      <img src="/assets/map/cloud1.png" alt="" className="map-cloud1"/>
+      <img src="/assets/map/cloud2.png" alt="" className="map-cloud2"/>
+      <img src="/assets/map/cloud3.png" alt="" className="map-cloud3"/>
+      <img src="/assets/map/cloud4.png" alt="" className="map-cloud4"/>
+
+      <img src="/assets/map/whole-background.png" alt=""  className="map-background"/>
     </div>
   );
 };
