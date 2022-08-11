@@ -10,6 +10,7 @@ import OceanCopyIntro from "./pages/OceanCopyIntro";
 import JungleIntro from "./pages/JungleIntro";
 import UniverseIntro from "./pages/UniverseIntro";
 import UniverseOutro from "./components/universeOutro/UniverseOutro";
+import Christmas from "./pages/Christmas";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/ocean-copy" element={<OceanCopy />} />
           <Route path="/ocean-intro" element={<OceanCopyIntro />} />
           <Route path="/test-yjh" element={<Test_yjh />} />
+          <Route path="/christmas" element={<Christmas />} />
         </Routes>
       </BrowserRouter>
     </div>
