@@ -4,11 +4,12 @@
 
 .UniverseIntro .universe_intro_text_box {
   position: absolute;
-  background-color: snow;
+  /* background-color: snow; */
+  color: white;
   border-radius: 100px;
   border: 10px solid plum;
   left: 60%;
-  top: 38%;
+  top: 55%;
   width: 600px;
   padding: 30px;
   padding-left: 60px;
