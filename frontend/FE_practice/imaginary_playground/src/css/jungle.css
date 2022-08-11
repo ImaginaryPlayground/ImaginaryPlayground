@@ -23,6 +23,7 @@ body {
   z-index: 1;
 }
 
+
 /* 텍스트 박스 */
 .jungle .text_box {
   font-size: 60px;
@@ -31,11 +32,13 @@ body {
   border-radius: 50px;
   padding: 15px;
   background-color: lightgoldenrodyellow;
+  z-index: 10000;
+
 }
 /* 텍스트 위치 */
 .jungle .text_location {
   position: absolute;
-  left: -48%;
+  left: -18%;
   top: -121%;
   width: 850px;
   height: 200px;
@@ -45,7 +48,7 @@ body {
   align-items: center;
   font-size: 30px;
   font-weight: bold;
-  z-index: -1;
+  z-index: 100000;
 }
 
 /* 등장 애니메이션 */
