@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+.DrawerLayout span {
+  font-family: "Nanum Gothic", sans-serif !important;
+  font-weight: bold;
+}
+
+.DrawerLayout div {
+  font-family: "IBM Plex Sans KR" !important;
+}
+
+.drawer_layout .select {
+  background-color: #1976d2;
+  color: white;
+}
+
+.drawer_layout .color_white {
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .MuiDialog-paper {
+    margin: "5px" !important;
+  }
+
+  .css-ypiqx9-MuiDialogContent-root {
+    padding: 0 12px !important;
+  }
+}
