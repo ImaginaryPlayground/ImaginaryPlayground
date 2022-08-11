@@ -577,3 +577,119 @@ UniverseIntro .universe_intro_text_box {
 .fast_disappear {
   animation: fast_dissapear 0.5s linear;
 }
+
+/* 클릭 div */
+
+.universe .mercury_click_div {
+  width: 120px;
+  height: 160px;
+  left: 12vw;
+  top: 63vh;
+}
+
+.universe .venus_click_div {
+  width: 120px;
+  height: 160px;
+  left: 2vw;
+  top: 46vh;
+}
+
+.universe .mars_click_div {
+  width: 110px;
+  height: 160px;
+  left: 24vw;
+  top: 38vh;
+}
+
+.universe .earth_click_div {
+  width: 150px;
+  height: 200px;
+  left: 30vw;
+  top: 75vh;
+}
+
+.universe .jupyter2_click_div {
+  width: 385px;
+  height: 455px;
+  left: 42vw;
+  top: 36vh;
+}
+
+.universe .saturn_click_div {
+  width: 240px;
+  height: 255px;
+  left: 67vw;
+  top: 70vh;
+}
+
+.universe .uranus_click_div {
+  width: 220px;
+  height: 240px;
+  left: 77vw;
+  top: 31vh;
+}
+
+.universe .neptune_click_div {
+  width: 160px;
+  height: 200px;
+  left: 91vw;
+  top: 51vh;
+}
+
+/* 두번째 게임(쓰레기 청소 div) */
+
+.universe .paper1_click_div {
+  width: 160px;
+  height: 200px;
+  left: 14vw;
+  top: 76vh;
+}
+
+.universe .paper2_click_div {
+  width: 160px;
+  height: 200px;
+  left: 33vw;
+  top: 46vh;
+}
+
+.universe .paper3_click_div {
+  width: 160px;
+  height: 200px;
+  left: 63vw;
+  top: 51vh;
+}
+
+.universe .plastic1_click_div {
+  width: 200px;
+  height: 220px;
+  left: 16vw;
+  top: 39vh;
+}
+
+.universe .plastic2_click_div {
+  width: 200px;
+  height: 220px;
+  left: 86vw;
+  top: 69vh;
+}
+
+.universe .plastic3_click_div {
+  width: 200px;
+  height: 220px;
+  left: 76vw;
+  top: 29vh;
+}
+
+.universe .metal1_click_div {
+  width: 150px;
+  height: 150px;
+  left: 0vw;
+  top: 53vh;
+}
+
+.universe .metal2_click_div {
+  width: 150px;
+  height: 150px;
+  left: 50vw;
+  top: 33vh;
+}

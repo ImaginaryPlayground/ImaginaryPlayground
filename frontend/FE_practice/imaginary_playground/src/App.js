@@ -11,6 +11,7 @@ import JungleIntro from "./pages/JungleIntro";
 import UniverseIntro from "./pages/UniverseIntro";
 import UniverseOutro from "./components/universeOutro/UniverseOutro";
 import Christmas from "./pages/Christmas";
+import "../src/App.css";
 
 function App() {
   return (
