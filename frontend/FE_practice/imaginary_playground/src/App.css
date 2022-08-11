@@ -1,0 +1,6 @@
+.click_div {
+  cursor: pointer;
+  position: absolute;
+  border: 1px solid red;
+  z-index: 999999;
+}
