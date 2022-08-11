@@ -10,10 +10,10 @@ export const SampleglTF2 = ({ id }) => {
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
   dom.style.position = "absolute";
-  dom.style.left = "3%";
-  dom.style.top = "25%";
+  dom.style.left = "-20%";
+  dom.style.top = "-4%";
   dom.style.zIndex = "1";
-  dom.setAttribute("class", "appear");
+  dom.setAttribute("class", "monkey_appear");
 
   const scene = new THREE.Scene();
 
@@ -24,7 +24,7 @@ export const SampleglTF2 = ({ id }) => {
     100
   );
 
-  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 5);
+  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 3.5);
   scene.add(light);
 
   // 궤도 추적
@@ -39,7 +39,7 @@ export const SampleglTF2 = ({ id }) => {
   let mixer1;
   let model;
   assetLoader.load(
-    "/assets/jungle/원숭이.gltf",
+    "/assets/jungle/monkey.gltf",
     function (gltf) {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
