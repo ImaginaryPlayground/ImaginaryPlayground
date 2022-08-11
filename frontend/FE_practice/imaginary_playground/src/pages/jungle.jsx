@@ -616,7 +616,7 @@ const Jungle = () => {
                 </div>
               </div>
             )}
-          </div>
+          </div> 
         )}
         {/* 메인원숭이 텍스트 */}
         {isMonkyMain && (
