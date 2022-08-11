@@ -1,0 +1,16 @@
+.MyPage {
+  margin: 0 auto;
+  width: 1200px;
+}
+
+@media (max-width: 1200px) {
+  .MyPage {
+    width: 90%;
+  }
+}
+
+@media (max-width: 900px) {
+  .MyPage {
+    width: 95% !important;
+  }
+}

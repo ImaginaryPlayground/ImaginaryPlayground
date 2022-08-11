@@ -1,0 +1,28 @@
+.QnaCRUDComp {
+  width: 750px !important;
+  display: flex;
+  flex-direction: column !important;
+  margin: 30px auto;
+}
+
+.QnaCRUDComp .text_length_check {
+  font-size: 12px;
+  color: #828c94;
+}
+
+.QnaCRUDComp .text_custom {
+  font-weight: bold;
+  color: #ad1457;
+}
+
+.QnaCRUDComp .text_custom_date {
+  font-weight: bold;
+  color: black;
+  display: inline-block;
+}
+
+@media (max-width: 780px) {
+  .QnaCRUDComp {
+    width: 95% !important;
+  }
+}

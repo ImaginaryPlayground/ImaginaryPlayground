@@ -1,0 +1,48 @@
+.KidsInfoComp {
+  margin: 0 auto;
+  margin-top: 3px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column !important;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+  padding: 50px;
+}
+
+.KidsInfoComp .flex_row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.KidsInfoComp span {
+  word-break: keep-all;
+  font-weight: bold;
+  font-family: "IBM Plex Sans KR", sans-serif !important;
+}
+
+.KidsInfoComp textarea::placeholder,
+input::placeholder {
+  font-family: "IBM Plex Sans KR", sans-serif !important;
+}
+
+.KidsInfoComp .star {
+  color: #ad1457;
+}
+
+.KidsInfoComp .img_input {
+  display: none !important;
+}
+
+@media (max-width: 800px) {
+  .KidsInfoComp {
+    width: 100% !important;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 385px) {
+  .KidsInfoComp .next_line {
+    width: 70% !important;
+    display: block;
+  }
+}
