@@ -16,6 +16,9 @@ const Universe = () => {
 
     return () => {
       Howler.stop();
+      for (let idx in document.getElementsByTagName("canvas")) {
+        console.log(idx);
+      }
     };
   }, []);
 
