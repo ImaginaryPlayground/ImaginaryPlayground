@@ -1,3 +1,8 @@
+.Map {
+	width: 100vw;
+	height: 100vh;
+}
+
 /* 버튼들 */
 
 .jungle-button {
@@ -38,7 +43,7 @@
 
 /* 클릭할 투명 div 태그들 4가지 맵 */
 .jungle-click {
-	width: 15vw;
+	width: 18vw;
 	height: 20vh;
 	border: 1px solid green;
 	position: absolute;
@@ -48,7 +53,7 @@
 }
 
 .ocean-click {
-	width: 15vw;
+	width: 18vw;
 	height: 20vh;
 	border: 1px solid blue;
 	position: absolute;
@@ -59,7 +64,7 @@
 }
 
 .christmas-click {
-	width: 15vw;
+	width: 18vw;
 	height: 20vh;
 	border: 1px solid red;
 	position: absolute;
@@ -70,12 +75,12 @@
 }
 
 .universe-click {
-	width: 15vw;
+	width: 18vw;
 	height: 20vh;
 	border: 1px solid black;
 	position: absolute;
 	top: 60vh;
-	left: 70vw;
+	left: 68vw;
 	cursor: pointer;
 
 }
@@ -221,5 +226,68 @@
     }
     to {
 		top:3%;
+    }
+}
+
+
+/* 배너 */
+.map-banner {
+	animation: map-banner 3000ms linear alternate infinite;
+
+	position: absolute;
+	z-index: -2;
+	width: 100vw;
+	height: 100vh;
+}
+
+.ocean-banner {
+	animation: map-banner 2700ms linear alternate infinite;
+
+	position: absolute;
+	z-index: -2;
+	width: 100vw;
+	height: 100vh;
+	padding-top: 62vh;
+}
+
+.jungle-banner {
+	animation: map-banner 2400ms linear alternate infinite;
+
+	position: absolute;
+	z-index: -2;
+	width: 100vw;
+	height: 100vh;
+	left: 17vw;
+	padding-top: 50vh;
+}
+
+.universe-banner {
+	animation: map-banner 2500ms linear alternate infinite;
+
+	position: absolute;
+	z-index: -2;
+	width: 100vw;
+	height: 100vh;
+	left: 64vw;
+	padding-top: 65vh;
+}
+
+.christmas-banner {
+	animation: map-banner 3300ms linear alternate infinite;
+
+	position: absolute;
+	z-index: -2;
+	width: 100vw;
+	height: 100vh;
+	left: 40vw;
+	padding-top: 62vh;
+}
+
+@keyframes map-banner {
+	from {
+        top: 0%;
+    }
+    to {
+		top:2%;
     }
 }
