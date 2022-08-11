@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Dolphin from "../components/ocean/Dolphin";
+import Shark from "../components/ocean/Shark";
+import HideLion from '../components/jungle/HideLion'
 import "../css/map.css";
 
 const Map = () => {
@@ -55,19 +56,26 @@ const Map = () => {
         onClick={() => navigate("/universe")}
         style={{ backgroundColor: "gray" }}
         className="universe-button"
-
       >
         우주
       </button>
+
 
       {/* 클릭 대체할 div 태그 */}
 
       <div className="ocean-click" onClick={() => navigate("/ocean-intro")}></div>
       <div className="jungle-click" onClick={() => navigate("/jungle")}></div>
-      <div className="christmas-click" ></div>
+      <div className="christmas-click" onClick={()=> navigate("/christmas")} ></div>
       <div className="universe-click" onClick={() => navigate("/universe")}></div>
 
       {/* 배경화면 사진 요소 */}
+      <img src="/assets/map/banner.png" alt="" className="map-banner"/>
+
+      <img src="/assets/map/mini-banner.png" alt="" className="jungle-banner"/>
+      <img src="/assets/map/mini-banner.png" alt="" className="ocean-banner"/>
+      <img src="/assets/map/mini-banner.png" alt="" className="universe-banner"/>
+      <img src="/assets/map/mini-banner.png" alt="" className="christmas-banner"/>
+
       <img src="/assets/map/foot.png" alt="" className="map-foot"/>
 
       <img src="/assets/map/leaf.png" alt="" className="map-leaf"/>
