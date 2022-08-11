@@ -68,6 +68,11 @@ const Jungle = () => {
       //음성인식 초기화
       SpeechRecognition.stopListening();
       resetTranscript();
+      const canvases = document.getElementsByTagName("canvas");
+
+      for (let index = 0; index < canvases.length; index++) {
+        canvases[index].remove();
+      }
     };
   }, []);
 
