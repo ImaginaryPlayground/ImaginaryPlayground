@@ -51,7 +51,7 @@ export const SampleglTF2 = ({ id }) => {
 
       const clip = THREE.AnimationClip.findByName(clips, "metarigAction");
       const action = mixer1.clipAction(clip);
-      action.play();
+      action?.play();
     },
     undefined,
     function (error) {
