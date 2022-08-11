@@ -18,6 +18,32 @@ const UniverseGame = () => {
     };
   }, []);
 
+  //웹소캣 통신
+  useEffect(() => {
+    setTimeout(() => {
+      //웹소캣 io 통신하기
+      let x = "269";
+      let y = "821";
+
+      const planetTouchObject = document.getElementsByClassName("click_div");
+
+      for (let idx = 0; idx < planetTouchObject.length; idx++) {
+        const objectRect = planetTouchObject[idx].getBoundingClientRect();
+        console.log(objectRect);
+        if (
+          x >= objectRect.x &&
+          x <= objectRect.x + objectRect.width &&
+          y >= objectRect.y &&
+          y <= objectRect.y + objectRect.height
+        ) {
+          planetTouchObject[idx].click();
+        }
+      }
+    }, 13000);
+
+    return () => {};
+  }, []);
+
   useEffect(() => {
     if (isHifive === 1) {
       Howler.stop();
@@ -125,48 +151,47 @@ const UniverseGame = () => {
 
   console.log("토탈 카운트가 지금 ", totalTrash);
 
-  const clickPaper = (e) => {
-    console.log(e.target.id);
+  const clickPaper = (id) => {
     if (totalTrash <= 2) {
       setTotalTrash(totalTrash + 1);
       const planetAudio = new Audio("/assets/universe/true.mp3");
       planetAudio.play();
-      document.getElementById(e.target.id).style.opacity = "0%";
+      document.getElementById(id).style.display = "none";
       console.log("페이퍼");
     } else {
       console.log("페이퍼 차례 아님");
     }
   };
 
-  const clickPlastic = (e) => {
+  const clickPlastic = (id) => {
     if (2 < totalTrash && totalTrash < 6) {
       setTotalTrash(totalTrash + 1);
-      console.log("플라스틱");
-      document.getElementById(e.target.id).style.opacity = "0%";
+      //console.log("플라스틱");
+      document.getElementById(id).style.display = "none";
       const planetAudio = new Audio("/assets/universe/true.mp3");
       planetAudio.play();
     } else if (totalTrash <= 2) {
-      console.log("아직 플라스틱 아님");
+      //console.log("아직 플라스틱 아님");
       const planetAudio = new Audio("/assets/universe/false.mp3");
       planetAudio.play();
     } else {
-      console.log("플라스틱 끝남");
+      //onsole.log("플라스틱 끝남");
     }
   };
 
-  const clickMetal = (e) => {
+  const clickMetal = (id) => {
     if (5 < totalTrash && totalTrash < 9) {
       setTotalTrash(totalTrash + 1);
-      console.log("캔");
+      //console.log("캔");
       const planetAudio = new Audio("/assets/universe/true.mp3");
       planetAudio.play();
-      document.getElementById(e.target.id).style.display = "none";
+      document.getElementById(id).style.display = "none";
     } else if (totalTrash <= 5) {
-      console.log("아직 캔 아님");
+      //console.log("아직 캔 아님");
       const planetAudio = new Audio("/assets/universe/false.mp3");
       planetAudio.play();
     } else {
-      console.log("캔 끝남 === 게임 끝남");
+      //console.log("캔 끝남 === 게임 끝남");
     }
   };
 
@@ -194,6 +219,12 @@ const UniverseGame = () => {
       )}
 
       <div id={"paper1"}>
+        <div
+          className="click_div paper1_click_div"
+          onClick={() => {
+            clickPaper("paper1");
+          }}
+        ></div>
         {totalTrash <= 2 ? (
           <div className="paper-effect1">
             <UniversePaperEffect></UniversePaperEffect>
@@ -209,7 +240,14 @@ const UniverseGame = () => {
           onClick={clickPaper}
         ></img>
       </div>
+
       <div id={"paper2"}>
+        <div
+          className="click_div paper2_click_div"
+          onClick={() => {
+            clickPaper("paper2");
+          }}
+        ></div>
         {totalTrash <= 2 ? (
           <div className="paper-effect2">
             <UniversePaperEffect></UniversePaperEffect>
@@ -225,7 +263,14 @@ const UniverseGame = () => {
           onClick={clickPaper}
         ></img>
       </div>
+
       <div id={"paper3"}>
+        <div
+          className="click_div paper3_click_div"
+          onClick={() => {
+            clickPaper("paper3");
+          }}
+        ></div>
         {totalTrash <= 2 ? (
           <div className="paper-effect3">
             <UniversePaperEffect></UniversePaperEffect>
@@ -254,7 +299,14 @@ const UniverseGame = () => {
       ) : (
         <></>
       )}
+
       <div id={"plastic1"}>
+        <div
+          className="click_div plastic1_click_div"
+          onClick={() => {
+            clickPlastic("plastic1");
+          }}
+        ></div>
         {2 < totalTrash && totalTrash < 6 ? (
           <div className="plastic-effect1">
             <UniversePlasticEffect></UniversePlasticEffect>
@@ -278,6 +330,12 @@ const UniverseGame = () => {
         ) : (
           <></>
         )}
+        <div
+          className="click_div plastic2_click_div"
+          onClick={() => {
+            clickPlastic("plastic2");
+          }}
+        ></div>
         <img
           alt=""
           src="/assets/universe/plastic.png"
@@ -294,6 +352,12 @@ const UniverseGame = () => {
         ) : (
           <></>
         )}
+        <div
+          className="click_div plastic3_click_div"
+          onClick={() => {
+            clickPlastic("plastic3");
+          }}
+        ></div>
         <img
           alt=""
           src="/assets/universe/plastic.png"
@@ -316,6 +380,12 @@ const UniverseGame = () => {
         <></>
       )}
       <div id={"metal1"}>
+        <div
+          className="click_div metal1_click_div"
+          onClick={() => {
+            clickMetal("metal1");
+          }}
+        ></div>
         {5 < totalTrash && totalTrash < 8 ? (
           <div className="metal-effect1">
             <UniverseMetalEffect></UniverseMetalEffect>
@@ -332,6 +402,12 @@ const UniverseGame = () => {
         />
       </div>
       <div id={"metal2"}>
+        <div
+          className="click_div metal2_click_div"
+          onClick={() => {
+            clickMetal("metal2");
+          }}
+        ></div>
         {5 < totalTrash && totalTrash < 8 ? (
           <div className="metal-effect2">
             <UniverseMetalEffect></UniverseMetalEffect>
@@ -361,7 +437,7 @@ const UniverseGame = () => {
           </div>
           {/* 하이파이브 할 위치 나중에 로딩 */}
           <div
-            className="hifive_touch_location"
+            className="hifive_touch_location click_div"
             id="hifive_touch_location"
             onClick={() => {
               setIsHifive(isHifive + 1);
