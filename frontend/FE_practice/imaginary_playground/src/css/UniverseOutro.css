@@ -8,7 +8,7 @@
   border-radius: 100px;
   border: 10px solid plum;
   left: 57%;
-  top: 38%;
+  top: 52%;
   width: 680px;
   padding: 30px;
   padding-left: 60px;
@@ -72,7 +72,7 @@
 }
 
 .universe_disappear {
-  animation: universe_disappear 1s ease-in;
+  animation: universe_disappear 1.5s ease-in;
 }
 
 @keyframes universe_disappear {
