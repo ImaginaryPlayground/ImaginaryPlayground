@@ -8,6 +8,7 @@ import UniverseGame from "../components/universe/UniverseGame";
 import { useNavigate } from "react-router-dom";
 import { Howl, Howler } from "howler";
 import AlienNextStage from "../components/universe/AlienNextStage";
+import AlienSide from "../components/universe/AlienSide";
 
 const Universe = () => {
   useEffect(() => {
@@ -21,14 +22,37 @@ const Universe = () => {
   const nextStageAudio = new Howl({
     src: ["/assets/audio/universe/우주맵다음스테이지음성.mp3"],
     onend: () => {
-      setPlanetCount(planetCount + 1);
-      document.getElementById("AlienNextStage").remove();
+      document.getElementsByClassName(
+        "universe_next_stage_text_box"
+      )[0].style.display = "none";
+      document
+        .getElementsByClassName("ufo")[0]
+        .setAttribute("class", "ufo_dissapear");
+      setTimeout(() => {
+        document
+          .getElementById("AlienNextStage")
+          .setAttribute("class", "fast_disappear");
+        document
+          .getElementById("universe_ufo_img")
+          .setAttribute("class", "ufo_dissapear_2");
+      }, 2000);
+
+      setTimeout(() => {
+        document.getElementById("AlienNextStage").remove();
+      }, 2500);
+
+      setTimeout(() => {
+        setPlanetCount(planetCount + 1);
+      }, 3500);
     },
   });
 
   const planetStartAudio = new Howl({
     src: ["/assets/audio/universe/행성스테이지게임시작음성.mp3"],
-    onend: () => {},
+    onend: () => {
+      document.getElementById("planet_touch_text_1").style.display = "none";
+      document.getElementById("planet_touch_text_2").style.display = "block";
+    },
   });
 
   // 힐링 파트(행성 클릭 이벤트) 횟수 카운트
@@ -41,6 +65,7 @@ const Universe = () => {
   useEffect(() => {
     if (planetCount === 8) {
       Howler.stop(); //모든 음악 종료 후 실행
+      document.getElementById("FirstStageAlienSide").remove(0);
       setTimeout(() => {
         nextStageAudio.play();
       }, 1500);
@@ -144,6 +169,10 @@ const Universe = () => {
           <>
             {planetCount !== 8 ? (
               <>
+                {/* 사이드 외계인 등장 */}
+                <div>
+                  <AlienSide id="FirstStageAlienSide" />
+                </div>
                 {/* 수성 mercury 흑백 */}
                 {mercury === true ? (
                   <>
@@ -464,6 +493,7 @@ const Universe = () => {
                 </p>
 
                 <img
+                  id="universe_ufo_img"
                   alt=""
                   src="/assets/universe/UFO.png"
                   className="move_down_up ufo animate__animated animate__fadeInRight"
@@ -471,7 +501,27 @@ const Universe = () => {
               </>
             ) : (
               <>
-                <h2 className="planetH2">태양계 행성을 터치해보세요!</h2>
+                <div id="planet_touch_text_1">
+                  <h2 className="planetH2" id="planet_touch_text_1">
+                    <span style={{ color: "red" }}>태양계</span>의{" "}
+                    <span style={{ color: "yellow" }}>행성</span>들이{" "}
+                    <span style={{ color: "gray" }}>빛</span>을 잃었어!
+                  </h2>
+                  <h2 className="planetH2" style={{ top: "17%" }}>
+                    <span style={{ color: "aquamarine" }}>터치</span>해서{" "}
+                    <span style={{ color: "palegoldenrod" }}>빛</span>을 찾아줘!
+                  </h2>
+                </div>
+
+                <h2
+                  id="planet_touch_text_2"
+                  className="planetH2 move_down_up"
+                  style={{ display: "none" }}
+                >
+                  <span style={{ color: "red" }}>태양계</span>{" "}
+                  <span style={{ color: "yellow" }}>행성</span>들을
+                  <span style={{ color: "aquamarine" }}> 터치</span>해보세요!
+                </h2>
               </>
             )}
           </>

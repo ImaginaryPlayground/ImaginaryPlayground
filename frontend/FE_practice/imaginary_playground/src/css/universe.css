@@ -489,8 +489,8 @@ UniverseIntro .universe_intro_text_box {
   background-color: snow;
   border-radius: 100px;
   border: 10px solid plum;
-  left: 60%;
-  top: 42vh;
+  left: 55%;
+  top: 50vh;
   width: 620px;
   padding: 30px;
   padding-left: 60px;
@@ -527,4 +527,53 @@ UniverseIntro .universe_intro_text_box {
   border-radius: 10px;
   border: 5px solid pink;
   display: none;
+}
+
+.ufo_dissapear {
+  animation: ufo_dissapear 2.3s linear;
+}
+
+@keyframes ufo_dissapear {
+  0% {
+    transform: translateY(-1vh) translateX(35vw);
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(55vh) translateX(35vw);
+  }
+}
+
+.ufo_dissapear_2 {
+  animation: ufo_dissapear_2 1.5s linear;
+}
+
+@keyframes ufo_dissapear_2 {
+  0% {
+    transform: translateY(55vh) translateX(35vw);
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(0vh) translateX(35vw);
+  }
+}
+
+@keyframes fast_dissapear {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fast_disappear {
+  animation: fast_dissapear 0.5s linear;
 }

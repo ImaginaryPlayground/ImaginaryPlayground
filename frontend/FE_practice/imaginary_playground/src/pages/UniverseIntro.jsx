@@ -40,7 +40,7 @@ const UniverseIntro = () => {
         <AlienMain id="AlienMain" />
       </div>
 
-      <div className="going_universe_text_box ">
+      <div className="going_universe_text_box universe_Top_appear">
         <div className="text_opacity_chage">
           <span style={{ color: "pink" }}>갤</span>
           <span style={{ color: "midnightblue" }}>럭</span>
@@ -50,7 +50,7 @@ const UniverseIntro = () => {
         </div>
       </div>
 
-      <div className="universe_intro_text_box">
+      <div className="universe_intro_text_box universe_Right_appear">
         <div>
           반갑군, <span style={{ color: "pink" }}>친구</span>!
         </div>

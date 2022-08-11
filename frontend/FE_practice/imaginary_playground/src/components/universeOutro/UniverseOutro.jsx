@@ -12,13 +12,13 @@ const UniverseOutro = () => {
     src: ["/assets/audio/universe/우주맵아웃트로음성.mp3"],
     onend: () => {
       document
-        .getElementById("AlienMain")
+        .getElementById("AlienOutroMain")
         ?.setAttribute("class", "universe_disappear");
 
       setTimeout(() => {
-        navigate("/universe", { replace: true });
-        document.getElementById("AlienMain").remove();
-      }, 1000);
+        navigate("/", { replace: true });
+        document.getElementById("AlienOutroMain").remove();
+      }, 1500);
     },
   });
 
@@ -53,23 +53,19 @@ const UniverseOutro = () => {
       <div className="universe_intro_text_box universe_Right_appear">
         <div className="mt-custom">
           우주 쓰레기를 <span style={{ color: "hotpink" }}>청소</span>해줘서
-          너무 고마워!
+          고마워!
         </div>
         <div className="mt-custom">
-          너도 지구에서도 길거리에 <span style={{ color: "red" }}>쓰레기</span>
-          를 함부로 버리지 않도록 해!
+          너도 <span style={{ color: "red" }}>쓰레기</span>를 함부로 버리지
+          않도록 해!
         </div>
         <div className="mt-custom">
           이제 <span style={{ color: "pink" }}>갤럭시</span> 월드의 탐험이
           끝이났어!
         </div>
         <div className="mt-custom">
-          <span style={{ color: "lightcoral" }}>또</span> 놀러 올거라고 믿고
-          있어!{" "}
-        </div>
-        <div className="mt-custom">
-          그럼 나는 아주 큰 이<span style={{ color: "darkorchid" }}>우주</span>
-          를 여행하고 있을께!
+          <span style={{ color: "darkorchid" }}>우주</span>를 여행하고 있을께!
+          또 놀려오렴!
         </div>
       </div>
       {/* 우주맵 백그라운드 */}

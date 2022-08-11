@@ -26,7 +26,7 @@ const UniverseGame = () => {
       Howler.stop();
       hifiveGood.play();
     } else if (isHifive >= 3) {
-      document.getElementById("AlienHiFive").classList.add("disappear");
+      document.getElementById("AlienHiFive").setAttribute("class", "disappear");
       setTimeout(() => {
         document.getElementById("AlienHiFive").remove();
         navigate("/universe-outro", { replace: true });
@@ -362,8 +362,16 @@ const UniverseGame = () => {
           {/* 하이파이브 할 위치 나중에 로딩 */}
           <div
             className="hifive_touch_location"
+            id="hifive_touch_location"
             onClick={() => {
               setIsHifive(isHifive + 1);
+              document.getElementById("hifive_touch_location").style.display =
+                "none";
+
+              setTimeout(() => {
+                document.getElementById("hifive_touch_location").style.display =
+                  "block";
+              }, 1200);
             }}
           ></div>
 
@@ -394,7 +402,7 @@ const UniverseGame = () => {
               할까?
             </div>
             <div className="mt-custom">
-              그럼 나를 <span style={{ color: "violet" }}>터치</span>해줘!!
+              {/* 그럼 나를 <span style={{ color: "violet" }}>터치</span>해줘!! */}
             </div>
           </div>
 
