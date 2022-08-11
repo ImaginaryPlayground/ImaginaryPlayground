@@ -22,6 +22,27 @@ const Universe = () => {
     };
   }, []);
 
+  useEffect(() => {
+    //웹소캣 io 통신하기
+    let x = "231";
+    let y = "900";
+
+    const planetTouchObject = document.getElementsByClassName("click_div");
+
+    for (let idx = 0; idx < planetTouchObject.length; idx++) {
+      const objectRect = planetTouchObject[idx].getBoundingClientRect();
+      console.log(objectRect);
+      if (
+        x >= objectRect.x &&
+        x <= objectRect.x + objectRect.width &&
+        y >= objectRect.y &&
+        y <= objectRect.y + objectRect.height
+      ) {
+        planetTouchObject[idx].click();
+      }
+    }
+  }, []);
+
   const nextStageAudio = new Howl({
     src: ["/assets/audio/universe/우주맵다음스테이지음성.mp3"],
     onend: () => {
@@ -188,6 +209,10 @@ const Universe = () => {
                   </>
                 ) : (
                   <>
+                    <div
+                      onClick={mercuryClick}
+                      className="click_div mercury_click_div"
+                    ></div>
                     <img
                       alt=""
                       src="/assets/universe/mercury.png"
@@ -213,6 +238,11 @@ const Universe = () => {
                   </>
                 ) : (
                   <>
+                    <div
+                      onClick={venusClick}
+                      className="click_div venus_click_div"
+                    ></div>
+
                     <img
                       alt=""
                       src="/assets/universe/venus.png"
@@ -238,6 +268,10 @@ const Universe = () => {
                   </>
                 ) : (
                   <>
+                    <div
+                      onClick={earthClick}
+                      className="click_div earth_click_div"
+                    ></div>
                     <img
                       alt=""
                       src="/assets/universe/earth.png"
@@ -263,6 +297,10 @@ const Universe = () => {
                   </>
                 ) : (
                   <>
+                    <div
+                      onClick={marsClick}
+                      className="click_div mars_click_div"
+                    ></div>
                     <img
                       alt=""
                       src="/assets/universe/mars.png"
@@ -288,6 +326,10 @@ const Universe = () => {
                   </>
                 ) : (
                   <>
+                    <div
+                      onClick={jupyterClick}
+                      className="click_div jupyter2_click_div"
+                    ></div>
                     <img
                       alt=""
                       src="/assets/universe/jupyter2.png"
@@ -313,6 +355,10 @@ const Universe = () => {
                   </>
                 ) : (
                   <>
+                    <div
+                      onClick={saturnClick}
+                      className="click_div saturn_click_div"
+                    ></div>
                     <img
                       alt=""
                       src="/assets/universe/saturn.png"
@@ -338,6 +384,10 @@ const Universe = () => {
                   </>
                 ) : (
                   <>
+                    <div
+                      onClick={uranusClick}
+                      className="click_div uranus_click_div"
+                    ></div>
                     <img
                       alt=""
                       src="/assets/universe/uranus.png"
@@ -363,6 +413,10 @@ const Universe = () => {
                   </>
                 ) : (
                   <>
+                    <div
+                      onClick={neptuneClick}
+                      className="click_div neptune_click_div"
+                    ></div>
                     <img
                       alt=""
                       src="/assets/universe/neptune.png"
@@ -535,7 +589,10 @@ const Universe = () => {
           </>
         )}
 
-        <button onClick={() => navigate("/")} className="home-button">
+        <button
+          onClick={() => (window.location.href = "/")}
+          className="home-button"
+        >
           돌아가기
         </button>
 
