@@ -9,7 +9,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CancelIcon from "@mui/icons-material/Cancel";
 import styled from "@emotion/styled";
 import { pink } from "@mui/material/colors";
@@ -333,6 +333,13 @@ const SignUpPage = () => {
       emailDirectUrl: "",
     });
   };
+
+  //로그인 되어있으면 홈으로 이동
+  useEffect(() => {
+    if (localStorage.getItem("isLogin")) {
+      navigate("/");
+    }
+  }, []);
   return (
     <Grid
       display={"flex"}
