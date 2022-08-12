@@ -13,10 +13,11 @@ const UserInfoComp = () => {
   const loginUserDataReducer = useSelector(
     (state) => state.loginUserDataReducer
   );
-  const [modifyName, setmodifyName] = useState(loginUserDataReducer.username);
+  const [modifyName, setmodifyName] = useState(loginUserDataReducer?.username);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loginUserToken = localStorage.getItem("token");
+
   // useEffect(() => {
   //   axios({
   //     url: `${config.api}/user`,

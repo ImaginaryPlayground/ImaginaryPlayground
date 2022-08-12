@@ -15,7 +15,7 @@ import {
 import PropTypes from "prop-types";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import "../../css/Header/Header.css";
 import { useNavigate } from "react-router-dom";
@@ -38,6 +38,13 @@ const Header = (props) => {
 
   const currentPage = useSelector((state) => state.HomePageCurrentPageReducer);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem("isLogin") !== "true") {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    }
+  }, []);
 
   const handleClickHome = async () => {
     await dispatch({
@@ -72,6 +79,7 @@ const Header = (props) => {
             //로그인 페이지로 이동
             if (res.data.status === "SUCCESS") {
               localStorage.removeItem("token");
+              localStorage.removeItem("isLogin");
               dispatch({ type: "SET_LOGIN_USER", data: null });
               navigate("/login");
             } else {

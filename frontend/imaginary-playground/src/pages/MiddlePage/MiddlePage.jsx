@@ -65,6 +65,18 @@ const MiddlePage = () => {
     previewUrl: "/img/MiddlePage/default.jpg",
   });
   useEffect(() => {
+    window.onpageshow = function (event) {
+      //console.log(loginUserDataReducer);
+      if (event.persisted || window.performance) {
+        navigate(-1);
+      }
+    };
+    //로그인 되어있으면 홈으로 이동
+    if (localStorage.getItem("isLogin") === "true") {
+      navigate("/");
+      console.log("안녕");
+    }
+
     //병원데이터 주소 받아오기
     getHospitalDataApi();
   }, []);
