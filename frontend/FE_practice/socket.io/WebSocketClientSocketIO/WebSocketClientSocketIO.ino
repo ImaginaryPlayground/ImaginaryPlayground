@@ -21,6 +21,9 @@ SocketIOclient socketIO;
  
 long duration, distance; // Duration used to calculate distance
 
+
+//테스트용 : x와 y좌표
+//String xy;
 void socketIOEvent(socketIOmessageType_t type, uint8_t * payload, size_t length) {
     switch(type) {
         case sIOtype_DISCONNECT:
@@ -82,7 +85,7 @@ void setup() {
     }
 
     //영선님네 wifi
-    WiFiMulti.addAP("test", "01065631816");
+    WiFiMulti.addAP("happyhouse", "306306306");
 
     //WiFi.disconnect();
     while(WiFiMulti.run() != WL_CONNECTED) {
@@ -100,7 +103,7 @@ void setup() {
     // 서버의 ip,port,그대로
 
     // 강의장 ip
-    socketIO.begin("192.168.100.107", 4001, "/socket.io/?EIO=4");
+    socketIO.begin("192.168.0.8", 4001, "/socket.io/?EIO=4");
     
     //socketIO.begin("192.168.1.105", 4001, "/socket.io/?EIO=4");
     //socketIO.begin("127.0.0.1:4001", 4001, "/socket.io/?EIO=4");
@@ -116,7 +119,7 @@ unsigned long messageTimestamp = 0;
 void loop() {
    // 아두이노 시리얼에서 입력 후 테스트 할 부분
    // 밑에 싹 지워도 됨
-    socketIO.loop();
+    //socketIO.loop();
 
     uint64_t now = millis();
 
@@ -141,12 +144,21 @@ void loop() {
         //Calculate the distance (in cm) based on the speed of sound.
         distance = duration/58.2;
 
-        // array에 distance add
-        array.add(distance);
+        //테스트용
+        //xy="231 900";
+
+
         
-        Serial.println(distance);
-        //Delay 50ms before next reading.
-        delay(50);
+        // array에 distance add
+       array.add(distance);
+
+       //테스트
+       //array.add(xy);
+        
+       Serial.println(distance);
+       //Serial.println(xy);
+        //Delay 10ms before next reading.
+        //delay(10);
         
         // 서버에 보내기
         // 만들어 놓은 구조를 바탕으로 JSON Seriallize(직렬화)

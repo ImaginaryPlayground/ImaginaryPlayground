@@ -15,6 +15,8 @@ export const SampleglTF2 = ({ id }) => {
   dom.style.top = "14%";
   dom.style.zIndex = "1";
   dom.setAttribute("class", "appear");
+
+  // 도화지생성
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
