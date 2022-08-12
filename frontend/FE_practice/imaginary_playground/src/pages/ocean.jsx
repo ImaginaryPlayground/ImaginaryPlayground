@@ -111,42 +111,43 @@ function Ocean() {
           )}
           {/* 왼쪽에서 2번째 상어 */}
           {countOne <= 4 ? (
-            <div className="Shark2" onClick={toggleOne}></div>
+            <div className="Shark2 click_div" onClick={toggleOne}></div>
           ) : (
             <></>
           )}
           {/* 왼쪽에서 3번째 상어 */}
           {countTwo <= 4 ? (
-            <div className="Shark3" onClick={toggleTwo}></div>
+            <div className="Shark3 click_div" onClick={toggleTwo}></div>
           ) : (
             <></>
           )}
           {/* 왼쪽에서 4번째 상어 */}
           {countThree <= 4 ? (
-            <div className="Shark4" onClick={toggleThree}></div>
+            <div className="Shark4 click_div" onClick={toggleThree}></div>
           ) : (
             <></>
           )}
           {/* 왼쪽에서 1번째 상어 */}
           {countFour <= 4 ? (
-            <div className="Shark1" onClick={toggleFour}></div>
+            <div className="Shark1 click_div" onClick={toggleFour}></div>
           ) : (
             <></>
           )}
 
-          <Shark
+          {/* <Shark
             countTwo={countTwo}
             countOne={countOne}
             countThree={countThree}
             countFour={countFour}
             totalCount={totalCount}
-          ></Shark>
+          ></Shark> */}
 
           {/* 상어가 20번이 다 터치가 되면 게임 끝났다는 화면 보여주기 */}
-          {totalCount === 20 ? (
+          {/* {totalCount === 20 ? (
             <div>
               <h2 className="title1">게임 끝~</h2>
               <iframe
+                title="게임오버"
                 src="/assets/ocean/applaud.mp3"
                 allow="autoplay;"
                 className="audio"
@@ -155,7 +156,7 @@ function Ocean() {
             </div>
           ) : (
             <></>
-          )}
+          )} */}
 
           {/* 홈으로 돌아가기 버튼 */}
           <button onClick={() => navigate("/")} className="home-button">
