@@ -9,8 +9,8 @@ services:
       context: frontend/imaginary-playground
       dockerfile: Dockerfile
     ports:
-      - "80:80"
-      - "443:443" 
+      - "3000:80"
+      - "443:443"
     # [인증서 파일 저장 경로]:/var/www/html
     volumes:
       - /home/ubuntu/docker-volume/pem:/var/www/html
