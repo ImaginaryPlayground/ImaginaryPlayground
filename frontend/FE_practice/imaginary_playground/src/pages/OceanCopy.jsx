@@ -28,6 +28,9 @@ const OceanCopy = () => {
   const [DanceStart, setDanceStart] = useState(false);
   const [DanceStartBefore, setDanceStartBefore] = useState(false);
 
+  //지금이 클릭 시간인지
+  const [isClickTime, setIsClickTime] = useState(false);
+
   //첫번째 모션 인식 시작
   const [motionStart1, setMotionStart1] = useState(false);
   const [motionStartBefore, setMotionStartBefore] = useState(false);
@@ -71,11 +74,35 @@ const OceanCopy = () => {
 
     setTimeout(() => {
       const mainDolphin = document.getElementById("main_dolphin_0");
-      mainDolphin.classList.add("move_down_up");
+      mainDolphin.classList?.add("move_down_up");
     }, 3000);
     return () => {
       Howler.stop();
     };
+  }, []);
+
+  //웹소캣 통신코드(터치)
+  useEffect(() => {
+    setTimeout(() => {
+      //웹소캣 io 통신하기
+      let x = "296";
+      let y = "672";
+
+      const planetTouchObject = document.getElementsByClassName("click_div");
+
+      for (let idx = 0; idx < planetTouchObject.length; idx++) {
+        const objectRect = planetTouchObject[idx].getBoundingClientRect();
+        console.log(objectRect);
+        if (
+          x >= objectRect.x &&
+          x <= objectRect.x + objectRect.width &&
+          y >= objectRect.y &&
+          y <= objectRect.y + objectRect.height
+        ) {
+          planetTouchObject[idx].click();
+        }
+      }
+    }, 20000);
   }, []);
 
   //상어 3마리 남은 음성
@@ -349,24 +376,37 @@ const OceanCopy = () => {
     },
   });
 
+  const click_rest_time = () => {};
   // 첫번째 상어
   const [isClickOne, setIsClickOne] = useState(false);
   const [countOne, setCountOne] = useState(0);
+
   const toggleOne = () => {
-    setCountOne(countOne + 1);
-    totalCountSet(totalCount + 1);
+    //클릭타임이 아니면 클릭적용
+    if (!isClickTime) {
+      setCountOne(countOne + 1);
+      totalCountSet(totalCount + 1);
 
-    bubbleAudio.play();
-    const dom = document.getElementById("attack_effect_1");
-    dom.style.display = "block";
+      bubbleAudio.play();
+      const dom = document.getElementById("attack_effect_1");
+      dom.style.display = "block";
 
-    setTimeout(() => {
-      dom.style.display = "none";
-    }, 1000);
-    if (countOne >= 2) {
-      document.getElementById("shark1")?.remove();
-      // 전체 상어 개수 -1
-      setTotalSharkCount(totalSharkCount - 1);
+      // 현재 클릭 시간을 적용시켜 클릭을 못하게 막기
+      setIsClickTime(true);
+      setTimeout(() => {
+        dom.style.display = "none";
+      }, 1000);
+
+      setTimeout(() => {
+        // 1.2초 후에 클릭 허용
+        setIsClickTime(false);
+      }, 1200);
+
+      if (countOne >= 2) {
+        document.getElementById("shark1")?.remove();
+        // 전체 상어 개수 -1
+        setTotalSharkCount(totalSharkCount - 1);
+      }
     }
   };
 
@@ -383,9 +423,17 @@ const OceanCopy = () => {
     const dom = document.getElementById("attack_effect_2");
     dom.style.display = "block";
 
+    // 현재 클릭 시간을 적용시켜 클릭을 못하게 막기
+    setIsClickTime(true);
     setTimeout(() => {
       dom.style.display = "none";
     }, 1000);
+
+    setTimeout(() => {
+      // 1.2초 후에 클릭 허용
+      setIsClickTime(false);
+    }, 1200);
+
     if (countTwo >= 2) {
       document.getElementById("shark2")?.remove();
       // 전체 상어 개수 -1
@@ -406,9 +454,17 @@ const OceanCopy = () => {
     const dom = document.getElementById("attack_effect_3");
     dom.style.display = "block";
 
+    // 현재 클릭 시간을 적용시켜 클릭을 못하게 막기
+    setIsClickTime(true);
     setTimeout(() => {
       dom.style.display = "none";
     }, 1000);
+
+    setTimeout(() => {
+      // 1.2초 후에 클릭 허용
+      setIsClickTime(false);
+    }, 1200);
+
     if (countThree >= 2) {
       document.getElementById("shark3")?.remove();
       // 전체 상어 개수 -1
@@ -429,9 +485,17 @@ const OceanCopy = () => {
     const dom = document.getElementById("attack_effect_4");
     dom.style.display = "block";
 
+    // 현재 클릭 시간을 적용시켜 클릭을 못하게 막기
+    setIsClickTime(true);
     setTimeout(() => {
       dom.style.display = "none";
     }, 1000);
+
+    setTimeout(() => {
+      // 1.2초 후에 클릭 허용
+      setIsClickTime(false);
+    }, 1200);
+
     if (countFour >= 2) {
       document.getElementById("shark4")?.remove();
       // 전체 상어 개수 -1
@@ -497,7 +561,7 @@ const OceanCopy = () => {
           {countOne <= 2 ? (
             <div
               id="shark_move_1_box"
-              className="copy_Shark1 shark_move_1_box"
+              className="copy_Shark1 shark_move_1_box click_div"
               onClick={toggleOne}
             >
               <div className="touch_message">
@@ -524,7 +588,7 @@ const OceanCopy = () => {
           {countTwo <= 2 ? (
             <div
               id="shark_move_1_box"
-              className="copy_Shark2 shark_move_2_box"
+              className="copy_Shark2 shark_move_2_box click_div click_div"
               onClick={toggleTwo}
             >
               <div className="touch_message">
@@ -551,7 +615,7 @@ const OceanCopy = () => {
           {countThree <= 2 ? (
             <div
               id="shark_move_3_box"
-              className="copy_Shark3 shark_move_3_box"
+              className="copy_Shark3 shark_move_3_box click_div click_div"
               onClick={toggleThree}
             >
               <div className="touch_message">
@@ -578,7 +642,7 @@ const OceanCopy = () => {
           {countFour <= 2 ? (
             <div
               id="shark_move_4_box"
-              className="copy_Shark4 shark_move_4_box"
+              className="copy_Shark4 shark_move_4_box click_div"
               onClick={toggleFour}
             >
               <div className="touch_message">
