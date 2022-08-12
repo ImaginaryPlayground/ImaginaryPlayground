@@ -1,213 +1,227 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap");
 
 .universe {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    background-image: url("https://user-images.githubusercontent.com/26748614/96337246-f14d4580-1085-11eb-8793-a86d929e034d.jpg");
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://user-images.githubusercontent.com/26748614/96337246-f14d4580-1085-11eb-8793-a86d929e034d.jpg");
+  font-family: "Single Day", cursive;
 }
 
-.planetH2, .universegame-title {
-    position: absolute;
-    z-index: 1000;
-    color: white;
-    top: 10vh;
-    left: 30vw;
-    font-size: 3vw;
-    font-family: 'Noto Serif KR', serif;
+.planetH2,
+.universegame-title {
+  position: absolute;
+  z-index: 1000;
+  color: white;
+  top: 10vh;
+  left: 37vw;
+  font-size: 3vw;
+  font-family: "Single Day", cursive;
+}
 
+.universegame-title-2 {
+  position: absolute;
+  z-index: 1000;
+  color: white;
+  top: 31vh;
+  left: 28vw;
+  font-size: 3vw;
+  font-family: "Single Day", cursive;
 }
 
 .universe-background {
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
 }
 
 /* 행성들 리스트 */
 
 .mercury {
-    position: absolute;
-    z-index: 10000;
-    width: 4vw;
-    top: 70vh;
-    left: 13%;
+  position: absolute;
+  z-index: 10000;
+  width: 4vw;
+  top: 70vh;
+  left: 13%;
 }
 
 .mercury-title {
-    position: absolute;
-    z-index: 10000;
-    color: white;
-    top: 77vh;
-    left: 14%;
-    font-family: 'Noto Serif KR', serif;
-    font-size: 100%;
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 60vh;
+  left: 13%;
+  font-family: "Noto Serif KR", serif;
+  font-size: 200%;
 }
 
 .venus {
-    position: absolute;
-    z-index: 10000;
-    left: 3%;
-    width: 4vw;
-    top: 53vh;
+  position: absolute;
+  z-index: 10000;
+  left: 3%;
+  width: 4vw;
+  top: 53vh;
 }
 
 .venus-title {
-    position: absolute;
-    z-index: 10000;
-    color: white;
-    top: 60vh;
-    left: 4%;
-    font-family: 'Noto Serif KR', serif;
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 42.5vh;
+  left: 3%;
+  font-family: "Noto Serif KR", serif;
+  font-size: 200%;
 }
 
 .earth {
-    position: absolute;
-    z-index: 10000;
-    left: 31%;
-    width: 6vw;
-    top: 82vh;
+  position: absolute;
+  z-index: 10000;
+  left: 31%;
+  width: 6vw;
+  top: 82vh;
 }
 
 .earth-title {
-    position: absolute;
-    z-index: 10000;
-    color: white;
-    top: 92vh;
-    left: 33%;
-    font-family: 'Noto Serif KR', serif;
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 72vh;
+  left: 32%;
+  font-family: "Noto Serif KR", serif;
+  font-size: 200%;
 }
 
 .mars {
-    position: absolute;
-    z-index: 10000;
-    left: 25%;
-    top: 45vh;
-    width: 4vw;
+  position: absolute;
+  z-index: 10000;
+  left: 25%;
+  top: 45vh;
+  width: 4vw;
 }
 
 .mars-title {
-    position: absolute;
-    z-index: 10000;
-    color: white;
-    top: 52vh;
-    left: 26%;
-    font-family: 'Noto Serif KR', serif;
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 35vh;
+  left: 25%;
+  font-family: "Noto Serif KR", serif;
+  font-size: 200%;
 }
 
 .jupyter {
-    position: absolute;
-    z-index: 10002;
-    left: 43vw;
-    top: 45vh;
-    width: 18vw;
+  position: absolute;
+  z-index: 10002;
+  left: 43vw;
+  top: 45vh;
+  width: 18vw;
 }
 
 .jupyter-title {
-    position: absolute;
-    z-index: 10000;
-    color: white;
-    top: 80vh;
-    left: 51%;
-    font-family: 'Noto Serif KR', serif;
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 33vh;
+  left: 50%;
+  font-family: "Noto Serif KR", serif;
+  font-size: 200%;
 }
 
 .saturn {
-    position: absolute;
-    z-index: 10001;
-    left: 68vw;
-    top: 78vh;
-    width: 11vw;
+  position: absolute;
+  z-index: 10001;
+  left: 68vw;
+  top: 78vh;
+  width: 11vw;
 }
 
 .saturn-title {
-    position: absolute;
-    z-index: 10000;
-    color: white;
-    top: 71vh;
-    left: 72%;
-    font-family: 'Noto Serif KR', serif;
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 67vh;
+  left: 71.2%;
+  font-family: "Noto Serif KR", serif;
+  font-size: 200%;
 }
 
 .uranus {
-    position: absolute;
-    z-index: 10000;
-    left: 78vw;
-    width: 9vw;
-    top: 40vh;
+  position: absolute;
+  z-index: 10000;
+  left: 78vw;
+  width: 9vw;
+  top: 40vh;
 }
 
 .uranus-title {
-    position: absolute;
-    z-index: 10000;
-    color: white;
-    top: 52vh;
-    left: 81.5%;
-    font-family: 'Noto Serif KR', serif;
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 29vh;
+  left: 79.5%;
+  font-family: "Noto Serif KR", serif;
+  font-size: 200%;
 }
 
 .neptune {
-    position: absolute;
-    z-index: 10000;
-    left: 93vw;
-    width: 5vw;
-    top: 59vh;
+  position: absolute;
+  z-index: 10000;
+  left: 93vw;
+  width: 5vw;
+  top: 59vh;
 }
 
 .neptune-title {
-    position: absolute;
-    z-index: 10000;
-    color: white;
-    top: 67vh;
-    left: 94%;
-    font-family: 'Noto Serif KR', serif;
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 49vh;
+  left: 92%;
+  font-family: "Noto Serif KR", serif;
+  font-size: 200%;
 }
-
-
 
 /* 게임 시작 버튼 */
 .gamestart {
-    position: absolute;
-    z-index: 100;
-    left: 40%;
-    top: 80vh;
+  position: absolute;
+  z-index: 100;
+  left: 40%;
+  top: 80vh;
 }
-
 
 /* 우주쓰레기 게임 이미지들 */
 
 .paper1 {
-    animation: trash 1400ms linear alternate infinite;
-    position: absolute;
-    z-index: 10000;
-    width: 5%;
-    top: 80vh;
-    left: 16vw;
+  animation: trash 1400ms linear alternate infinite;
+  position: absolute;
+  z-index: 10000;
+  width: 5%;
+  top: 80vh;
+  left: 16vw;
 }
 
 .paper2 {
-    animation: trash 1500ms linear alternate infinite;
+  animation: trash 1500ms linear alternate infinite;
 
-    position: absolute;
-    z-index: 10000;
-    width: 5vw;
-    top: 50vh;
-    left: 35vw;
+  position: absolute;
+  z-index: 10000;
+  width: 5vw;
+  top: 50vh;
+  left: 35vw;
 }
 
 .paper3 {
-    animation: trash 1650ms linear alternate infinite;
+  animation: trash 1650ms linear alternate infinite;
 
-    position: absolute;
-    z-index: 10000;
-    width: 5vw;
-    top: 55vh;
-    left: 65vw;
+  position: absolute;
+  z-index: 10000;
+  width: 5vw;
+  top: 55vh;
+  left: 65vw;
 }
 
 /* .paper4 {
     animation: trash 1700ms linear alternate infinite;
-
     position: absolute;
     z-index: 10000;
     width: 5vw;
@@ -215,41 +229,38 @@
     left: 80vw;
 } */
 
-
-
 .plastic1 {
-    animation: trash 2350ms linear alternate infinite;
+  animation: trash 2350ms linear alternate infinite;
 
-    position: absolute;
-    z-index: 10000;
-    width: 3vw;
-    top: 40vh;
-    left: 20vw;
+  position: absolute;
+  z-index: 10000;
+  width: 3vw;
+  top: 40vh;
+  left: 20vw;
 }
 
 .plastic2 {
-    animation: trash 1900ms linear alternate infinite;
+  animation: trash 1900ms linear alternate infinite;
 
-    position: absolute;
-    z-index: 10000;
-    width: 3vw;
-    top: 70vh;
-    left: 90vw;
+  position: absolute;
+  z-index: 10000;
+  width: 3vw;
+  top: 70vh;
+  left: 90vw;
 }
 
 .plastic3 {
-    animation: trash 2300ms linear alternate infinite;
+  animation: trash 2300ms linear alternate infinite;
 
-    position: absolute;
-    z-index: 10000;
-    width: 3vw;
-    top: 30vh;
-    left: 80vw;
+  position: absolute;
+  z-index: 10000;
+  width: 3vw;
+  top: 30vh;
+  left: 80vw;
 }
 
 /* .plastic4 {
     animation: trash 2500ms linear alternate infinite;
-
     position: absolute;
     z-index: 10000;
     width: 3vw;
@@ -257,30 +268,28 @@
     left: 70vw;
 } */
 
-
 .metal1 {
-    animation: trash 2500ms linear alternate infinite;
+  animation: trash 2500ms linear alternate infinite;
 
-    position: absolute;
-    z-index: 10000;
-    width: 4vw;
-    top: 55vh;
-    left: 2.5vw;
+  position: absolute;
+  z-index: 10000;
+  width: 4vw;
+  top: 55vh;
+  left: 2.5vw;
 }
 
 .metal2 {
-    animation: trash 2300ms linear alternate infinite;
+  animation: trash 2300ms linear alternate infinite;
 
-    position: absolute;
-    z-index: 10000;
-    width: 4vw;
-    top: 35vh;
-    left: 52vw;
+  position: absolute;
+  z-index: 10000;
+  width: 4vw;
+  top: 35vh;
+  left: 52vw;
 }
 
 /* .metal3 {
     animation: trash 2500ms linear alternate infinite;
-
     position: absolute;
     z-index: 10000;
     width: 4vw;
@@ -290,7 +299,6 @@
 /* 
 .metal4 {
     animation: trash 2700ms linear alternate infinite;
-
     position: absolute;
     z-index: 10000;
     width: 4vw;
@@ -299,63 +307,389 @@
 } */
 
 @keyframes trash {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(45deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(45deg);
+  }
 }
-
 
 /* 게임 쓰레기통 */
 .paperbin {
-    position: absolute;
-    z-index: 1000;
-    top: 75vh;
-    left: 30vw;
-    width: 13vw;
+  position: absolute;
+  z-index: 1000;
+  top: 75vh;
+  left: 30vw;
+  width: 13vw;
 }
 
 .plasticbin {
-    position: absolute;
-    z-index: 1000;
-    top: 75vh;
-    left: 45vw;
-    width: 13vw;
+  position: absolute;
+  z-index: 1000;
+  top: 75vh;
+  left: 45vw;
+  width: 13vw;
 }
 
 .metalbin {
-    position: absolute;
-    z-index: 1000;
-    top: 75vh;
-    left: 60vw;
-    width: 13vw;
+  position: absolute;
+  z-index: 1000;
+  top: 75vh;
+  left: 60vw;
+  width: 13vw;
 }
 
 /* 게임 안내 문구 */
 .paper-title {
-    position: absolute;
-    color: white;
+  position: absolute;
+  color: white;
 }
 
 .plastic-title {
-    position: absolute;
-    color: white;
+  position: absolute;
+  color: white;
 }
-
-
 
 /* UFO */
 
 .ufo {
-    position: absolute;
-    z-index: 1;
-    top: 50vh;
-    left: 50vw;
+  position: absolute;
+  z-index: 1;
+  top: 24vh;
+  left: 44vw;
 }
 
+/* 팡팡 터지는 효과 */
 
+.paper-effect1 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 76vh;
+  left: 18vw;
+}
 
+.paper-effect2 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 45vh;
+  left: 37vw;
+}
 
+.paper-effect3 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 50vh;
+  left: 67vw;
+}
 
+.plastic-effect1 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 43vh;
+  left: 21vw;
+}
+
+.plastic-effect2 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 72vh;
+  left: 91vw;
+}
+
+.plastic-effect3 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 32vh;
+  left: 81vw;
+}
+
+.metal-effect1 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 50vh;
+  left: 4vw;
+}
+
+.metal-effect2 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 31vh;
+  left: 54vw;
+}
+
+/* 다음스테이지 넘어가는 도중에 나오는 음성 */
+
+.universe_next_stage_text_box {
+  position: absolute;
+  background-color: snow;
+  border-radius: 100px;
+  border: 10px solid plum;
+  left: 53%;
+  top: 47%;
+  width: 600px;
+  padding: 30px;
+  padding-left: 60px;
+  padding-right: 0px;
+  z-index: 1;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: left;
+  font-family: "Single Day", cursive;
+  display: none;
+}
+
+.universe_next_stage_text_box:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 41px solid transparent;
+  border-right-color: plum;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: -20.5px;
+  margin-left: -41px;
+  z-index: 1;
+}
+
+.universe .mt-custom {
+  margin-top: 10px;
+}
+
+UniverseIntro .universe_intro_text_box {
+  position: absolute;
+  background-color: snow;
+  border-radius: 100px;
+  border: 10px solid plum;
+  left: 60%;
+  top: 38%;
+  width: 600px;
+  padding: 30px;
+  padding-left: 60px;
+  padding-right: 0px;
+  z-index: 1;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: left;
+}
+
+.universe_hifive_text_box {
+  position: absolute;
+  background-color: snow;
+  border-radius: 100px;
+  border: 10px solid plum;
+  left: 55%;
+  top: 50vh;
+  width: 620px;
+  padding: 30px;
+  padding-left: 60px;
+  padding-right: 0px;
+  z-index: 1;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: left;
+}
+
+.universe_hifive_text_box:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 41px solid transparent;
+  border-right-color: plum;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: -20.5px;
+  margin-left: -41px;
+  z-index: 1;
+}
+
+.universe .hifive_touch_location {
+  position: absolute;
+  left: 50vh;
+  top: 45vh;
+  width: 450px;
+  height: 495px;
+  z-index: 5;
+  border-radius: 10px;
+  border: 5px solid pink;
+  display: none;
+}
+
+.ufo_dissapear {
+  animation: ufo_dissapear 2.3s linear;
+}
+
+@keyframes ufo_dissapear {
+  0% {
+    transform: translateY(-1vh) translateX(35vw);
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(55vh) translateX(35vw);
+  }
+}
+
+.ufo_dissapear_2 {
+  animation: ufo_dissapear_2 1.5s linear;
+}
+
+@keyframes ufo_dissapear_2 {
+  0% {
+    transform: translateY(55vh) translateX(35vw);
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(0vh) translateX(35vw);
+  }
+}
+
+@keyframes fast_dissapear {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fast_disappear {
+  animation: fast_dissapear 0.5s linear;
+}
+
+/* 클릭 div */
+
+.universe .mercury_click_div {
+  width: 120px;
+  height: 160px;
+  left: 12vw;
+  top: 63vh;
+}
+
+.universe .venus_click_div {
+  width: 120px;
+  height: 160px;
+  left: 2vw;
+  top: 46vh;
+}
+
+.universe .mars_click_div {
+  width: 110px;
+  height: 160px;
+  left: 24vw;
+  top: 38vh;
+}
+
+.universe .earth_click_div {
+  width: 150px;
+  height: 200px;
+  left: 30vw;
+  top: 75vh;
+}
+
+.universe .jupyter2_click_div {
+  width: 385px;
+  height: 455px;
+  left: 42vw;
+  top: 36vh;
+}
+
+.universe .saturn_click_div {
+  width: 240px;
+  height: 255px;
+  left: 67vw;
+  top: 70vh;
+}
+
+.universe .uranus_click_div {
+  width: 220px;
+  height: 240px;
+  left: 77vw;
+  top: 31vh;
+}
+
+.universe .neptune_click_div {
+  width: 160px;
+  height: 200px;
+  left: 91vw;
+  top: 51vh;
+}
+
+/* 두번째 게임(쓰레기 청소 div) */
+
+.universe .paper1_click_div {
+  width: 160px;
+  height: 200px;
+  left: 14vw;
+  top: 76vh;
+}
+
+.universe .paper2_click_div {
+  width: 160px;
+  height: 200px;
+  left: 33vw;
+  top: 46vh;
+}
+
+.universe .paper3_click_div {
+  width: 160px;
+  height: 200px;
+  left: 63vw;
+  top: 51vh;
+}
+
+.universe .plastic1_click_div {
+  width: 200px;
+  height: 220px;
+  left: 16vw;
+  top: 39vh;
+}
+
+.universe .plastic2_click_div {
+  width: 200px;
+  height: 220px;
+  left: 86vw;
+  top: 69vh;
+}
+
+.universe .plastic3_click_div {
+  width: 200px;
+  height: 220px;
+  left: 76vw;
+  top: 29vh;
+}
+
+.universe .metal1_click_div {
+  width: 150px;
+  height: 150px;
+  left: 0vw;
+  top: 53vh;
+}
+
+.universe .metal2_click_div {
+  width: 150px;
+  height: 150px;
+  left: 50vw;
+  top: 33vh;
+}
