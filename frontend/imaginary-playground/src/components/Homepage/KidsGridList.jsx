@@ -90,7 +90,7 @@ const KidsGridList = () => {
           age_2: searchData.age_2,
           gender: searchData.gender,
           page: page - 1,
-          hospital_id: loginUserDataReducer.hospital_id,
+          hospital_id: loginUserDataReducer?.hospital_id,
         },
       })
         .then((res) => {
@@ -115,60 +115,64 @@ const KidsGridList = () => {
   }, [page]);
 
   useEffect(() => {
-    //console.log(loginUserToken);
-    selectedKidDataNum.current = 0;
-    allKidDataNum.current = 0;
-    //페이지 리로드 감지
-    window.onpageshow = function (event) {
-      //console.log(loginUserDataReducer);
-      if (event.persisted || window.performance) {
-        setPage(1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-        }, 60);
-      }
-    };
-
-    setTimeout(() => {
-      window.scrollTo(0, currentPage.scrollY);
-      setLoading(true);
-    }, 50);
-
-    //등록된 전체아이 조회
-    axios({
-      url: `${config.api}/user/care/lookup/all`,
-      method: "POST",
-      headers: {
-        Auth: state?.token || loginUserToken,
-      }, //헤더에 토큰
-      data: {
-        name: "",
-        age_1: 1,
-        age_2: 50,
-        gender: "A",
-        page: 0,
-        hospital_id: loginUserDataReducer.hospital_id,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        if (res.data.status === "SUCCESS") {
-          //전체 데이터를 배열로 반환(아이 이미지)
-          allKidDataNum.current = res.data.searchedDataAllNum;
-          selectedKidDataNum.current = res.data.searchedDataAllNum;
-          //받은 데이터들 입력(전체 데이터 수도 같이 준다)
-          setKidsData(res.data.data);
-        } else {
-          swal({
-            title: "에러!",
-            text: "환자 데이터 오류가 발생했습니다.!",
-            icon: "error",
-          });
+    if (localStorage.getItem("isLogin") !== "true") {
+      //로그인이 되어있지 않다면 실행x
+    } else {
+      //console.log(loginUserToken);
+      selectedKidDataNum.current = 0;
+      allKidDataNum.current = 0;
+      //페이지 리로드 감지
+      window.onpageshow = function (event) {
+        //console.log(loginUserDataReducer);
+        if (event.persisted || window.performance) {
+          setPage(1);
+          setTimeout(() => {
+            window.scrollTo(0, 0);
+          }, 60);
         }
+      };
+
+      setTimeout(() => {
+        window.scrollTo(0, currentPage.scrollY);
+        setLoading(true);
+      }, 50);
+
+      //등록된 전체아이 조회
+      axios({
+        url: `${config.api}/user/care/lookup/all`,
+        method: "POST",
+        headers: {
+          Auth: state?.token || loginUserToken,
+        }, //헤더에 토큰
+        data: {
+          name: "",
+          age_1: 1,
+          age_2: 50,
+          gender: "A",
+          page: 0,
+          hospital_id: loginUserDataReducer.hospital_id,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          console.log(res);
+          if (res.data.status === "SUCCESS") {
+            //전체 데이터를 배열로 반환(아이 이미지)
+            allKidDataNum.current = res.data.searchedDataAllNum;
+            selectedKidDataNum.current = res.data.searchedDataAllNum;
+            //받은 데이터들 입력(전체 데이터 수도 같이 준다)
+            setKidsData(res.data.data);
+          } else {
+            swal({
+              title: "에러!",
+              text: "환자 데이터 오류가 발생했습니다.!",
+              icon: "error",
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, []);
 
   // useLayoutEffect(() => {
