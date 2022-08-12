@@ -19,7 +19,6 @@ wifi를 통해서 데이터를 주고 받을 수 있다는 이야기를 듣고 �
 
 컨설턴트님이 말씀하시기를.. 두 방식은 속도에 있어서 크게 차이가 없다고 말씀하셨다. 참고한 오버플로우의 글은 10년전의 글이므로 컨설턴트님의 말씀을 믿기로 하고 `socket.io` 라이브러리를 사용하기로 바꾸었다.
 
-
 ### WebSocket 통신
 
 [한 블로그](https://www.hardcopyworld.com/?p=3215)에서 `Wemos D1 mini`와 라즈베리파이 간 `WebSocket`통신을 진행한 코드를 보고 진행하였다. 아두이노 [esp8266에서 사용하는 websocket 라이브러리](https://github.com/morrissinger/ESP8266-Websocket)와 [라즈베리파이에서 사용하는 websocket 라이브러리](https://github.com/websocket-client/websocket-client) 고하였다고 한다.
@@ -32,9 +31,13 @@ esp8266에서의 기본 라이브러리인 [ESP8266WiFi](https://arduino-esp8266
 
 websocket은 server 코드로 작성하였다. 하지만 이후 사용할 socket.io에서는 client를 넣을 예정이다.
 
-### Socket.io
+### Socket.io 통신
 
-진행중..
+라즈베리파이에서는 3D캐릭터의 로딩이 잘 되지 않는 다는 점을 뒤늦게 알아차리고 라즈베리파이 대신 노트북의 아니라 node.js 서버와 통신하기 위해서 socket.io 통신으로 바꾸게 되었다.
+
+arduino에서 사용할 수 있는 [예제코드](https://github.com/timum-viw/socket.io-client)를 참고하여 권성호 팀원이 기본적인 통신코드를 작성하였고 필자가 위에서 만들었던 코드의 초음파 알고리즘만을 추가하여 node.js로 송신하는 [socket.io client 코드](./codes/WebSocketClientSocketIO/WebSocketClientSocketIO.ino)를 작성하였다.
+
+잘 작동하는지 확인이 필요하다.
 
 ### 전원 공급
 

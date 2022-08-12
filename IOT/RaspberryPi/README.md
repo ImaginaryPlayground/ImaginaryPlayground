@@ -1,4 +1,4 @@
-# 라즈베리파이 정리
+# Raspberry pi 
 
 - [경험한 에러를 정리한 페이지](./problems/README.md)
 - [초음파센서](./ultraSonic/README.md)
@@ -9,7 +9,7 @@
 
 화면은 노트북의 화면을 보여주고 센서 값들은 node.js와 socket 연결을 통해 넘겨주는 방식으로, 통신에 대한 작업이 늘어나게 되었다. (웹에서는 CORS 문제까지 발생했다고 한다.)
 
-## Raspberry pi 환경설정
+## 환경설정
 
 1. 고정 IP 설정 방법
 그 강의의 강의장은 와이파이를 통해 데이터를 주고 받는 것을 제한해 두었는데 이 때문에 특정한 IP를 사용하지 않으면 SSH나 VNC를 사용하지 못해서 아래의 블로그를 참고하였다.
@@ -169,3 +169,34 @@ AttributeError: 'str' object has no attribute 'toInt'
 
 - [[Node.js] 자바스크립트로 파이썬 연동 실행 방법(함수 매개변수 전달 호출 : child-process)](https://curryyou.tistory.com/225)
 - [자바스크립트에서 Python 파일 실행하기](https://doongdoongeee.tistory.com/148)
+
+## [teachableMachine](https://teachablemachine.withgoogle.com/)
+
+빠르게 웹, 앱에 적용할 수 있는 간단한 머신러닝 모델을 만들 수 있도록 도와주는 사이트로 구글에서 제작하였다.
+
+초등학생들에게 AI를 쉽게 가르치기 위해서 만들었다고 기억하고 있지만, 확실하지 않아서 다시 찾아봐야 할 것 같다.
+
+필자는 해당 사이트를 활용하여 간단한 자세인식 모델을 만들어 프로젝트에 적용할 예정이다. 아이들의 자세를 인식하여 특정 행동을 취하면 다음으로 넘어가는 기능을 구현할 때 사용한다.
+
+## node.js
+
+TM에서 만든 모델을 적용하고 인식한 자세를 React로 전달하기 위해서 라즈베리파이에 [Node.js를 설치](https://it-jm.tistory.com/19)하였다.
+
+2022년 8월 12일 기준 [nodejs](https://nodejs.org/en/)공식 홈페이지에서 추천하는 버전은 16.16.0버전으로 필자도 해당 버전으로 설치하였다.
+
+<img src="https://user-images.githubusercontent.com/19484971/184197121-ebf8bef7-2561-4719-b75c-b64e928ab012.png" width=500>
+
+<img src="https://user-images.githubusercontent.com/19484971/184197377-e24f9c44-7bdc-490f-a570-431f33cf5822.png" width=300>
+
+그리고 자연스럽게 npm 8.11.0버전도 설치가 되였다.
+
+기본적인 폴더를 생성해야할 것 같아 [구글링하여 찾은 블로그](https://dion-ko.tistory.com/123)와 [nodejs 공식 홈페이지](https://nodejs.org/dist/latest-v16.x/docs/api/synopsis.html)를 보면서 진행하였다.
+
+<img src="https://user-images.githubusercontent.com/19484971/184212192-982a10d9-3819-4522-a9c1-1e6462525fb1.png" width=300>
+
+자세인식이 되는 것을 확인하고 혹시 모르니 다시 라즈베리파이를 백업한 후 잤다.
+
+### [Socket.io](https://socket.io/)
+
+간단한 텍스트와 이미지를 전송하기 위해서 사용한다.
+
