@@ -9,6 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { Howl, Howler } from "howler";
 import AlienNextStage from "../components/universe/AlienNextStage";
 import AlienSide from "../components/universe/AlienSide";
+import socketIOClient from "socket.io-client";
+
+//소켓 IO node서버 연결 주소
+const ENDPOINT = "http://127.0.0.1:4001";
 
 const Universe = () => {
   useEffect(() => {
@@ -28,6 +32,14 @@ const Universe = () => {
     let y = "900";
 
     const planetTouchObject = document.getElementsByClassName("click_div");
+    const socket = socketIOClient(ENDPOINT);
+    // socket.on("FromAPI", (data) => {
+    //   console.log(data);
+    // });
+    socket.emit("chat message", "hello");
+    socket.on("chat message", (data) => {
+      console.log(data);
+    });
 
     for (let idx = 0; idx < planetTouchObject.length; idx++) {
       const objectRect = planetTouchObject[idx].getBoundingClientRect();
