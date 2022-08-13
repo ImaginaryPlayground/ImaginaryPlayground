@@ -7,6 +7,21 @@ import { useNavigate } from "react-router";
 import "../css/UniverseIntro.css";
 
 const UniverseIntro = () => {
+
+  useEffect(() => {
+    var canvasNode = document.querySelectorAll("canvas");
+    var canvas = Array.prototype.slice.call(canvasNode);
+    if (canvas) {
+      canvas.forEach(function (element) {
+        // element.style.display = 'none'
+        if (element.id !== 'AlienMain') {
+          element.remove();
+        }
+      });
+    }
+  }, []);
+
+
   const navigate = useNavigate();
   const universeIntroAudio = new Howl({
     src: ["/assets/audio/universe/우주맵인트로음성.mp3"],
