@@ -2,7 +2,7 @@ import React from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-export const SampleglTF2 = ({ id }) => {
+export const DolphinglTF = ({ id }) => {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -11,12 +11,11 @@ export const SampleglTF2 = ({ id }) => {
   dom.setAttribute("id", `${id}`);
   // dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "0%";
+  dom.style.left = "38%";
   dom.style.top = "27%";
   dom.style.zIndex = "1";
   dom.setAttribute("class", "map-animal");
   dom.style.scale = "40%";
-
 
   const scene = new THREE.Scene();
 
@@ -27,7 +26,7 @@ export const SampleglTF2 = ({ id }) => {
     100
   );
 
-  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 5);
+  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 7);
   scene.add(light);
 
   // 궤도 추적
@@ -35,27 +34,26 @@ export const SampleglTF2 = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(5, 3, 30);
+  camera.position.set(5, 6, 30);
 
   const assetLoader = new GLTFLoader();
 
   let mixer1;
-  let model;
   assetLoader.load(
-    "/assets/jungle/토끼.gltf",
+    "/assets/map/alien.gltf",
     function (gltf) {
-      model = gltf.scene;
+      const model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
-      // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(13, 5, 24);
+      gltf.scene.scale.multiplyScalar(4);
+      model.position.set(3, 6, 5);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
       const clips = gltf.animations;
 
-      const clip = THREE.AnimationClip.findByName(clips, "metarigAction");
+      const clip = THREE.AnimationClip.findByName(clips, "metarigAction.001");
       const action = mixer1.clipAction(clip);
-      action.play();
+      action?.play();
     },
     undefined,
     function (error) {
@@ -64,11 +62,10 @@ export const SampleglTF2 = ({ id }) => {
   );
 
   const clock1 = new THREE.Clock();
-  let left = 0;
+
   function animate() {
     if (mixer1) mixer1.update(clock1.getDelta());
-
-    renderer.render(scene, camera);
+      renderer.render(scene, camera);
   }
   renderer.setAnimationLoop(animate);
 
@@ -80,12 +77,12 @@ export const SampleglTF2 = ({ id }) => {
   }
 };
 
-const AlienMain = ({ id }) => {
+const MapAlien = ({ id }) => {
   return (
     <>
-      <SampleglTF2 id={id}></SampleglTF2>
+      <DolphinglTF id={id}></DolphinglTF>
     </>
   );
 };
 
-export default React.memo(AlienMain);
+export default React.memo(MapAlien);

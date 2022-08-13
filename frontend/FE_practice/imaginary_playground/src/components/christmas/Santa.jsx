@@ -9,14 +9,12 @@ export const SampleglTF2 = ({ id }) => {
 
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
-  // dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "0%";
-  dom.style.top = "27%";
+  dom.style.left = "60%";
+  dom.style.top = "40%";
   dom.style.zIndex = "1";
-  dom.setAttribute("class", "map-animal");
-  dom.style.scale = "40%";
-
+//   dom.setAttribute("class", "map-animal");
+  dom.style.scale = "160%";
 
   const scene = new THREE.Scene();
 
@@ -27,7 +25,7 @@ export const SampleglTF2 = ({ id }) => {
     100
   );
 
-  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 5);
+  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 3);
   scene.add(light);
 
   // 궤도 추적
@@ -35,19 +33,19 @@ export const SampleglTF2 = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(5, 3, 30);
+  camera.position.set(5, 6, 30);
 
   const assetLoader = new GLTFLoader();
 
   let mixer1;
   let model;
   assetLoader.load(
-    "/assets/jungle/토끼.gltf",
+    "/assets/christmas/santa.gltf",
     function (gltf) {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
       // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(13, 5, 24);
+      model.position.set(0, 7, 24);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
@@ -55,7 +53,7 @@ export const SampleglTF2 = ({ id }) => {
 
       const clip = THREE.AnimationClip.findByName(clips, "metarigAction");
       const action = mixer1.clipAction(clip);
-      action.play();
+      action?.play();
     },
     undefined,
     function (error) {
@@ -80,7 +78,7 @@ export const SampleglTF2 = ({ id }) => {
   }
 };
 
-const AlienMain = ({ id }) => {
+const Santa = ({ id }) => {
   return (
     <>
       <SampleglTF2 id={id}></SampleglTF2>
@@ -88,4 +86,4 @@ const AlienMain = ({ id }) => {
   );
 };
 
-export default React.memo(AlienMain);
+export default React.memo(Santa);

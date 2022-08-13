@@ -204,12 +204,12 @@ const Universe = () => {
   return (
     <>
       <div className="universe">
-        {/* <iframe
+        <iframe
           title="배경음악"
           src="/assets/audio/universe/universe.mp3"
           allow="autoplay;"
           className="audio"
-        ></iframe> */}
+        ></iframe>
 
         {planetCount !== 9 ? (
           <>
@@ -582,7 +582,7 @@ const Universe = () => {
               <>
                 <div id="planet_touch_text_1">
                   <h2 className="planetH2" id="planet_touch_text_1">
-                    <span style={{ color: "red" }}>태양계</span>의{" "}
+                    <span style={{ color: "gold" }}>태양계</span>의{" "}
                     <span style={{ color: "yellow" }}>행성</span>들이{" "}
                     <span style={{ color: "gray" }}>빛</span>을 잃었어!
                   </h2>
@@ -597,7 +597,7 @@ const Universe = () => {
                   className="planetH2 move_down_up"
                   style={{ display: "none" }}
                 >
-                  <span style={{ color: "red" }}>태양계</span>{" "}
+                  <span style={{ color: "gold" }}>태양계</span>{" "}
                   <span style={{ color: "yellow" }}>행성</span>들을
                   <span style={{ color: "aquamarine" }}> 터치</span>해보세요!
                 </h2>
@@ -611,12 +611,8 @@ const Universe = () => {
           </>
         )}
 
-        <button
-          onClick={() => (window.location.href = "/")}
-          className="home-button"
-        >
-          돌아가기
-        </button>
+<img src="/assets/map/minimap.png" alt="" className="minimap" 
+      onClick={() => (window.location.href = "/")}/>
 
         {/* 우주 배경 구현 */}
         <Canvas className="universe-canvas">
