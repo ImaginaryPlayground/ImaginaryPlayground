@@ -1,5 +1,7 @@
 import '../css/christmas.css'
+import Santa from '../components/christmas/Santa.jsx'
 import { useEffect } from 'react';
+
 
 const Christmas = () => {
 
@@ -9,7 +11,9 @@ const Christmas = () => {
     if (canvas) {
       canvas.forEach(function (element) {
         // element.style.display = 'none'
+        if (element.id !== 'santa'){ 
           element.remove();
+        }
       });
     }
   }, []);
@@ -22,6 +26,8 @@ const Christmas = () => {
         allow="autoplay;"
         className="audio"
       ></iframe>
+
+      <Santa id={'santa'}></Santa>
 
         {/* 크리스마스 트리 */}
         <img src="/assets/christmas/star.png" alt="" className='tree-star'/>

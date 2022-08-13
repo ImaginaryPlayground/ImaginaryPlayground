@@ -9,11 +9,15 @@ export const SampleglTF2 = ({ id }) => {
 
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
+  // dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "-18%";
-  dom.style.top = "17%";
+  dom.style.left = "0%";
+  dom.style.top = "27%";
   dom.style.zIndex = "1";
-  dom.setAttribute("class", "appear");
+  dom.setAttribute("class", "map-animal");
+  dom.style.scale = "40%";
+
+
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -31,7 +35,7 @@ export const SampleglTF2 = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(10, 6, 30);
+  camera.position.set(5, 3, 30);
 
   const assetLoader = new GLTFLoader();
 
