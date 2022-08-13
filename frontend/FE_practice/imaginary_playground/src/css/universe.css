@@ -206,7 +206,7 @@
   position: absolute;
   z-index: 10000;
   width: 5vw;
-  top: 50vh;
+  top: 56vh;
   left: 35vw;
 }
 
@@ -235,7 +235,7 @@
   position: absolute;
   z-index: 10000;
   width: 3vw;
-  top: 40vh;
+  top: 30vh;
   left: 20vw;
 }
 
@@ -374,7 +374,7 @@
   position: absolute;
   z-index: 1000;
   width: 5%;
-  top: 45vh;
+  top: 50vh;
   left: 37vw;
 }
 
@@ -390,7 +390,7 @@
   position: absolute;
   z-index: 1000;
   width: 5%;
-  top: 43vh;
+  top: 30vh;
   left: 21vw;
 }
 
@@ -649,7 +649,7 @@ UniverseIntro .universe_intro_text_box {
   width: 160px;
   height: 200px;
   left: 33vw;
-  top: 46vh;
+  top: 50vh;
 }
 
 .universe .paper3_click_div {
@@ -662,8 +662,8 @@ UniverseIntro .universe_intro_text_box {
 .universe .plastic1_click_div {
   width: 200px;
   height: 220px;
-  left: 16vw;
-  top: 39vh;
+  left: 15vw;
+  top: 29vh;
 }
 
 .universe .plastic2_click_div {

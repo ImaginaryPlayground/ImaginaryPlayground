@@ -70,9 +70,9 @@ const Jungle = () => {
       resetTranscript();
       const canvases = document.getElementsByTagName("canvas");
 
-      for (let index = 0; index < canvases.length; index++) {
-        canvases[index].remove();
-      }
+      // for (let index = 0; index < canvases.length; index++) {
+      //   canvases[index].remove();
+      // }
     };
   }, []);
 
