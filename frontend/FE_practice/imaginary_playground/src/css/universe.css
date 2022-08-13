@@ -42,7 +42,7 @@
   z-index: 10000;
   width: 4vw;
   top: 70vh;
-  left: 13%;
+  left: 9vw;
 }
 
 .mercury-title {
@@ -58,7 +58,7 @@
 .venus {
   position: absolute;
   z-index: 10000;
-  left: 3%;
+  left: 9vw;
   width: 4vw;
   top: 53vh;
 }
@@ -76,7 +76,7 @@
 .earth {
   position: absolute;
   z-index: 10000;
-  left: 31%;
+  left: 34vw;
   width: 6vw;
   top: 82vh;
 }
@@ -94,8 +94,8 @@
 .mars {
   position: absolute;
   z-index: 10000;
-  left: 25%;
-  top: 45vh;
+  left: 34vw;
+  top: 54vh;
   width: 4vw;
 }
 
@@ -112,9 +112,9 @@
 .jupyter {
   position: absolute;
   z-index: 10002;
-  left: 43vw;
-  top: 45vh;
-  width: 18vw;
+  left: 53vw;
+  top: 40vh;
+  width: 15vw;
 }
 
 .jupyter-title {
@@ -130,7 +130,7 @@
 .saturn {
   position: absolute;
   z-index: 10001;
-  left: 68vw;
+  left: 57vw;
   top: 78vh;
   width: 11vw;
 }
@@ -148,9 +148,9 @@
 .uranus {
   position: absolute;
   z-index: 10000;
-  left: 78vw;
+  left: 82vw;
   width: 9vw;
-  top: 40vh;
+  top: 50vh;
 }
 
 .uranus-title {
@@ -166,9 +166,9 @@
 .neptune {
   position: absolute;
   z-index: 10000;
-  left: 93vw;
+  left: 83vw;
   width: 5vw;
-  top: 59vh;
+  top: 75vh;
 }
 
 .neptune-title {
@@ -206,7 +206,7 @@
   position: absolute;
   z-index: 10000;
   width: 5vw;
-  top: 56vh;
+  top: 59vh;
   left: 35vw;
 }
 
@@ -217,7 +217,7 @@
   z-index: 10000;
   width: 5vw;
   top: 55vh;
-  left: 65vw;
+  left: 60vw;
 }
 
 /* .paper4 {
@@ -236,7 +236,7 @@
   z-index: 10000;
   width: 3vw;
   top: 30vh;
-  left: 20vw;
+  left: 13vw;
 }
 
 .plastic2 {
@@ -246,7 +246,7 @@
   z-index: 10000;
   width: 3vw;
   top: 70vh;
-  left: 90vw;
+  left: 86vw;
 }
 
 .plastic3 {
@@ -255,8 +255,8 @@
   position: absolute;
   z-index: 10000;
   width: 3vw;
-  top: 30vh;
-  left: 80vw;
+  top: 36vh;
+  left: 84vw;
 }
 
 /* .plastic4 {
@@ -274,8 +274,8 @@
   position: absolute;
   z-index: 10000;
   width: 4vw;
-  top: 55vh;
-  left: 2.5vw;
+  top: 72vh;
+  left: 12vw;
 }
 
 .metal2 {
@@ -285,7 +285,7 @@
   z-index: 10000;
   width: 4vw;
   top: 35vh;
-  left: 52vw;
+  left: 58vw;
 }
 
 /* .metal3 {
@@ -374,7 +374,7 @@
   position: absolute;
   z-index: 1000;
   width: 5%;
-  top: 50vh;
+  top: 53vh;
   left: 37vw;
 }
 
@@ -383,7 +383,7 @@
   z-index: 1000;
   width: 5%;
   top: 50vh;
-  left: 67vw;
+  left: 62vw;
 }
 
 .plastic-effect1 {
@@ -391,31 +391,31 @@
   z-index: 1000;
   width: 5%;
   top: 30vh;
-  left: 21vw;
+  left: 15vw;
 }
 
 .plastic-effect2 {
   position: absolute;
   z-index: 1000;
   width: 5%;
-  top: 72vh;
-  left: 91vw;
+  top: 70vh;
+  left: 87vw;
 }
 
 .plastic-effect3 {
   position: absolute;
   z-index: 1000;
   width: 5%;
-  top: 32vh;
-  left: 81vw;
+  top: 34vh;
+  left: 85vw;
 }
 
 .metal-effect1 {
   position: absolute;
   z-index: 1000;
   width: 5%;
-  top: 50vh;
-  left: 4vw;
+  top: 66vh;
+  left: 13vw;
 }
 
 .metal-effect2 {
@@ -423,7 +423,7 @@
   z-index: 1000;
   width: 5%;
   top: 31vh;
-  left: 54vw;
+  left: 60vw;
 }
 
 /* 다음스테이지 넘어가는 도중에 나오는 음성 */
@@ -583,57 +583,57 @@ UniverseIntro .universe_intro_text_box {
 .universe .mercury_click_div {
   width: 120px;
   height: 160px;
-  left: 12vw;
+  left: 8vw;
   top: 63vh;
 }
 
 .universe .venus_click_div {
   width: 120px;
   height: 160px;
-  left: 2vw;
+  left: 8vw;
   top: 46vh;
 }
 
 .universe .mars_click_div {
   width: 110px;
   height: 160px;
-  left: 24vw;
-  top: 38vh;
+  left: 33vw;
+  top: 48vh;
 }
 
 .universe .earth_click_div {
   width: 150px;
   height: 200px;
-  left: 30vw;
+  left: 33vw;
   top: 75vh;
 }
 
 .universe .jupyter2_click_div {
   width: 385px;
   height: 455px;
-  left: 42vw;
-  top: 36vh;
+  left: 52vw;
+  top: 30vh;
 }
 
 .universe .saturn_click_div {
   width: 240px;
   height: 255px;
-  left: 67vw;
-  top: 70vh;
+  left: 55vw;
+  top: 73vh;
 }
 
 .universe .uranus_click_div {
   width: 220px;
   height: 240px;
-  left: 77vw;
-  top: 31vh;
+  left: 80vw;
+  top: 43vh;
 }
 
 .universe .neptune_click_div {
   width: 160px;
   height: 200px;
-  left: 91vw;
-  top: 51vh;
+  left: 82vw;
+  top: 70vh;
 }
 
 /* 두번째 게임(쓰레기 청소 div) */
@@ -649,47 +649,47 @@ UniverseIntro .universe_intro_text_box {
   width: 160px;
   height: 200px;
   left: 33vw;
-  top: 50vh;
+  top: 55vh;
 }
 
 .universe .paper3_click_div {
   width: 160px;
   height: 200px;
-  left: 63vw;
+  left: 58vw;
   top: 51vh;
 }
 
 .universe .plastic1_click_div {
   width: 200px;
   height: 220px;
-  left: 15vw;
+  left: 9vw;
   top: 29vh;
 }
 
 .universe .plastic2_click_div {
   width: 200px;
   height: 220px;
-  left: 86vw;
+  left: 82vw;
   top: 69vh;
 }
 
 .universe .plastic3_click_div {
   width: 200px;
   height: 220px;
-  left: 76vw;
-  top: 29vh;
+  left: 80vw;
+  top: 35vh;
 }
 
 .universe .metal1_click_div {
   width: 150px;
   height: 150px;
-  left: 0vw;
-  top: 53vh;
+  left:10vw;
+  top: 70vh;
 }
 
 .universe .metal2_click_div {
   width: 150px;
   height: 150px;
-  left: 50vw;
+  left: 56vw;
   top: 33vh;
 }
