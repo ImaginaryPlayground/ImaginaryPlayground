@@ -1,5 +1,6 @@
 import '../css/christmas.css'
 import Santa from '../components/christmas/Santa.jsx'
+import Tree from '../components/christmas/tree.jsx'
 import { useEffect } from 'react';
 
 
@@ -11,7 +12,7 @@ const Christmas = () => {
     if (canvas) {
       canvas.forEach(function (element) {
         // element.style.display = 'none'
-        if (element.id !== 'santa'){ 
+        if (element.id !== 'santa' && element.id !== 'tree'){ 
           element.remove();
         }
       });
@@ -28,6 +29,7 @@ const Christmas = () => {
       ></iframe>
 
       <Santa id={'santa'}></Santa>
+      {/* <Tree id={'tree'}></Tree> */}
 
         {/* 크리스마스 트리 */}
         <img src="/assets/christmas/star.png" alt="" className='tree-star'/>
@@ -40,6 +42,9 @@ const Christmas = () => {
         {/* 배경 */}
         <div class="snow">
         </div>
+
+        <img src="/assets/map/minimap.png" alt="" className="minimap" 
+      onClick={() => (window.location.href = "/")}/>
     </div>)
 }
 

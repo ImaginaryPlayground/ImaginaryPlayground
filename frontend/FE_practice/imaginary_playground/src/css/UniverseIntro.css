@@ -1,3 +1,10 @@
+.minimap {
+  position: absolute;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+}
+
 .UniverseIntro {
   /* font-family: "Single Day", cursive; */
   font-family: 'IBM Plex Sans KR', sans-serif;
@@ -89,6 +96,8 @@
 
 
 .universe-map {
+  animation: universe-intro alternate;
+
   width: 70vh;
   height: 30vh;
   position: absolute;

@@ -601,12 +601,8 @@ const Universe = () => {
           </>
         )}
 
-        <button
-          onClick={() => (window.location.href = "/")}
-          className="home-button"
-        >
-          돌아가기
-        </button>
+<img src="/assets/map/minimap.png" alt="" className="minimap" 
+      onClick={() => (window.location.href = "/")}/>
 
         {/* 우주 배경 구현 */}
         <Canvas className="universe-canvas">

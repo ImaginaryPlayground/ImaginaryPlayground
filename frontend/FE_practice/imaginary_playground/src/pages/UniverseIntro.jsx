@@ -88,6 +88,9 @@ const UniverseIntro = () => {
           그럼 빨리 <span style={{ color: "violet" }}>출발</span>해보자고!!
         </div>
       </div> */}
+
+      <img src="/assets/map/minimap.png" alt="" className="minimap" 
+      onClick={() => (window.location.href = "/")}/>
         
       {/* 우주맵 백그라운드 */}
       <UniverseLoading />
