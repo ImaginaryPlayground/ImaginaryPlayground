@@ -10,7 +10,7 @@ export const SampleglTF2 = ({ id }) => {
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
   dom.style.position = "absolute";
-  dom.style.left = "-12%";
+  dom.style.left = "-8%";
   dom.style.top = "0%";
   dom.style.zIndex = "1";
   dom.setAttribute("class", "map-animal");
@@ -25,7 +25,7 @@ export const SampleglTF2 = ({ id }) => {
     100
   );
 
-  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 3.5);
+  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 3);
   scene.add(light);
 
   // 궤도 추적
