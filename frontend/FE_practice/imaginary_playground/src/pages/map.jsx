@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/map.css";
 
-import MapLion from '../components/map/Lion'
-import MapDolphin from '../components/map/Dolphin'
 
 const Map = () => {
   const navigate = useNavigate();
@@ -68,9 +66,6 @@ const Map = () => {
         우주
       </button>
 
-      {/* <MapLion id={`lion_map`}></MapLion>
-      <MapDolphin id={`dolphin_map`}></MapDolphin> */}
-
 
       {/* 클릭 대체할 div 태그 */}
 
@@ -90,7 +85,7 @@ const Map = () => {
       <img src="/assets/map/foot.png" alt="" className="map-foot"/>
 
       {/* 바다맵 구역 이미지 */}
-      <img src="/assets/map/dolphin.png" alt="" className="map-dolphin"/>
+      <img src="/assets/map/animal.png" alt="" className="map-animal"/>
       <img src="/assets/map/leaf.png" alt="" className="map-leaf"/>
       <img src="/assets/map/bubble.png" alt="" className="map-bubble"/>
       <img src="/assets/map/fish.png" alt="" className="map-fish"/>
