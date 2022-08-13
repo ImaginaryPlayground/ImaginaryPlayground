@@ -10,6 +10,7 @@ import { useNavigate } from "react-router";
 import "../css/JungleIntro.css";
 
 const JungleIntro = () => {
+
   const navigate = useNavigate();
   const jungleIntroAudio = new Howl({
     src: ["/assets/audio/jungle/정글맵 인트로 음성.wav"],

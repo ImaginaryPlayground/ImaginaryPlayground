@@ -1,6 +1,19 @@
 import '../css/christmas.css'
+import { useEffect } from 'react';
 
 const Christmas = () => {
+
+  useEffect(() => {
+    var canvasNode = document.querySelectorAll("canvas");
+    var canvas = Array.prototype.slice.call(canvasNode);
+    if (canvas) {
+      canvas.forEach(function (element) {
+        // element.style.display = 'none'
+          element.remove();
+      });
+    }
+  }, []);
+
     return(<div className='christmas'>
 
     <iframe
