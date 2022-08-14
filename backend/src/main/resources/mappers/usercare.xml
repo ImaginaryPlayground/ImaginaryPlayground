@@ -21,7 +21,7 @@
 
     <update id="updateBabyInfo" parameterType="BabyDto">
         UPDATE imagination_playground.user_baby
-        SET name = #{name}, age = #{age}, gender = #{gender}, `character` = #{character}, modified_date = NOW()
+        SET `name` = #{name}, age = #{age}, gender = #{gender}, `character` = #{character}, modified_date = NOW()
         <if test="profile != null">
             , profile = #{profile}
         </if>
