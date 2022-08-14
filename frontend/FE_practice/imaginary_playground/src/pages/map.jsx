@@ -5,6 +5,8 @@ import "../css/map.css";
 import MapLion from '../components/map/Lion.jsx'
 import MapDolphin from '../components/map/Dolphin.jsx'
 import MapRabbit from '../components/map/Rabbit.jsx'
+import MapAlien from '../components/map/Alien.jsx'
+import MapSanta from '../components/map/Santa.jsx'
 
 const Map = () => {
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ const Map = () => {
     if (canvas) {
       canvas.forEach(function (element) {
         // element.style.display = 'none'
-        if (element.id !== 'mapDolphin' && element.id !== 'mapLion' && element.id !== 'mapRabbit') {
+        if (element.id !== 'mapDolphin' && element.id !== 'mapLion' && element.id !== 'mapRabbit' && element.id !== "mapAlien" && element.id !== 'mapSanta') {
           element.remove();
         }
       });
@@ -89,6 +91,8 @@ const Map = () => {
 
     <MapDolphin id={'mapDolphin'}></MapDolphin>
     <MapLion id={'mapLion'}></MapLion>
+    <MapAlien id={'mapAlien'}></MapAlien>
+    <MapSanta id={'mapSanta'}></MapSanta>
 
       {/* 클릭 대체할 div 태그 */}
 

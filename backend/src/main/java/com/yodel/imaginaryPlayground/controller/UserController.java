@@ -122,17 +122,6 @@ public class UserController {
         return result;
     }
 
-//    @PostMapping("/upload")
-//    @ApiOperation(value = "재직 증명서 업로드")
-//    public ResponseEntity<Void> uploadFile(
-//            @RequestPart("document") List<MultipartFile> document,
-//            @RequestParam("data") String data) {
-//
-//        System.out.println(document);
-//        System.out.println(data);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "로그인을 한다.")
     public Map<String, Object> login(
@@ -357,17 +346,17 @@ public class UserController {
         return result;
     }
 
-    private String save(MultipartFile file, String contextPath, String uploadDate) {
-
-        try {
-            String newFileName = uploadDate + file.getOriginalFilename();
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(contextPath + newFileName);
-            Files.write(path, bytes);
-            return newFileName;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    private String save(MultipartFile file, String contextPath, String uploadDate) {
+//
+//        try {
+//            String newFileName = uploadDate + file.getOriginalFilename();
+//            byte[] bytes = file.getBytes();
+//            Path path = Paths.get(contextPath + newFileName);
+//            Files.write(path, bytes);
+//            return newFileName;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 }
