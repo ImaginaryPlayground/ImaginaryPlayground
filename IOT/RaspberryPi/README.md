@@ -177,6 +177,32 @@ AttributeError: 'str' object has no attribute 'toInt'
 
 필자는 해당 사이트를 활용하여 간단한 자세인식 모델을 만들어 프로젝트에 적용할 예정이다. 아이들의 자세를 인식하여 특정 행동을 취하면 다음으로 넘어가는 기능을 구현할 때 사용한다.
 
+### Teachable Machine Library - Pose
+
+[자세인식에 대한 API 다큐먼트](https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose)가 따로 있어서 참고하였으나.. 생각보다 다양하지 않고 대부분은 이미 TM 예시 코드에서 사용하는 것들이라서 참고하는 정도로만 사용하였다.
+
+코드는 기본으로 제공해주는 예시코드를 사용하였다. 해당 예시코드는 위의 다큐먼트 링크에서도 볼 수 있었고 학습 후 모델을 내보낼 때도 볼 수 있었다.
+
+<img src="https://user-images.githubusercontent.com/19484971/184523879-99befa9f-7872-45b2-975e-3681b692d80a.png" width=800>
+
+### Canvas 이미지
+
+필자의 경우에는 프로젝트에서 자세인식 이미지를 전송할 필요가 있었기 때문에 해당 이미지를 담고있는 변수를 찾아야 했는데, `webcam.canvas`와 `ctx.canvas` 라는 변수가 그럴듯해보여서 콘솔에 출력해보았더니
+
+<img src="https://user-images.githubusercontent.com/19484971/184523449-1a19a7ce-b5cc-4954-a90d-8a74d435c056.png" width=400>
+
+둘 모두 캔버스 태그인 것은 맞지만 다른 캔버스 태그를 담고있는 듯이 보였다. 해당 캔버스의 파일을 임의로 다운로드해서 아래와 같이 살펴보았다.
+
+<img src="https://user-images.githubusercontent.com/19484971/184523616-2e366aaa-21bc-4e58-abbf-f6fc7395bcbc.png" width=800>
+
+왼쪽의 사진이 `ctx.canvas` 이미지, 오른쪽의 사진이 `webcam.canvas`이다. 처음에는 자세인식 이전에 다운로드를 해서 다르게 찍힌 것인가 생각해서 코드를 수정해서 다운로드를 했으나 같은 결과를 볼 수 있었다. 
+
+참고로 캔버스 이미지 다운로드 코드를 참고한 사이트는 [이곳](https://joylee-developer.tistory.com/134)이다.
+
+결과를 요약하자면 `webcam.canvas`는 일반적인 웹캠 사진을 담는 캠버스, `ctx.canvas`는 `webcam.canvas` 사진에서 자세인식을 하여 `keypoint`를 그린 사진을 담는 캔버스라는 것을 알 수 있었다.
+
+위의 정보를 토대로 `socket.io`를 통해 이미지를 발송할 예정이다!
+
 ## node.js
 
 TM에서 만든 모델을 적용하고 인식한 자세를 React로 전달하기 위해서 라즈베리파이에 [Node.js를 설치](https://it-jm.tistory.com/19)하였다.
@@ -198,4 +224,6 @@ TM에서 만든 모델을 적용하고 인식한 자세를 React로 전달하기
 ### [Socket.io](https://socket.io/)
 
 간단한 텍스트와 이미지를 전송하기 위해서 사용한다.
+
+공식 홈페이지의 다큐먼트를 참고하긴 하였으나, 추가적인 설명이 조금 더 필요하다고 느껴서 [한 블로그](https://inpa.tistory.com/entry/SOCKET-%F0%9F%93%9A-SocketIO-%EC%82%AC%EC%9A%A9-%ED%95%B4%EB%B3%B4%EA%B8%B0)를 참고하였다.
 
