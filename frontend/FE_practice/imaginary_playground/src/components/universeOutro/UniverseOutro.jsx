@@ -40,7 +40,7 @@ const UniverseOutro = () => {
         <AlienMain id="AlienOutroMain" />
       </div>
 
-      <div className="going_universe_text_box universe_Top_appear">
+      {/* <div className="going_universe_text_box universe_Top_appear">
         <div className="text_opacity_chage">
           <span style={{ color: "pink" }}>갤</span>
           <span style={{ color: "midnightblue" }}>럭</span>
@@ -48,9 +48,12 @@ const UniverseOutro = () => {
           <span style={{ color: "gray" }}>월</span>
           <span style={{ color: "navy" }}>드</span> 나가는 문
         </div>
-      </div>
+      </div> */}
 
-      <div className="universe_intro_text_box universe_Right_appear">
+      <h2 className="universe-intro-text">갤럭시 월드 나가는 문</h2>
+
+
+      {/* <div className="universe_intro_text_box universe_Right_appear">
         <div className="mt-custom">
           우주 쓰레기를 <span style={{ color: "hotpink" }}>청소</span>해줘서
           고마워!
@@ -67,7 +70,7 @@ const UniverseOutro = () => {
           <span style={{ color: "darkorchid" }}>우주</span>를 여행하고 있을께!
           또 놀려오렴!
         </div>
-      </div>
+      </div> */}
       {/* 우주맵 백그라운드 */}
       <UniverseLoading />
     </div>

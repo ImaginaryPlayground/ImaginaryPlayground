@@ -10,8 +10,8 @@ export const SampleglTF2 = ({ id }) => {
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
   dom.style.position = "absolute";
-  dom.style.left = "-18%";
-  dom.style.top = "17%";
+  dom.style.left = "-23%";
+  dom.style.top = "14%";
   dom.style.zIndex = "1";
   dom.setAttribute("class", "appear");
   const scene = new THREE.Scene();
@@ -31,18 +31,18 @@ export const SampleglTF2 = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(10, 6, 30);
+  camera.position.set(10, 8, 30);
 
   const assetLoader = new GLTFLoader();
 
   let mixer1;
   let model;
   assetLoader.load(
-    "/assets/jungle/토끼.gltf",
+    "/assets/universe/alien.gltf",
     function (gltf) {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
-      // gltf.scene.scale.multiplyScalar(4);
+      gltf.scene.scale.multiplyScalar(2.5);
       model.position.set(13, 5, 24);
       scene.add(model);
 

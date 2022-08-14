@@ -1,5 +1,6 @@
 .UniverseOutro {
-  font-family: "Single Day", cursive;
+  /* font-family: "Single Day", cursive; */
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 .UniverseOutro .universe_intro_text_box {
