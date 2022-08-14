@@ -1,3 +1,3 @@
 export const config = {
-  api: "http://localhost/api",
+  api: "https://i7d204.p.ssafy.io/api",
 };

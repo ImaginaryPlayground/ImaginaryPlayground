@@ -4,11 +4,9 @@ FROM mariadb
 ENV MYSQL_ROOT_PASSWORD yodel1234
 
 WORKDIR /etc/mysql/setDB
-RUN pwd
 
 # 초기 세팅 SQL 파일 Docker로 Copy
 COPY ./setDB.sql /etc/mysql/setDB/setDB.sql
-RUN ls -al
 
 EXPOSE 3306
 

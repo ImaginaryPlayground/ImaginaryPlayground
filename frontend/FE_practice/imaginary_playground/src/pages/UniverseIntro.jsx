@@ -7,6 +7,21 @@ import { useNavigate } from "react-router";
 import "../css/UniverseIntro.css";
 
 const UniverseIntro = () => {
+
+  useEffect(() => {
+    var canvasNode = document.querySelectorAll("canvas");
+    var canvas = Array.prototype.slice.call(canvasNode);
+    if (canvas) {
+      canvas.forEach(function (element) {
+        // element.style.display = 'none'
+        if (element.id !== 'AlienMain') {
+          element.remove();
+        }
+      });
+    }
+  }, []);
+
+
   const navigate = useNavigate();
   const universeIntroAudio = new Howl({
     src: ["/assets/audio/universe/우주맵인트로음성.mp3"],
@@ -40,7 +55,7 @@ const UniverseIntro = () => {
         <AlienMain id="AlienMain" />
       </div>
 
-      <div className="going_universe_text_box universe_Top_appear">
+      {/* <div className="going_universe_text_box universe_Top_appear">
         <div className="text_opacity_chage">
           <span style={{ color: "pink" }}>갤</span>
           <span style={{ color: "midnightblue" }}>럭</span>
@@ -48,9 +63,12 @@ const UniverseIntro = () => {
           <span style={{ color: "gray" }}>월</span>
           <span style={{ color: "navy" }}>드</span>로 입장중...
         </div>
-      </div>
+      </div> */}
 
-      <div className="universe_intro_text_box universe_Right_appear">
+          <img src="/assets/universe/map.png" alt="" className="universe-map"/>
+
+
+      {/* <div className="universe_intro_text_box universe_Right_appear">
         <div>
           반갑군, <span style={{ color: "pink" }}>친구</span>!
         </div>
@@ -69,7 +87,11 @@ const UniverseIntro = () => {
         <div className="mt-custom">
           그럼 빨리 <span style={{ color: "violet" }}>출발</span>해보자고!!
         </div>
-      </div>
+      </div> */}
+
+      <img src="/assets/map/minimap.png" alt="" className="minimap" 
+      onClick={() => (window.location.href = "/")}/>
+        
       {/* 우주맵 백그라운드 */}
       <UniverseLoading />
     </div>

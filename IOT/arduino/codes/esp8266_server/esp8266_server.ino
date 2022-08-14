@@ -25,11 +25,11 @@ const int mX = pX * mWidth / pWidth; // 초음파 센서의 모니터 화면 가
 const String strX = (String) mX; // 단순히 String으로 만든 x
 
 // wifi를 통한 웹소켓 통신시 사용하는 변수들
-IPAddress local_IP(192, 168, 1, 111);     // 사용할 IP 주소
-IPAddress gateway(192, 168, 0, 1);  // 게이트웨이 주소
+IPAddress local_IP(192, 168, 0, 50);     // 사용할 IP 주소
+IPAddress gateway(192, 168, 1, 1);  // 게이트웨이 주소
 IPAddress subnet(255, 255, 255, 0); // 서브넷 주소
-IPAddress primaryDNS(8, 8, 8, 8);   //optional
-IPAddress secondaryDNS(8, 8, 4, 4); //optional
+//IPAddress primaryDNS(8, 8, 8, 8);   //optional
+//IPAddress secondaryDNS(8, 8, 4, 4); //optional
 
 WiFiClient client;
 // 서버 생성시 연결될 포트 지정
@@ -85,20 +85,20 @@ void setup() {
   Serial.print("Connecting to ");
   Serial.println(ssid);
 
+//  WiFi.mode(WIFI_STA);
+//  WiFi.persistent(false);
+//  WiFi.setAutoConnect(false);
+//  delay(1000);
+//  while(!WiFi.config(local_IP, gateway, subnet)){
+//    Serial.print(".");
+//    delay(400);  
+//  }
+
   // 고정 IP 할당.. 이 왜 안되지..?
   Serial.println(local_IP);
   Serial.println(gateway);
   Serial.println(subnet);
-  
-//  WiFi.mode(WIFI_STA);
-//  WiFi.persistent(false);
-//  WiFi.setAutoConnect(false);
-//  while (!WiFi.config(local_IP, gateway, subnet)) {
-//    Serial.println("STA Failed to configure");
-//    delay(400);
-//  }
 
-//  WiFi.config(local_IP, gateway, subnet);
   WiFi.begin(ssid, password);
 
   startServer();
