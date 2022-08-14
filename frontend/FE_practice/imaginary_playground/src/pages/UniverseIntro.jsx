@@ -65,8 +65,8 @@ const UniverseIntro = () => {
         </div>
       </div> */}
 
-          <img src="/assets/universe/map.png" alt="" className="universe-map"/>
-
+      <h2 className="universe-intro-text">갤럭시 월드로 입장 중</h2>
+      {/* <img src="/assets/universe/map.png" alt="" className="universe-map"/> */}
 
       {/* <div className="universe_intro_text_box universe_Right_appear">
         <div>
@@ -89,8 +89,6 @@ const UniverseIntro = () => {
         </div>
       </div> */}
 
-      <img src="/assets/map/minimap.png" alt="" className="minimap" 
-      onClick={() => (window.location.href = "/")}/>
         
       {/* 우주맵 백그라운드 */}
       <UniverseLoading />

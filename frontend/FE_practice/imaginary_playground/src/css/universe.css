@@ -27,7 +27,7 @@
   z-index: 1000;
   color: white;
   top: 31vh;
-  left: 28vw;
+  left: 24.5vw;
   font-size: 3vw;
   /* font-family: "Single Day", cursive; */
   font-family: 'IBM Plex Sans KR', sans-serif;
@@ -434,9 +434,9 @@
 
 .universe_next_stage_text_box {
   position: absolute;
-  background-color: snow;
-  border-radius: 100px;
-  border: 10px solid plum;
+  /* background-color: snow; */
+  /* border-radius: 100px; */
+  /* border: 10px solid plum; */
   left: 53%;
   top: 47%;
   width: 600px;
@@ -452,7 +452,7 @@
   display: none;
 }
 
-.universe_next_stage_text_box:after {
+/* .universe_next_stage_text_box:after {
   content: "";
   position: absolute;
   left: 0;
@@ -466,10 +466,36 @@
   margin-top: -20.5px;
   margin-left: -41px;
   z-index: 1;
+} */
+.universe-map {
+  animation: universe-intro 1s alternate;
+
+  width: 68vh;
+  height: 38vh;
+  position: absolute;
+  /* z-index: 1; */
+  left: -1vw;
+  top: -2vh;
+  opacity: 50%;
+}
+
+@keyframes universe-intro {
+  0% {
+    opacity: 0%;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 50%;
+    transform: scale(1);
+  }
 }
 
 .universe .mt-custom {
+  animation: universe-intro 1s alternate;
   margin-top: 10px;
+  color: white;
+  /* z-index: 2; */
 }
 
 UniverseIntro .universe_intro_text_box {
@@ -491,10 +517,10 @@ UniverseIntro .universe_intro_text_box {
 
 .universe_hifive_text_box {
   position: absolute;
-  background-color: snow;
+  /* background-color: snow; */
   border-radius: 100px;
-  border: 10px solid plum;
-  left: 55%;
+  /* border: 10px solid plum; */
+  left: 52%;
   top: 50vh;
   width: 620px;
   padding: 30px;
@@ -506,7 +532,33 @@ UniverseIntro .universe_intro_text_box {
   text-align: left;
 }
 
-.universe_hifive_text_box:after {
+.universe-hifive-map {
+  animation: universe-hifive-map 1s alternate;
+
+  width: 69vh;
+  height: 38vh;
+  position: absolute;
+  /* z-index: 1; */
+  left: -1vw;
+  top: -2vh;
+  opacity: 50%;
+}
+
+@keyframes universe-hifive-map {
+  0% {
+    opacity: 0%;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 50%;
+    transform: scale(1);
+  }
+}
+
+
+
+/* .universe_hifive_text_box:after {
   content: "";
   position: absolute;
   left: 0;
@@ -520,11 +572,11 @@ UniverseIntro .universe_intro_text_box {
   margin-top: -20.5px;
   margin-left: -41px;
   z-index: 1;
-}
+} */
 
 .universe .hifive_touch_location {
   position: absolute;
-  left: 50vh;
+  left: 45vh;
   top: 45vh;
   width: 450px;
   height: 495px;
