@@ -173,15 +173,15 @@
   }
 
   20% {
-    transform: translateX(-150px) translateY(-100px);
+    transform: translateX(-70px) translateY(-100px);
   }
 
   40% {
-    transform: translateX(-200px) translateY(-150px);
+    transform: translateX(-120px) translateY(-150px);
   }
 
   60% {
-    transform: translateX(-250px) translateY(-200px);
+    transform: translateX(-150px) translateY(-200px);
   }
 
   80% {
@@ -189,7 +189,7 @@
   }
 
   100% {
-    transform: translateX(-70px) translateY(0px);
+    transform: translateX(0px) translateY(0px);
   }
 }
 
@@ -209,15 +209,15 @@
   }
 
   20% {
-    transform: translateX(-200px) translateY(0px);
+    transform: translateX(-100px) translateY(0px);
   }
 
   40% {
-    transform: translateX(-400px) translateY(0px);
+    transform: translateX(-250px) translateY(0px);
   }
 
   60% {
-    transform: translateX(-600px) translateY(0px);
+    transform: translateX(-400px) translateY(0px);
   }
 
   80% {
