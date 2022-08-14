@@ -27,7 +27,7 @@
   z-index: 1000;
   color: white;
   top: 31vh;
-  left: 28vw;
+  left: 24.5vw;
   font-size: 3vw;
   /* font-family: "Single Day", cursive; */
   font-family: 'IBM Plex Sans KR', sans-serif;
@@ -520,7 +520,7 @@ UniverseIntro .universe_intro_text_box {
   /* background-color: snow; */
   border-radius: 100px;
   /* border: 10px solid plum; */
-  left: 55%;
+  left: 52%;
   top: 50vh;
   width: 620px;
   padding: 30px;
@@ -576,7 +576,7 @@ UniverseIntro .universe_intro_text_box {
 
 .universe .hifive_touch_location {
   position: absolute;
-  left: 50vh;
+  left: 45vh;
   top: 45vh;
   width: 450px;
   height: 495px;
