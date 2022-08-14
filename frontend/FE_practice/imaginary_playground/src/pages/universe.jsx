@@ -44,8 +44,8 @@ const Universe = () => {
     let y = "0";
     let isLoadingTime = false;
     socket.on("chat message", (data) => {
-      // console.log(data);
-      y = data.split(" ")[2];
+      console.log(data);
+      y = data.split(" ")[2] - 400;
       //x값 세팅
       if (!isLoadingTime) {
         if (data.split(" ")[0] == 1) {
