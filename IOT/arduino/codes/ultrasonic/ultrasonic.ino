@@ -35,5 +35,5 @@ void loop()
   Serial.println(distance);
 
   // 다음 측정을 위한 딜레이
-  delay(50);
+  delay(100);
 }
