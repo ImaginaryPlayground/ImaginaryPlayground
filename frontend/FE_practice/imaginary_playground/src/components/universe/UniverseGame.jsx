@@ -7,10 +7,13 @@ import { useEffect, useState } from "react";
 import AlienSide from "./AlienSide";
 import AlienHiFive from "./AlienHiFive";
 import { useNavigate } from "react-router-dom";
+import { ENDPOINT } from "../../util/nodeConfig";
+import socketIOClient from "socket.io-client";
 
 const UniverseGame = () => {
   const [totalTrash, setTotalTrash] = useState(0);
   const [isHifive, setIsHifive] = useState(0);
+  const [isAlienHifive, setIsAlienHifive] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     return () => {
@@ -22,27 +25,52 @@ const UniverseGame = () => {
   useEffect(() => {
     setTimeout(() => {
       //웹소캣 io 통신하기
-      let x = "269";
-      let y = "821";
+      let xStart = "0";
+      let xEnd = "0";
+      let y = "0";
+      let isLoading = false;
+      const socket = socketIOClient(ENDPOINT);
+      socket.on("chat message", (data) => {
+        // console.log(data);
+        y = data.split(" ")[2];
 
-      const planetTouchObject = document.getElementsByClassName("click_div");
-
-      for (let idx = 0; idx < planetTouchObject.length; idx++) {
-        const objectRect = planetTouchObject[idx].getBoundingClientRect();
-        console.log(objectRect);
-        if (
-          x >= objectRect.x &&
-          x <= objectRect.x + objectRect.width &&
-          y >= objectRect.y &&
-          y <= objectRect.y + objectRect.height
-        ) {
-          planetTouchObject[idx].click();
+        if (data.split(" ")[0] == 1) {
+          xStart = "0";
+          xEnd = "480";
+        } else if (data.split(" ")[0] == 2) {
+          xStart = "481";
+          xEnd = "960";
+        } else if (data.split(" ")[0] == 3) {
+          xStart = "961";
+          xEnd = "1440";
+        } else if (data.split(" ")[0] == 4) {
+          xStart = "1441";
+          xEnd = "1920";
         }
-      }
-    }, 13000);
+        const planetTouchObject = document.getElementsByClassName("click_div");
+        if (!isLoading) {
+          for (let idx = 0; idx < planetTouchObject.length; idx++) {
+            const objectRect = planetTouchObject[idx].getBoundingClientRect();
+            console.log(objectRect);
+            if (
+              xStart <= objectRect.x &&
+              xEnd >= objectRect.x + objectRect.width &&
+              y >= objectRect.y &&
+              y <= objectRect.y + objectRect.height
+            ) {
+              isLoading = true;
+              planetTouchObject[idx].click();
+              setTimeout(() => {
+                isLoading = false;
+              }, 1000);
+            }
+          }
+        }
+      });
+    }, 0);
 
     return () => {};
-  }, []);
+  }, [isAlienHifive]);
 
   useEffect(() => {
     if (isHifive === 1) {
@@ -81,6 +109,7 @@ const UniverseGame = () => {
     } else if (totalTrash === 8) {
       Howler.stop();
       document.getElementById("AlienSide").remove();
+      setIsAlienHifive(true);
       setTimeout(() => {
         hifiveCanAudio.play();
       }, 1000);
@@ -480,10 +509,12 @@ const UniverseGame = () => {
             <div className="mt-custom">
               그럼 나를 <span style={{ color: "violet" }}>터치</span>해줘!!
             </div> */}
-            
+
             <div className="mt-custom">정말 훌륭해!!!</div>
-            <div className="mt-custom">덕분에 행성들이&nbsp; 
-            <span style={{ color: "gold" }}>빛</span>을 찾았고</div>
+            <div className="mt-custom">
+              덕분에 행성들이&nbsp;
+              <span style={{ color: "gold" }}>빛</span>을 찾았고
+            </div>
             <div className="mt-custom">
               우주에 있는 <span style={{ color: "hotpink" }}>쓰레기</span>
               들을 청소해냈어!
@@ -492,7 +523,11 @@ const UniverseGame = () => {
               우리 한번 <span style={{ color: "darkorchid" }}>하이파이브</span>
               할까?
             </div>
-            <img src="/assets/universe/map.png" alt="" className="universe-hifive-map"/>
+            <img
+              src="/assets/universe/map.png"
+              alt=""
+              className="universe-hifive-map"
+            />
           </div>
 
           <img
@@ -654,8 +689,12 @@ const UniverseGame = () => {
         </>
       )}
 
-<img src="/assets/map/minimap.png" alt="" className="minimap" 
-      onClick={() => (window.location.href = "/")}/>
+      <img
+        src="/assets/map/minimap.png"
+        alt=""
+        className="minimap"
+        onClick={() => (window.location.href = "/")}
+      />
     </div>
   );
 };

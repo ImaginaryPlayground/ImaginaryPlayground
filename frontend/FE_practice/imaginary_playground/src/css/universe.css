@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap");
 
 .universe {
   position: relative;
@@ -7,7 +7,7 @@
   height: 100vh;
   background-image: url("https://user-images.githubusercontent.com/26748614/96337246-f14d4580-1085-11eb-8793-a86d929e034d.jpg");
   /* font-family: "Single Day", cursive; */
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
 }
 
 .planetH2,
@@ -19,7 +19,7 @@
   left: 37vw;
   font-size: 3vw;
   /* font-family: "Single Day", cursive; */
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
 }
 
 .universegame-title-2 {
@@ -30,7 +30,7 @@
   left: 24.5vw;
   font-size: 3vw;
   /* font-family: "Single Day", cursive; */
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
 }
 
 .universe-background {
@@ -55,7 +55,7 @@
   color: white;
   top: 62vh;
   left: 12.3vw;
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 200%;
 }
 
@@ -73,7 +73,7 @@
   color: white;
   top: 45vh;
   left: 7.5vw;
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 200%;
 }
 
@@ -91,7 +91,7 @@
   color: white;
   top: 73.5vh;
   left: 35vw;
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 200%;
 }
 
@@ -109,7 +109,7 @@
   color: white;
   top: 42vh;
   left: 34.5vw;
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 200%;
 }
 
@@ -127,7 +127,7 @@
   color: white;
   top: 61vh;
   left: 59vw;
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 200%;
 }
 
@@ -145,7 +145,7 @@
   color: white;
   top: 32.5vh;
   left: 60vw;
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 200%;
 }
 
@@ -163,7 +163,7 @@
   color: white;
   top: 68vh;
   left: 84vw;
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 200%;
 }
 
@@ -181,7 +181,7 @@
   color: white;
   top: 42vh;
   left: 87vw;
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 200%;
 }
 
@@ -278,7 +278,7 @@
   position: absolute;
   z-index: 10000;
   width: 4vw;
-  top: 72vh;
+  top: 62vh;
   left: 12vw;
 }
 
@@ -448,7 +448,7 @@
   font-size: 40px;
   text-align: left;
   /* font-family: "Single Day", cursive; */
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   display: none;
 }
 
@@ -556,8 +556,6 @@ UniverseIntro .universe_intro_text_box {
   }
 }
 
-
-
 /* .universe_hifive_text_box:after {
   content: "";
   position: absolute;
@@ -638,6 +636,7 @@ UniverseIntro .universe_intro_text_box {
 /* 클릭 div */
 
 .universe .mercury_click_div {
+  position: absolute;
   width: 120px;
   height: 160px;
   left: 10.5vw;
@@ -645,6 +644,7 @@ UniverseIntro .universe_intro_text_box {
 }
 
 .universe .venus_click_div {
+  position: absolute;
   width: 120px;
   height: 160px;
   left: 6vw;
@@ -652,6 +652,7 @@ UniverseIntro .universe_intro_text_box {
 }
 
 .universe .mars_click_div {
+  position: absolute;
   width: 110px;
   height: 160px;
   left: 33vw;
@@ -659,6 +660,7 @@ UniverseIntro .universe_intro_text_box {
 }
 
 .universe .earth_click_div {
+  position: absolute;
   width: 150px;
   height: 200px;
   left: 33vw;
@@ -666,6 +668,7 @@ UniverseIntro .universe_intro_text_box {
 }
 
 .universe .jupyter2_click_div {
+  position: absolute;
   width: 385px;
   height: 32vh;
   left: 52vw;
@@ -673,6 +676,7 @@ UniverseIntro .universe_intro_text_box {
 }
 
 .universe .saturn_click_div {
+  position: absolute;
   width: 240px;
   height: 255px;
   left: 55vw;
@@ -680,6 +684,7 @@ UniverseIntro .universe_intro_text_box {
 }
 
 .universe .uranus_click_div {
+  position: absolute;
   width: 220px;
   height: 240px;
   left: 80vw;
@@ -687,6 +692,7 @@ UniverseIntro .universe_intro_text_box {
 }
 
 .universe .neptune_click_div {
+  position: absolute;
   width: 160px;
   height: 200px;
   left: 85vw;
@@ -740,8 +746,8 @@ UniverseIntro .universe_intro_text_box {
 .universe .metal1_click_div {
   width: 150px;
   height: 150px;
-  left:10vw;
-  top: 70vh;
+  left: 10vw;
+  top: 60vh;
 }
 
 .universe .metal2_click_div {
