@@ -16,6 +16,8 @@ import Motion1Dolphin from "../components/oceanCopy/Motion1Dolphin";
 import Motion2Dolphin from "../components/oceanCopy/Motion2Dolphin";
 import Motion3Dolphin from "../components/oceanCopy/Motion3Dolphin";
 import EndGameMainDolphin from "../components/oceanCopy/EndGameMainDolphin";
+import { ENDPOINT } from "../util/nodeConfig";
+import socketIOClient from "socket.io-client";
 
 const OceanCopy = () => {
   // 게임 시작하는 게임 지도 구현
@@ -56,7 +58,7 @@ const OceanCopy = () => {
 
       //메인 돌리 삭제
       const mainDolphin = document.getElementById("main_dolphin_0");
-      mainDolphin.remove();
+      mainDolphin?.remove();
 
       // 지도 클릭하면 나올 효과음 구현
       mapMusic.play();
@@ -85,24 +87,78 @@ const OceanCopy = () => {
   useEffect(() => {
     setTimeout(() => {
       //웹소캣 io 통신하기
-      let x = "296";
-      let y = "672";
 
-      const planetTouchObject = document.getElementsByClassName("click_div");
-
-      for (let idx = 0; idx < planetTouchObject.length; idx++) {
-        const objectRect = planetTouchObject[idx].getBoundingClientRect();
-        console.log(objectRect);
-        if (
-          x >= objectRect.x &&
-          x <= objectRect.x + objectRect.width &&
-          y >= objectRect.y &&
-          y <= objectRect.y + objectRect.height
-        ) {
-          planetTouchObject[idx].click();
+      let y = "0";
+      let isLoadingTime = false;
+      const socket = socketIOClient(ENDPOINT);
+      socket.on("chat message", (data) => {
+        const sharkObjects = document.getElementsByClassName("click_div");
+        // console.log(data);
+        y = data.split(" ")[2];
+        //x값 세팅
+        if (!isLoadingTime) {
+          for (let index = 0; index < sharkObjects.length; index++) {
+            const sharkObject = sharkObjects[index];
+            const sharkObjectRect = sharkObjects[index].getBoundingClientRect();
+            if (data.split(" ")[0] == 1) {
+              if (
+                sharkObject.classList[0] === "copy_shark1" &&
+                sharkObjectRect.y <= y &&
+                sharkObjectRect.y + sharkObjectRect.height >= y
+              ) {
+                isLoadingTime = true;
+                sharkObject.click();
+                setTimeout(() => {
+                  isLoadingTime = false;
+                }, 1000);
+              }
+            } else if (data.split(" ")[0] == 2) {
+              if (
+                (sharkObject.classList[0] === "copy_shark2" &&
+                  sharkObjectRect.y <= y &&
+                  sharkObjectRect.y + sharkObjectRect.height >= y) ||
+                (sharkObject.classList[0] === "copy_shark3" &&
+                  sharkObjectRect.y <= y &&
+                  sharkObjectRect.y + sharkObjectRect.height >= y)
+              ) {
+                isLoadingTime = true;
+                sharkObject.click();
+                setTimeout(() => {
+                  isLoadingTime = false;
+                }, 1000);
+              }
+            } else if (data.split(" ")[0] == 3) {
+              if (
+                (sharkObject.classList[0] === "copy_shark2" &&
+                  sharkObjectRect.y <= y &&
+                  sharkObjectRect.y + sharkObjectRect.height >= y) ||
+                (sharkObject.classList[0] === "copy_shark3" &&
+                  sharkObjectRect.y <= y &&
+                  sharkObjectRect.y + sharkObjectRect.height >= y)
+              ) {
+                isLoadingTime = true;
+                sharkObject.click();
+                setTimeout(() => {
+                  isLoadingTime = false;
+                }, 1000);
+              }
+            } else if (data.split(" ")[0] == 4) {
+              if (
+                sharkObject.classList[0] === "copy_shark4" &&
+                sharkObjectRect.y <= y &&
+                sharkObjectRect.y + sharkObjectRect.height >= y
+              ) {
+                isLoadingTime = true;
+                sharkObject.click();
+                setTimeout(() => {
+                  isLoadingTime = false;
+                }, 1000);
+              }
+            }
+          }
         }
-      }
-    }, 20000);
+      });
+    });
   }, []);
 
   //상어 3마리 남은 음성
