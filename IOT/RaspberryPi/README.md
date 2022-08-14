@@ -203,6 +203,8 @@ AttributeError: 'str' object has no attribute 'toInt'
 
 위의 정보를 토대로 `socket.io`를 통해 이미지를 발송할 예정이다!
 
+TM과 Socket.io를 활용하여 프로젝트에 적용한 [파일 링크](./codes/poseRecognition-NodeJs/README.md)
+
 ## node.js
 
 TM에서 만든 모델을 적용하고 인식한 자세를 React로 전달하기 위해서 라즈베리파이에 [Node.js를 설치](https://it-jm.tistory.com/19)하였다.
@@ -215,7 +217,7 @@ TM에서 만든 모델을 적용하고 인식한 자세를 React로 전달하기
 
 그리고 자연스럽게 npm 8.11.0버전도 설치가 되였다.
 
-기본적인 폴더를 생성해야할 것 같아 [구글링하여 찾은 블로그](https://dion-ko.tistory.com/123)와 [nodejs 공식 홈페이지](https://nodejs.org/dist/latest-v16.x/docs/api/synopsis.html)를 보면서 진행하였다.
+기본적인 폴더를 생성해야할 것 같아 [구글링하여 찾은 블로그](https://dion-ko.tistory.com/123)와 [nodejs 공식 홈페이지](https://nodejs.org/dist/latest-v16.x/docs/api/synopsis.html)도 참고하였다.
 
 <img src="https://user-images.githubusercontent.com/19484971/184212192-982a10d9-3819-4522-a9c1-1e6462525fb1.png" width=300>
 
@@ -227,3 +229,4 @@ TM에서 만든 모델을 적용하고 인식한 자세를 React로 전달하기
 
 공식 홈페이지의 다큐먼트를 참고하긴 하였으나, 추가적인 설명이 조금 더 필요하다고 느껴서 [한 블로그](https://inpa.tistory.com/entry/SOCKET-%F0%9F%93%9A-SocketIO-%EC%82%AC%EC%9A%A9-%ED%95%B4%EB%B3%B4%EA%B8%B0)를 참고하였다.
 
+TM과 Socket.io를 활용하여 프로젝트에 적용한 [파일 링크](./codes/poseRecognition-NodeJs/README.md)

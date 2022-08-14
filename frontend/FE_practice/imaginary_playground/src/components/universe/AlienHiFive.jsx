@@ -10,8 +10,8 @@ export const SampleglTF2 = ({ id }) => {
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
   dom.style.position = "absolute";
-  dom.style.left = "-18%";
-  dom.style.top = "17%";
+  dom.style.left = "-25%";
+  dom.style.top = "7%";
   dom.style.zIndex = "1";
   dom.setAttribute("class", "appear");
   const scene = new THREE.Scene();
@@ -38,12 +38,12 @@ export const SampleglTF2 = ({ id }) => {
   let mixer1;
   let model;
   assetLoader.load(
-    "/assets/jungle/토끼.gltf",
+    "/assets/universe/alien.gltf",
     function (gltf) {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
-      // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(13, 5, 24);
+      gltf.scene.scale.multiplyScalar(2.5);
+      model.position.set(13, 2, 24);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
