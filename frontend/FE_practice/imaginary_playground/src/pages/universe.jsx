@@ -194,12 +194,12 @@ const Universe = () => {
   return (
     <>
       <div className="universe">
-        {/* <iframe
+        <iframe
           title="배경음악"
           src="/assets/audio/universe/universe.mp3"
           allow="autoplay;"
           className="audio"
-        ></iframe> */}
+        ></iframe>
 
         {planetCount !== 9 ? (
           <>
@@ -463,7 +463,7 @@ const Universe = () => {
                   className="universe_next_stage_text_box"
                   id="universe_next_stage_text_box"
                 >
-                  <div>
+                  {/* <div>
                     훌륭하군 <span style={{ color: "pink" }}>친구</span>!
                   </div>
                   <div className="mt-custom">
@@ -478,17 +478,16 @@ const Universe = () => {
                   <div className="mt-custom">
                     바로 다음 <span style={{ color: "hotpink" }}>장소</span>로
                     가보자고!
-                  </div>
+                  </div> */}
+                  <div className="mt-custom">훌륭하군 친구!</div>
+                  <div className="mt-custom">태양계 행성들의 색을 다시 찾아주어</div>
+                  <div className="mt-custom">밝게 &nbsp; 
+                  <span style={{ color: "gold" }}>빛</span>이 나기 시작했어!</div>
+                  <div className="mt-custom">바로 다음 장소로 가보자고!</div>
+                  <img src="/assets/universe/map.png" alt="" className="universe-map"/>
                 </div>
 
-                {/* <button
-                  className="gamestart animate__animated animate__bounceIn"
-                  onClick={() => {
-                    setPlanetCount(planetCount + 1);
-                  }}
-                >
-                  게임 시작
-                </button> */}
+
                 <img
                   alt=""
                   src="/assets/universe/mercury.png"
@@ -572,7 +571,7 @@ const Universe = () => {
               <>
                 <div id="planet_touch_text_1">
                   <h2 className="planetH2" id="planet_touch_text_1">
-                    <span style={{ color: "red" }}>태양계</span>의{" "}
+                    <span style={{ color: "gold" }}>태양계</span>의{" "}
                     <span style={{ color: "yellow" }}>행성</span>들이{" "}
                     <span style={{ color: "gray" }}>빛</span>을 잃었어!
                   </h2>
@@ -587,7 +586,7 @@ const Universe = () => {
                   className="planetH2 move_down_up"
                   style={{ display: "none" }}
                 >
-                  <span style={{ color: "red" }}>태양계</span>{" "}
+                  <span style={{ color: "gold" }}>태양계</span>{" "}
                   <span style={{ color: "yellow" }}>행성</span>들을
                   <span style={{ color: "aquamarine" }}> 터치</span>해보세요!
                 </h2>
@@ -601,12 +600,8 @@ const Universe = () => {
           </>
         )}
 
-        <button
-          onClick={() => (window.location.href = "/")}
-          className="home-button"
-        >
-          돌아가기
-        </button>
+<img src="/assets/map/minimap.png" alt="" className="minimap" 
+      onClick={() => (window.location.href = "/")}/>
 
         {/* 우주 배경 구현 */}
         <Canvas className="universe-canvas">

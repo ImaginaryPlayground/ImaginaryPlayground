@@ -48,7 +48,7 @@
 	border: 3px solid green;
 	position: absolute;
 	top: 43vh;
-	left: 24vw;
+	left: 28vw;
 	cursor: pointer;
 	z-index: 99999;
 }
@@ -71,10 +71,9 @@
 	border: 3px solid red;
 	position: absolute;
 	top: 50vh;
-	left: 48vw;
+	left: 52vw;
 	cursor: pointer;
 	z-index: 99999;
-
 }
 
 .universe-click {
@@ -83,7 +82,7 @@
 	border: 3px solid black;
 	position: absolute;
 	top: 58vh;
-	left: 72vw;
+	left: 77vw;
 	cursor: pointer;
 	z-index: 99999;
 
@@ -303,7 +302,7 @@
 	z-index: 99;
 	width: 100vw;
 	height: 100vh;
-	left: 20vw;
+	left: 24vw;
 	padding-top: 56vh;
 }
 
@@ -314,7 +313,7 @@
 	z-index: 99;
 	width: 100vw;
 	height: 100vh;
-	left: 68.5vw;
+	left: 74vw;
 	padding-top: 72vh;
 }
 
@@ -325,7 +324,7 @@
 	z-index: 99;
 	width: 100vw;
 	height: 100vh;
-	left: 44vw;
+	left: 49vw;
 	padding-top: 65vh;
 }
 

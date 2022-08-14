@@ -10,11 +10,11 @@ export const SampleglTF2 = ({ id }) => {
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
   dom.style.position = "absolute";
-  dom.style.left = "-8%";
-  dom.style.top = "0%";
+  dom.style.left = "60%";
+  dom.style.top = "40%";
   dom.style.zIndex = "1";
-  dom.setAttribute("class", "map-animal");
-  dom.style.scale = "60%";
+//   dom.setAttribute("class", "map-animal");
+  dom.style.scale = "160%";
 
   const scene = new THREE.Scene();
 
@@ -40,7 +40,7 @@ export const SampleglTF2 = ({ id }) => {
   let mixer1;
   let model;
   assetLoader.load(
-    "/assets/map/lion.gltf",
+    "/assets/christmas/santa.gltf",
     function (gltf) {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
@@ -78,7 +78,7 @@ export const SampleglTF2 = ({ id }) => {
   }
 };
 
-const MapLion = ({ id }) => {
+const Santa = ({ id }) => {
   return (
     <>
       <SampleglTF2 id={id}></SampleglTF2>
@@ -86,4 +86,4 @@ const MapLion = ({ id }) => {
   );
 };
 
-export default React.memo(MapLion);
+export default React.memo(Santa);

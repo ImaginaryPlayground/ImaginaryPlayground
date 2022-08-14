@@ -462,7 +462,7 @@ const UniverseGame = () => {
           </div>
 
           <div className="universe_hifive_text_box" style={{ display: "none" }}>
-            <div>
+            {/* <div>
               정말, <span style={{ color: "pink" }}>훌륭해</span>!
             </div>
             <div className="mt-custom">
@@ -478,8 +478,21 @@ const UniverseGame = () => {
               할까?
             </div>
             <div className="mt-custom">
-              {/* 그럼 나를 <span style={{ color: "violet" }}>터치</span>해줘!! */}
+              그럼 나를 <span style={{ color: "violet" }}>터치</span>해줘!!
+            </div> */}
+            
+            <div className="mt-custom">정말 훌륭해!!!</div>
+            <div className="mt-custom">덕분에 행성들이&nbsp; 
+            <span style={{ color: "gold" }}>빛</span>을 찾았고</div>
+            <div className="mt-custom">
+              우주에 있는 <span style={{ color: "hotpink" }}>쓰레기</span>
+              들을 청소해냈어!
             </div>
+            <div className="mt-custom">
+              우리 한번 <span style={{ color: "darkorchid" }}>하이파이브</span>
+              할까?
+            </div>
+            <img src="/assets/universe/map.png" alt="" className="universe-hifive-map"/>
           </div>
 
           <img
@@ -640,6 +653,9 @@ const UniverseGame = () => {
               alt="" src="/assets/universe/metalBin4.png" className="metalbin" /></>):(<></>)} */}
         </>
       )}
+
+<img src="/assets/map/minimap.png" alt="" className="minimap" 
+      onClick={() => (window.location.href = "/")}/>
     </div>
   );
 };
