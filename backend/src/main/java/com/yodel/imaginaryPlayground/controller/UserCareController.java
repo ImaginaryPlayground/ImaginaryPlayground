@@ -44,45 +44,19 @@ public class UserCareController{
     @ApiOperation(value = "아이 등록", notes = "회원 페이지에서 아이를 등록할 수 있다.")
     @PostMapping(value="/", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
     public Map<String, Object> saveBaby(
-            @RequestParam BabyDto baby,
+            @RequestPart(value="key", required=false) BabyDto baby,
             @RequestPart(value="file", required=true) MultipartFile file, HttpServletRequest request) throws Exception {
 
         Map<String, Object> result = new HashMap<>();
-        JSONObject saveData = new JSONObject(baby);
 
         String fileName = file.getOriginalFilename();
         System.out.println(fileName);
         System.out.println(request.getServletContext().getRealPath("/"));
 
-        int user_id = 0;
-        String name = "";
-        int age = 0;
-        String gender = "";
-        String character = "";
-        int hospital_id = 0;
-
-        Iterator it = saveData.keys();
-        while (it.hasNext()) {
-            String key = (String) it.next();
-            if (key.equals("user_id")) {
-                user_id = saveData.getInt(key);
-            } else if (key.equals("name")) {
-                name = saveData.getString(key);
-            } else if (key.equals("age")) {
-                age = saveData.getInt(key);
-            } else if (key.equals("gender")) {
-                gender = saveData.getString(key);
-            } else if (key.equals("character")) {
-                character = saveData.getString(key);
-            } else if (key.equals("hospital_id")) {
-                hospital_id = saveData.getInt(key);
-            }
-        }
-
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
             String uploadDate = simpleDateFormat.format(new Date());
-            String profile = request.getServletContext().getRealPath("/");
+            String profile = save(file, request.getServletContext().getRealPath("/"), uploadDate);
 
 
             try {
