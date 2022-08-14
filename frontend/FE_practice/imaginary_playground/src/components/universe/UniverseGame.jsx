@@ -32,17 +32,17 @@ const UniverseGame = () => {
       const socket = socketIOClient(ENDPOINT);
       socket.on("chat message", (data) => {
         // console.log(data);
-        y = data.split(" ")[2];
+        y = data.split(" ")[2] - 400;
 
         if (data.split(" ")[0] == 1) {
           xStart = "0";
-          xEnd = "480";
+          xEnd = "960";
         } else if (data.split(" ")[0] == 2) {
           xStart = "481";
           xEnd = "960";
         } else if (data.split(" ")[0] == 3) {
           xStart = "961";
-          xEnd = "1440";
+          xEnd = "1920 ";
         } else if (data.split(" ")[0] == 4) {
           xStart = "1441";
           xEnd = "1920";
@@ -51,7 +51,7 @@ const UniverseGame = () => {
         if (!isLoading) {
           for (let idx = 0; idx < planetTouchObject.length; idx++) {
             const objectRect = planetTouchObject[idx].getBoundingClientRect();
-            console.log(objectRect);
+            //console.log(objectRect);
             if (
               xStart <= objectRect.x &&
               xEnd >= objectRect.x + objectRect.width &&
