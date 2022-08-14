@@ -4,6 +4,6 @@ esp8266 wemos D1 mini 아두이노 모듈의 wifi 통신 테스트를 위해서 
 
 아두이노가 초음파 센서로 거리를 측정하면 해당 거리를 토대로 계산한 위치좌표를 라즈베리파이로 송신하고 라즈베리파이는 전달받은 데이터를 토대로 커서를 조작하는 간단한 코드들이다.
 
-위의 설명에서 사용되는 [아두이노 코드](../../../arduino/codes/esp8266_server/esp8266_server.ino)는 링크를 걸어두겠다.
+위의 설명에서 사용되는 [아두이노 코드](../../../arduino/codes/esp8266_server_ultrasonic/esp8266_server_ultrasonic.ino)는 링크를 걸어두겠다. (빔 프로젝트와 모니터 화면에 비례하여 위치를 계산하는 코드가 추가된 파일 [링크](../../../arduino/codes/esp8266_server/esp8266_server.ino))
 
 두 파일이 있는데 [한 파일](./esp8266_client.py)에는 단순히 wifi를 통해 데이터를 받으면 출력하는 코드이고 [다른 파일](./esp8266_client_gui.py)은 데이터를 받으면 커서를 간단히 움직이면서 클릭하는 코드이다.
