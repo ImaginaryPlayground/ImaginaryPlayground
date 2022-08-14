@@ -15,7 +15,6 @@ import socketIOClient from "socket.io-client";
 const ENDPOINT = "http://127.0.0.1:4001";
 
 const Universe = () => {
-  const [isClickRestTime, setIsClickRestTime] = useState(false);
   useEffect(() => {
     planetStartAudio.play();
 
@@ -29,41 +28,32 @@ const Universe = () => {
 
   useEffect(() => {
     //웹소캣 io 통신하기
+    let x = "231";
+    let y = "900";
 
     const planetTouchObject = document.getElementsByClassName("click_div");
-    //const socket = socketIOClient(ENDPOINT);
+    const socket = socketIOClient(ENDPOINT);
     // socket.on("FromAPI", (data) => {
     //   console.log(data);
     // });
-    // socket.emit("chat message", "hello");
-    // socket.on("chat message", (data) => {
-    //   //console.log(data);
-    // });
+    socket.emit("chat message", "hello");
+    socket.on("chat message", (data) => {
+      console.log(data);
+    });
 
-    let x = "334";
-    let y = "411";
-
-    if (!isClickRestTime) {
-      for (let idx = 0; idx < planetTouchObject.length; idx++) {
-        const objectRect = planetTouchObject[idx].getBoundingClientRect();
-        console.log("클릭됐음");
-        //console.log(objectRect);
-        if (
-          x >= objectRect.x &&
-          x <= objectRect.x + objectRect.width &&
-          y >= objectRect.y &&
-          y <= objectRect.y + objectRect.height
-        ) {
-          planetTouchObject[idx].click();
-          setIsClickRestTime(true);
-          setTimeout(() => {
-            setIsClickRestTime(false);
-          }, 2000);
-          break;
-        }
+    for (let idx = 0; idx < planetTouchObject.length; idx++) {
+      const objectRect = planetTouchObject[idx].getBoundingClientRect();
+      console.log(objectRect);
+      if (
+        x >= objectRect.x &&
+        x <= objectRect.x + objectRect.width &&
+        y >= objectRect.y &&
+        y <= objectRect.y + objectRect.height
+      ) {
+        planetTouchObject[idx].click();
       }
     }
-  }, [isClickRestTime]);
+  }, []);
 
   const nextStageAudio = new Howl({
     src: ["/assets/audio/universe/우주맵다음스테이지음성.mp3"],
@@ -473,7 +463,7 @@ const Universe = () => {
                   className="universe_next_stage_text_box"
                   id="universe_next_stage_text_box"
                 >
-                  <div>
+                  {/* <div>
                     훌륭하군 <span style={{ color: "pink" }}>친구</span>!
                   </div>
                   <div className="mt-custom">
@@ -488,17 +478,16 @@ const Universe = () => {
                   <div className="mt-custom">
                     바로 다음 <span style={{ color: "hotpink" }}>장소</span>로
                     가보자고!
-                  </div>
+                  </div> */}
+                  <div className="mt-custom">훌륭하군 친구!</div>
+                  <div className="mt-custom">태양계 행성들의 색을 다시 찾아주어</div>
+                  <div className="mt-custom">밝게 &nbsp; 
+                  <span style={{ color: "gold" }}>빛</span>이 나기 시작했어!</div>
+                  <div className="mt-custom">바로 다음 장소로 가보자고!</div>
+                  <img src="/assets/universe/map.png" alt="" className="universe-map"/>
                 </div>
 
-                {/* <button
-                  className="gamestart animate__animated animate__bounceIn"
-                  onClick={() => {
-                    setPlanetCount(planetCount + 1);
-                  }}
-                >
-                  게임 시작
-                </button> */}
+
                 <img
                   alt=""
                   src="/assets/universe/mercury.png"
