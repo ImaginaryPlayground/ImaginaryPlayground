@@ -640,6 +640,9 @@ const UniverseGame = () => {
               alt="" src="/assets/universe/metalBin4.png" className="metalbin" /></>):(<></>)} */}
         </>
       )}
+
+<img src="/assets/map/minimap.png" alt="" className="minimap" 
+      onClick={() => (window.location.href = "/")}/>
     </div>
   );
 };

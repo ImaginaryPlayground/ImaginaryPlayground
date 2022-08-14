@@ -1,5 +1,13 @@
+.minimap {
+  position: absolute;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+}
+
 .UniverseIntro {
-  font-family: "Single Day", cursive;
+  /* font-family: "Single Day", cursive; */
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 .UniverseIntro .universe_intro_text_box {
@@ -84,4 +92,15 @@
     opacity: 0;
     transform: scale(0);
   }
+}
+
+
+.universe-map {
+  animation: universe-intro alternate;
+
+  width: 70vh;
+  height: 30vh;
+  position: absolute;
+  z-index: 1;
+  left: 33vw;
 }

@@ -15,6 +15,7 @@ import socketIOClient from "socket.io-client";
 const ENDPOINT = "http://127.0.0.1:4001";
 
 const Universe = () => {
+  const [isClickRestTime, setIsClickRestTime] = useState(false);
   useEffect(() => {
     planetStartAudio.play();
 
@@ -28,32 +29,41 @@ const Universe = () => {
 
   useEffect(() => {
     //웹소캣 io 통신하기
-    let x = "231";
-    let y = "900";
 
     const planetTouchObject = document.getElementsByClassName("click_div");
-    const socket = socketIOClient(ENDPOINT);
+    //const socket = socketIOClient(ENDPOINT);
     // socket.on("FromAPI", (data) => {
     //   console.log(data);
     // });
-    socket.emit("chat message", "hello");
-    socket.on("chat message", (data) => {
-      console.log(data);
-    });
+    // socket.emit("chat message", "hello");
+    // socket.on("chat message", (data) => {
+    //   //console.log(data);
+    // });
 
-    for (let idx = 0; idx < planetTouchObject.length; idx++) {
-      const objectRect = planetTouchObject[idx].getBoundingClientRect();
-      console.log(objectRect);
-      if (
-        x >= objectRect.x &&
-        x <= objectRect.x + objectRect.width &&
-        y >= objectRect.y &&
-        y <= objectRect.y + objectRect.height
-      ) {
-        planetTouchObject[idx].click();
+    let x = "334";
+    let y = "411";
+
+    if (!isClickRestTime) {
+      for (let idx = 0; idx < planetTouchObject.length; idx++) {
+        const objectRect = planetTouchObject[idx].getBoundingClientRect();
+        console.log("클릭됐음");
+        //console.log(objectRect);
+        if (
+          x >= objectRect.x &&
+          x <= objectRect.x + objectRect.width &&
+          y >= objectRect.y &&
+          y <= objectRect.y + objectRect.height
+        ) {
+          planetTouchObject[idx].click();
+          setIsClickRestTime(true);
+          setTimeout(() => {
+            setIsClickRestTime(false);
+          }, 2000);
+          break;
+        }
       }
     }
-  }, []);
+  }, [isClickRestTime]);
 
   const nextStageAudio = new Howl({
     src: ["/assets/audio/universe/우주맵다음스테이지음성.mp3"],
@@ -194,12 +204,12 @@ const Universe = () => {
   return (
     <>
       <div className="universe">
-        {/* <iframe
+        <iframe
           title="배경음악"
           src="/assets/audio/universe/universe.mp3"
           allow="autoplay;"
           className="audio"
-        ></iframe> */}
+        ></iframe>
 
         {planetCount !== 9 ? (
           <>
@@ -572,7 +582,7 @@ const Universe = () => {
               <>
                 <div id="planet_touch_text_1">
                   <h2 className="planetH2" id="planet_touch_text_1">
-                    <span style={{ color: "red" }}>태양계</span>의{" "}
+                    <span style={{ color: "gold" }}>태양계</span>의{" "}
                     <span style={{ color: "yellow" }}>행성</span>들이{" "}
                     <span style={{ color: "gray" }}>빛</span>을 잃었어!
                   </h2>
@@ -587,7 +597,7 @@ const Universe = () => {
                   className="planetH2 move_down_up"
                   style={{ display: "none" }}
                 >
-                  <span style={{ color: "red" }}>태양계</span>{" "}
+                  <span style={{ color: "gold" }}>태양계</span>{" "}
                   <span style={{ color: "yellow" }}>행성</span>들을
                   <span style={{ color: "aquamarine" }}> 터치</span>해보세요!
                 </h2>
@@ -601,12 +611,8 @@ const Universe = () => {
           </>
         )}
 
-        <button
-          onClick={() => (window.location.href = "/")}
-          className="home-button"
-        >
-          돌아가기
-        </button>
+<img src="/assets/map/minimap.png" alt="" className="minimap" 
+      onClick={() => (window.location.href = "/")}/>
 
         {/* 우주 배경 구현 */}
         <Canvas className="universe-canvas">
