@@ -2,10 +2,10 @@ package com.yodel.imaginaryPlayground.service;
 
 import com.yodel.imaginaryPlayground.mapper.UserCareMapper;
 import com.yodel.imaginaryPlayground.model.dto.BabyDto;
-import com.yodel.imaginaryPlayground.model.dto.ConsultDto;
 import com.yodel.imaginaryPlayground.model.dto.PageDto;
 import com.yodel.imaginaryPlayground.model.vo.BabyVO;
 import com.yodel.imaginaryPlayground.model.vo.IdVO;
+import com.yodel.imaginaryPlayground.model.dto.ConsultDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class UserCareServiceImpl implements UserCareService {
     @Value("${variable.image.view}")
     String imagePath;
 
-    @Value("${variable.image.path}")
+    @Value("${variable.image.save.path}")
     String removePath;
 
     @Override
