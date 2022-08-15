@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Update;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,7 +40,8 @@ public class UserCareController{
     private final String error = "ERROR";
     private final UserCareService userCareService;
 
-    private final String FILE_PATH = "/tmp/";
+    @Value("${variable.image.path}")
+    String FILE_PATH;
     private final int PAGE = 12; //Pagination을 위한 변수
 
     //https://gaemi606.tistory.com/entry/Spring-Boot-multipartform-data-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C-React-Axios-REST-API
@@ -53,7 +55,6 @@ public class UserCareController{
 
         String fileName = file.getOriginalFilename();
         System.out.println(fileName);
-        System.out.println(request.getServletContext().getRealPath("/"));
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
