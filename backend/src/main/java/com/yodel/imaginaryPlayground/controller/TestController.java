@@ -2,16 +2,14 @@ package com.yodel.imaginaryPlayground.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 //업로드
-@RestController("/test")
+@RestController
+@RequestMapping("/test")
 public class TestController {
     @GetMapping("")
     public Map<String, Object> logout() {

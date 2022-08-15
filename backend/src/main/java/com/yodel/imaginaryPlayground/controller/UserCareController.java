@@ -40,7 +40,7 @@ public class UserCareController{
     private final String error = "ERROR";
     private final UserCareService userCareService;
 
-    @Value("${variable.image.path}")
+    @Value("${variable.image.save.path}")
     String FILE_PATH;
     private final int PAGE = 12; //Pagination을 위한 변수
 
