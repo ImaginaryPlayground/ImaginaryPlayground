@@ -9,7 +9,7 @@ export const DolphinglTF = ({ id }) => {
 
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
-  dom.setAttribute("class", `move_down_up`);
+  // dom.setAttribute("class", `move_down_up`);
   dom.style.position = "absolute";
   dom.style.right = "-55%";
   dom.style.top = "-11%";
