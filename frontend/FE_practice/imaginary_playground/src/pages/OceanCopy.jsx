@@ -92,81 +92,81 @@ const OceanCopy = () => {
 
   //웹소캣 통신코드(터치)
   useEffect(() => {
-    // setTimeout(() => {
-    //   //웹소캣 io 통신하기
-    //   let y = "0";
-    //   let isLoadingTime = false;
-    //   const socket = socketIOClient(ENDPOINT);
-    //   socket.on("chat message", (data) => {
-    //     const sharkObjects = document.getElementsByClassName("click_div");
-    //     if (data.split(" ")[0] == 3) {
-    //       console.log(data.split(" ")[2] - 320);
-    //     }
-    //     y = data.split(" ")[2] - 320;
-    //     //x값 세팅
-    //     if (!isLoadingTime) {
-    //       for (let index = 0; index < sharkObjects.length; index++) {
-    //         const sharkObject = sharkObjects[index];
-    //         const sharkObjectRect = sharkObjects[index].getBoundingClientRect();
-    //         if (data.split(" ")[0] == 1) {
-    //           if (
-    //             sharkObject.classList[0] === "copy_Shark1" &&
-    //             100 <= y &&
-    //             1000 >= y
-    //           ) {
-    //             isLoadingTime = true;
-    //             sharkObject.click();
-    //             setTimeout(() => {
-    //               isLoadingTime = false;
-    //             }, 1000);
-    //           }
-    //         } else if (data.split(" ")[0] == 2) {
-    //           if (
-    //             (sharkObject.classList[0] === "copy_Shark2" &&
-    //               100 <= y &&
-    //               700 >= y) ||
-    //             (sharkObject.classList[0] === "copy_Shark3" &&
-    //               700 <= y &&
-    //               1000 >= y)
-    //           ) {
-    //             isLoadingTime = true;
-    //             sharkObject.click();
-    //             setTimeout(() => {
-    //               isLoadingTime = false;
-    //             }, 1050);
-    //           }
-    //         } else if (data.split(" ")[0] == 3) {
-    //           if (
-    //             (sharkObject.classList[0] === "copy_Shark2" &&
-    //               100 <= y &&
-    //               750 >= y) ||
-    //             (sharkObject.classList[0] === "copy_Shark3" &&
-    //               751 <= y &&
-    //               1060 >= y)
-    //           ) {
-    //             isLoadingTime = true;
-    //             sharkObject.click();
-    //             setTimeout(() => {
-    //               isLoadingTime = false;
-    //             }, 1000);
-    //           }
-    //         } else if (data.split(" ")[0] == 4) {
-    //           if (
-    //             sharkObject.classList[0] === "copy_Shark4" &&
-    //             sharkObjectRect.y <= y &&
-    //             sharkObjectRect.y + sharkObjectRect.height >= y
-    //           ) {
-    //             isLoadingTime = true;
-    //             sharkObject.click();
-    //             setTimeout(() => {
-    //               isLoadingTime = false;
-    //             }, 1000);
-    //           }
-    //         }
-    //       }
-    //     }
-    //   });
-    // });
+    setTimeout(() => {
+      //웹소캣 io 통신하기
+      let y = "0";
+      let isLoadingTime = false;
+      const socket = socketIOClient(ENDPOINT);
+      socket.on("chat message", (data) => {
+        const sharkObjects = document.getElementsByClassName("click_div");
+        if (data.split(" ")[0] == 3) {
+          console.log(data.split(" ")[2] - 320);
+        }
+        y = data.split(" ")[2] - 320;
+        //x값 세팅
+        if (!isLoadingTime) {
+          for (let index = 0; index < sharkObjects.length; index++) {
+            const sharkObject = sharkObjects[index];
+            const sharkObjectRect = sharkObjects[index].getBoundingClientRect();
+            if (data.split(" ")[0] == 1) {
+              if (
+                sharkObject.classList[0] === "copy_Shark1" &&
+                100 <= y &&
+                1000 >= y
+              ) {
+                isLoadingTime = true;
+                sharkObject.click();
+                setTimeout(() => {
+                  isLoadingTime = false;
+                }, 1000);
+              }
+            } else if (data.split(" ")[0] == 2) {
+              if (
+                (sharkObject.classList[0] === "copy_Shark2" &&
+                  100 <= y &&
+                  700 >= y) ||
+                (sharkObject.classList[0] === "copy_Shark3" &&
+                  700 <= y &&
+                  1000 >= y)
+              ) {
+                isLoadingTime = true;
+                sharkObject.click();
+                setTimeout(() => {
+                  isLoadingTime = false;
+                }, 1050);
+              }
+            } else if (data.split(" ")[0] == 3) {
+              if (
+                (sharkObject.classList[0] === "copy_Shark2" &&
+                  100 <= y &&
+                  750 >= y) ||
+                (sharkObject.classList[0] === "copy_Shark3" &&
+                  751 <= y &&
+                  1060 >= y)
+              ) {
+                isLoadingTime = true;
+                sharkObject.click();
+                setTimeout(() => {
+                  isLoadingTime = false;
+                }, 1000);
+              }
+            } else if (data.split(" ")[0] == 4) {
+              if (
+                sharkObject.classList[0] === "copy_Shark4" &&
+                sharkObjectRect.y <= y &&
+                sharkObjectRect.y + sharkObjectRect.height >= y
+              ) {
+                isLoadingTime = true;
+                sharkObject.click();
+                setTimeout(() => {
+                  isLoadingTime = false;
+                }, 1000);
+              }
+            }
+          }
+        }
+      });
+    });
   }, []);
 
   //상어 3마리 남은 음성
@@ -212,6 +212,7 @@ const OceanCopy = () => {
       setIsMotionStart(true);
       let canvas, ctx;
       const socket = io("http://localhost:3001");
+      socket.emit("poseOn");
       canvas = document.getElementById("canvas");
       console.log(canvas);
       canvas.width = 500;
@@ -288,7 +289,7 @@ const OceanCopy = () => {
             setTimeout(() => {
               document.getElementById("endGame_text1").style.display = "none";
               document.getElementById("endGame_text2").style.display = "block";
-            }, 14000);
+            }, 3000);
 
             endGameSound.play();
 
