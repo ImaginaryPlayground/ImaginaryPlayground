@@ -93,18 +93,21 @@ const OceanCopy = () => {
       const socket = socketIOClient(ENDPOINT);
       socket.on("chat message", (data) => {
         const sharkObjects = document.getElementsByClassName("click_div");
-        // console.log(data);
-        y = data.split(" ")[2];
+        if (data.split(" ")[0] == 3) {
+          console.log(data.split(" ")[2] - 320);
+        }
+        y = data.split(" ")[2] - 320;
         //x값 세팅
         if (!isLoadingTime) {
           for (let index = 0; index < sharkObjects.length; index++) {
             const sharkObject = sharkObjects[index];
             const sharkObjectRect = sharkObjects[index].getBoundingClientRect();
+
             if (data.split(" ")[0] == 1) {
               if (
-                sharkObject.classList[0] === "copy_shark1" &&
-                sharkObjectRect.y <= y &&
-                sharkObjectRect.y + sharkObjectRect.height >= y
+                sharkObject.classList[0] === "copy_Shark1" &&
+                100 <= y &&
+                1000 >= y
               ) {
                 isLoadingTime = true;
                 sharkObject.click();
@@ -114,27 +117,27 @@ const OceanCopy = () => {
               }
             } else if (data.split(" ")[0] == 2) {
               if (
-                (sharkObject.classList[0] === "copy_shark2" &&
-                  sharkObjectRect.y <= y &&
-                  sharkObjectRect.y + sharkObjectRect.height >= y) ||
-                (sharkObject.classList[0] === "copy_shark3" &&
-                  sharkObjectRect.y <= y &&
-                  sharkObjectRect.y + sharkObjectRect.height >= y)
+                (sharkObject.classList[0] === "copy_Shark2" &&
+                  100 <= y &&
+                  700 >= y) ||
+                (sharkObject.classList[0] === "copy_Shark3" &&
+                  700 <= y &&
+                  1000 >= y)
               ) {
                 isLoadingTime = true;
                 sharkObject.click();
                 setTimeout(() => {
                   isLoadingTime = false;
-                }, 1000);
+                }, 1050);
               }
             } else if (data.split(" ")[0] == 3) {
               if (
-                (sharkObject.classList[0] === "copy_shark2" &&
-                  sharkObjectRect.y <= y &&
-                  sharkObjectRect.y + sharkObjectRect.height >= y) ||
-                (sharkObject.classList[0] === "copy_shark3" &&
-                  sharkObjectRect.y <= y &&
-                  sharkObjectRect.y + sharkObjectRect.height >= y)
+                (sharkObject.classList[0] === "copy_Shark2" &&
+                  100 <= y &&
+                  750 >= y) ||
+                (sharkObject.classList[0] === "copy_Shark3" &&
+                  751 <= y &&
+                  1060 >= y)
               ) {
                 isLoadingTime = true;
                 sharkObject.click();
@@ -144,7 +147,7 @@ const OceanCopy = () => {
               }
             } else if (data.split(" ")[0] == 4) {
               if (
-                sharkObject.classList[0] === "copy_shark4" &&
+                sharkObject.classList[0] === "copy_Shark4" &&
                 sharkObjectRect.y <= y &&
                 sharkObjectRect.y + sharkObjectRect.height >= y
               ) {
