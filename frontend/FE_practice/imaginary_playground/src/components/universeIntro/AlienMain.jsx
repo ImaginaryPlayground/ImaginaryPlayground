@@ -9,11 +9,15 @@ export const SampleglTF2 = ({ id }) => {
 
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
+  // dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "-18%";
-  dom.style.top = "17%";
+  dom.style.left = "10%";
+  dom.style.top = "22%";
   dom.style.zIndex = "1";
-  dom.setAttribute("class", "appear");
+  dom.setAttribute("class", "map-animal");
+  dom.style.scale = "40%";
+
+
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -23,7 +27,7 @@ export const SampleglTF2 = ({ id }) => {
     100
   );
 
-  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 5);
+  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 4);
   scene.add(light);
 
   // 궤도 추적
@@ -31,19 +35,19 @@ export const SampleglTF2 = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(10, 6, 30);
+  camera.position.set(5, 3, 30);
 
   const assetLoader = new GLTFLoader();
 
   let mixer1;
   let model;
   assetLoader.load(
-    "/assets/jungle/토끼.gltf",
+    "/assets/universe/alien.gltf",
     function (gltf) {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
-      // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(13, 5, 24);
+      gltf.scene.scale.multiplyScalar(4);
+      model.position.set(4,-1, 24);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);

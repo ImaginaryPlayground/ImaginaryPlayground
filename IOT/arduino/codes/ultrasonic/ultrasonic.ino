@@ -8,7 +8,7 @@ long duration, distance;
 void setup()
 {
   // trig와 echo 핀 선언
-  Serial.begin (9600);
+  Serial.begin (115200);
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 
@@ -35,5 +35,5 @@ void loop()
   Serial.println(distance);
 
   // 다음 측정을 위한 딜레이
-  delay(50);
+  delay(100);
 }

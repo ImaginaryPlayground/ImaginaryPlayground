@@ -9,39 +9,109 @@ import { useNavigate } from "react-router-dom";
 import { Howl, Howler } from "howler";
 import AlienNextStage from "../components/universe/AlienNextStage";
 import AlienSide from "../components/universe/AlienSide";
+import socketIOClient from "socket.io-client";
+import { ENDPOINT } from "../util/nodeConfig";
 
 const Universe = () => {
+  const [nowClickPlanet, setNowClickPlanet] = useState("수성");
+
+  // 클릭할때마다 행성의 클릭 다음순서를 변경한다.
+  const changeClickPlanetOrder = (pre, next, planetName) => {
+    document.getElementsByClassName(`${pre}`)[0].classList.remove("click_div");
+    document.getElementsByClassName(`${next}`)[0].classList.add("click_div");
+
+    setNowClickPlanet(planetName);
+  };
   useEffect(() => {
     planetStartAudio.play();
 
     return () => {
       Howler.stop();
-      for (let idx in document.getElementsByTagName("canvas")) {
-        console.log(idx);
-      }
     };
   }, []);
 
   useEffect(() => {
     //웹소캣 io 통신하기
-    let x = "231";
-    let y = "900";
 
-    const planetTouchObject = document.getElementsByClassName("click_div");
+    const planetTouchObject = document.getElementsByClassName("click_div")[0];
+    const planetTouchObjectClass =
+      document.getElementsByClassName("click_div")[0]?.classList[0];
+    const planetTouchObjectRect = planetTouchObject?.getClientRects()[0];
+    console.log(planetTouchObjectRect);
+    const socket = socketIOClient(ENDPOINT);
+    console.log(planetTouchObject?.classList[0]);
 
-    for (let idx = 0; idx < planetTouchObject.length; idx++) {
-      const objectRect = planetTouchObject[idx].getBoundingClientRect();
-      console.log(objectRect);
-      if (
-        x >= objectRect.x &&
-        x <= objectRect.x + objectRect.width &&
-        y >= objectRect.y &&
-        y <= objectRect.y + objectRect.height
-      ) {
-        planetTouchObject[idx].click();
+    let y = "0";
+    let isLoadingTime = false;
+    socket.on("chat message", (data) => {
+      console.log(data);
+      y = data.split(" ")[2] - 400;
+      //x값 세팅
+      if (!isLoadingTime) {
+        if (data.split(" ")[0] == 1) {
+          if (
+            (planetTouchObjectClass === "mercury_click_div" &&
+              planetTouchObjectRect.y <= y &&
+              planetTouchObjectRect.y + planetTouchObjectRect.height >= y) ||
+            (planetTouchObjectClass === "venus_click_div" &&
+              planetTouchObjectRect.y <= y &&
+              planetTouchObjectRect.y + planetTouchObjectRect.height >= y)
+          ) {
+            isLoadingTime = true;
+            planetTouchObject.click();
+            setTimeout(() => {
+              isLoadingTime = false;
+            }, 1000);
+          }
+        } else if (data.split(" ")[0] == 2) {
+          if (
+            (planetTouchObjectClass === "mars_click_div" &&
+              planetTouchObjectRect.y <= y &&
+              planetTouchObjectRect.y + planetTouchObjectRect.height >= y) ||
+            (planetTouchObjectClass === "earth_click_div" &&
+              planetTouchObjectRect.y <= y &&
+              planetTouchObjectRect.y + planetTouchObjectRect.height >= y)
+          ) {
+            isLoadingTime = true;
+            planetTouchObject.click();
+            setTimeout(() => {
+              isLoadingTime = false;
+            }, 1000);
+          }
+        } else if (data.split(" ")[0] == 3) {
+          if (
+            (planetTouchObjectClass === "jupyter2_click_div" &&
+              planetTouchObjectRect.y <= y &&
+              planetTouchObjectRect.y + planetTouchObjectRect.height >= y) ||
+            (planetTouchObjectClass === "saturn_click_div" &&
+              planetTouchObjectRect.y <= y &&
+              planetTouchObjectRect.y + planetTouchObjectRect.height >= y)
+          ) {
+            isLoadingTime = true;
+            planetTouchObject.click();
+            setTimeout(() => {
+              isLoadingTime = false;
+            }, 1000);
+          }
+        } else if (data.split(" ")[0] == 4) {
+          if (
+            (planetTouchObjectClass === "uranus_click_div" &&
+              planetTouchObjectRect.y <= y &&
+              planetTouchObjectRect.y + planetTouchObjectRect.height >= y) ||
+            (planetTouchObjectClass === "neptune_click_div" &&
+              planetTouchObjectRect.y <= y &&
+              planetTouchObjectRect.y + planetTouchObjectRect.height >= y)
+          ) {
+            isLoadingTime = true;
+            planetTouchObject.click();
+            setTimeout(() => {
+              isLoadingTime = false;
+            }, 1000);
+          }
+        }
       }
-    }
-  }, []);
+    });
+  }, [nowClickPlanet]);
 
   const nextStageAudio = new Howl({
     src: ["/assets/audio/universe/우주맵다음스테이지음성.mp3"],
@@ -76,6 +146,10 @@ const Universe = () => {
     onend: () => {
       document.getElementById("planet_touch_text_1").style.display = "none";
       document.getElementById("planet_touch_text_2").style.display = "block";
+      // document
+      //   .getElementsByClassName("mercury_click_div")[0]
+      //   .classList.add("click_div");
+      // setNowClickPlanet("수성");
     },
   });
 
@@ -111,6 +185,7 @@ const Universe = () => {
     planetAudio.play();
     setMercury(!mercury);
     clickPlanet();
+    changeClickPlanetOrder("mercury_click_div", "mars_click_div", "화성");
   };
 
   // 금성(venus) 클릭
@@ -120,6 +195,7 @@ const Universe = () => {
     planetAudio.play();
     setVenus(!venus);
     clickPlanet();
+    changeClickPlanetOrder("venus_click_div", "earth_click_div", "지구");
   };
 
   // 지구(earth) 클릭
@@ -129,6 +205,7 @@ const Universe = () => {
     planetAudio.play();
     setEarth(!earth);
     clickPlanet();
+    changeClickPlanetOrder("earth_click_div", "saturn_click_div", "토성");
   };
 
   // 화성(mars) 클릭
@@ -138,6 +215,7 @@ const Universe = () => {
     planetAudio.play();
     setMars(!mars);
     clickPlanet();
+    changeClickPlanetOrder("mars_click_div", "jupyter2_click_div", "목성");
   };
 
   // 목성(jupyter) 클릭
@@ -147,6 +225,7 @@ const Universe = () => {
     planetAudio.play();
     setJupyter(!jupyter);
     clickPlanet();
+    changeClickPlanetOrder("jupyter2_click_div", "neptune_click_div", "해왕성");
   };
 
   // 토성(Saturn) 클릭
@@ -156,6 +235,7 @@ const Universe = () => {
     planetAudio.play();
     setSaturn(!saturn);
     clickPlanet();
+    changeClickPlanetOrder("saturn_click_div", "uranus_click_div", "천왕성");
   };
 
   // 천왕성(uranus) 클릭
@@ -174,6 +254,7 @@ const Universe = () => {
     planetAudio.play();
     setNeptune(!neptune);
     clickPlanet();
+    changeClickPlanetOrder("neptune_click_div", "venus_click_div", "금성");
   };
 
   document.documentElement.style.setProperty("--animate-duration", "2s");
@@ -182,12 +263,12 @@ const Universe = () => {
   return (
     <>
       <div className="universe">
-        {/* <iframe
+        <iframe
           title="배경음악"
           src="/assets/audio/universe/universe.mp3"
           allow="autoplay;"
           className="audio"
-        ></iframe> */}
+        ></iframe>
 
         {planetCount !== 9 ? (
           <>
@@ -211,7 +292,7 @@ const Universe = () => {
                   <>
                     <div
                       onClick={mercuryClick}
-                      className="click_div mercury_click_div"
+                      className="mercury_click_div click_div"
                     ></div>
                     <img
                       alt=""
@@ -238,10 +319,7 @@ const Universe = () => {
                   </>
                 ) : (
                   <>
-                    <div
-                      onClick={venusClick}
-                      className="click_div venus_click_div"
-                    ></div>
+                    <div onClick={venusClick} className="venus_click_div"></div>
 
                     <img
                       alt=""
@@ -268,10 +346,7 @@ const Universe = () => {
                   </>
                 ) : (
                   <>
-                    <div
-                      onClick={earthClick}
-                      className="click_div earth_click_div"
-                    ></div>
+                    <div onClick={earthClick} className="earth_click_div"></div>
                     <img
                       alt=""
                       src="/assets/universe/earth.png"
@@ -297,10 +372,7 @@ const Universe = () => {
                   </>
                 ) : (
                   <>
-                    <div
-                      onClick={marsClick}
-                      className="click_div mars_click_div"
-                    ></div>
+                    <div onClick={marsClick} className="mars_click_div"></div>
                     <img
                       alt=""
                       src="/assets/universe/mars.png"
@@ -328,7 +400,7 @@ const Universe = () => {
                   <>
                     <div
                       onClick={jupyterClick}
-                      className="click_div jupyter2_click_div"
+                      className="jupyter2_click_div"
                     ></div>
                     <img
                       alt=""
@@ -357,7 +429,7 @@ const Universe = () => {
                   <>
                     <div
                       onClick={saturnClick}
-                      className="click_div saturn_click_div"
+                      className="saturn_click_div"
                     ></div>
                     <img
                       alt=""
@@ -386,7 +458,7 @@ const Universe = () => {
                   <>
                     <div
                       onClick={uranusClick}
-                      className="click_div uranus_click_div"
+                      className="uranus_click_div"
                     ></div>
                     <img
                       alt=""
@@ -415,7 +487,7 @@ const Universe = () => {
                   <>
                     <div
                       onClick={neptuneClick}
-                      className="click_div neptune_click_div"
+                      className="neptune_click_div"
                     ></div>
                     <img
                       alt=""
@@ -451,7 +523,7 @@ const Universe = () => {
                   className="universe_next_stage_text_box"
                   id="universe_next_stage_text_box"
                 >
-                  <div>
+                  {/* <div>
                     훌륭하군 <span style={{ color: "pink" }}>친구</span>!
                   </div>
                   <div className="mt-custom">
@@ -466,17 +538,23 @@ const Universe = () => {
                   <div className="mt-custom">
                     바로 다음 <span style={{ color: "hotpink" }}>장소</span>로
                     가보자고!
+                  </div> */}
+                  <div className="mt-custom">훌륭하군 친구!</div>
+                  <div className="mt-custom">
+                    태양계 행성들의 색을 다시 찾아주어
                   </div>
+                  <div className="mt-custom">
+                    밝게 &nbsp;
+                    <span style={{ color: "gold" }}>빛</span>이 나기 시작했어!
+                  </div>
+                  <div className="mt-custom">바로 다음 장소로 가보자고!</div>
+                  <img
+                    src="/assets/universe/map.png"
+                    alt=""
+                    className="universe-map"
+                  />
                 </div>
 
-                {/* <button
-                  className="gamestart animate__animated animate__bounceIn"
-                  onClick={() => {
-                    setPlanetCount(planetCount + 1);
-                  }}
-                >
-                  게임 시작
-                </button> */}
                 <img
                   alt=""
                   src="/assets/universe/mercury.png"
@@ -560,7 +638,7 @@ const Universe = () => {
               <>
                 <div id="planet_touch_text_1">
                   <h2 className="planetH2" id="planet_touch_text_1">
-                    <span style={{ color: "red" }}>태양계</span>의{" "}
+                    <span style={{ color: "gold" }}>태양계</span>의{" "}
                     <span style={{ color: "yellow" }}>행성</span>들이{" "}
                     <span style={{ color: "gray" }}>빛</span>을 잃었어!
                   </h2>
@@ -575,8 +653,8 @@ const Universe = () => {
                   className="planetH2 move_down_up"
                   style={{ display: "none" }}
                 >
-                  <span style={{ color: "red" }}>태양계</span>{" "}
-                  <span style={{ color: "yellow" }}>행성</span>들을
+                  {/* <span style={{ color: "gold" }}>태양계</span>{" "} */}
+                  <span style={{ color: "yellow" }}>{nowClickPlanet}</span>을
                   <span style={{ color: "aquamarine" }}> 터치</span>해보세요!
                 </h2>
               </>
@@ -589,12 +667,12 @@ const Universe = () => {
           </>
         )}
 
-        <button
+        <img
+          src="/assets/map/minimap.png"
+          alt=""
+          className="minimap"
           onClick={() => (window.location.href = "/")}
-          className="home-button"
-        >
-          돌아가기
-        </button>
+        />
 
         {/* 우주 배경 구현 */}
         <Canvas className="universe-canvas">
