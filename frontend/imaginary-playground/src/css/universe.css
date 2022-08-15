@@ -1,0 +1,758 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap");
+
+.universe {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://user-images.githubusercontent.com/26748614/96337246-f14d4580-1085-11eb-8793-a86d929e034d.jpg");
+  /* font-family: "Single Day", cursive; */
+  font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+.planetH2,
+.universegame-title {
+  position: absolute;
+  z-index: 1000;
+  color: white;
+  top: 10vh;
+  left: 37vw;
+  font-size: 3vw;
+  /* font-family: "Single Day", cursive; */
+  font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+.universegame-title-2 {
+  position: absolute;
+  z-index: 1000;
+  color: white;
+  top: 31vh;
+  left: 24.5vw;
+  font-size: 3vw;
+  /* font-family: "Single Day", cursive; */
+  font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+.universe-background {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+}
+
+/* 행성들 리스트 */
+
+.mercury {
+  position: absolute;
+  z-index: 10000;
+  width: 4vw;
+  top: 70vh;
+  left: 12vw;
+}
+
+.mercury-title {
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 62vh;
+  left: 12.3vw;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 200%;
+}
+
+.venus {
+  position: absolute;
+  z-index: 10000;
+  left: 7vw;
+  width: 4vw;
+  top: 53vh;
+}
+
+.venus-title {
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 45vh;
+  left: 7.5vw;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 200%;
+}
+
+.earth {
+  position: absolute;
+  z-index: 10000;
+  left: 34vw;
+  width: 6vw;
+  top: 82vh;
+}
+
+.earth-title {
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 73.5vh;
+  left: 35vw;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 200%;
+}
+
+.mars {
+  position: absolute;
+  z-index: 10000;
+  left: 34vw;
+  top: 50vh;
+  width: 4vw;
+}
+
+.mars-title {
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 42vh;
+  left: 34.5vw;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 200%;
+}
+
+.jupyter {
+  position: absolute;
+  z-index: 10002;
+  left: 53vw;
+  top: 70vh;
+  width: 15vw;
+}
+
+.jupyter-title {
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 61vh;
+  left: 59vw;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 200%;
+}
+
+.saturn {
+  position: absolute;
+  z-index: 10001;
+  left: 57vw;
+  top: 40vh;
+  width: 11vw;
+}
+
+.saturn-title {
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 32.5vh;
+  left: 60vw;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 200%;
+}
+
+.uranus {
+  position: absolute;
+  z-index: 10000;
+  left: 82vw;
+  width: 9vw;
+  top: 77vh;
+}
+
+.uranus-title {
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 68vh;
+  left: 84vw;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 200%;
+}
+
+.neptune {
+  position: absolute;
+  z-index: 10000;
+  left: 87vw;
+  width: 5vw;
+  top: 50vh;
+}
+
+.neptune-title {
+  position: absolute;
+  z-index: 10000;
+  color: white;
+  top: 42vh;
+  left: 87vw;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-size: 200%;
+}
+
+/* 게임 시작 버튼 */
+.gamestart {
+  position: absolute;
+  z-index: 100;
+  left: 40%;
+  top: 80vh;
+}
+
+/* 우주쓰레기 게임 이미지들 */
+
+.paper1 {
+  animation: trash 1400ms linear alternate infinite;
+  position: absolute;
+  z-index: 10000;
+  width: 5%;
+  top: 80vh;
+  left: 16vw;
+}
+
+.paper2 {
+  animation: trash 1500ms linear alternate infinite;
+
+  position: absolute;
+  z-index: 10000;
+  width: 5vw;
+  top: 59vh;
+  left: 35vw;
+}
+
+.paper3 {
+  animation: trash 1650ms linear alternate infinite;
+
+  position: absolute;
+  z-index: 10000;
+  width: 5vw;
+  top: 55vh;
+  left: 60vw;
+}
+
+/* .paper4 {
+    animation: trash 1700ms linear alternate infinite;
+    position: absolute;
+    z-index: 10000;
+    width: 5vw;
+    top: 50vh;
+    left: 80vw;
+} */
+
+.plastic1 {
+  animation: trash 2350ms linear alternate infinite;
+
+  position: absolute;
+  z-index: 10000;
+  width: 3vw;
+  top: 30vh;
+  left: 13vw;
+}
+
+.plastic2 {
+  animation: trash 1900ms linear alternate infinite;
+
+  position: absolute;
+  z-index: 10000;
+  width: 3vw;
+  top: 70vh;
+  left: 86vw;
+}
+
+.plastic3 {
+  animation: trash 2300ms linear alternate infinite;
+
+  position: absolute;
+  z-index: 10000;
+  width: 3vw;
+  top: 36vh;
+  left: 84vw;
+}
+
+/* .plastic4 {
+    animation: trash 2500ms linear alternate infinite;
+    position: absolute;
+    z-index: 10000;
+    width: 3vw;
+    top: 40vh;
+    left: 70vw;
+} */
+
+.metal1 {
+  animation: trash 2500ms linear alternate infinite;
+
+  position: absolute;
+  z-index: 10000;
+  width: 4vw;
+  top: 62vh;
+  left: 12vw;
+}
+
+.metal2 {
+  animation: trash 2300ms linear alternate infinite;
+
+  position: absolute;
+  z-index: 10000;
+  width: 4vw;
+  top: 35vh;
+  left: 58vw;
+}
+
+/* .metal3 {
+    animation: trash 2500ms linear alternate infinite;
+    position: absolute;
+    z-index: 10000;
+    width: 4vw;
+    top: 55vh;
+    left: 2.5vw;
+} */
+/* 
+.metal4 {
+    animation: trash 2700ms linear alternate infinite;
+    position: absolute;
+    z-index: 10000;
+    width: 4vw;
+    top: 70vh;
+    left: 80vw;
+} */
+
+@keyframes trash {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(45deg);
+  }
+}
+
+/* 게임 쓰레기통 */
+.paperbin {
+  position: absolute;
+  z-index: 1000;
+  top: 75vh;
+  left: 30vw;
+  width: 13vw;
+}
+
+.plasticbin {
+  position: absolute;
+  z-index: 1000;
+  top: 75vh;
+  left: 45vw;
+  width: 13vw;
+}
+
+.metalbin {
+  position: absolute;
+  z-index: 1000;
+  top: 75vh;
+  left: 60vw;
+  width: 13vw;
+}
+
+/* 게임 안내 문구 */
+.paper-title {
+  position: absolute;
+  color: white;
+}
+
+.plastic-title {
+  position: absolute;
+  color: white;
+}
+
+/* UFO */
+
+.ufo {
+  position: absolute;
+  z-index: 1;
+  top: 24vh;
+  left: 44vw;
+}
+
+/* 팡팡 터지는 효과 */
+
+.paper-effect1 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 76vh;
+  left: 18vw;
+}
+
+.paper-effect2 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 53vh;
+  left: 37vw;
+}
+
+.paper-effect3 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 50vh;
+  left: 62vw;
+}
+
+.plastic-effect1 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 30vh;
+  left: 15vw;
+}
+
+.plastic-effect2 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 70vh;
+  left: 87vw;
+}
+
+.plastic-effect3 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 34vh;
+  left: 85vw;
+}
+
+.metal-effect1 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 66vh;
+  left: 13vw;
+}
+
+.metal-effect2 {
+  position: absolute;
+  z-index: 1000;
+  width: 5%;
+  top: 31vh;
+  left: 60vw;
+}
+
+/* 다음스테이지 넘어가는 도중에 나오는 음성 */
+
+.universe_next_stage_text_box {
+  position: absolute;
+  /* background-color: snow; */
+  /* border-radius: 100px; */
+  /* border: 10px solid plum; */
+  left: 53%;
+  top: 47%;
+  width: 600px;
+  padding: 30px;
+  padding-left: 60px;
+  padding-right: 0px;
+  z-index: 1;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: left;
+  /* font-family: "Single Day", cursive; */
+  font-family: "IBM Plex Sans KR", sans-serif;
+  display: none;
+}
+
+/* .universe_next_stage_text_box:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 41px solid transparent;
+  border-right-color: plum;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: -20.5px;
+  margin-left: -41px;
+  z-index: 1;
+} */
+.universe-map {
+  animation: universe-intro 1s alternate;
+
+  width: 68vh;
+  height: 38vh;
+  position: absolute;
+  /* z-index: 1; */
+  left: -1vw;
+  top: -2vh;
+  opacity: 50%;
+}
+
+@keyframes universe-intro {
+  0% {
+    opacity: 0%;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 50%;
+    transform: scale(1);
+  }
+}
+
+.universe .mt-custom {
+  animation: universe-intro 1s alternate;
+  margin-top: 10px;
+  color: white;
+  /* z-index: 2; */
+}
+
+UniverseIntro .universe_intro_text_box {
+  position: absolute;
+  background-color: snow;
+  border-radius: 100px;
+  border: 10px solid plum;
+  left: 60%;
+  top: 38%;
+  width: 600px;
+  padding: 30px;
+  padding-left: 60px;
+  padding-right: 0px;
+  z-index: 1;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: left;
+}
+
+.universe_hifive_text_box {
+  position: absolute;
+  /* background-color: snow; */
+  border-radius: 100px;
+  /* border: 10px solid plum; */
+  left: 52%;
+  top: 50vh;
+  width: 620px;
+  padding: 30px;
+  padding-left: 60px;
+  padding-right: 0px;
+  z-index: 1;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: left;
+}
+
+.universe-hifive-map {
+  animation: universe-hifive-map 1s alternate;
+
+  width: 69vh;
+  height: 38vh;
+  position: absolute;
+  /* z-index: 1; */
+  left: -1vw;
+  top: -2vh;
+  opacity: 50%;
+}
+
+@keyframes universe-hifive-map {
+  0% {
+    opacity: 0%;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 50%;
+    transform: scale(1);
+  }
+}
+
+/* .universe_hifive_text_box:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 41px solid transparent;
+  border-right-color: plum;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: -20.5px;
+  margin-left: -41px;
+  z-index: 1;
+} */
+
+.universe .hifive_touch_location {
+  position: absolute;
+  left: 45vh;
+  top: 45vh;
+  width: 450px;
+  height: 495px;
+  z-index: 5;
+  border-radius: 10px;
+  border: 5px solid pink;
+  display: none;
+}
+
+.ufo_dissapear {
+  animation: ufo_dissapear 2.3s linear;
+}
+
+@keyframes ufo_dissapear {
+  0% {
+    transform: translateY(-1vh) translateX(35vw);
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(55vh) translateX(35vw);
+  }
+}
+
+.ufo_dissapear_2 {
+  animation: ufo_dissapear_2 1.5s linear;
+}
+
+@keyframes ufo_dissapear_2 {
+  0% {
+    transform: translateY(55vh) translateX(35vw);
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(0vh) translateX(35vw);
+  }
+}
+
+@keyframes fast_dissapear {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fast_disappear {
+  animation: fast_dissapear 0.5s linear;
+}
+
+/* 클릭 div */
+
+.universe .mercury_click_div {
+  position: absolute;
+  width: 120px;
+  height: 160px;
+  left: 10.5vw;
+  top: 66vh;
+}
+
+.universe .venus_click_div {
+  position: absolute;
+  width: 120px;
+  height: 160px;
+  left: 6vw;
+  top: 46vh;
+}
+
+.universe .mars_click_div {
+  position: absolute;
+  width: 110px;
+  height: 160px;
+  left: 33vw;
+  top: 45vh;
+}
+
+.universe .earth_click_div {
+  position: absolute;
+  width: 150px;
+  height: 200px;
+  left: 33vw;
+  top: 75vh;
+}
+
+.universe .jupyter2_click_div {
+  position: absolute;
+  width: 385px;
+  height: 32vh;
+  left: 52vw;
+  top: 66vh;
+}
+
+.universe .saturn_click_div {
+  position: absolute;
+  width: 240px;
+  height: 255px;
+  left: 55vw;
+  top: 35vh;
+}
+
+.universe .uranus_click_div {
+  position: absolute;
+  width: 220px;
+  height: 240px;
+  left: 80vw;
+  top: 70vh;
+}
+
+.universe .neptune_click_div {
+  position: absolute;
+  width: 160px;
+  height: 200px;
+  left: 85vw;
+  top: 45vh;
+}
+
+/* 두번째 게임(쓰레기 청소 div) */
+
+.universe .paper1_click_div {
+  width: 160px;
+  height: 200px;
+  left: 14vw;
+  top: 76vh;
+}
+
+.universe .paper2_click_div {
+  width: 160px;
+  height: 200px;
+  left: 33vw;
+  top: 55vh;
+}
+
+.universe .paper3_click_div {
+  width: 160px;
+  height: 200px;
+  left: 58vw;
+  top: 51vh;
+}
+
+.universe .plastic1_click_div {
+  width: 200px;
+  height: 220px;
+  left: 9vw;
+  top: 29vh;
+}
+
+.universe .plastic2_click_div {
+  width: 200px;
+  height: 220px;
+  left: 82vw;
+  top: 69vh;
+}
+
+.universe .plastic3_click_div {
+  width: 200px;
+  height: 220px;
+  left: 80vw;
+  top: 35vh;
+}
+
+.universe .metal1_click_div {
+  width: 150px;
+  height: 150px;
+  left: 10vw;
+  top: 60vh;
+}
+
+.universe .metal2_click_div {
+  width: 150px;
+  height: 150px;
+  left: 56vw;
+  top: 33vh;
+}

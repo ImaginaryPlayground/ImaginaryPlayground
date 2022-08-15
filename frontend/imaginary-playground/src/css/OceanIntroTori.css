@@ -1,0 +1,86 @@
+@keyframes ocean_tori_intro {
+  0% {
+    transform: translateX(1000px);
+  }
+  10% {
+    transform: translateX(900px) translateY(-30px);
+  }
+  20% {
+    transform: translateX(800px) translateY(0px);
+  }
+  30% {
+    transform: translateX(700px) translateY(-30px);
+  }
+  40% {
+    transform: translateX(600px) translateY(0px);
+  }
+  50% {
+    transform: translateX(500px) translateY(-30px);
+  }
+  60% {
+    transform: translateX(400px) translateY(0px);
+  }
+  70% {
+    transform: translateX(300px) translateY(-30px);
+  }
+  80% {
+    transform: translateX(200px) translateY(0px);
+  }
+  90% {
+    transform: translateX(100px) translateY(-30px);
+  }
+  100% {
+    transform: translateX(0px) translateY(0px);
+  }
+}
+
+.OceanCopyIntro {
+  font-family: "Single Day", cursive;
+}
+
+.OceanCopyIntro .text_box {
+  position: absolute;
+  left: 20%;
+  top: 50%;
+  font-size: 50px;
+  width: 600px;
+  border: 20px solid midnightblue;
+  background-color: dodgerblue;
+  border-radius: 30px;
+  word-break: keep-all;
+  text-align: center;
+}
+
+.ocean_tori_intro {
+  animation: ocean_tori_intro 3s linear;
+}
+
+.OceanCopyIntro .title {
+  font-family: "Single Day", cursive;
+  font-size: 80px;
+}
+
+.OceanCopyIntro .move_down_up {
+  animation: move_down_up 0.7s linear infinite alternate;
+}
+
+.OceanCopyIntro .title_box {
+  position: absolute;
+  top: 20%;
+  left: -5%;
+}
+
+.ocean_tori_move_down_up {
+  animation: ocean_tori_move_down_up 0.7s linear infinite alternate;
+}
+
+/* 위아래 흔들리는 애니메이션 */
+@keyframes ocean_tori_move_down_up {
+  0% {
+    transform: translateY(-30px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
