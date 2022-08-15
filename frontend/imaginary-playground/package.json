@@ -35,8 +35,6 @@
     "web-vitals": "^2.1.4",
     "@react-three/drei": "^9.19.0",
     "@react-three/fiber": "^8.2.2",
-    "@teachablemachine/pose": "^0.8.6",
-    "@tensorflow/tfjs": "^3.19.0",
     "global": "^4.4.0",
     "howler": "^2.2.3",
     "react-player": "^2.10.1",
