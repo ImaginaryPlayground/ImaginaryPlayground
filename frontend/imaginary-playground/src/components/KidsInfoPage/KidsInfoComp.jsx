@@ -279,7 +279,11 @@ const KidsInfoComp = () => {
         </Grid>
         <Grid item width={"80%"} textAlign="center">
           <img
-            src={kidInfoData?.preview || "/img/KidsInfoPage/default_img.jpg"}
+            src={
+              kidInfoData?.profile
+                ? `https://${kidInfoData.profile}`
+                : "/img/KidsInfoPage/default_img.jpg"
+            }
             alt="정면사진"
             width={isMobile_800 ? "50%" : "30%"}
             onClick={() => {
