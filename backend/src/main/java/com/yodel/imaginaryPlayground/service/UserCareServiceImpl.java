@@ -50,7 +50,11 @@ public class UserCareServiceImpl implements UserCareService {
 
     @Override
     public BabyDto getBaby(BabyDto babyDto) throws Exception {
-        return userCareMapper.getBaby(babyDto);
+        BabyDto baby = userCareMapper.getBaby(babyDto);
+        String path = baby.getProfile();
+        String newPath = "i7d204.p.ssafy.io/api/image_view/" + path.replaceFirst("/tmp/", "");
+        baby.setProfile(newPath);
+        return baby;
     }
 
     @Override
