@@ -39,6 +39,8 @@ public class UserController {
     private static final String fail = "FAIL";
     private static final String error = "ERROR";
 
+    private final String FILE_PATH = "/tmp/";
+
     @PostMapping("/register")
     @ApiOperation(value = "회원가입", notes = "회원가입을 한다.")
     public Map<String, Object> signUp(
@@ -88,7 +90,7 @@ public class UserController {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
             String uploadDate = simpleDateFormat.format(new Date());
-            String document = request.getServletContext().getRealPath("/");
+            String document = save(file, uploadDate);
 
 //            userService.saveFile(document, email);
 
@@ -357,14 +359,14 @@ public class UserController {
         return result;
     }
 
-    private String save(MultipartFile file, String contextPath, String uploadDate) {
+    private String save(MultipartFile file, String uploadDate) {
 
         try {
             String newFileName = uploadDate + file.getOriginalFilename();
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(contextPath + newFileName);
+            Path path = Paths.get(FILE_PATH + newFileName);
             Files.write(path, bytes);
-            return newFileName;
+            return path.toString();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
