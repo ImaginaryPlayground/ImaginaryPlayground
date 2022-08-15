@@ -356,8 +356,8 @@ const SignUpPage = () => {
           <h5>sns로 간편 회원가입</h5>
         </Grid>
         <Grid item className="sns_signup_btn">
-          <img src="/iconFolder/SnsLogin/kakao-talk.png" alt="카카오톡" />
-          <img src="/iconFolder/SnsLogin/free-icon-google.png" alt="구글" />
+          <img src="/iconFolder/SnsLogin/kakao_talk.png" alt="카카오톡" />
+          <img src="/iconFolder/SnsLogin/free_icon_google.png" alt="구글" />
           <img
             src="/iconFolder/SnsLogin/naver_icon_1.png"
             width="64px"
