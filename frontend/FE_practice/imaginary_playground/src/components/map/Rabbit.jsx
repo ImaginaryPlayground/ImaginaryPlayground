@@ -11,7 +11,7 @@ export const DolphinglTF = ({ id }) => {
   dom.setAttribute("id", `${id}`);
   // dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "0%";
+  dom.style.left = "-55%";
   dom.style.top = "0%";
   dom.style.zIndex = "1";
   dom.setAttribute("class", "map-animal");
