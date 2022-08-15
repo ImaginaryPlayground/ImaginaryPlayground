@@ -291,19 +291,18 @@
 	z-index: 99;
 	width: 100vw;
 	height: 100vh;
-	padding-top: 82vh;
-	left: 0.5vw;
+	margin-top: -5vh;
 }
 
-.jungle-banner {
+.jungle-bbanner {
 	animation: map-banner 2400ms linear alternate infinite;
 
 	position: absolute;
 	z-index: 99;
 	width: 100vw;
 	height: 100vh;
-	left: 24vw;
-	padding-top: 56vh;
+	padding-top: 5vh;
+	left: 3vw;
 }
 
 .universe-banner {
@@ -313,8 +312,7 @@
 	z-index: 99;
 	width: 100vw;
 	height: 100vh;
-	left: 74vw;
-	padding-top: 72vh;
+	padding-top: -50px;
 }
 
 .christmas-banner {

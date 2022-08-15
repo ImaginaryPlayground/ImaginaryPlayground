@@ -51,36 +51,24 @@ const JungleIntro = () => {
       <div>
         <JungleIntroTori id="jungleIntroTori" />
       </div>
-      <div className="text_location appear_text" id="intro_jungle_text">
-        <div className="text_box">
+      {/* <div className="text_location animate__animated animate__backInDown" > */}
+        {/* <div className="text_box">
           <div>
-            안녕!
-            <span style={{ color: "brown" }}>우가우가 숲</span>인 정글 맵에 온걸
+            안녕! &nbsp;
+            <span style={{ color: "green" }}>우가우가 숲</span>에 온 걸
             환영해!
           </div>
-          <div style={{ marginTop: "30px" }}>
-            여긴 여러 <span style={{ color: "brown" }}>동물</span>들이 살고있어!{" "}
+          <div style={{ marginTop: "1vh" }}>
+            여긴 여러 동물들이 살고 있어!
           </div>
-          <div style={{ marginTop: "30px" }}>
-            지금 바로!! 정글의<span style={{ color: "brown" }}>동물</span>들을{" "}
-            <div
-              style={{
-                fontSize: "60px",
-                textAlign: "left",
-                marginTop: "30px",
-              }}
-            >
-              보러가자!
-              <span
-                style={{
-                  fontSize: "60px",
-                  color: "blue",
-                }}
-              ></span>
-            </div>{" "}
+          <div style={{ marginTop: "1vh" }}>
+            지금 바로 정글의 동물들을 보러가자!
           </div>
-        </div>
-      </div>
+        </div> */}
+        <img src="/assets/jungle/jungle-text.png" alt="" 
+        className="jungle-text animate__animated animate__backInDown" 
+        id="intro_jungle_text"/>
+      {/* </div> */}
       <JungleBackground />
     </div>
   );

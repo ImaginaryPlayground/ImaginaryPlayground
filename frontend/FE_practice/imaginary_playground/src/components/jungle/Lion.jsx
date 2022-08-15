@@ -14,7 +14,7 @@ export const SampleglTF2 = ({ id }) => {
   dom.style.left = "9%";
   dom.style.top = "14%";
   dom.style.zIndex = "1";
-  dom.setAttribute("class", "appear");
+  // dom.setAttribute("class", "appear");
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(

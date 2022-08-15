@@ -556,6 +556,13 @@ const Jungle = () => {
 
   return (
     <div className="jungle" id="jungle_box">
+       <iframe
+          title="배경음악"
+          src="/assets/audio/jungle/jungle.mp3?autoplay=1&loop=1&autopause=0"
+          allow="autoplay;"
+          loop="1"
+          className="audio"
+        ></iframe>
       <div className="hide_monky_box">
         {/* 동물 찾으라는 텍스트 */}
         {isHideAnimalText && (
@@ -564,20 +571,13 @@ const Jungle = () => {
               <div>
                 <span style={{ color: "brown" }}>동물</span>들이 여기저기
                 숨어있어!!{" "}
-              </div>
-              <div style={{ marginTop: "30px" }}>
+                <br />
                 어서 <span style={{ color: "brown" }}>동물</span>들을 찾아줘!{" "}
-              </div>
-              <div style={{ marginTop: "30px" }}>
+                <br />
                 현재 숨어있는 <span style={{ color: "brown" }}>동물</span>은{" "}
-                <span style={{ fontSize: "60px" }}>
+                <span>
                   총{" "}
-                  <span
-                    style={{
-                      fontSize: "60px",
-                      color: "blue",
-                    }}
-                  >
+                  <span style={{ color: "green" }}>
                     {restAnimal}마리
                   </span>
                   야!
@@ -593,10 +593,9 @@ const Jungle = () => {
           playElephantSound) && (
           <div className="text_location ">
             <div className="text_box">
-              <div style={{ fontSize: "60px", marginTop: "10px" }}>
+              <div>
                 어떤 <span style={{ color: "brown" }}>동물</span>인지 맞춰봐!
-              </div>
-              <div style={{ fontSize: "60px", marginTop: "10px" }}>
+                <br />
                 소리가 나오고 있어!
               </div>
             </div>
@@ -619,75 +618,77 @@ const Jungle = () => {
           </div> 
         )}
         {/* 메인원숭이 텍스트 */}
-        {isMonkyMain && (
-          <div className="text_location appear_text">
-            <div className="text_box">
-              <div>
-                나는 <span style={{ color: "saddlebrown" }}>원숭이</span>야
-              </div>
-              <div style={{ fontSize: "60px", marginTop: "20px" }}>
-                만나서 반가워!
-              </div>
-              <div style={{ fontSize: "60px", marginTop: "20px" }}>
-                <span style={{ color: "midnightblue" }}>"화이팅"</span> 이라고
-                외쳐줘!!!
-              </div>
-            </div>
-          </div>
+        {isMonkyMain && (<>
+          <img src="/assets/jungle/monkey-bubble.png" alt="" className="monkey-bubble animate__animated animate__tada"/>
+        </>
+          // <div className="text_location appear_text">
+          //   <div className="text_box">
+          //     <div>
+          //       나는 <span style={{ color: "saddlebrown" }}>원숭이</span>야
+          //       <br />
+          //       만나서 반가워!
+          //       <br />
+          //       <span style={{ color: "midnightblue" }}>"화이팅"</span> 이라고
+          //       외쳐줘!!!
+          //     </div>
+          //   </div>
+          // </div>
         )}
         {/* 메인사자 텍스트 */}
-        {isLionMain && (
-          <div className="text_location appear_text">
-            <div className="text_box">
-              <div>
-                나는 정글왕<span style={{ color: "saddlebrown" }}>사자</span>야
-              </div>
-              <div style={{ fontSize: "60px", marginTop: "20px" }}>
-                운동을 정말로 좋아하지! 나와 같이 운동하자!
-              </div>
-              <div style={{ fontSize: "60px", marginTop: "20px" }}>
-                <span style={{ color: "midnightblue" }}>"할수 있다"</span> 라고
-                외쳐줘!!!
-              </div>
-            </div>
-          </div>
+        {isLionMain && (<>
+          <img src="/assets/jungle/lion-bubble.png" alt="" className="lion-bubble animate__animated animate__tada"/>
+        </>
+          // <div className="text_location appear_text">
+          //   <div className="text_box">
+          //     <div>
+          //       나는 정글왕 <span style={{ color: "saddlebrown" }}>사자</span>야
+          //       <br />
+          //       운동을 정말로 좋아하지! 
+          //       <br />
+          //       <span style={{ color: "midnightblue" }}>"할 수 있다"</span> 라고
+          //       외쳐줘!!!
+          //     </div>
+          //   </div>
+          // </div>
         )}
         {/* 메인 늑대 텍스트 */}
-        {isWolfMain && (
-          <div className="text_location appear_text">
-            <div className="text_box">
-              <div>
-                나는 정글의 외로운
-                <span style={{ color: "saddlebrown" }}> 늑대</span>야
-              </div>
-              <div style={{ fontSize: "55px", marginTop: "20px" }}>
-                나는 친구가 없어. 하지만 너가 내 친구가 되어줄 수 있어!
-              </div>
-              <div style={{ fontSize: "60px", marginTop: "20px" }}>
-                <span style={{ color: "midnightblue" }}>"건강 하자"</span> 라고
-                외쳐줘!!!
-              </div>
-            </div>
-          </div>
+        {isWolfMain && (<>
+          <img src="/assets/jungle/wolf-bubble.png" alt="" className="wolf-bubble animate__animated animate__tada"/>
+        </>
+          // <div className="text_location appear_text">
+          //   <div className="text_box">
+          //     <div>
+          //       나는 정글의 외로운
+          //       <span style={{ color: "saddlebrown" }}> 늑대</span>야
+          //       <br />
+          //       너가 내 친구가 되어줄 수 있어!
+          //       <br />
+          //       <span style={{ color: "midnightblue" }}>"건강하자"</span> 라고
+          //       외쳐줘!!!
+          //     </div>
+          //   </div>
+          // </div>
         )}
 
         {/* 메인 코끼리 텍스트 */}
-        {isElephantMain && (
-          <div className="text_location appear_text">
-            <div className="text_box">
-              <div>
-                나는 정글의 수호신{" "}
-                <span style={{ color: "saddlebrown" }}>코끼리</span>야
-              </div>
-              <div style={{ fontSize: "50px", marginTop: "20px" }}>
-                나와 내친구들과 정글에서 놀지 않을래? 꼭 온다고 약속해줘!!
-              </div>
-              <div style={{ fontSize: "60px", marginTop: "20px" }}>
-                <span style={{ color: "midnightblue" }}>"약속 해"</span> 라고
-                외쳐줘!!!
-              </div>
-            </div>
-          </div>
+        {isElephantMain && (<>
+          <img src="/assets/jungle/elephant-bubble.png" alt="" className="wolf-bubble animate__animated animate__tada"/>
+        </>
+          // <div className="text_location appear_text">
+          //   <div className="text_box">
+          //     <div>
+          //       나는 정글의 수호신{" "}
+          //       <span style={{ color: "saddlebrown" }}>코끼리</span>야
+          //       <br />
+          //       나와 내친구들과 정글에서 놀지 않을래? 
+          //       <br />
+          //       꼭 온다고 약속해줘!!
+          //       <br />
+          //       <span style={{ color: "midnightblue" }}>"약속해"</span> 라고
+          //       외쳐줘!!!
+          //     </div>
+          //   </div>
+          // </div>
         )}
 
         {/* 마무리 텍스트1 */}
@@ -695,13 +696,12 @@ const Jungle = () => {
           <div className="text_location appear_text">
             <div className="text_box">
               <div>
-                덕분에 모든 숨어있는 정글{" "}
-                <span style={{ color: "saddlebrown" }}>동물</span>들을 찾을 수
-                있었어!
-              </div>
-              <div style={{ fontSize: "55px", marginTop: "20px" }}>
+                덕분에 동물 친구들을 찾을 수 있었어!
+                <br />
                 <span style={{ color: "saddlebrown" }}>동물</span> 친구들은
-                나중에 너가 밝은 얼굴로 놀러 오기만을 기다리고 있을 꺼야!
+                나중에 너가 밝은 얼굴로 
+                <br />
+                놀러오기만을 기다리고 있을거야
               </div>
             </div>
           </div>
@@ -712,16 +712,10 @@ const Jungle = () => {
           <div className="text_location" id="end_2">
             <div className="text_box">
               <div>
-                언젠가 <span style={{ color: "brown" }}>"우리"</span> 함께 같이
-                놀러가자! <span style={{ color: "midnightblue" }}>그날</span>{" "}
-                만을 기다리고 있을 께!
-              </div>
-              <div style={{ fontSize: "55px", marginTop: "20px" }}>
-                자, 이제 정글에서{" "}
-                <span style={{ color: "deeppink" }}>할 일</span>은 끝이 났어!
+                자, 이제 정글에서 할 일은 끝이 났어!
+                <br />
                 다른 <span style={{ color: "coral" }}>여행</span>을 하러 가자!
-              </div>
-              <div style={{ fontSize: "60px", marginTop: "20px" }}>
+                <br />
                 <span style={{ color: "midnightblue" }}>"출발"</span> 이라고
                 외쳐줘!!!
               </div>
