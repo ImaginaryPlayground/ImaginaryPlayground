@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
   }
   // 추가
   socket.on("chat message", (msg) => {
-    socket.emit("chat message", msg);
+    io.emit("chat message", msg);
     //socket.emit("DistanceAPI", response);
     console.log("distance: " + msg);
   });
@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
   interval = setInterval(() => getApiAndEmit(socket), 1000);
 
   socket.on("disconnect", () => {
-    console.log("Client disconnected");
+    console.log("Client disconnected"); 
     clearInterval(interval);
   });
 });

@@ -1,0 +1,85 @@
+<div>controll panel</div>
+<div><canvas id="canvas"></canvas></div>
+<button type="button" onclick="poseOn()">poseOn</button>
+<button type="button" onclick="poseOff()">poseOff</button>
+<!--<img id = "imgId" src = static/child.jpg /> -->
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    let canvas, ctx;
+
+    // 연결할 서버 (같은 도메인을 가지는 경우 io에 URL 경로를 지정하지 않아도 서버 URL로 설정된다고 한다.)
+    const socket = io();
+    // const socket = io("ws://localhost:3001");
+    // const socket = io("http://192.168.1.101:3000");
+
+    // 연결이 되었을 시
+    socket.on("connect", () => {
+        console.log(socket.id);
+    });
+
+    // 연결이 끊겼을 시
+    socket.on("disconnect", () => {
+        console.log(socket.id); // undefined
+    });
+
+    // 받은 pose 출력
+    socket.on("pose", (className, maxProbability) => {
+        console.log(className, maxProbability);
+    });
+
+    // error! ===========
+    socket.on("poseImg", (image) => {
+        console.log("poseImg");
+        console.log(image);
+
+        const imageObj = new Image();
+        imageObj.onload = function() {
+        ctx.drawImage(imageObj, 0, 0);
+        };
+        imageObj.src = image;
+
+       // var file = dataURL2File(canvas.toDataURL(),'fileName.png');
+        //file.onload = function() {
+      //ctx.drawImage(image, 0, 0);
+      //<img id = "imgId" src="image" />;
+     
+    });
+    //document.getElementById('imgId').src = "data:image/;base64,"+img;
+
+    //});
+    // error! ===========
+
+    window.onload = init();
+
+    function init(){
+        canvas = document.getElementById("canvas");
+        canvas.width = 200; canvas.height = 200;
+        ctx = canvas.getContext('2d');
+        
+    }
+
+    // 자세인식 이미지 수신을 위한 poseOn 메시지를 발송 
+    function poseOn() {
+        console.log("poseOn");
+        socket.emit("poseOn");
+    };
+
+    // 자세인식 이미지 수신 중단 위한 poseOff 메시지를 발송 
+    function poseOff() {
+        console.log("poseOff");
+        socket.emit("poseOff");
+    };
+
+    function dataURL2File(dataUrl, fileName){ 
+        var arr = dataUrl.split(',');
+        var mime = arr[0].match(/:(.*?);/)[1]; 
+        var bstr = atob(arr[1]); 
+        var n = bstr.length;
+        var u8arr = new Uint8Array(n); 
+        while(n--){ 
+            u8arr[n] = bstr.charCodeAt(n); 
+        } 
+        return new File([u8arr],fileName,{type:mime}); 
+    }
+
+</script>
