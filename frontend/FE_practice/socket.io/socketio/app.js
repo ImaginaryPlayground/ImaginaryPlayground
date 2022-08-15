@@ -36,8 +36,9 @@ io.on("connection", (socket) => {
   });
   // 여기까지
   interval = setInterval(() => getApiAndEmit(socket), 1000);
+
   socket.on("disconnect", () => {
-    console.log("Client disconnected");
+    console.log("Client disconnected"); 
     clearInterval(interval);
   });
 });
@@ -49,7 +50,7 @@ const getApiAndEmit = (socket) => {
 };
 
 const getApidistanceEmit = (socket) => {
-  const response = msg;
+  const response = 123;
   // Emitting a new message. Will be consumed by the client
   socket.emit("DistanceAPI", response);
 };

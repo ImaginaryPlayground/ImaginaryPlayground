@@ -5,7 +5,7 @@
 <mapper namespace="com.yodel.imaginaryPlayground.mapper.UserCareMapper">
     <insert id="saveBaby" parameterType="BabyDto">
         INSERT INTO imagination_playground.user_baby
-        (user_id, name, age, gender, profile, `character`, `hospital_id`, registered_date, modified_date)
+        (user_id, `name`, age, gender, profile, `character`, `hospital_id`, registered_date, modified_date)
         VALUES
         (#{user_id}, #{name}, #{age}, #{gender}, #{profile}, #{character}, #{hospital_id}, NOW(), NOW())
     </insert>
@@ -21,7 +21,7 @@
 
     <update id="updateBabyInfo" parameterType="BabyDto">
         UPDATE imagination_playground.user_baby
-        SET name = #{name}, age = #{age}, gender = #{gender}, `character` = #{character}, modified_date = NOW()
+        SET `name` = #{name}, age = #{age}, gender = #{gender}, `character` = #{character}, modified_date = NOW()
         <if test="profile != null">
             , profile = #{profile}
         </if>

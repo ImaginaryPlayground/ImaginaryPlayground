@@ -124,17 +124,6 @@ public class UserController {
         return result;
     }
 
-//    @PostMapping("/upload")
-//    @ApiOperation(value = "재직 증명서 업로드")
-//    public ResponseEntity<Void> uploadFile(
-//            @RequestPart("document") List<MultipartFile> document,
-//            @RequestParam("data") String data) {
-//
-//        System.out.println(document);
-//        System.out.println(data);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "로그인을 한다.")
     public Map<String, Object> login(

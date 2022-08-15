@@ -1,5 +1,15 @@
+.minimap {
+  position: absolute;
+  z-index: 999;
+  width: 5vw;
+  /* height: 100vh; */
+  left: 93vw;
+  margin-top: 91vh;
+}
+
 .UniverseIntro {
-  font-family: "Single Day", cursive;
+  /* font-family: "Single Day", cursive; */
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 .UniverseIntro .universe_intro_text_box {
@@ -83,5 +93,31 @@
   100% {
     opacity: 0;
     transform: scale(0);
+  }
+}
+
+
+
+.universe-intro-text {
+  animation: universe-intro-text 1s alternate infinite; 
+
+  width: 80vh;
+  height: 40vh;
+  position: absolute;
+  z-index: 2;
+  left: 30vw;
+  top: 35vh;
+  opacity: 100%;
+  color: white;
+  font-size: 600%;
+}
+
+@keyframes universe-intro-text {
+  0% {
+    opacity: 30%;
+  }
+
+  100% {
+    opacity: 100%;
   }
 }

@@ -4,6 +4,59 @@
     position: relative;
 }
 
+
+/* 크리스마스 트리 이미지 */
+
+.christmastree {
+    position: absolute;
+    z-index: 2;
+    width: 100vw;
+    height: 100vh;
+}
+
+.ornament {
+    position: absolute;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+}
+
+.tree-star {
+    position: absolute;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+}
+
+.rudolph {
+    animation: moving-rudolph 10000ms linear infinite;
+    position: absolute;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    opacity: 60%;
+}
+
+@keyframes moving-rudolph {
+	from {
+        right: -20%;
+    }
+    to {
+		right:100%;
+    }
+}
+
+.christmashill {
+    position: absolute;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+
+/* 배경 */
+
 .christmas-background {
     width: 100vw;
     height: 100vh;
@@ -14,7 +67,10 @@
 
 /* 눈 떨어지는 효과 */
 .snow {
-
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: -8;
 }
 
 .snow:before{content:'';background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAMAAAD8CC+4AAAAflBMVEX///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+yfIzaAAAAKnRSTlMAAgkMDQ4PERITFRlISVFUWVpgYmVobW5vc3Z3eXx9goSKjpWXoaOqrLIxv86ZAAACaElEQVR4Ae3dbW7iBhRA0WdcHJqCwRRDCsWvTT8m3v8GR7ADpPkx1jtnH1c3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYLHa9dQ3sVhvv359NPEScjrkORZr/vpz/idewuqamaexj2X65b95nv/+/IgX0O3zKZbp/Y/5KXjBlA9DF8v0NT/c34MX7C7HzLy1sUynf/+a5/n/t+AlYw73bGKpPuf7t7kJXrLNTRvL9fv821v8MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0K6nvgkqyemQ56CS1TUzT2Mf1NHt8ymoY8qHoQvq2F2OmXlrg0rGHO7ZBJVsc9MGAAAAAAAAAAAAFWIcxDiIcRDjIMZBjIMYBzEOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQLue+iaoJKdDnoNKVtfMPI19UEe3z6egjikfhi6oY3c5ZuatjUoYc7hnE5WwzU0bAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB/LP6x+Mf+xPxj8Y/FPxb/WPxjAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABo11PfRCXkdMhzVMLqmpmnsY866Pb5FHUw5cPQRR3sLsfMvLVRCWMO92yiEra5aWOxAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoF1PfROVkNMhz1EJq2tmnsY+6qDb51PUwZQPQxd1sLscM/PWRiWMOdyziUrY5qaNWgAAAAAAAAAAAABAmIkwE2EmwkyEmQgzEWYizAQAAAAAAAAAAAAAgO+81Sm+KMVvegAAAABJRU5ErkJggg==),
