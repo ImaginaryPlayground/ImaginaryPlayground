@@ -5,7 +5,7 @@ import {
   KAKAO_AUTH_URL,
   NAVER_AUTH_CLIENT_ID,
   REDIRECT_URI,
-} from "../../components/Oauth/Oauth.jsx";
+} from "../components/Oauth/Oauth.jsx";
 
 import {
   Button,
@@ -17,15 +17,13 @@ import {
   TextField,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-import "../../css/LoginPage/LoginPage.css";
 import { pink } from "@mui/material/colors";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { config } from "../../util/config.jsx";
+import { config } from "../util/config";
 import swal from "sweetalert";
-import { loginUserToken } from "../../util/token.jsx";
 import { useDispatch } from "react-redux";
+import "../css/LoginPage.css";
 
 const theme = createTheme({
   palette: {
@@ -48,9 +46,9 @@ const { naver } = window;
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const savedStrogeUserId = localStorage.getItem("stored_id");
+  const savedStrogeUserId = sessionStorage.getItem("stored_id");
   const [isSaveUserId, setIsSaveUserId] = useState(!!savedStrogeUserId);
-  const loginUserToken = localStorage.getItem("token");
+  const loginUserToken = sessionStorage.getItem("token");
 
   const [loginUserInfo, setLoginUserInfo] = useState({
     userEmail: !!savedStrogeUserId ? savedStrogeUserId : "",
@@ -73,10 +71,15 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("isLogin") === "true") {
+    if (sessionStorage.getItem("isLogin") === "true") {
       navigate("/");
     }
-    initializeNaverLogin();
+
+    var canvasNode = document.querySelectorAll("canvas");
+    for (let index = 0; index < canvasNode.length; index++) {
+      canvasNode[index].remove();
+    }
+    
   }, []);
 
   const handleFocusInput = (e) => {
@@ -119,8 +122,8 @@ const LoginPage = () => {
       .then((res) => {
         console.log(res);
         if (res.data.status === "SUCCESS") {
-          localStorage.setItem("token", res.data.data);
-          //console.log("로컬 토큰값: ", localStorage.getItem("token"));
+          sessionStorage.setItem("token", res.data.data);
+          //console.log("로컬 토큰값: ", sessionStorage.getItem("token"));
           //회원정보 가져오는 비동기 처리
 
           //토큰 저장
@@ -128,9 +131,9 @@ const LoginPage = () => {
           //console.log("토큰값:", res.data.data);
           // 로컬 스토리지에 저장되어있는 아이디 삭제 혹은 생성
           if (isSaveUserId) {
-            localStorage.setItem("stored_id", loginUserInfo.userEmail);
+            sessionStorage.setItem("stored_id", loginUserInfo.userEmail);
           } else {
-            localStorage.setItem("stored_id", "");
+            sessionStorage.setItem("stored_id", "");
           }
 
           axios({
@@ -155,7 +158,7 @@ const LoginPage = () => {
                 provider: loginData.provider,
                 type: loginData.type,
               };
-              localStorage.setItem("isLogin", "true");
+              sessionStorage.setItem("isLogin", "true");
               dispatch({ type: "SET_LOGIN_USER", data: loginUserDataMapping });
 
               //홈으로 이동
@@ -265,9 +268,9 @@ const LoginPage = () => {
           label="아이디 저장"
         />
         <Grid item>
-          <Link to={"/signup"} className="link">
+          <a href="https://i7d204.p.ssafy.io/signup" className="link">
             회원가입
-          </Link>
+          </a>
         </Grid>
       </Grid>
       <Grid item className="login_btn_wrapper">
