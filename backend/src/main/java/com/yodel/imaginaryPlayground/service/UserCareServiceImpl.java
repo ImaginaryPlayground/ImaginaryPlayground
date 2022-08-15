@@ -7,6 +7,7 @@ import com.yodel.imaginaryPlayground.model.dto.PageDto;
 import com.yodel.imaginaryPlayground.model.vo.BabyVO;
 import com.yodel.imaginaryPlayground.model.vo.IdVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,12 @@ import java.util.Map;
 public class UserCareServiceImpl implements UserCareService {
 
     private final UserCareMapper userCareMapper;
+
+    @Value("${variable.image.view}")
+    String imagePath;
+
+    @Value("${variable.image.path}")
+    String removePath;
 
     @Override
     public int saveBaby(BabyDto baby) throws Exception {
@@ -52,7 +59,7 @@ public class UserCareServiceImpl implements UserCareService {
     public BabyDto getBaby(BabyDto babyDto) throws Exception {
         BabyDto baby = userCareMapper.getBaby(babyDto);
         String path = baby.getProfile();
-        String newPath = "i7d204.p.ssafy.io/api/image_view/" + path.replaceFirst("/tmp/", "");
+        String newPath = imagePath + path.replaceFirst(removePath, "");
         baby.setProfile(newPath);
         return baby;
     }
