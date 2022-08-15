@@ -1,0 +1,478 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap");
+
+/* 상어떼가 나타났다 */
+.ocean_copy {
+  font-family: "Single Day", cursive;
+}
+
+.ocean_copy .title {
+  font-family: "Single Day", cursive;
+  font-size: 80px;
+}
+
+.ocean_copy .complete_title {
+  font-family: "Single Day", cursive;
+  font-size: 80px;
+  left: 22%;
+  top: 20%;
+  position: absolute;
+}
+
+.ocean_copy .dance_start_text {
+  font-family: "Single Day", cursive;
+  font-size: 80px;
+  left: 30%;
+  top: 24%;
+  position: absolute;
+}
+
+.ocean_copy .copy_Shark1 {
+  width: 390px;
+  height: 200px;
+
+  position: absolute;
+  z-index: 100;
+  left: 22%;
+  top: 70%;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.ocean_copy .copy_Shark2 {
+  width: 390px;
+  height: 180px;
+  /* border: 1px solid black; */
+
+  position: absolute;
+  z-index: 100;
+  left: 48%;
+  top: 53%;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.ocean_copy .copy_Shark3 {
+  width: 340px;
+  height: 150px;
+  /* border: 1px solid black; */
+
+  position: absolute;
+  z-index: 100;
+  left: 58%;
+  top: 80%;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.ocean_copy .copy_Shark4 {
+  width: 340px;
+  height: 180px;
+  /* border: 1px solid black; */
+
+  position: absolute;
+  z-index: 100;
+  left: 78%;
+  top: 28%;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.ocean_copy .dance_before {
+  font-family: "Single Day", cursive;
+  font-size: 80px;
+  left: 30%;
+  top: 50%;
+  position: absolute;
+  color: snow;
+}
+
+.ocean_copy .text_countdown_1 {
+  animation: text_countdown 1s linear;
+  display: none;
+}
+.ocean_copy .text_countdown_2 {
+  animation: text_countdown 1s linear;
+  display: none;
+}
+.ocean_copy .text_countdown_3 {
+  animation: text_countdown 1s linear;
+  display: none;
+}
+
+.ocean_copy .countdown_box {
+  font-family: "Single Day", cursive;
+  font-size: 50px;
+  left: 48%;
+  top: 60%;
+  position: absolute;
+  font-size: 150px;
+}
+
+/* 위아래 흔들리는 애니메이션 */
+@keyframes text_countdown {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.shark_move_1 {
+  animation: shark_move_1 15s infinite linear alternate;
+}
+
+.shark_move_1_box {
+  animation: shark_move_1 15s infinite linear alternate;
+}
+
+/* 글자 사라지는 애니메이션 */
+
+/* 상어 움직이는 애니메이션1 */
+
+@keyframes shark_move_1 {
+  0% {
+    transform: translateX(0px) translateY(0px);
+  }
+
+  20% {
+    transform: translateX(-150px) translateY(-100px);
+  }
+
+  40% {
+    transform: translateX(-300px) translateY(-250px);
+  }
+
+  60% {
+    transform: translateX(-200px) translateY(-400px);
+  }
+
+  80% {
+    transform: translateX(-100px) translateY(-150px);
+  }
+
+  100% {
+    transform: translateX(0px) translateY(-0px);
+  }
+}
+
+.shark_move_2 {
+  animation: shark_move_2 15s infinite linear alternate;
+}
+
+.shark_move_2_box {
+  animation: shark_move_2 15s infinite linear alternate;
+}
+
+/* 상어 움직이는 애니메이션2 */
+
+@keyframes shark_move_2 {
+  0% {
+    transform: translateX(0px) translateY(0px);
+  }
+
+  20% {
+    transform: translateX(-70px) translateY(-100px);
+  }
+
+  40% {
+    transform: translateX(-120px) translateY(-150px);
+  }
+
+  60% {
+    transform: translateX(-150px) translateY(-200px);
+  }
+
+  80% {
+    transform: translateX(-100px) translateY(-100px);
+  }
+
+  100% {
+    transform: translateX(0px) translateY(0px);
+  }
+}
+
+.shark_move_3 {
+  animation: shark_move_3 15s infinite linear alternate;
+}
+
+.shark_move_3_box {
+  animation: shark_move_3 15s infinite linear alternate;
+}
+
+/* 상어 움직이는 애니메이션3 */
+
+@keyframes shark_move_3 {
+  0% {
+    transform: translateX(0px) translateY(0px);
+  }
+
+  20% {
+    transform: translateX(-100px) translateY(0px);
+  }
+
+  40% {
+    transform: translateX(-250px) translateY(0px);
+  }
+
+  60% {
+    transform: translateX(-400px) translateY(0px);
+  }
+
+  80% {
+    transform: translateX(-250px) translateY(0px);
+  }
+
+  100% {
+    transform: translateX(0px) translateY(0px);
+  }
+}
+
+.shark_move_4 {
+  animation: shark_move_4 15s infinite linear alternate;
+}
+
+.shark_move_4_box {
+  animation: shark_move_4 15s infinite linear alternate;
+}
+
+/* 상어 움직이는 애니메이션4 */
+
+@keyframes shark_move_4 {
+  0% {
+    transform: translateX(0px) translateY(250px);
+  }
+
+  20% {
+    transform: translateX(-100px) translateY(300px);
+  }
+
+  40% {
+    transform: translateX(-200px) translateY(350px);
+  }
+
+  60% {
+    transform: translateX(-100px) translateY(400px);
+  }
+
+  80% {
+    transform: translateX(-0px) translateY(450px);
+  }
+
+  100% {
+    transform: translateX(100px) translateY(550px);
+  }
+}
+
+.ocean_copy .touch_message {
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  margin-top: -40px;
+}
+
+/* 하트 애니메이션 */
+.attack_effect {
+  display: none;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: pink;
+  height: 50px;
+  width: 50px;
+  transform: rotate(-45deg);
+  animation-name: beat;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+.attack_effect:after {
+  background-color: pink;
+  content: "";
+  border-radius: 50%;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0px;
+  left: 25px;
+}
+.attack_effect:before {
+  background-color: pink;
+  content: "";
+  border-radius: 50%;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 0px;
+}
+
+@keyframes backdiv {
+  50% {
+    background: #ffe6f2;
+  }
+}
+
+@keyframes beat {
+  0% {
+    transform: scale(1) rotate(-45deg);
+  }
+  50% {
+    transform: scale(0.6) rotate(-45deg);
+  }
+}
+
+/* 사이즈 변화 애니메이션 */
+
+.text_size_change {
+  animation: text_size_change 1s infinite alternate linear;
+  display: inline-block;
+}
+
+@keyframes text_size_change {
+  0% {
+    transform: scale(0.7);
+  }
+
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+.text_size_change {
+  animation: opacity_change 1s infinite alternate linear;
+}
+
+/* 춤 따라하기 애니메이션 */
+@keyframes opacity_change {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+/* 터치 숫자 텍스트 애니메이션 */
+@keyframes touch_num_animation {
+  0% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* 몇번 터치해야하는지 숫자 텍스트 css */
+.ocean_copy .touch_num_text {
+  color: red;
+  font-size: 60px;
+  font-weight: bold;
+  animation: touch_num_animation 0.5s infinite alternate linear;
+}
+
+.move_down_up {
+  animation: move_down_up 0.7s linear infinite alternate;
+}
+
+.ocean_copy .sing_text {
+  position: absolute;
+  left: 20%;
+  top: 55%;
+  width: 700px;
+  border: 5px solid white;
+  display: none;
+  border-radius: 50px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.ocean_copy .sing_title {
+  font-size: 60px;
+  text-align: center;
+  position: absolute;
+  left: 35%;
+  top: -35%;
+  font-weight: bold;
+  color: brown;
+}
+.ocean_copy .sing_common {
+  display: none;
+  font-size: 65px;
+  margin-bottom: 20px;
+  word-break: keep-all;
+  text-align: center;
+}
+
+.ocean_copy .mt-10 {
+  margin-top: 20px;
+}
+
+.ocean_copy .endGame_text {
+  text-align: center;
+  width: 800px;
+  top: 30%;
+  font-weight: bold;
+  border-radius: 50px;
+}
+
+/* 위아래 흔들리는 애니메이션 */
+@keyframes move_down_up {
+  0% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.ocean_copy .main_dolphin_text {
+  border-radius: 30px;
+  padding: 10px;
+  position: absolute;
+  right: 0%;
+  top: 20%;
+  width: 420px;
+  font-size: 40px;
+  font-weight: bold;
+  background-color: royalblue;
+}
+
+.ocean_copy .main_dolphin_good_text {
+  border-radius: 30px;
+  padding: 10px;
+  position: absolute;
+  right: 0%;
+  top: 20%;
+  width: 260px;
+  font-size: 40px;
+  font-weight: bold;
+  color: whitesmoke;
+}
+
+.rotate_dolphin {
+  animation: rotate_dolphin 1.7s linear infinite alternate-reverse;
+}
+
+/* 돌고래 360도 회전*/
+@keyframes rotate_dolphin {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  50% {
+    transform: rotateZ(180deg);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
