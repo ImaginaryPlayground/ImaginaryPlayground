@@ -92,81 +92,82 @@ const OceanCopy = () => {
 
   //웹소캣 통신코드(터치)
   useEffect(() => {
-    // setTimeout(() => {
-    //   //웹소캣 io 통신하기
-    //   let y = "0";
-    //   let isLoadingTime = false;
-    //   const socket = socketIOClient(ENDPOINT);
-    //   socket.on("chat message", (data) => {
-    //     const sharkObjects = document.getElementsByClassName("click_div");
-    //     if (data.split(" ")[0] == 3) {
-    //       console.log(data.split(" ")[2] - 320);
-    //     }
-    //     y = data.split(" ")[2] - 320;
-    //     //x값 세팅
-    //     if (!isLoadingTime) {
-    //       for (let index = 0; index < sharkObjects.length; index++) {
-    //         const sharkObject = sharkObjects[index];
-    //         const sharkObjectRect = sharkObjects[index].getBoundingClientRect();
-    //         if (data.split(" ")[0] == 1) {
-    //           if (
-    //             sharkObject.classList[0] === "copy_Shark1" &&
-    //             100 <= y &&
-    //             1000 >= y
-    //           ) {
-    //             isLoadingTime = true;
-    //             sharkObject.click();
-    //             setTimeout(() => {
-    //               isLoadingTime = false;
-    //             }, 1000);
-    //           }
-    //         } else if (data.split(" ")[0] == 2) {
-    //           if (
-    //             (sharkObject.classList[0] === "copy_Shark2" &&
-    //               100 <= y &&
-    //               700 >= y) ||
-    //             (sharkObject.classList[0] === "copy_Shark3" &&
-    //               700 <= y &&
-    //               1000 >= y)
-    //           ) {
-    //             isLoadingTime = true;
-    //             sharkObject.click();
-    //             setTimeout(() => {
-    //               isLoadingTime = false;
-    //             }, 1050);
-    //           }
-    //         } else if (data.split(" ")[0] == 3) {
-    //           if (
-    //             (sharkObject.classList[0] === "copy_Shark2" &&
-    //               100 <= y &&
-    //               750 >= y) ||
-    //             (sharkObject.classList[0] === "copy_Shark3" &&
-    //               751 <= y &&
-    //               1060 >= y)
-    //           ) {
-    //             isLoadingTime = true;
-    //             sharkObject.click();
-    //             setTimeout(() => {
-    //               isLoadingTime = false;
-    //             }, 1000);
-    //           }
-    //         } else if (data.split(" ")[0] == 4) {
-    //           if (
-    //             sharkObject.classList[0] === "copy_Shark4" &&
-    //             sharkObjectRect.y <= y &&
-    //             sharkObjectRect.y + sharkObjectRect.height >= y
-    //           ) {
-    //             isLoadingTime = true;
-    //             sharkObject.click();
-    //             setTimeout(() => {
-    //               isLoadingTime = false;
-    //             }, 1000);
-    //           }
-    //         }
-    //       }
-    //     }
-    //   });
-    // });
+    setTimeout(() => {
+      //웹소캣 io 통신하기
+      let y = "0";
+      let isLoadingTime = false;
+      const socket = socketIOClient(ENDPOINT);
+      socket.on("chat message", (data) => {
+        const sharkObjects = document.getElementsByClassName("click_div");
+        if (data.split(" ")[0] == 3) {
+          console.log(data.split(" ")[2] - 320);
+        }
+        console.log(data);
+        y = data.split(" ")[2] - 400;
+        //x값 세팅
+        if (!isLoadingTime) {
+          for (let index = 0; index < sharkObjects.length; index++) {
+            const sharkObject = sharkObjects[index];
+            const sharkObjectRect = sharkObjects[index].getBoundingClientRect();
+            if (data.split(" ")[0] == 1) {
+              if (
+                sharkObject.classList[0] === "copy_Shark1" &&
+                100 <= y &&
+                1000 >= y
+              ) {
+                isLoadingTime = true;
+                sharkObject.click();
+                setTimeout(() => {
+                  isLoadingTime = false;
+                }, 1000);
+              }
+            } else if (data.split(" ")[0] == 2) {
+              if (
+                (sharkObject.classList[0] === "copy_Shark2" &&
+                  100 <= y &&
+                  700 >= y) ||
+                (sharkObject.classList[0] === "copy_Shark3" &&
+                  700 <= y &&
+                  1000 >= y)
+              ) {
+                isLoadingTime = true;
+                sharkObject.click();
+                setTimeout(() => {
+                  isLoadingTime = false;
+                }, 1050);
+              }
+            } else if (data.split(" ")[0] == 3) {
+              if (
+                (sharkObject.classList[0] === "copy_Shark2" &&
+                  100 <= y &&
+                  750 >= y) ||
+                (sharkObject.classList[0] === "copy_Shark3" &&
+                  751 <= y &&
+                  1060 >= y)
+              ) {
+                isLoadingTime = true;
+                sharkObject.click();
+                setTimeout(() => {
+                  isLoadingTime = false;
+                }, 1000);
+              }
+            } else if (data.split(" ")[0] == 4) {
+              if (
+                sharkObject.classList[0] === "copy_Shark4" &&
+                100 <= y &&
+                800 >= y
+              ) {
+                isLoadingTime = true;
+                sharkObject.click();
+                setTimeout(() => {
+                  isLoadingTime = false;
+                }, 1000);
+              }
+            }
+          }
+        }
+      });
+    });
   }, []);
 
   //상어 3마리 남은 음성
@@ -212,7 +213,7 @@ const OceanCopy = () => {
       setIsMotionStart(true);
       let canvas, ctx;
       const socket = io("http://localhost:3001");
-      socket.emit('poseOn')
+      socket.emit("poseOn");
       canvas = document.getElementById("canvas");
       console.log(canvas);
       canvas.width = 500;
@@ -263,7 +264,7 @@ const OceanCopy = () => {
             setisMotionLoading(true);
             // lastMotionAudio.play();
             motion2Dolphin?.remove();
-          }, 3000);
+          }, 8000);
           // setTimeout(() => {
           //   canvas.style.display = "block";
           // }, 5000);
@@ -289,7 +290,7 @@ const OceanCopy = () => {
             setTimeout(() => {
               document.getElementById("endGame_text1").style.display = "none";
               document.getElementById("endGame_text2").style.display = "block";
-            }, 14000);
+            }, 8000);
 
             endGameSound.play();
 
@@ -669,9 +670,9 @@ const OceanCopy = () => {
               <div>{<MainDolphinSide id="main_dolphin_side_0" />}</div>
             )}
           <div>{<SharkSample id="shark1" />}</div>
-          {/* <div>{<SharkSample2 id="shark2" />}</div>
+          <div>{<SharkSample2 id="shark2" />}</div>
           <div>{<SharkSample3 id="shark3" />}</div>
-          <div>{<SharkSample4 id="shark4" />}</div> */}
+          <div>{<SharkSample4 id="shark4" />}</div>
           {/* 메인돌리 남은 상어 텍스트 */}
           {totalSharkCount !== 0 && (
             <>
@@ -682,14 +683,18 @@ const OceanCopy = () => {
                       현재 남은 상어는{" "}
                       <span style={{ color: "red", fontSize: "45px" }}>
                         {totalSharkCount}
-                      </span>
-                      {" "}마리야!
+                      </span>{" "}
+                      마리야!
                     </div>
                   </div>
                 </>
               ) : (
-                <div style={{position: 'relative'}}>
-                  <img src="/assets/ocean/dolly-victory.png" alt="" className="dolly-victory animate__animated animate__pulse" />
+                <div style={{ position: "relative" }}>
+                  <img
+                    src="/assets/ocean/dolly-victory.png"
+                    alt=""
+                    className="dolly-victory animate__animated animate__pulse"
+                  />
                 </div>
                 // <div className="main_dolphin_good_text">
                 //   상어를 물리쳤어! 신난다!!
@@ -870,7 +875,8 @@ const OceanCopy = () => {
             <>
               <h2 className="dance_start_text text_size_change">
                 <span style={{ color: "darkcyan" }}>돌리</span>의&nbsp;
-                <span style={{ color: "midnightblue" }}>춤</span>을 따라 하세요!!
+                <span style={{ color: "midnightblue" }}>춤</span>을 따라
+                하세요!!
               </h2>
               {/* 댄스 돌핀 로드 */}
               <DanceMainDolphin id="dance_main_dolphin_0" />
@@ -906,7 +912,8 @@ const OceanCopy = () => {
           {(motionStart1 || motionStart2 || motionStart3) && !isMotionLoading && (
             <h2 className="dance_start_text text_size_change">
               <span style={{ color: "darkcyan" }}>돌리</span>의&nbsp;
-              <span style={{ color: "midnightblue" }}>자세</span>를 따라 하세요!!
+              <span style={{ color: "midnightblue" }}>자세</span>를 따라
+              하세요!!
             </h2>
           )}
           {isMotionCorrect && (
