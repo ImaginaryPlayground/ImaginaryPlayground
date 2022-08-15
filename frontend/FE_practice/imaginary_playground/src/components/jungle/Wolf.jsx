@@ -11,10 +11,10 @@ export const SampleglTF2 = ({ id }) => {
   dom.setAttribute("id", `${id}`);
   dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "30%";
-  dom.style.top = "-4%";
+  dom.style.left = "17%";
+  dom.style.top = "22%";
   dom.style.zIndex = "1";
-  dom.setAttribute("class", "appear");
+  // dom.setAttribute("class", "appear");
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -32,25 +32,25 @@ export const SampleglTF2 = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(5, 6, 30);
+  camera.position.set(12, 12, 30);
 
   const assetLoader = new GLTFLoader();
 
   let mixer1;
   let model;
   assetLoader.load(
-    "/assets/ocean/Whale1.gltf",
+    "/assets/jungle/wolf.gltf",
     function (gltf) {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
-      // gltf.scene.scale.multiplyScalar(4);
+      gltf.scene.scale.multiplyScalar(18);
       model.position.set(4, 7, 16);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
       const clips = gltf.animations;
 
-      const clip = THREE.AnimationClip.findByName(clips, "metarigAction");
+      const clip = THREE.AnimationClip.findByName(clips, "01_Run");
       const action = mixer1.clipAction(clip);
       action?.play();
     },
