@@ -12,9 +12,9 @@ export const SampleglTF2 = ({ id }) => {
   dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
   dom.style.left = "4%";
-  dom.style.top = "46%";
+  dom.style.top = "20%";
   dom.style.zIndex = "1";
-  dom.setAttribute("class", "appear");
+  // dom.setAttribute("class", "appear");
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -24,7 +24,7 @@ export const SampleglTF2 = ({ id }) => {
     100
   );
 
-  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 5);
+  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 3);
   scene.add(light);
 
   // 궤도 추적
@@ -44,7 +44,7 @@ export const SampleglTF2 = ({ id }) => {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
       // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(4, 7, 26);
+      model.position.set(4, 5, 26);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);

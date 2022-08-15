@@ -25,6 +25,8 @@ body {
 /* 요소  */
 
 .bush1 {
+    animation: bush1 850ms linear alternate infinite;
+
     width: 100vw;
     height: 100vh;
 
@@ -33,12 +35,35 @@ body {
 }
 
 .bush2 {
+    animation: bush2 720ms linear alternate infinite;
+
     width: 100vw;
     height: 100vh;
 
     position: absolute;
     z-index: 7;
 }
+
+@keyframes bush1 {
+    from {
+      left: -1%;
+    }
+  
+    to {
+      left: 0%;
+    }
+  }
+
+  
+@keyframes bush2 {
+    from {
+      right: -1%;
+    }
+  
+    to {
+      right: 0%;
+    }
+  }
 
 /*  움직이는 요소 */
 

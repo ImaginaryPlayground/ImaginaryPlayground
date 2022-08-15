@@ -102,11 +102,11 @@ const Map = () => {
       <div className="universe-click" onClick={() => mapMoving("/universe-intro")}></div>
 
       {/* 배경화면 사진 요소 */}
-      <img src="/assets/map/banner.png" alt="" className="map-banner"/>
+      <img src="/assets/map/main-banner.png" alt="" className="map-banner"/>
 
-      <img src="/assets/map/mini-banner.png" alt="" className="jungle-banner"/>
-      <img src="/assets/map/mini-banner.png" alt="" className="ocean-banner"/>
-      <img src="/assets/map/mini-banner.png" alt="" className="universe-banner"/>
+      <img src="/assets/map/jungle-banner.png" alt="" className="jungle-bbanner"/>
+      <img src="/assets/map/ocean-banner.png" alt="" className="ocean-banner"/>
+      <img src="/assets/map/universe-banner.png" alt="" className="universe-banner"/>
       <img src="/assets/map/mini-banner.png" alt="" className="christmas-banner"/>
 
       <img src="/assets/map/foot.png" alt="" className="map-foot"/>
