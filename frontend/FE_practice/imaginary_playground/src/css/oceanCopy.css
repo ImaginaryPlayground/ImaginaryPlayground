@@ -2,27 +2,31 @@
 
 /* 상어떼가 나타났다 */
 .ocean_copy {
-  font-family: "Single Day", cursive;
+  /* font-family: "Single Day", cursive; */
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 .ocean_copy .title {
-  font-family: "Single Day", cursive;
-  font-size: 80px;
+  /* font-family: "Single Day", cursive; */
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 4vw;
 }
 
 .ocean_copy .complete_title {
-  font-family: "Single Day", cursive;
-  font-size: 80px;
+  /* font-family: "Single Day", cursive; */
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-size: 4vw;
   left: 22%;
-  top: 20%;
+  top: 13%;
   position: absolute;
 }
 
 .ocean_copy .dance_start_text {
-  font-family: "Single Day", cursive;
+  /* font-family: "Single Day", cursive; */
+  font-family: 'IBM Plex Sans KR', sans-serif;
   font-size: 80px;
   left: 30%;
-  top: 24%;
+  top: 10%;
   position: absolute;
 }
 
@@ -78,7 +82,9 @@
 }
 
 .ocean_copy .dance_before {
-  font-family: "Single Day", cursive;
+  /* font-family: "Single Day", cursive; */
+  font-family: 'IBM Plex Sans KR', sans-serif;
+
   font-size: 80px;
   left: 30%;
   top: 50%;
@@ -399,7 +405,7 @@
   text-align: center;
   position: absolute;
   left: 35%;
-  top: -35%;
+  top: -10%;
   font-weight: bold;
   color: brown;
 }
@@ -438,12 +444,12 @@
   border-radius: 30px;
   padding: 10px;
   position: absolute;
-  right: 0%;
-  top: 20%;
-  width: 420px;
-  font-size: 40px;
+  left: 40vw;
+  top: 20vh;
+  /* width: 420px; */
+  font-size: 2vw;
   font-weight: bold;
-  background-color: royalblue;
+  /* background-color: royalblue; */
 }
 
 .ocean_copy .main_dolphin_good_text {
@@ -453,26 +459,43 @@
   right: 0%;
   top: 20%;
   width: 260px;
-  font-size: 40px;
+  font-size: 2vw;
   font-weight: bold;
   color: whitesmoke;
 }
 
-.rotate_dolphin {
-  animation: rotate_dolphin 1.7s linear infinite alternate-reverse;
+.victory_dolphin {
+  animation: victory_dolphin 1s linear infinite alternate-reverse;
 }
 
 /* 돌고래 360도 회전*/
-@keyframes rotate_dolphin {
+@keyframes victory_dolphin {
   0% {
-    transform: rotateZ(0deg);
+    /* transform: scale(1); */
+    /* size: 100%; */
+    top: -11%;
   }
 
   50% {
-    transform: rotateZ(180deg);
+    /* transform: scale(1.2); */
+    /* size:120%; */
+    top: -12%;
+
   }
 
   100% {
-    transform: rotateZ(360deg);
+    /* transform: scale(1); */
+    /* size: 100%; */
+    top: -11%;
+
   }
+}
+
+.dolly-victory {
+  position: absolute;
+  width: 22vw;
+  height: 22vh;
+  z-index: 1;
+  top: 7vh;
+  left: 78vw;
 }

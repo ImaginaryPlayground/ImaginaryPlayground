@@ -58,7 +58,6 @@ const Jungle = () => {
   //초기 로딩시 음성 시작
   useEffect(() => {
     setTimeout(() => {
-      mainJungleSound.play('key1')
       findTextAudio.play();
     }, 2000);
 
@@ -395,7 +394,7 @@ const Jungle = () => {
       setIsHideAnimalText(false);
       setTimeout(() => {
         monkySound.stop();
-      }, 30000);
+      }, 10000);
 
       SpeechRecognition.startListening({ continuous: true, language: "ko" });
     },
@@ -555,27 +554,15 @@ const Jungle = () => {
     },
   });
 
-  //정글 메인 음악
-  const mainJungleSound = new Howl({
-    src: ["/assets/audio/jungle/jungle.mp3"],
-    sprite: {
-      key1: [0, 10000, true],
-    },
-    volume:0.3,
-    onend: () => {
-      
-    },
-  });
-
   return (
     <div className="jungle" id="jungle_box">
-       {/* <iframe
+       <iframe
           title="배경음악"
           src="/assets/audio/jungle/jungle.mp3?autoplay=1&loop=1&autopause=0"
           allow="autoplay;"
           loop="1"
           className="audio"
-        ></iframe> */}
+        ></iframe>
       <div className="hide_monky_box">
         {/* 동물 찾으라는 텍스트 */}
         {isHideAnimalText && (

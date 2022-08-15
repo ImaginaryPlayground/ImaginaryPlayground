@@ -1,7 +1,5 @@
 import "../../css/universe.css";
-import UniversePaperEffect from "./UniversePaperEffect";
-import UniversePlasticEffect from "./UniversePlasticEffect";
-import UniverseMetalEffect from "./UniverseMetalEffect";
+import UniverseEffect from "./UniverseEffect";
 import { Howl, Howler } from "howler";
 import { useEffect, useState } from "react";
 import AlienSide from "./AlienSide";
@@ -256,7 +254,7 @@ const UniverseGame = () => {
         ></div>
         {totalTrash <= 2 ? (
           <div className="paper-effect1">
-            <UniversePaperEffect></UniversePaperEffect>
+            <UniverseEffect></UniverseEffect>
           </div>
         ) : (
           <></>
@@ -279,7 +277,7 @@ const UniverseGame = () => {
         ></div>
         {totalTrash <= 2 ? (
           <div className="paper-effect2">
-            <UniversePaperEffect></UniversePaperEffect>
+            <UniverseEffect></UniverseEffect>
           </div>
         ) : (
           <></>
@@ -302,7 +300,7 @@ const UniverseGame = () => {
         ></div>
         {totalTrash <= 2 ? (
           <div className="paper-effect3">
-            <UniversePaperEffect></UniversePaperEffect>
+            <UniverseEffect></UniverseEffect>
           </div>
         ) : (
           <></>
@@ -338,7 +336,7 @@ const UniverseGame = () => {
         ></div>
         {2 < totalTrash && totalTrash < 6 ? (
           <div className="plastic-effect1">
-            <UniversePlasticEffect></UniversePlasticEffect>
+            <UniverseEffect></UniverseEffect>
           </div>
         ) : (
           <></>
@@ -354,7 +352,7 @@ const UniverseGame = () => {
       <div id={"plastic2"}>
         {2 < totalTrash && totalTrash < 6 ? (
           <div className="plastic-effect2">
-            <UniversePlasticEffect></UniversePlasticEffect>
+            <UniverseEffect></UniverseEffect>
           </div>
         ) : (
           <></>
@@ -376,7 +374,7 @@ const UniverseGame = () => {
       <div id={"plastic3"}>
         {2 < totalTrash && totalTrash < 6 ? (
           <div className="plastic-effect3">
-            <UniversePlasticEffect></UniversePlasticEffect>
+            <UniverseEffect></UniverseEffect>
           </div>
         ) : (
           <></>
@@ -417,7 +415,7 @@ const UniverseGame = () => {
         ></div>
         {5 < totalTrash && totalTrash < 8 ? (
           <div className="metal-effect1">
-            <UniverseMetalEffect></UniverseMetalEffect>
+            <UniverseEffect></UniverseEffect>
           </div>
         ) : (
           <></>
@@ -439,7 +437,7 @@ const UniverseGame = () => {
         ></div>
         {5 < totalTrash && totalTrash < 8 ? (
           <div className="metal-effect2">
-            <UniverseMetalEffect></UniverseMetalEffect>
+            <UniverseEffect></UniverseEffect>
           </div>
         ) : (
           <></>

@@ -66,6 +66,9 @@ const UniverseIntro = () => {
       </div> */}
 
       <h2 className="universe-intro-text">갤럭시 월드로 입장 중</h2>
+      <img src="/assets/universe/intro-text.png" alt="" className="universe-intro animate__animated animate__zoomIn"/>
+
+      
       {/* <img src="/assets/universe/map.png" alt="" className="universe-map"/> */}
 
       {/* <div className="universe_intro_text_box universe_Right_appear">
