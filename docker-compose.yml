@@ -7,7 +7,7 @@ services:
   frontend:
     image: frontend-react
     build:
-      context: frontend/imaginary-playground
+      context: frontend/imaginary-playground/
       dockerfile: Dockerfile
     ports:
       - "3000:80"
