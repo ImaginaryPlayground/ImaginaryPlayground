@@ -8,6 +8,7 @@ import { Howl, Howler } from "howler";
 import { useNavigate } from "react-router";
 
 import "../css/JungleIntro.css";
+import { useFBO } from "@react-three/drei";
 
 const JungleIntro = () => {
 
@@ -20,7 +21,6 @@ const JungleIntro = () => {
       document
         .getElementById("jungleIntroTori")
         .setAttribute("class", "disappear");
-
       setTimeout(() => {
         document.getElementById("jungleIntroTori").remove();
         navigate("/jungle", { replace: true });
@@ -28,12 +28,22 @@ const JungleIntro = () => {
     },
   });
 
+  useEffect(()=>{
+    setTimeout(()=> {
+      document
+      .getElementById('tory-intro')
+      .setAttribute('class','tory-disappear')
+    },0)
+  })
+
   useEffect(() => {
     setTimeout(() => {
       document
         .getElementById("jungleIntroTori")
         .setAttribute("class", "move_down_up");
-
+      document
+        .getElementById('tory-intro')
+        .setAttribute('class','animate__animated animate__tada tory-intro ')
       jungleIntroAudio.play();
     }, 3000);
 
@@ -45,6 +55,7 @@ const JungleIntro = () => {
       document.getElementById("jungleIntroTori")?.remove();
     };
   }, []);
+
 
   return (
     <div className="JungleIntro">
@@ -65,9 +76,15 @@ const JungleIntro = () => {
             지금 바로 정글의 동물들을 보러가자!
           </div>
         </div> */}
-        <img src="/assets/jungle/jungle-text.png" alt="" 
-        className="jungle-text animate__animated animate__backInDown" 
-        id="intro_jungle_text"/>
+        <div id="intro_jungle_text">
+          <img src="/assets/jungle/jungle-text.png" alt="" 
+          className="jungle-text animate__animated animate__backInDown" 
+          />
+          <img src="/assets/jungle/tory-intro.png" alt="" className="tory-intro 
+           "
+           id="tory-intro"
+          />
+        </div>
       {/* </div> */}
       <JungleBackground />
     </div>

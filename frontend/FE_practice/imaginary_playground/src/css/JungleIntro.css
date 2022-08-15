@@ -34,3 +34,15 @@
 .animate__animated.animate__backInDown {
   --animate-duration: 2s;
 }
+
+.tory-intro {
+  position: absolute;
+  z-index: 10;
+  left: 60vw;
+  top: 35vh;
+}
+
+.tory-disappear{
+  display:none;
+  opacity: 0%;
+}

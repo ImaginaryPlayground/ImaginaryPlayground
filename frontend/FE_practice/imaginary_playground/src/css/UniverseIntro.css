@@ -12,9 +12,9 @@
   font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
-.UniverseIntro .universe_intro_text_box {
+/* .UniverseIntro .universe_intro_text_box {
   position: absolute;
-  /* background-color: snow; */
+  background-color: snow;
   color: white;
   border-radius: 100px;
   border: 10px solid plum;
@@ -28,9 +28,9 @@
   font-weight: bold;
   font-size: 40px;
   text-align: left;
-}
+} */
 
-.UniverseIntro .universe_intro_text_box:after {
+/* .UniverseIntro .universe_intro_text_box:after {
   content: "";
   position: absolute;
   left: 0;
@@ -44,8 +44,8 @@
   margin-top: -20.5px;
   margin-left: -41px;
   z-index: 1;
-}
-
+} */
+/* 
 .UniverseIntro .going_universe_text_box {
   position: absolute;
   background-color: snow;
@@ -58,7 +58,7 @@
   z-index: 1;
   font-weight: bold;
   font-size: 80px;
-}
+} */
 
 .UniverseIntro .mt-custom {
   margin-top: 5px;
@@ -106,7 +106,7 @@
   position: absolute;
   z-index: 2;
   left: 30vw;
-  top: 35vh;
+  top: 20vh;
   opacity: 100%;
   color: white;
   font-size: 600%;
@@ -120,4 +120,11 @@
   100% {
     opacity: 100%;
   }
+}
+
+.universe-intro {
+  position: absolute;
+  z-index: 1;
+  top: 40vh;
+  left: 32vw;
 }

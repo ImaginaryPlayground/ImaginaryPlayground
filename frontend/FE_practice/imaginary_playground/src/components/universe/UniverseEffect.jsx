@@ -1,21 +1,21 @@
-import "../../css/universe.css"
+import "../../css/UniverseEffect.css"
 
 const UniverseEffect = () => {
     return (<>
-        <div class="firework" id="firework">
-            <div class="explosion"></div>
-            <div class="explosion"></div>
-            <div class="explosion"></div>
-            <div class="explosion"></div>
-            <div class="explosion"></div>
-            <div class="explosion"></div>
-            <div class="explosion"></div>
-            <div class="explosion"></div>
-            <div class="explosion"></div>
-            <div class="explosion"></div>
-            <div class="explosion"></div>
-            <div class="explosion"></div>
-        </div>
+        {/* <div className="firework" id="firework"> */}
+            <div className="explosion"></div>
+            <div className="explosion"></div>
+            <div className="explosion"></div>
+            <div className="explosion"></div>
+            <div className="explosion"></div>
+            <div className="explosion"></div>
+            <div className="explosion"></div>
+            <div className="explosion"></div>
+            <div className="explosion"></div>
+            <div className="explosion"></div>
+            <div className="explosion"></div>
+            <div className="explosion"></div>
+        {/* </div> */}
     </>)
 }
 
