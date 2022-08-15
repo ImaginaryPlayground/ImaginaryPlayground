@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "../../css/Homepage/KidsGridItem.css";
 
 const KidsGridItem = ({ kidData }) => {
+  console.log(kidData.profile);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentPage = useSelector((state) => state.HomePageCurrentPageReducer);
@@ -40,7 +41,7 @@ const KidsGridItem = ({ kidData }) => {
       >
         <Grid item className="kids_img_box" sx={{ position: "relative" }}>
           <img
-            src="/img/etcImg/차은우.jpg"
+            src={`https://${kidData.profile}`}
             alt=""
             width={"100%"}
             style={{ borderRadius: "10px" }}
