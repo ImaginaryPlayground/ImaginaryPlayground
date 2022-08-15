@@ -59,6 +59,7 @@ const Jungle = () => {
   useEffect(() => {
     setTimeout(() => {
       findTextAudio.play();
+      mainJungleSound.play('key1')
     }, 2000);
 
     return () => {
@@ -363,6 +364,8 @@ const Jungle = () => {
       }, 13500);
     }
 
+
+
     //마지막 출발 멘트 외치기
     if (end_2 && transcript.includes("출발")) {
       //음성인식 초기화
@@ -407,6 +410,17 @@ const Jungle = () => {
       key1: [0, 10000, true],
     },
     onend: () => {},
+  });
+
+   //정글 메인 음악
+   const mainJungleSound = new Howl({
+    src: ["/assets/audio/jungle/jungle.mp3"],
+    sprite: {
+      key1: [0, 10000, true],
+    },
+    volume:0.3,
+    onend: () => {
+    },
   });
 
   //메인 원숭이 음성
@@ -556,13 +570,13 @@ const Jungle = () => {
 
   return (
     <div className="jungle" id="jungle_box">
-       <iframe
+       {/* <iframe
           title="배경음악"
           src="/assets/audio/jungle/jungle.mp3?autoplay=1&loop=1&autopause=0"
           allow="autoplay;"
           loop="1"
           className="audio"
-        ></iframe>
+        ></iframe> */}
       <div className="hide_monky_box">
         {/* 동물 찾으라는 텍스트 */}
         {isHideAnimalText && (
