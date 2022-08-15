@@ -233,20 +233,19 @@ const OceanCopy = () => {
           motion1Success = true;
           const motion1Dolphin = document.getElementById("motion1_dolphin_0");
           setisMotionCorrect(true);
-          setTimeout(() => {
-            canvas.style.display = "none";
-          }, 1000);
+          canvas.style.display = "none";
+
           setTimeout(() => {
             //모션 로딩 처리
             setisMotionCorrect(false);
             setisMotionLoading(true);
-            nextMotionAudio.play();
+            // nextMotionAudio.play();
             motion1Dolphin?.remove();
           }, 3000);
 
-          setTimeout(() => {
-            canvas.style.display = "block";
-          }, 5000);
+          // setTimeout(() => {
+          //   canvas.style.display = "block";
+          // }, 5000);
         } else if (
           motionStart2 &&
           className === "bong_pose" &&
@@ -256,30 +255,27 @@ const OceanCopy = () => {
           motion2Success = false;
           const motion2Dolphin = document.getElementById("motion2_dolphin_0");
           setisMotionCorrect(true);
-          setTimeout(() => {
-            canvas.style.display = "none";
-          }, 1000);
+          canvas.style.display = "none";
           setTimeout(() => {
             //모션 로딩 처리
             setisMotionCorrect(false);
             setisMotionLoading(true);
-            lastMotionAudio.play();
+            // lastMotionAudio.play();
             motion2Dolphin?.remove();
           }, 3000);
-          setTimeout(() => {
-            canvas.style.display = "block";
-          }, 5000);
+          // setTimeout(() => {
+          //   canvas.style.display = "block";
+          // }, 5000);
         } else if (
           motionStart3 &&
           !motion3Success &&
           className === "idle" &&
           maxProbability == 1.0
         ) {
-          setTimeout(() => {
-            canvas.style.display = "none";
-          }, 1000);
-          motion3Success = true;
+          socket.emit("poseOff");
           setisMotionCorrect(true);
+          canvas.style.display = "none";
+          motion3Success = true;
           setTimeout(() => {
             setisMotionCorrect(false);
             setMotionStart3(false);
@@ -323,8 +319,16 @@ const OceanCopy = () => {
       });
     }
 
+    if (motionStart1 && isMotionLoading) {
+      Howler.stop();
+      nextMotionAudio.play();
+    } else if (motionStart2 && isMotionLoading) {
+      Howler.stop();
+      lastMotionAudio.play();
+    }
+
     return () => {};
-  }, [motionStart1, motionStart2, motionStart3, isStartMotion]);
+  }, [motionStart1, motionStart2, motionStart3, isMotionLoading]);
 
   const endGameSound = new Howl({
     src: ["/assets/audio/ocean/오션맵 마무리 멘트.mp3"],
@@ -917,9 +921,9 @@ const OceanCopy = () => {
             <>
               <h2
                 className="dance_start_text text_size_change"
-                style={{ top: "60%" }}
+                style={{ top: "52%", left: "55%", fontSize: "90px" }}
               >
-                정답입니다!!
+                <span style={{ color: "hotpink" }}>정답</span>입니다!!
               </h2>
             </>
           )}
@@ -928,7 +932,7 @@ const OceanCopy = () => {
             <>
               <h2
                 className="dance_start_text text_size_change"
-                style={{ left: "25%", top: "41%", fontSize: "100px" }}
+                style={{ left: "25%", top: "22%", fontSize: "100px" }}
               >
                 다음
                 <span style={{ color: "midnightblue" }}> 자세</span>를
