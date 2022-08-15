@@ -1,10 +1,10 @@
-# 웹 IoT Backend
+# 💻웹 IoT Backend
 
 모든 과정은 IntelliJ 2022.2 기준으로 설명되었습니다.
 
 
 
-## 기술스택 및 라이브러리
+## 🛠기술스택 및 라이브러리
 
 | Project         | Version | Description |
 | --------------- | ------- | ----------- |
@@ -29,27 +29,29 @@
 
 
 
-## 개발 환경 구성 및 배포 과정
+## 🖥 서비스 아키텍처
 
-1. 프로젝트 다운로드
+![image-20220815213650352](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220815213650352.png)
+
+
+
+## 👷‍♂️개발 환경 구성 및 배포 과정
+
+### 프로젝트 다운로드
+
+1. Gitlab의 레포지토리를 clone합니다.
 
    ```
    git clone https://lab.ssafy.com/s07-webmobile3-sub2/S07P12D204.git
    ```
 
-2. backend폴더로 이동
+2. backend폴더로 이동합니다.
 
    ```
    cd S07P12D204/backend
    ```
 
-3. backend 빌드 및 배포 과정
-
-   ```
-   배포 시도 중
-   ```
-
-4. backend gradle 의존성
+3. gradle 의존성을 다음과 같이 추가합니다.
 
    ```
    plugins {
@@ -115,9 +117,49 @@
    }
    ```
 
+
+
+### 배포 과정
+
+해당 서비스는 AWS EC2를 이용하여 배포하였습니다.
+
+배포를 하기 위해 다음과 같은 방법으로 실행하였습니다.
+
+1. AWS EC2 인스턴스 생성
+
+2. 공개키 기반 인증 SSH 접속
+
+   ```
+   ssh -i "개인키 경로" ubuntu@i7d204.p.ssafy.io
+
+3. Docker + Jenkins 설치
+
+4. Gitlab Webhook 설정
+
+5. ssl 인증서 적용
+
+6. Jenkins pipeline을 이용하여 자동 배포 구축
+
+7. 백엔드 Spring boot와 프론트엔드 React, Database를 docker image로 빌드
+
+8. Nginx 환경 설정
+
+   ```
+   server {
+       listen 80;
+       listen [::]:80;
+   
+   	location / {
+   		root /usr/share/nginx/html;
+   		index index.html;
+   		try_files $uri $uri/ /index.html;
+       }
+   }
+   ```
+
    
 
-## Routes
+## 📂Routes
 
 ```
 //AdminController
@@ -167,7 +209,9 @@ POST     http://localhost:8080/user/token
 POST     http://localhost:8080/user/logout
 ```
 
-## 디렉토리 구조
+
+
+## 📁디렉토리 구조
 
 ```
 java
