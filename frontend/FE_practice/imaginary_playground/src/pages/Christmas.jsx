@@ -2,20 +2,18 @@ import '../css/christmas.css'
 import Santa from '../components/christmas/Santa.jsx'
 import Tree from '../components/christmas/tree.jsx'
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const Christmas = () => {
 
+  const navigate = useNavigate();
   useEffect(() => {
-    var canvasNode = document.querySelectorAll("canvas");
-    var canvas = Array.prototype.slice.call(canvasNode);
-    if (canvas) {
-      canvas.forEach(function (element) {
-        // element.style.display = 'none'
-        if (element.id !== 'santa' && element.id !== 'tree'){ 
-          element.remove();
-        }
-      });
+
+    if(sessionStorage.getItem("isLogin") !== 'true'){
+      //만약 로그인 되어있지 않으면 three.js 캐릭터들 모두 삭제 후 로그인 페이지로 이동
+      alert('크리스마스 맵은 로그인이 필요합니다!')
+      navigate('/login')
     }
   }, []);
 
