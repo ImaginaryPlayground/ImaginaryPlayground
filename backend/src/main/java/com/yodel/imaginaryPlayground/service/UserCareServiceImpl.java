@@ -22,7 +22,7 @@ public class UserCareServiceImpl implements UserCareService {
     @Value("${variable.image.view}")
     String imagePath;
 
-    @Value("${variable.image.save.path}")
+    @Value("${variable.image.search.path}")
     String removePath;
 
     @Override
@@ -83,7 +83,12 @@ public class UserCareServiceImpl implements UserCareService {
     private List<BabyDto> convertImagePath(List<BabyDto> babyList){
         if(babyList != null){
             for(int i=0; i<babyList.size(); i++){
-                babyList.get(i).setProfile(babyList.get(i).getProfile().replaceFirst(removePath, ""));
+                System.out.println(babyList.get(i).getProfile());
+                if(babyList.get(i).getProfile() != null) {
+                    //리눅스, 윈도우 두 경우를 고려해 모든 경우에서 다음 문자열들 제거
+                    String replacedPath = babyList.get(i).getProfile().replaceFirst("/tmp/", "");
+                    babyList.get(i).setProfile(imagePath + replacedPath.replaceFirst("C:\\\\image\\\\", ""));
+                }
             }
         }
         return babyList;
