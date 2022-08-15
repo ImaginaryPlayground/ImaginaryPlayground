@@ -212,6 +212,7 @@ const OceanCopy = () => {
       setIsMotionStart(true);
       let canvas, ctx;
       const socket = io("http://localhost:3001");
+      socket.emit('poseOn')
       canvas = document.getElementById("canvas");
       console.log(canvas);
       canvas.width = 500;
