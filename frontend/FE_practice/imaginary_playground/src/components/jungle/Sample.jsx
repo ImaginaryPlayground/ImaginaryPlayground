@@ -52,7 +52,7 @@ export const SampleglTF = ({ id }) => {
 
       const clip = THREE.AnimationClip.findByName(clips, "Swim");
       const action = mixer1.clipAction(clip);
-      action.play();
+      action?.play();
     },
     undefined,
     function (error) {

@@ -9,9 +9,9 @@ export const DolphinglTF = ({ id }) => {
 
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
-  dom.setAttribute("class", `appear`);
+
   dom.style.position = "absolute";
-  dom.style.left = "18%";
+  dom.style.left = "10%";
   dom.style.top = "11%";
   dom.style.zIndex = "-3";
   const scene = new THREE.Scene();
