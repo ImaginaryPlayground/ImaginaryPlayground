@@ -823,8 +823,7 @@ const OceanCopy = () => {
                 !motionStartBefore &&
                 !endGameAudio && (
                   <h2 className="complete_title">
-                    너가 해냈어!! 모든{" "}
-                    <span style={{ color: "brown" }}>상어</span>를 물리쳤어!{" "}
+                    너가 해냈어!! 모든 상어를 물리쳤어!
                   </h2>
                 )}
 
@@ -843,8 +842,7 @@ const OceanCopy = () => {
                 !motionStartBefore &&
                 !endGameAudio && (
                   <div className="dance_before">
-                    이제 곧 <span style={{ color: "hotpink" }}>돌리</span>가
-                    춤을 춥니다
+                    이제 곧 돌리가 춤을 춥니다
                   </div>
                 )}
 
@@ -1026,9 +1024,11 @@ const OceanCopy = () => {
 
           {/* 동요 가사 보여주기 */}
           <div className="sing_text" id="sing_box">
-            <div className="sing_title">노래 가사</div>
+            {/* <div className="sing_title">노래 가사</div> */}
             <div className="sing_1  sing_common" id="sing_1">
-              돌고래와 춤을 춰요. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;태양을 향해
+              돌고래와 춤을 춰요.
+              <br />
+              태양을 향해
               쑥쑥쑥, 쑥쑥쑥,
             </div>
             <div className="sing_2  sing_common" id="sing_2">
