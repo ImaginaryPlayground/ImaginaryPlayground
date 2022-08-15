@@ -32,7 +32,7 @@ public class UserCareServiceImpl implements UserCareService {
 
     @Override
     public List<BabyDto> searchAllBaby(BabyVO babyVO) throws Exception {
-        return userCareMapper.searchAllBaby(babyVO);
+        return convertImagePath(userCareMapper.searchAllBaby(babyVO));
     }
 
     @Override
@@ -42,12 +42,12 @@ public class UserCareServiceImpl implements UserCareService {
 
     @Override
     public List<BabyDto> lookupAllBaby(PageDto pageDto) throws Exception {
-        return userCareMapper.lookupAllBaby(pageDto);
+        return convertImagePath(userCareMapper.lookupAllBaby(pageDto));
     }
 
     @Override
     public List<BabyDto> searchByKeyword(PageDto pageDto) throws Exception {
-        return userCareMapper.searchByKeyword(pageDto);
+        return convertImagePath(userCareMapper.searchByKeyword(pageDto));
     }
 
     @Override
@@ -77,5 +77,15 @@ public class UserCareServiceImpl implements UserCareService {
     @Override
     public List<ConsultDto> getConsultData(IdVO idVO) throws Exception {
         return userCareMapper.getConsultData(idVO);
+    }
+
+    //[공통로직] List 내부 아이들의 이미지 주소변환
+    private List<BabyDto> convertImagePath(List<BabyDto> babyList){
+        if(babyList != null){
+            for(int i=0; i<babyList.size(); i++){
+                babyList.get(i).setProfile(babyList.get(i).getProfile().replaceFirst(removePath, ""));
+            }
+        }
+        return babyList;
     }
 }
