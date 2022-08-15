@@ -37,6 +37,8 @@ public class UserCareController{
     private final String fail = "FAIL";
     private final String error = "ERROR";
     private final UserCareService userCareService;
+
+    private final String FILE_PATH = "/tmp/";
     private final int PAGE = 12; //Pagination을 위한 변수
 
     //https://gaemi606.tistory.com/entry/Spring-Boot-multipartform-data-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C-React-Axios-REST-API
@@ -55,7 +57,7 @@ public class UserCareController{
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
             String uploadDate = simpleDateFormat.format(new Date());
-            String profile = save(file, request.getServletContext().getRealPath("/"), uploadDate);
+            String profile = save(file, uploadDate);
 
 
             try {
@@ -99,7 +101,7 @@ public class UserCareController{
                 System.out.println(request.getServletContext().getRealPath("/"));
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
                 String uploadDate = simpleDateFormat.format(new Date());
-                profile = save(file, request.getServletContext().getRealPath("/"), uploadDate);
+                profile = save(file, uploadDate);
             }
 
             baby.setProfile(profile);
@@ -224,12 +226,12 @@ public class UserCareController{
         return result;
     }
 
-    private String save(MultipartFile file, String contextPath, String uploadDate) {
+    private String save(MultipartFile file, String uploadDate) {
 
         try {
             String newFileName = uploadDate + file.getOriginalFilename();
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(contextPath + newFileName);
+            Path path = Paths.get(FILE_PATH + newFileName);
             Files.write(path, bytes);
             return path.toString();
         } catch (Exception e) {
