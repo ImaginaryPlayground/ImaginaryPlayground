@@ -11,6 +11,7 @@ import JungleIntro from "./pages/JungleIntro";
 import UniverseIntro from "./pages/UniverseIntro";
 import UniverseOutro from "./components/universeOutro/UniverseOutro";
 import Christmas from "./pages/Christmas";
+import LoginPage from "./pages/LoginPage";
 import "../src/App.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Map />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/ocean" element={<Ocean />} />
           <Route path="/jungle" element={<Jungle />} />
           <Route path="/jungle-intro" element={<JungleIntro />} />
