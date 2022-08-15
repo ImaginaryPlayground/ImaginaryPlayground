@@ -582,28 +582,28 @@ UniverseIntro .universe_intro_text_box {
 
 .universe .mercury_click_div {
   width: 120px;
-  height: 160px;
+  height: 100px;
   left: 12vw;
   top: 63vh;
 }
 
 .universe .venus_click_div {
   width: 120px;
-  height: 160px;
+  height: 100px;
   left: 2vw;
   top: 46vh;
 }
 
 .universe .mars_click_div {
   width: 110px;
-  height: 160px;
+  height: 100px;
   left: 24vw;
   top: 38vh;
 }
 
 .universe .earth_click_div {
   width: 150px;
-  height: 200px;
+  height: 150px;
   left: 30vw;
   top: 75vh;
 }

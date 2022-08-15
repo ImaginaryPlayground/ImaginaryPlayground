@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div>controll panel</div>
+<img id = "imgId" src ="./child.jpg" />
+<div><canvas id="canvas"></canvas></div>
+<button type="button" onclick="poseOn()">poseOn</button>
+<button type="button" onclick="poseOff()">poseOff</button>
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    let canvas, ctx;
+
+    // 연결할 서버
+    const socket = io();
+    // const socket = io("ws://localhost:3001");
+    // const socket = io("http://192.168.1.101:3000");
+
+    // 연결이 되었을 시
+    socket.on("connect", () => {
+        console.log(socket.id);
+    });
+
+    // 연결이 끊겼을 시
+    socket.on("disconnect", () => {
+        console.log(socket.id); // undefined
+    });
+
+    // 받은 pose 출력
+    socket.on("pose", (className, maxProbability) => {
+        console.log(className, maxProbability);
+    });
+
+    // error! ===========
+    socket.on("poseImg", (img) => {
+        console.log("poseImg");
+        console.log(img);
+        //image = img;
+        
+
+        // 이미지를 URL로 만들어서 전송하고 리엑트에서 복구하면 될 것 같았는데 잘 되지 않음
+        var file = dataURL2File(canvas.toDataURL(),'fileName.png');
+        img.onload = function (){
+            ctx.drawImage(file, 0, 0);
+            var data = canvas.toDataURL('image/png');
+            document.getElementById("ImgId").src = "data:image/;base64,"+img;
+            //console.log(ImgId);
+            
+         //<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAACtCAYAAADSz7.......">
+
+
+        }
+        
+       
+    });
+    // error! ===========
+
+    window.onload = init();
+
+    function init(){
+        canvas = document.getElementById("canvas");
+        canvas.width = 200; canvas.height = 200;
+        ctx = canvas.getContext('2d');
+    }
+
+    // 자세인식 이미지 수신을 위한 poseOn 메시지를 발송 
+    function poseOn() {
+        console.log("poseOn");
+        socket.emit("poseOn");
+    };
+
+    // 자세인식 이미지 수신 중단 위한 poseOff 메시지를 발송 
+    function poseOff() {
+        console.log("poseOff");
+        socket.emit("poseOff");
+    };
+
+    function dataURL2File(dataUrl, fileName){ 
+        var arr = dataUrl.split(',');
+        var mime = arr[0].match(/:(.*?);/)[1]; 
+        var bstr = atob(arr[1]); 
+        var n = bstr.length;
+        var u8arr = new Uint8Array(n); 
+        while(n--){ 
+            u8arr[n] = bstr.charCodeAt(n); 
+        } 
+        return new File([u8arr],fileName,{type:mime}); 
+    }
+
+</script>
+</body>
+</html>

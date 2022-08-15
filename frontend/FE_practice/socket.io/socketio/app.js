@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
   }
   // 추가
   socket.on("chat message", (msg) => {
-    socket.emit("chat message", msg);
+    io.emit("chat message", msg);
     //socket.emit("DistanceAPI", response);
     console.log("distance: " + msg);
   });

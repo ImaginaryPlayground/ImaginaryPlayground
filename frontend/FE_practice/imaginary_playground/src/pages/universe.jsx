@@ -15,6 +15,7 @@ import socketIOClient from "socket.io-client";
 const ENDPOINT = "http://127.0.0.1:4001";
 
 const Universe = () => {
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     planetStartAudio.play();
 
@@ -36,24 +37,33 @@ const Universe = () => {
     // socket.on("FromAPI", (data) => {
     //   console.log(data);
     // });
-    socket.emit("chat message", "hello");
+    socket.emit("chat message");
     socket.on("chat message", (data) => {
-      console.log(data);
-    });
+      console.log(data?.split(" ")[2] - 400);
+      x = 0;
+      y = data?.split(" ")[2] - 400;
 
-    for (let idx = 0; idx < planetTouchObject.length; idx++) {
-      const objectRect = planetTouchObject[idx].getBoundingClientRect();
-      console.log(objectRect);
-      if (
-        x >= objectRect.x &&
-        x <= objectRect.x + objectRect.width &&
-        y >= objectRect.y &&
-        y <= objectRect.y + objectRect.height
-      ) {
-        planetTouchObject[idx].click();
+      for (let idx = 0; idx < planetTouchObject.length; idx++) {
+        const objectRect = planetTouchObject[idx].getBoundingClientRect();
+        //console.log(objectRect);
+        if (
+          y >= objectRect.y &&
+          y <= objectRect.y + objectRect.height &&
+          0 <= objectRect.x &&
+          objectRect.x <= 480
+        ) {
+          if (!isLoading) {
+            planetTouchObject[idx].click();
+            setIsLoading(true);
+          }
+        }
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
       }
-    }
-  }, []);
+    });
+    console.log(y);
+  }, [isLoading]);
 
   const nextStageAudio = new Howl({
     src: ["/assets/audio/universe/우주맵다음스테이지음성.mp3"],
