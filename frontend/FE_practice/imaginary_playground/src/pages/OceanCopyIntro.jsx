@@ -47,7 +47,7 @@ const OceanCopyIntro = () => {
           <OceanIntroDolphin id={"OceanIntroDolphin"} />
         </div>
       )}
-      <div className="title_box">
+      {/* <div className="title_box">
         <h2 className="title move_down_up">
           <span style={{ color: "mediumblue", fontWeight: "bold" }}>
             미지의 바다
@@ -57,41 +57,45 @@ const OceanCopyIntro = () => {
           </span>
           로 가는중!
         </h2>
-      </div>
+      </div> */}
+      <img src="/assets/ocean/ocean-title.png" alt="" className="ocean-title animate__animated animate__fadeIn"/>
       {isThreeSeconds && (
-        <div className="text_box">
-          <div
-            className="attack_effect"
-            style={{ display: "block", left: "-103%", top: "-102%" }}
-          ></div>
-          <div
-            className="attack_effect"
-            style={{ display: "block", left: "97%", top: "-102%" }}
-          ></div>
-          <div className="text_box_bg">
-            <span style={{ color: "mediumblue", fontWeight: "bold" }}>
-              미지의 바다
-            </span>{" "}
-            <span style={{ color: "hotpink", fontWeight: "bold" }}>
-              "언더더씨"
-            </span>
-            에는 무시무시한{" "}
-            <span style={{ color: "red", fontWeight: "bold" }}>상어</span>들과
-            귀여운{" "}
-            <span style={{ color: "pink", fontWeight: "bold" }}>돌고래</span>
-            들이 살고있어!
-            <div>
-              벌써부터{" "}
-              <span style={{ color: "maroon", fontWeight: "bold" }}>기대</span>
-              가 되는걸!!
-            </div>
-            <div>
-              지금 바로{" "}
-              <span style={{ color: "brown", fontWeight: "bold" }}>출발</span>
-              하자!!
-            </div>
-          </div>
-        </div>
+        <>
+          <img src="/assets/ocean/dolly-text.png" alt="" className="dolly-text animate__animated animate__tada"/>
+        </>
+        // <div className="text_box">
+        //   <div
+        //     className="attack_effect"
+        //     style={{ display: "block", left: "-103%", top: "-102%" }}
+        //   ></div>
+        //   <div
+        //     className="attack_effect"
+        //     style={{ display: "block", left: "97%", top: "-102%" }}
+        //   ></div>
+        //   <div className="text_box_bg">
+        //     <span style={{ color: "mediumblue", fontWeight: "bold" }}>
+        //       미지의 바다
+        //     </span>{" "}
+        //     <span style={{ color: "hotpink", fontWeight: "bold" }}>
+        //       "언더더씨"
+        //     </span>
+        //     에는 무시무시한{" "}
+        //     <span style={{ color: "red", fontWeight: "bold" }}>상어</span>들과
+        //     귀여운{" "}
+        //     <span style={{ color: "pink", fontWeight: "bold" }}>돌고래</span>
+        //     들이 살고있어!
+        //     <div>
+        //       벌써부터{" "}
+        //       <span style={{ color: "maroon", fontWeight: "bold" }}>기대</span>
+        //       가 되는걸!!
+        //     </div>
+        //     <div>
+        //       지금 바로{" "}
+        //       <span style={{ color: "brown", fontWeight: "bold" }}>출발</span>
+        //       하자!!
+        //     </div>
+        //   </div>
+        // </div>
       )}
       {/* 지금부터 배경 요소 시작 */}
       {/* 양옆 암벽 */}
