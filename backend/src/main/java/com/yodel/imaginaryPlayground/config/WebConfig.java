@@ -18,6 +18,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/image_view/**")
-                .addResourceLocations("file:"); //리눅스 root에서 시작하는 폴더 경로
+                .addResourceLocations("file:/tmp/"); //리눅스 root에서 시작하는 폴더 경로
     }
 }
