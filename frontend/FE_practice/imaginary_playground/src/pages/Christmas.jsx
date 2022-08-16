@@ -36,7 +36,7 @@ const Christmas = () => {
   );
   const christmasMapSound = new Howl({
     src: ["/assets/audio/christmas/christmas.mp3"],
-    volume: 0.1,
+    volume: 0.7,
     onend: () => {},
   });
 
@@ -141,6 +141,7 @@ const Christmas = () => {
 
   return (
     <div className="christmas">
+
       {/* 뒤돌아 보세요 텍스트 띄우기 전 */}
       {!backSee ? (
         <>
@@ -160,7 +161,7 @@ const Christmas = () => {
               </div>
               <div className="kid_box_2 animate__animated animate__tada">
                 <div className="img_box">
-                  <img src={`https://${kidsData[2]?.profile}`} alt="" />
+                  <img src={`https://${kidsData[1]?.profile}`} alt="" />
                 </div>
                 <div className="kid_text">{kidsData[1]?.character}</div>
               </div>
