@@ -125,7 +125,7 @@ const KidsInfoComp = () => {
     const formData = new FormData();
 
     if (state?.isEdit) {
-      console.log("수정API", kidInfoData);
+      console.log("수정API", modifiedData);
 
       //blob객체의 타입을 application/json 형식으로 만들기
       const blob = new Blob([JSON.stringify(modifiedData)], {
@@ -190,8 +190,12 @@ const KidsInfoComp = () => {
         .then((res) => {
           console.log(res);
           //받은 데이터들 등록
+
           if (res.data.status === "SUCCESS") {
-            dispatch({ type: "SET_SELECTED_KID", data: kidInfoData });
+            dispatch({
+              type: "SET_SELECTED_KID",
+              data: { ...kidInfoData, id: res.data.data.id },
+            });
             dispatch({
               type: "SET_CURRENT_PAGE",
               data: { ...reducerCurrentPage, page: 1, scrollY: 0 },
@@ -280,7 +284,9 @@ const KidsInfoComp = () => {
         <Grid item width={"80%"} textAlign="center">
           <img
             src={
-              kidInfoData?.profile
+              kidInfoData?.preview
+                ? kidInfoData?.preview
+                : kidInfoData?.profile
                 ? `https://${kidInfoData.profile}`
                 : "/img/KidsInfoPage/default_img.jpg"
             }
