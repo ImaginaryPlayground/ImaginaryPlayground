@@ -3,18 +3,18 @@
 /* 상어떼가 나타났다 */
 .ocean_copy {
   /* font-family: "Single Day", cursive; */
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
 }
 
 .ocean_copy .title {
   /* font-family: "Single Day", cursive; */
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 4vw;
 }
 
 .ocean_copy .complete_title {
   /* font-family: "Single Day", cursive; */
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 4vw;
   left: 22%;
   top: 13%;
@@ -23,7 +23,7 @@
 
 .ocean_copy .dance_start_text {
   /* font-family: "Single Day", cursive; */
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 80px;
   left: 30%;
   top: 12%;
@@ -83,7 +83,7 @@
 
 .ocean_copy .dance_before {
   /* font-family: "Single Day", cursive; */
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
 
   font-size: 80px;
   left: 27%;
@@ -107,7 +107,7 @@
 
 .ocean_copy .countdown_box {
   /* font-family: "Single Day", cursive; */
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
 
   font-size: 50px;
   left: 48%;
@@ -415,9 +415,11 @@
 .ocean_copy .sing_common {
   display: none;
   font-size: 3vw;
-  margin-bottom: 20px;
+  margin-top: 40px;
+
   word-break: keep-all;
   text-align: center;
+  line-height: 120px;
 }
 
 .ocean_copy .mt-10 {
@@ -483,14 +485,12 @@
     /* transform: scale(1.2); */
     /* size:120%; */
     top: -12%;
-
   }
 
   100% {
     /* transform: scale(1); */
     /* size: 100%; */
     top: -11%;
-
   }
 }
 
