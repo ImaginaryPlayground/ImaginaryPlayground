@@ -42,4 +42,12 @@ numpy.distutils.system_info.NotFoundError: No BLAS/LAPACK libraries found.
 
 진행후 설치가 진행되기는 하는데.. 이상하게도 build에만 4시간이 걸리고 있어서 중간에 취소하였다;
 
-face_recognition 라이브러리를 활용하여 만든 [facial_recognition](https://github.com/carolinedunn/facial_recognition)이 사용하기 좋아보이고 [설치하는 가이드](https://www.tomshardware.com/how-to/raspberry-pi-facial-recognition)도 친절하게 있어서 이쪽으로 시도해보려고 한다.
+끄고 킨 다음 다시 설치를 시도해보니 새로운 에러가 발생하였다. 더 슬픈 점은 어떤 내용을보고 해결했는지 조금 햇갈린다는 점이다.
+
+[이슈](https://github.com/ansible-community/molecule/issues/1966)에 적혀있는 `curl https://bootstrap.pypa.io/get-pip.py | python -`을 사용해서 해결한 것인지, [스택오버플로우](https://stackoverflow.com/questions/38865708/how-can-i-run-python-scikit-learn-on-raspberry-pi)의 update와 특정 라이브러리를 설치해서 해결한 것인지 확실하지가 않다.
+
+그리고 다시 설치하는데.. 4시간 30분이 걸렸고 그 동안 필자는 꼭 [knn을 활용한 코드](https://github.com/ageitgey/face_recognition/blob/master/examples/face_recognition_knn.py)가 아니여도 인코딩(encoding)이라는 방식을 통해 [개인적으로 아는 사람을 학습시키고 얼굴인식을 진행](https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py)할 수 있다는 것을 알았다.
+
+즉, scikit-learn을 꼭 설치할 필요가 없었.. 크흑.ㄱㄹ.
+
+그래도 내용을 잘 이해한 덕분에 facial_recognition에서 작동되는 코드가 필자가 원하는 코드라는 것을 알 수 있었고 약간의 코드만 변경해서 원하는 기능을 얻을 수 있었다.
