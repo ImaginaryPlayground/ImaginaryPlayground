@@ -31,7 +31,7 @@
 
 ## 🖥 서비스 아키텍처
 
-![image-20220815213650352](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220815213650352.png)
+![image-20220815213650352](.\image\backend_structure.png)
 
 
 
