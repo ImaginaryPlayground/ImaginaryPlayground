@@ -1,4 +1,3 @@
-
 .explosion {
 	position: absolute;
 	/* left: -2px;
@@ -47,6 +46,7 @@
 }
 
 .explosion::before {
+	animation: explosion 1.5s ease-in-out infinite;
 	content: '';
 	position: absolute;
 	left: 0;
