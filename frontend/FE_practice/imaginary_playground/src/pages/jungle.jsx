@@ -55,6 +55,7 @@ const Jungle = () => {
   } = useSpeechRecognition();
   const goForse = useRef(false);
   const navigate = useNavigate();
+
   //초기 로딩시 음성 시작
   useEffect(() => {
     setTimeout(() => {
@@ -498,7 +499,7 @@ const Jungle = () => {
 
   //늑대 울음 소리
   const wolfSound = new Howl({
-    src: ["/assets/audio/jungle/늑대 울음소리.m4a"],
+    src: ["/assets/audio/jungle/늑대 울음소리.wav"],
     sprite: {
       key1: [0, 10000, true],
     },

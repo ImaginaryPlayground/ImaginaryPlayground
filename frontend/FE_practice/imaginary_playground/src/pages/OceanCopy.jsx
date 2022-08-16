@@ -969,12 +969,12 @@ const OceanCopy = () => {
               <div>
                 <EndGameMainDolphin id={"endGame_dolphin_0"} />
               </div>
-              <h2
+              <div
                 className="complete_title endGame_text"
                 style={{ display: "block" }}
                 id="endGame_text1"
               >
-                <div>
+                {/* <div>
                   너무 <span style={{ color: "midnightblue" }}>재밌었어</span>
                   !!
                 </div>
@@ -991,14 +991,17 @@ const OceanCopy = () => {
                     또 <span style={{ color: "red" }}>상어</span>가 괴롭힌다면
                     너가 와서 도와줘야 해!
                   </div>
-                </div>
-              </h2>
-              <h2
+                </div> */}
+                <img src="/assets/ocean/dolly-complete1.png" alt="" className="dolly-complete animate__animated animate__pulse" />
+              </div>
+              <div
                 className="complete_title endGame_text"
                 style={{ display: "none" }}
                 id="endGame_text2"
               >
-                <div>
+                <img src="/assets/ocean/dolly-complete2.png" alt="" className="dolly-complete animate__animated animate__pulse" />
+
+                {/* <div>
                   항상 <span style={{ color: "midnightblue" }}>건강해</span>!!
                 </div>
                 <div style={{ fontSize: "55px", marginTop: "20px" }}>
@@ -1023,8 +1026,8 @@ const OceanCopy = () => {
                     우리 꼭 <span style={{ color: "limegreen" }}>언젠가</span>{" "}
                     다시 볼 수 있기를...
                   </div>
-                </div>
-              </h2>
+                </div> */}
+              </div>
             </>
           )}
 
@@ -1081,9 +1084,9 @@ const OceanCopy = () => {
           </div>
 
           {/* 홈으로 돌아가기 버튼 */}
-          <button onClick={() => navigate("/")} className="home-button">
-            돌아가기
-          </button>
+
+          <img src="/assets/map/minimap.png" alt="" className="minimap"/>
+
         </>
       ) : (
         <>
