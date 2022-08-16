@@ -228,7 +228,7 @@ const OceanCopy = () => {
 
         if (
           motionStart1 &&
-          className === "hands_up" &&
+          className === "pose1" &&
           maxProbability == 1.0 &&
           !motion1Success
         ) {
@@ -250,7 +250,7 @@ const OceanCopy = () => {
           // }, 5000);
         } else if (
           motionStart2 &&
-          className === "bong_pose" &&
+          className === "pose2" &&
           maxProbability == 1.0 &&
           !motion2Success
         ) {
@@ -271,7 +271,7 @@ const OceanCopy = () => {
         } else if (
           motionStart3 &&
           !motion3Success &&
-          className === "idle" &&
+          className === "pose3" &&
           maxProbability == 1.0
         ) {
           socket.emit("poseOff");
