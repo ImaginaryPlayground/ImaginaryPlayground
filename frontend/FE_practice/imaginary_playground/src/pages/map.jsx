@@ -70,7 +70,7 @@ const Map = () => {
       <img src="/assets/map/jungle-banner.png" alt="" className="jungle-bbanner"/>
       <img src="/assets/map/ocean-banner.png" alt="" className="ocean-banner"/>
       <img src="/assets/map/universe-banner.png" alt="" className="universe-banner"/>
-      <img src="/assets/map/mini-banner.png" alt="" className="christmas-banner"/>
+      <img src="/assets/map/christmas-banner.png" alt="" className="christmas-banner"/>
 
       <img src="/assets/map/foot.png" alt="" className="map-foot"/>
 

@@ -10,9 +10,9 @@ export const SampleglTF2 = ({ id }) => {
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
   dom.style.position = "absolute";
-  dom.style.left = "32%";
-  dom.style.top = "33%";
-  dom.style.zIndex = "1000";
+  dom.style.left = "73%";
+  dom.style.top = "40%";
+  dom.style.zIndex = "1000000";
   dom.setAttribute("class", "appear");
   dom.style.scale = "160%";
 
