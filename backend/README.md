@@ -31,7 +31,7 @@
 
 ## 🖥 서비스 아키텍처
 
-![image-20220815213650352](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220815213650352.png)
+![architecture](C:\Users\multicampus\Desktop\ssafy\S07P12D204\backend\지식공유\architecture.png)
 
 
 
@@ -189,6 +189,9 @@ POST     http://localhost:8080/question/lookup/all
 GET      http://localhost:8080/question/lookup/all
 GET      http://localhost:8080/question/lookup/{id}
 
+//TestController
+GET      http://localhost:8080/test/
+
 //UserCareController
 POST     http://localhost:8080/user/care/
 PUT      http://localhost:8080/user/care/
@@ -228,6 +231,7 @@ java
     │	├── ClovaSpeechController
     │	├── HospitalController
     │	├── QuestionController
+    │	├── TestController
     │	├── UserCareController
     │	└── UserController
     └── mapper
@@ -259,6 +263,11 @@ java
     │   │	├── IdVO
     │   │	└── PasswordVO
     ├── Service
+    │   ├── jwt
+    │   │	└── CustomUserDetailService
+    │   ├── oauth
+    │   │	└── CustomOAuth2UserService
+    │   ├── oauth
     │   ├── AdminService
     │   ├── AdminServiceImpl
     │   ├── AnswerService
@@ -282,7 +291,8 @@ resources
  		├── question.xml
 		├── user.xml
 		└── usercare.xml
-├── application.properties
-└── application-oauth.properties
+├── application-oauth.properties
+├── application-prod.properties
+└── application.properties
 ```
 
