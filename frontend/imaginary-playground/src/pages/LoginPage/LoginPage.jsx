@@ -73,6 +73,9 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
+    if (localStorage.getItem("isLogin") === "true") {
+      navigate("/");
+    }
     initializeNaverLogin();
   }, []);
 
@@ -131,7 +134,7 @@ const LoginPage = () => {
           }
 
           axios({
-            url: `${config.api}/user/token`, //마지막은 페이지번호
+            url: `${config.api}/user/token`,
             method: "POST",
             headers: {
               Auth: res.data.data,
@@ -150,7 +153,9 @@ const LoginPage = () => {
                 hospital_name: loginData.hospital_name,
                 hospital_address: loginData.hospital_address,
                 provider: loginData.provider,
+                type: loginData.type,
               };
+              localStorage.setItem("isLogin", "true");
               dispatch({ type: "SET_LOGIN_USER", data: loginUserDataMapping });
 
               //홈으로 이동
@@ -186,6 +191,7 @@ const LoginPage = () => {
       justifyContent={"center"}
       alignItems={"center"}
       display="flex"
+      flexWrap={"nowrap"}
       container
     >
       <Grid item className="login_banner">
@@ -278,7 +284,7 @@ const LoginPage = () => {
       </Grid>
       <Grid item className="sns_login_btn">
         <img
-          src="/iconFolder/SnsLogin/kakao-talk.png"
+          src="/iconFolder/SnsLogin/kakao_talk.png"
           alt="카카오톡"
           onClick={() => {
             window.location.href = KAKAO_AUTH_URL;
@@ -286,7 +292,7 @@ const LoginPage = () => {
         />
 
         <img
-          src="/iconFolder/SnsLogin/free-icon-google.png"
+          src="/iconFolder/SnsLogin/free_icon_google.png"
           alt="구글"
           onClick={() => {
             window.location.href = GOOGLE_AUTH_URL;
