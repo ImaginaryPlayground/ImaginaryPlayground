@@ -12,7 +12,7 @@ export const SampleglTF2 = ({ id }) => {
   dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
   dom.style.left = "17%";
-  dom.style.top = "22%";
+  dom.style.top = "25%";
   dom.style.zIndex = "1";
   // dom.setAttribute("class", "appear");
   const scene = new THREE.Scene();
@@ -50,7 +50,7 @@ export const SampleglTF2 = ({ id }) => {
       mixer1 = new THREE.AnimationMixer(model);
       const clips = gltf.animations;
 
-      const clip = THREE.AnimationClip.findByName(clips, "01_Run");
+      const clip = THREE.AnimationClip.findByName(clips, "02_walk");
       const action = mixer1.clipAction(clip);
       action?.play();
     },

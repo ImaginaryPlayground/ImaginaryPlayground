@@ -9,7 +9,7 @@ import { Howl, Howler } from "howler";
 import { useNavigate } from "react-router";
 import Monkey from "../components/jungle/Monkey";
 import HideLion from "../components/jungle/HideLion";
-import Sample4 from "../components/jungle/Sample4";
+import HideWolf from "../components/jungle/HideWolf";
 import HideElephant from "../components/jungle/HideElephant";
 
 import ToriMain from "../components/jungle/ToriMain";
@@ -746,9 +746,9 @@ const Jungle = () => {
         <HideLion id={`lion_0`} />
       </div>
       {/* 숨겨진 늑대 로딩 */}
-      {/* <div>
-        <Sample4 id={`wolf_0`} />
-      </div> */}
+      <div>
+        <HideWolf id={`wolf_0`} />
+      </div>
 
       {/* 숨겨진 코끼리 로딩 */}
       <div>
