@@ -413,7 +413,7 @@ const OceanCopy = () => {
         setTimeout(() => {
           MotionStartBeforeAudio.play();
         }, 700);
-      }, 60000);
+      }, 61000);
 
       //노래 가사 div에 접근
       const sing_1 = document.getElementById("sing_1");
@@ -424,60 +424,60 @@ const OceanCopy = () => {
       const sing_6 = document.getElementById("sing_6");
       const sing_7 = document.getElementById("sing_7");
       const sing_8 = document.getElementById("sing_8");
-      const sing_9 = document.getElementById("sing_9");
-      const sing_10 = document.getElementById("sing_10");
-      const sing_11 = document.getElementById("sing_11");
-      const sing_12 = document.getElementById("sing_12");
-      const sing_13 = document.getElementById("sing_13");
+      // const sing_9 = document.getElementById("sing_9");
+      // const sing_10 = document.getElementById("sing_10");
+      // const sing_11 = document.getElementById("sing_11");
+      // const sing_12 = document.getElementById("sing_12");
+      // const sing_13 = document.getElementById("sing_13");
 
       setTimeout(() => {
         sing_1.style.display = "none";
         sing_2.style.display = "block";
-      }, 7600);
+      }, 8800);
       setTimeout(() => {
         sing_2.style.display = "none";
         sing_3.style.display = "block";
-      }, 13700);
+      }, 14500);
       setTimeout(() => {
         sing_3.style.display = "none";
         sing_4.style.display = "block";
-      }, 18900);
+      }, 22500);
       setTimeout(() => {
         sing_4.style.display = "none";
         sing_5.style.display = "block";
-      }, 24900);
+      }, 29500);
       setTimeout(() => {
         sing_5.style.display = "none";
         sing_6.style.display = "block";
-      }, 29500);
+      }, 39500);
       setTimeout(() => {
         sing_6.style.display = "none";
         sing_7.style.display = "block";
-      }, 36500);
+      }, 46300);
       setTimeout(() => {
         sing_7.style.display = "none";
         sing_8.style.display = "block";
-      }, 40200);
-      setTimeout(() => {
-        sing_8.style.display = "none";
-        sing_9.style.display = "block";
-      }, 43500);
-      setTimeout(() => {
-        sing_9.style.display = "none";
-        sing_10.style.display = "block";
-      }, 45500);
-      setTimeout(() => {
-        sing_10.style.display = "none";
-        sing_11.style.display = "block";
-      }, 48500);
-      setTimeout(() => {
-        sing_11.style.display = "none";
-        sing_12.style.display = "block";
-      }, 52000);
-      setTimeout(() => {
-        sing_12.style.display = "none";
-        sing_13.style.display = "block";
-      }, 54500);
+      }, 53000);
+      // setTimeout(() => {
+      //   sing_8.style.display = "none";
+      //   sing_9.style.display = "block";
+      // }, 43500);
+      // setTimeout(() => {
+      //   sing_9.style.display = "none";
+      //   sing_10.style.display = "block";
+      // }, 45500);
+      // setTimeout(() => {
+      //   sing_10.style.display = "none";
+      //   sing_11.style.display = "block";
+      // }, 48500);
+      // setTimeout(() => {
+      //   sing_11.style.display = "none";
+      //   sing_12.style.display = "block";
+      // }, 52000);
+      // setTimeout(() => {
+      //   sing_12.style.display = "none";
+      //   sing_13.style.display = "block";
+      // }, 54500);
     },
   });
 
@@ -847,9 +847,7 @@ const OceanCopy = () => {
                 !motionStart3 &&
                 !motionStartBefore &&
                 !endGameAudio && (
-                  <div className="dance_before">
-                    이제 곧 돌리가 춤을 춥니다
-                  </div>
+                  <div className="dance_before">이제 곧 돌리가 춤을 춥니다</div>
                 )}
 
               {/* 카운트다운 박스 */}
@@ -1034,33 +1032,38 @@ const OceanCopy = () => {
           <div className="sing_text" id="sing_box">
             {/* <div className="sing_title">노래 가사</div> */}
             <div className="sing_1  sing_common" id="sing_1">
-              돌고래와 춤을 춰요.
+              휠릴릴리 휠릴릴리
               <br />
-              태양을 향해
-              쑥쑥쑥, 쑥쑥쑥,
+              휠릴릴릴릴리 휠릴리
             </div>
             <div className="sing_2  sing_common" id="sing_2">
-              바다와 함께 으쓱쓱,으쓱쓱, 다같이 함께 콩콩콩, 콩콩콩
+              휠릴릴리 휠릴릴리 <br /> 노래하는 돌고래
             </div>
             <div className="sing_3  sing_common" id="sing_3">
-              물고기도 신나 춤을 춰요 하늘을 향해 쑥쑥쑥, 쑥쑥쑥,
+              재롱둥이 돌고래 휠릴릴릴리 <br />
+              친구들아 모여라 휠릴릴릴리
             </div>
             <div className="sing_4  sing_common" id="sing_4">
-              파도와 함께 으쓱쓱, 으쓱쓱, 다같이 함께 콩콩콩, 콩콩콩
+              휠 릴릴리 휠 릴릴리 <br />
+              빙글빙글 돌아 점프 점프 점프
             </div>
             <div className="sing_5  sing_common" id="sing_5">
-              미역도 신나 춤을 춰요 별을 향해 쑥쑥쑥, 쑥쑥쑥,
+              휠 릴릴리 휠 릴릴리 <br />
+              파란 하늘 높이 점프 점프 점프
             </div>
             <div className="sing_6  sing_common" id="sing_6">
-              돌고래와 함께 으쓱쓱, 으쓱쓱, 다같이 함께 콩콩콩, 콩콩콩
+              재롱둥이 돌고래 휠릴릴릴리 <br />
+              친구들아 모여라 휠릴릴릴리
             </div>
             <div className="sing_7  sing_common" id="sing_7">
-              언더더씨 돌고래 마을에 오신 것을 환영합니다.
+              휠릴릴리 휠릴릴리 <br />
+              휘파람 불면서 랄랄라
             </div>
             <div className="sing_8  sing_common" id="sing_8">
-              여기는 웃음이 넘치는 돌고래 마을
+              휠릴릴리 휠릴릴리 <br />
+              목소리 높여서 랄랄라
             </div>
-            <div className="sing_9  sing_common" id="sing_9">
+            {/* <div className="sing_9  sing_common" id="sing_9">
               모두가 친구되는 돌고래마을
             </div>
             <div className="sing_10  sing_common" id="sing_10">
@@ -1074,7 +1077,7 @@ const OceanCopy = () => {
             </div>
             <div className="sing_13 sing_common" id="sing_13">
               뚜뚜뚜루 뚜뚜루 뚜뚜
-            </div>
+            </div> */}
           </div>
 
           {/* 홈으로 돌아가기 버튼 */}
