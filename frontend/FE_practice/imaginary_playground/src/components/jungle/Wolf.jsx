@@ -11,8 +11,8 @@ export const SampleglTF2 = ({ id }) => {
   dom.setAttribute("id", `${id}`);
   dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "17%";
-  dom.style.top = "25%";
+  dom.style.left = "20%";
+  dom.style.top = "14%"; 
   dom.style.zIndex = "1";
   // dom.setAttribute("class", "appear");
   const scene = new THREE.Scene();
@@ -43,8 +43,8 @@ export const SampleglTF2 = ({ id }) => {
     function (gltf) {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
-      gltf.scene.scale.multiplyScalar(18);
-      model.position.set(4, 7, 16);
+      gltf.scene.scale.multiplyScalar(5.5);
+      camera.position.set(19, 10, 30);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);

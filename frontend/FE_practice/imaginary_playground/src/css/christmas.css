@@ -34,6 +34,7 @@
   width: 100vw;
   height: 100vh;
   opacity: 60%;
+  top: -8vh;
 }
 
 @keyframes moving-rudolph {
@@ -133,14 +134,12 @@
 }
 
 /* 초기 산타 말풍선 */
-.christmas .santa_text_box {
+.santa-intro {
   position: absolute;
-  left: 65%;
-  top: 30%;
-  width: 500px;
-  border: 10px solid snow;
-  color: snow;
-  font-size: 30px;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  top: -20vh;
 }
 
 /* 아이박스 */
@@ -149,46 +148,77 @@
   position: absolute;
   left: 10%;
   top: 20%;
-  width: 300px;
-  color: snow;
+  width: 23vw;
+  /* height: 40vh; */
+  padding: 1vw;
+  color: black;
+  background-color: white;
   z-index: 10000;
-  font-size: 20px;
+  font-size: 2vw;
+  /* --animate-duration: 1.5s; */
+  box-shadow: 0.5vw 0.5vw 0.5vw black;
 }
 
 .christmas .kid_box_2 {
   position: absolute;
-  left: 80%;
-  top: 5%;
-  width: 300px;
-  color: snow;
+  left: 66%;
+  top: 20%;
+  width: 23vw;
+  padding: 1vw;
+  color: black;
+  background-color: white;
   z-index: 10000;
-  font-size: 20px;
+  font-size: 2vw;
+  --animate-duration: 1.2s;
+  box-shadow: 0.5vw 0.5vw 0.5vw black;
 }
 
 .christmas .kid_box_3 {
   position: absolute;
-  left: 50%;
+  left: 38%;
   top: 20%;
-  width: 300px;
-  color: snow;
+  width: 23vw;
+  padding: 1vw;
+  color: black;
+  background-color: white;
   z-index: 10000;
-  font-size: 20px;
+  font-size: 2vw;
+  --animate-duration: 1.1s;
+  box-shadow: 0.5vw 0.5vw 0.5vw black;
 }
 
 .christmas img {
   width: 100%;
 }
 
+.kid_text {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+.rope {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+.color {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000000;
+}
+
 /* 메인산타 말풍선 */
 .christmas .mainSanta_text_box {
   position: absolute;
-  left: 60%;
-  top: 60%;
-  width: 500px;
-  border: 10px solid black;
-  color: black;
-  font-size: 30px;
+  left: 23vw;
+  top: 60vh;
+  /* border: 10px solid black; */
+  color: white;
+  font-size: 5vw;
   z-index: 1000;
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 .christmas .text_countdown {
@@ -219,12 +249,13 @@
 
 .christmas .backSee_text_box {
   position: absolute;
-  left: 29%;
-  top: 54%;
-  width: 800px;
-  border: 10px solid black;
+  left: 33%;
+  top: 30%;
+  /* width: 800px; */
+  /* border: 10px solid black; */
   z-index: 1000;
-  font-size: 100px;
+  font-size: 5vw;
   font-weight: bold;
   color: mintcream;
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }

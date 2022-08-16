@@ -147,41 +147,41 @@ const Christmas = () => {
           {/* 시작음성이 끝나기 전과 끝나고 난 후 */}
           {startSantaAudio ? (
             <>
-              <div className="santa_text_box">
-                지성이, 지웅이, 지후를 위해 우리가 특별한 공간을 만들었어!
-              </div>
+              <img src="/assets/christmas/santa-intro.png" alt="" className="santa-intro animate__animated animate__bounce"/>
               <Santa id={"startSanta"}></Santa>
             </>
           ) : (
             <>
-              <div className="kid_box_1 move_down_up">
+              <div className="kid_box_1 animate__animated animate__tada">
                 <div className="img_box">
                   <img src={`https://${kidsData[0]?.profile}`} alt="" />
                 </div>
-                <div>{kidsData[0]?.character}</div>
+                <div className="kid_text">{kidsData[0]?.character}</div>
               </div>
-              <div className="kid_box_2 move_down_up">
-                <div className="img_box">
-                  <img src={`https://${kidsData[1]?.profile}`} alt="" />
-                </div>
-                <div>{kidsData[1]?.character}</div>
-              </div>
-              <div className="kid_box_3 move_down_up">
+              <div className="kid_box_2 animate__animated animate__tada">
                 <div className="img_box">
                   <img src={`https://${kidsData[2]?.profile}`} alt="" />
                 </div>
-                <div>{kidsData[2]?.character}</div>
+                <div className="kid_text">{kidsData[1]?.character}</div>
               </div>
+              <div className="kid_box_3 animate__animated animate__tada">
+                <div className="img_box">
+                  <img src={`https://${kidsData[2]?.profile}`} alt="" />
+                </div>
+                <div className="kid_text">{kidsData[2]?.character}</div>
+              </div>
+              <img src="/assets/christmas/rope.png" alt="" className="rope animate__animated animate__pulse"/>
+              <img src="/assets/christmas/color.png" alt="" className="color animate__animated animate__pulse"/>
 
               {/* 메인산타 등장 */}
               {isMainSanta && (
                 <div>
                   <MainSanta id="mainSanta" />
 
-                  {!giveMeGift ? (
-                    <div className="mainSanta_text_box appear">
-                      지성아, 지웅아, 지후야 너넬 위해 선물을 준비했어!
-                    </div>
+                  {!giveMeGift ? (<></>
+                    // <div className="mainSanta_text_box appear">
+                    //   지성아, 지웅아, 지후야 너넬 위해 선물을 준비했어!
+                    // </div>
                   ) : (
                     <div
                       className="mainSanta_text_box text_countdown"
@@ -197,7 +197,7 @@ const Christmas = () => {
         </>
       ) : (
         <>
-          <div className="backSee_text_box text_countdown">
+          <div className="backSee_text_box animate__animated animate__flash">
             뒤를 돌아 보세요!
           </div>
         </>

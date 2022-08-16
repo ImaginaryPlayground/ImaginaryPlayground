@@ -12,7 +12,7 @@ export const SampleglTF2 = ({ id }) => {
   dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
   dom.style.left = "50%";
-  dom.style.top = "22%";
+  dom.style.top = "14%"; 
   dom.style.zIndex = "3";
   dom.setAttribute("class", "appear");
   const scene = new THREE.Scene();
@@ -32,7 +32,7 @@ export const SampleglTF2 = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(12, 12, 30);
+  camera.position.set(15, 10, 30);
 
   const assetLoader = new GLTFLoader();
 
@@ -43,7 +43,7 @@ export const SampleglTF2 = ({ id }) => {
     function (gltf) {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
-      gltf.scene.scale.multiplyScalar(15);
+      gltf.scene.scale.multiplyScalar(2);
       model.position.set(10, 7, 16);
       scene.add(model);
 
