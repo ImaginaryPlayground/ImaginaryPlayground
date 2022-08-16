@@ -9,12 +9,12 @@ export const SampleglTF2 = ({ id }) => {
 
   const dom = document.body.appendChild(renderer.domElement);
   dom.setAttribute("id", `${id}`);
+  dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "-38%";
-  dom.style.top = "14%";
-  dom.style.zIndex = "-28";
+  dom.style.left = "50%";
+  dom.style.top = "22%";
+  dom.style.zIndex = "3";
   dom.setAttribute("class", "appear");
-
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -32,7 +32,7 @@ export const SampleglTF2 = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(5, 6, 24);
+  camera.position.set(12, 12, 30);
 
   const assetLoader = new GLTFLoader();
 
@@ -43,14 +43,14 @@ export const SampleglTF2 = ({ id }) => {
     function (gltf) {
       model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
-      // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(8, 6, 20);
+      gltf.scene.scale.multiplyScalar(15);
+      model.position.set(10, 7, 16);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
       const clips = gltf.animations;
 
-      const clip = THREE.AnimationClip.findByName(clips, "metarigAction");
+      const clip = THREE.AnimationClip.findByName(clips, "02_walk");
       const action = mixer1.clipAction(clip);
       action?.play();
     },
@@ -77,7 +77,7 @@ export const SampleglTF2 = ({ id }) => {
   }
 };
 
-const HideWolf = ({ id }) => {
+const Wolf = ({ id }) => {
   return (
     <>
       <SampleglTF2 id={id}></SampleglTF2>
@@ -85,4 +85,4 @@ const HideWolf = ({ id }) => {
   );
 };
 
-export default React.memo(HideWolf);
+export default React.memo(Wolf);

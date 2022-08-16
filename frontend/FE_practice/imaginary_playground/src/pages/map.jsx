@@ -48,44 +48,7 @@ const Map = () => {
         allow="autoplay;"
         className="audio"
       ></iframe>
-      <button
-        onClick={() => navigate("/jungle")}
-        style={{ backgroundColor: "green" }}
-        className="jungle-button"
-      >
-        정글맵
-      </button>
-      <button
-        onClick={() => navigate("/jungle-intro")}
-        style={{ background: "yellow" }}
-        className="jungle-intro-button"
 
-      >
-        정글 인트로
-      </button>
-      {/* <button
-        onClick={() => navigate("/ocean-intro")}
-        style={{ backgroundColor: "skyblue" }}
-        className="ocean-real-button"
-
-      >
-        언더더씨최적화
-      </button> */}
-      {/* <button
-        onClick={() => navigate("/universe-intro")}
-        style={{ backgroundColor: "yellowgreen" }}
-        className="universe-intro-button"
-        
-      >
-        우주 인트로
-      </button>
-      <button
-        onClick={() => navigate("/universe")}
-        style={{ backgroundColor: "gray" }}
-        className="universe-button"
-      >
-        우주
-      </button> */}
 
     <MapRabbit id={'mapRabbit'}></MapRabbit>
 
