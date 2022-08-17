@@ -192,7 +192,7 @@
 }
 
 .kid_text {
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
 }
 
 .rope {
@@ -215,10 +215,11 @@
   left: 23vw;
   top: 60vh;
   /* border: 10px solid black; */
-  color: white;
+  color: yellowgreen;
+  font-weight: bold;
   font-size: 5vw;
-  z-index: 1000;
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  z-index: 100000;
+  font-family: "IBM Plex Sans KR", sans-serif;
 }
 
 .christmas .text_countdown {
@@ -257,5 +258,5 @@
   font-size: 5vw;
   font-weight: bold;
   color: mintcream;
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
 }
