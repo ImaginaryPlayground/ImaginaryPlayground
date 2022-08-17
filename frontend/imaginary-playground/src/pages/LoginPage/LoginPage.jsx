@@ -44,7 +44,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 const { naver } = window;
-const imgUrl = process.env.PUBLIC_URL || ""
+const imgUrl = process.env.PUBLIC_URL || "";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -285,7 +285,7 @@ const LoginPage = () => {
       </Grid>
       <Grid item className="sns_login_btn">
         <img
-          src={`${imgUrl}/iconFolder/SnsLogin/kakao-talk.png`}
+          src={`${imgUrl}/iconFolder/SnsLogin/kakao_talk.png`}
           alt="카카오톡"
           onClick={() => {
             window.location.href = KAKAO_AUTH_URL;
@@ -293,7 +293,7 @@ const LoginPage = () => {
         />
 
         <img
-          src={`${imgUrl}/iconFolder/SnsLogin/free-icon-google.png`}
+          src={`${imgUrl}/iconFolder/SnsLogin/free_icon_google.png`}
           alt="구글"
           onClick={() => {
             window.location.href = GOOGLE_AUTH_URL;
@@ -301,8 +301,8 @@ const LoginPage = () => {
         />
         <div id="naverIdLogin">
           <img
-          src={`${imgUrl}/iconFolder/SnsLogin/naver_icon_1.png`}
-          width="64px"
+            src={`${imgUrl}/iconFolder/SnsLogin/naver_icon_1.png`}
+            width="64px"
             height="64px"
             alt="네이버"
           />
