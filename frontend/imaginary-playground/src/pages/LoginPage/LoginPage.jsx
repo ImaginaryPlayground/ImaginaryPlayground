@@ -284,7 +284,7 @@ const LoginPage = () => {
       </Grid>
       <Grid item className="sns_login_btn">
         <img
-          src="/iconFolder/SnsLogin/kakao-talk.png"
+          src="/iconFolder/SnsLogin/kakao_talk.png"
           alt="카카오톡"
           onClick={() => {
             window.location.href = KAKAO_AUTH_URL;
@@ -292,7 +292,7 @@ const LoginPage = () => {
         />
 
         <img
-          src="/iconFolder/SnsLogin/free-icon-google.png"
+          src="/iconFolder/SnsLogin/free_icon_google.png"
           alt="구글"
           onClick={() => {
             window.location.href = GOOGLE_AUTH_URL;

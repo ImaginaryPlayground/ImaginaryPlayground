@@ -11,7 +11,7 @@ export const SampleglTF2 = ({ id }) => {
   dom.setAttribute("id", `${id}`);
   // dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "10%";
+  dom.style.left = "24%";
   dom.style.top = "22%";
   dom.style.zIndex = "1";
   dom.setAttribute("class", "map-animal");
