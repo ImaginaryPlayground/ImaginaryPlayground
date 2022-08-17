@@ -12,6 +12,7 @@ import UniverseIntro from "./pages/UniverseIntro";
 import UniverseOutro from "./components/universeOutro/UniverseOutro";
 import Christmas from "./pages/Christmas";
 import LoginPage from "./pages/LoginPage";
+import OceanMotionTest from "./pages/OceanMotionTest";
 
 import "../src/App.css";
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/junglebackground" element={<JungleBackground />} />
           <Route path="/ocean-copy" element={<OceanCopy />} />
           <Route path="/ocean-intro" element={<OceanCopyIntro />} />
+          <Route path="/ocean-motion" element={<OceanMotionTest />} />
           <Route path="/test-yjh" element={<Test_yjh />} />
           <Route path="/christmas" element={<Christmas />} />
         </Routes>
