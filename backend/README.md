@@ -31,7 +31,7 @@
 
 ## 🖥 서비스 아키텍처
 
-![architecture](C:\Users\multicampus\Desktop\ssafy\S07P12D204\backend\지식공유\architecture.png)
+![architecture](.\지식공유\architecture.png)
 
 
 
