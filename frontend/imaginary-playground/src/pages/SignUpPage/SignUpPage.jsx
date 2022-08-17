@@ -354,26 +354,36 @@ const SignUpPage = () => {
         <Grid item className="banner">
           <h3 style={{ marginBottom: 0 }}>회원가입</h3>
         </Grid>
-        <Grid item textAlign="center">
+        {/* <Grid item textAlign="center">
           <h5>sns로 간편 회원가입</h5>
         </Grid>
         <Grid item className="sns_signup_btn">
           <img
+<<<<<<< Updated upstream
             src={`${imgUrl}/iconFolder/SnsLogin/kakao_talk.png`}
+=======
+            src={`${imgUrl}/iconFolder/SnsLogin/kakao-talk.png`}
+>>>>>>> Stashed changes
             alt="카카오톡"
           />
 
           <img
+<<<<<<< Updated upstream
             src={`${imgUrl}/iconFolder/SnsLogin/free_icon_google.png`}
             alt="구글"
           />
+=======
+            src={`${imgUrl}/iconFolder/SnsLogin/free-icon-google.png`}
+            alt="구글"
+          />  
+>>>>>>> Stashed changes
           <img
             src={`${imgUrl}/iconFolder/SnsLogin/naver_icon_1.png`}
             width="64px"
             height="64px"
             alt="네이버"
           />
-        </Grid>
+        </Grid> */}
         <div className="divide"></div>
 
         <Grid item>
