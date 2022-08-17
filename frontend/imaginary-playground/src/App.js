@@ -7,17 +7,15 @@ import MiddlePage from "./pages/MiddlePage/MiddlePage";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import HomePage from "./pages/HomePage/HomePage";
 
-import store from "./redux/store";
-import { Provider, useDispatch } from "react-redux";
 import KidsInfoPage from "./pages/KidsInfoPage/KidsInfoPage";
-import { PersistGate } from "redux-persist/integration/react";
-import { persistStore } from "redux-persist";
 import KidsInfoCreatePage from "./pages/KidsInfoPage/KidsInfoCreatePage";
 import Mypage from "./pages/UserPage/Mypage";
 import QnaListPage from "./pages/QnaPage/QnaListPage";
 import QnaCreatePage from "./pages/QnaPage/QnaCreatePage";
 import QnaDetailPage from "./pages/QnaPage/QnaDetailPage";
 import { useEffect } from "react";
+
+import "../src/App.css";
 
 // let persistor = persistStore(store);
 function App() {

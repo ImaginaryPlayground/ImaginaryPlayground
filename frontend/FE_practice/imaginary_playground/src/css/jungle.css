@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Single+Day&display=swap");
 
 body {
   overflow: hidden;
@@ -6,9 +8,178 @@ body {
 
 .jungle {
   position: absolute;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+} 
+
+/* 고래 */
+.jungle .hide_monky_box {
+  height: 100px;
+  width: 400px;
+  position: absolute;
+  left: 39%;
+  top: 37%;
+  z-index: 10000;
 }
+
+/* 텍스트 박스 */
+.jungle .text_box {
+  font-size: 2vw;
+  margin-top: 10px;
+  border: 5px solid green;
+  border-radius: 50px;
+  padding: 15px;
+  background-color: lightgoldenrodyellow;
+  z-index: 10;
+  width: 35vw;
+  display: flex;
+  justify-content: center;
+}
+/* 텍스트 위치 */
+.jungle .text_location {
+  position: absolute;
+  left: -36%;
+  top: -121%;
+  width: 850px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* font-size: 30px; */
+  font-weight: bold;
+  z-index: 10;
+}
+
+/* 정글 인트로 텍스트(타이틀) */
+.jungle-text {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+}
+
+
+/* 등장 애니메이션 */
+.appear {
+  animation: appear 3s ease-in-out;
+}
+
+.initial_hide {
+  animation: initial_hide 3s ease-in-out;
+}
+
+/* 말하기 표시 애니메이션 */
+.speech {
+  animation: speech infinite 1s linear alternate;
+}
+
+.appear_text {
+  animation: appear_text 1s linear alternate;
+}
+
+.disappear {
+  animation: disappear 1.5s linear;
+}
+
+/* 텍스트 떨어지는 애니메이션 */
+@keyframes appear_text {
+  0% {
+    transform: scale(0) translateY(-500px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* 퇴장애니메이션 */
+@keyframes disappear {
+  0% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) translateY(-300px);
+    opacity: 0;
+  }
+}
+
+/* 등장애니메이션 */
+@keyframes appear {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* 초기에 숨는 애니메이션 */
+@keyframes initial_hide {
+  0% {
+    transform: translateX(-300px) translateY(-400px);
+
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes speech {
+  0% {
+    scale: 1;
+    opacity: 0.8;
+  }
+
+  100% {
+    scale: 1.5;
+    opacity: 1;
+  }
+}
+
+
+
+/* 동물들 버블 */
+.animate__animated.animate__tada {
+  --animate-duration: 2s;
+}
+
+.monkey-bubble {
+  position: absolute;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  left: -38vw;
+  top: -32vh;
+}
+
+.lion-bubble {
+  position: absolute;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  left: -38vw;
+  top: -35vh;
+}
+
+.wolf-bubble {
+  position: absolute;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  left: -38vw;
+  top: -35vh;
+} 
+
 
 /* 배경 */
 
