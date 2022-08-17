@@ -141,14 +141,17 @@ const Christmas = () => {
 
   return (
     <div className="christmas">
-
       {/* 뒤돌아 보세요 텍스트 띄우기 전 */}
       {!backSee ? (
         <>
           {/* 시작음성이 끝나기 전과 끝나고 난 후 */}
           {startSantaAudio ? (
             <>
-              <img src="/assets/christmas/santa-intro.png" alt="" className="santa-intro animate__animated animate__bounce"/>
+              <img
+                src="/assets/christmas/santa-intro.png"
+                alt=""
+                className="santa-intro animate__animated animate__bounce"
+              />
               <Santa id={"startSanta"}></Santa>
             </>
           ) : (
@@ -171,24 +174,33 @@ const Christmas = () => {
                 </div>
                 <div className="kid_text">{kidsData[2]?.character}</div>
               </div>
-              <img src="/assets/christmas/rope.png" alt="" className="rope animate__animated animate__pulse"/>
-              <img src="/assets/christmas/color.png" alt="" className="color animate__animated animate__pulse"/>
+              <img
+                src="/assets/christmas/rope.png"
+                alt=""
+                className="rope animate__animated animate__pulse"
+              />
+              <img
+                src="/assets/christmas/color.png"
+                alt=""
+                className="color animate__animated animate__pulse"
+              />
 
               {/* 메인산타 등장 */}
               {isMainSanta && (
                 <div>
                   <MainSanta id="mainSanta" />
 
-                  {!giveMeGift ? (<></>
+                  {!giveMeGift ? (
+                    <></>
+                  ) : (
                     // <div className="mainSanta_text_box appear">
                     //   지성아, 지웅아, 지후야 너넬 위해 선물을 준비했어!
                     // </div>
-                  ) : (
                     <div
                       className="mainSanta_text_box text_countdown"
                       id="give_me_gift_box"
                     >
-                      "선물 주세요" 라고 외치세요!
+                      {/* "선물 주세요" 라고 외치세요! */}
                     </div>
                   )}
                 </div>

@@ -11,8 +11,8 @@ export const DolphinglTF = ({ id }) => {
   dom.setAttribute("id", `${id}`);
   // dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
-  dom.style.left = "-55%";
-  dom.style.top = "0%";
+  dom.style.left = "-47%";
+  dom.style.top = "-7%";
   dom.style.zIndex = "1";
   dom.setAttribute("class", "map-animal");
   dom.style.scale = "200%";
@@ -26,7 +26,7 @@ export const DolphinglTF = ({ id }) => {
     100
   );
 
-  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 7);
+  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 5);
   scene.add(light);
 
   // 궤도 추적
@@ -34,18 +34,18 @@ export const DolphinglTF = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(5, 6, 30);
+  camera.position.set(-5, 6, 30);
 
   const assetLoader = new GLTFLoader();
 
   let mixer1;
   assetLoader.load(
-    "/assets/map/rabbit.gltf",
+    "/assets/jungle/토끼.gltf",
     function (gltf) {
       const model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
       // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(15, 10, 10);
+      model.position.set(0, 10, 10);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
@@ -65,7 +65,7 @@ export const DolphinglTF = ({ id }) => {
 
   function animate() {
     if (mixer1) mixer1.update(clock1.getDelta());
-      renderer.render(scene, camera);
+    renderer.render(scene, camera);
   }
   renderer.setAnimationLoop(animate);
 

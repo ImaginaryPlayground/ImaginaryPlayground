@@ -103,7 +103,7 @@ const OceanCopy = () => {
           console.log(data.split(" ")[2] - 320);
         }
         console.log(data);
-        y = data.split(" ")[2] - 400;
+        y = data.split(" ")[2] - 100;
         //x값 세팅
         if (!isLoadingTime) {
           for (let index = 0; index < sharkObjects.length; index++) {
@@ -212,7 +212,7 @@ const OceanCopy = () => {
       let motion3Success = false;
       setIsMotionStart(true);
       let canvas, ctx;
-      const socket = io("http://localhost:3001");
+      const socket = io("http://10.2.1.172:3001");
       socket.emit("poseOn");
       canvas = document.getElementById("canvas");
       console.log(canvas);
@@ -992,14 +992,22 @@ const OceanCopy = () => {
                     너가 와서 도와줘야 해!
                   </div>
                 </div> */}
-                <img src="/assets/ocean/dolly-complete1.png" alt="" className="dolly-complete animate__animated animate__pulse" />
+                <img
+                  src="/assets/ocean/dolly-complete1.png"
+                  alt=""
+                  className="dolly-complete animate__animated animate__pulse"
+                />
               </div>
               <div
                 className="complete_title endGame_text"
                 style={{ display: "none" }}
                 id="endGame_text2"
               >
-                <img src="/assets/ocean/dolly-complete2.png" alt="" className="dolly-complete animate__animated animate__pulse" />
+                <img
+                  src="/assets/ocean/dolly-complete2.png"
+                  alt=""
+                  className="dolly-complete animate__animated animate__pulse"
+                />
 
                 {/* <div>
                   항상 <span style={{ color: "midnightblue" }}>건강해</span>!!
@@ -1085,8 +1093,7 @@ const OceanCopy = () => {
 
           {/* 홈으로 돌아가기 버튼 */}
 
-          <img src="/assets/map/minimap.png" alt="" className="minimap"/>
-
+          <img src="/assets/map/minimap.png" alt="" className="minimap" />
         </>
       ) : (
         <>
