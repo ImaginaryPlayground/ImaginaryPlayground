@@ -77,7 +77,7 @@ const LoginPage = () => {
     if (localStorage.getItem("isLogin") === "true") {
       navigate("/");
     }
-    initializeNaverLogin();
+    // initializeNaverLogin();
   }, []);
 
   const handleFocusInput = (e) => {
@@ -281,11 +281,11 @@ const LoginPage = () => {
         </ColorButton>
       </Grid>
       <Grid item mt={2}>
-        <h5>sns로 간편 로그인/회원가입</h5>
+        {/* <h5>sns로 간편 로그인/회원가입</h5> */}
       </Grid>
       <Grid item className="sns_login_btn">
-        <img
-          src={`${imgUrl}/iconFolder/SnsLogin/kakao_talk.png`}
+        {/* <img
+          src={`${imgUrl}/iconFolder/SnsLogin/kakao-talk.png`}
           alt="카카오톡"
           onClick={() => {
             window.location.href = KAKAO_AUTH_URL;
@@ -306,7 +306,7 @@ const LoginPage = () => {
             height="64px"
             alt="네이버"
           />
-        </div>
+        </div> */}
       </Grid>
     </Grid>
   );
