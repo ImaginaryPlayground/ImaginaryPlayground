@@ -11,9 +11,10 @@ export const DolphinglTF = ({ id }) => {
   dom.setAttribute("id", `${id}`);
 
   dom.style.position = "absolute";
-  dom.style.left = "10%";
+  dom.style.left = "20%";
   dom.style.top = "11%";
   dom.style.zIndex = "-3";
+  dom.style.scale = "130%";
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -23,7 +24,7 @@ export const DolphinglTF = ({ id }) => {
     100
   );
 
-  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 5);
+  const light = new THREE.HemisphereLight(0xffffff, 0x000000, 4);
   scene.add(light);
 
   // 궤도 추적
@@ -31,18 +32,18 @@ export const DolphinglTF = ({ id }) => {
   // orbit.update();
 
   // 좌우 / 위아래 / 앞뒤
-  camera.position.set(5, 6, 30);
+  camera.position.set(1, 6, 30);
 
   const assetLoader = new GLTFLoader();
 
   let mixer1;
   assetLoader.load(
-    "/assets/ocean/dolly.gltf",
+    "/assets/ocean/surprise.gltf",
     function (gltf) {
       const model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
-      // gltf.scene.scale.multiplyScalar(4);
-      model.position.set(-7, 5, 10);
+      gltf.scene.scale.multiplyScalar(3);
+      model.position.set(-2, 5, 10);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
