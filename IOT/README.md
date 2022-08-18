@@ -23,11 +23,13 @@
 
 아두이노 사진 추가 요망
 
-#### 회로도
+회로도
 
 아두이노 wifi 모듈 esp8266(wemos D1 mini)와 WeMos D1 Mini Battery Shield, 리튬폴리머배터리, 초음파 센서 회로도
 
 <img src="https://user-images.githubusercontent.com/19484971/184803510-7229079e-b84e-4d62-8690-20519ad8d866.png" width=400>
+
+> with [fritzing](https://fritzing.org/)
 
 ### 얼굴인식
 
@@ -64,7 +66,8 @@ Google에서 개발한 Teachable Machine 을 활용하여 간단한 자세를 �
 + [Teachable Machine](https://teachablemachine.withgoogle.com/)
 + Socket.io (소켓 통신)
 
-## flowChart..?
+## 통신 흐름도
 
-위의 기능을 그림으로 만들자..
-어떻게 만들지;
+<img src="https://user-images.githubusercontent.com/19484971/185294578-ad6241b8-ab41-41b2-bb18-1790a4928d9e.png" width=500>
+
+> with [draw.io](https://www.draw.io/)
