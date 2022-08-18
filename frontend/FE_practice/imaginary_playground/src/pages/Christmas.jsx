@@ -6,9 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Howl, Howler } from "howler";
 import { config } from "../util/config";
 import axios from "axios";
-import session from "redux-persist/lib/storage/session";
 import { useSelector } from "react-redux";
-import { div } from "@tensorflow/tfjs";
 import MainSanta from "../components/christmas/MainSanta";
 import SpeechRecognition, {
   useSpeechRecognition,
