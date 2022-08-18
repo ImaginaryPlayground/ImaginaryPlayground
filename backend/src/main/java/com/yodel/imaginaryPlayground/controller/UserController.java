@@ -356,6 +356,7 @@ public class UserController {
             String newFileName = uploadDate + file.getOriginalFilename();
             byte[] bytes = file.getBytes();
             Path path = Paths.get(FILE_PATH + newFileName);
+            System.out.println(path);
             Files.write(path, bytes);
             return path.toString();
         } catch (Exception e) {
