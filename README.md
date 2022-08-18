@@ -1,51 +1,62 @@
-# 🎪상상놀이터(소아병동 아이들을 위한 IoT 서비스)
+# 🎪 상상놀이터(소아병동 아이들을 위한 IoT 서비스)
 
 <!-- 필수 항목 -->
 
-## ✔카테고리
+</br>
 
-| Application                       | Domain                                | Language                         | Framework                            |
-| --------------------------------- | ------------------------------------- | -------------------------------- | ------------------------------------ |
-| :white_check_mark: Desktop Web    | :black_square_button: AI              | :white_check_mark: JavaScript    | :black_square_button: Vue.js         |
-| :black_square_button: Mobile Web  | :black_square_button: Big Data        | :black_square_button: TypeScript | :white_check_mark: React             |
-| :white_check_mark: Responsive Web | :black_square_button: Blockchain      | :black_square_button: C/C++      | :black_square_button: Angular        |
-| :black_square_button: Android App | :white_check_mark: IoT                | :black_square_button: C#         | :black_square_button: Node.js        |
-| :black_square_button: iOS App     | :black_square_button: AR/VR/Metaverse | :black_square_button: ​Python    | :black_square_button: Flask/Django   |
-| :black_square_button: Desktop App | :black_square_button: Game            | :white_check_mark: Java          | :white_check_mark: Spring/Springboot |
-|                                   |                                       | :black_square_button: Kotlin     |                                      |
+## ✔ 카테고리
+
+| Application | Domain | Language | Framework |
+| ---- | ---- | ---- | ---- |
+| :white_check_mark: Desktop Web | :black_square_button: AI | :white_check_mark: JavaScript | :black_square_button: Vue.js |
+| :black_square_button: Mobile Web | :black_square_button: Big Data | :black_square_button: TypeScript | :white_check_mark: React |
+| :white_check_mark: Responsive Web | :black_square_button: Blockchain | :black_square_button: C/C++ | :black_square_button: Angular |
+| :black_square_button: Android App | :white_check_mark: IoT | :black_square_button: C# | :black_square_button: Node.js |
+| :black_square_button: iOS App | :black_square_button: AR/VR/Metaverse | :black_square_button: ​Python | :black_square_button: Flask/Django |
+| :black_square_button: Desktop App | :black_square_button: Game | :white_check_mark: Java | :white_check_mark: Spring/Springboot |
+| | | :black_square_button: Kotlin | |
 
 <!-- 필수 항목 -->
 
-## 💁‍♀️프로젝트 소개
+## 💁‍♀️ 프로젝트 소개
 
 - **개요**
-  - 소아병동 아이들이 실시간 참여할 수 있는 놀이공간
-  - 임베디드 KIT 연동 웹 서비스
+  - 소아병동 아이들을 위한 교육 및 놀이 통합형 IoT 서비스
+  - 실시간 참여할 수 있는 IT 놀이공간
 
 * **주요 기능**
+
   * 4개의 테마(정글, 우주, 바다, 크리스마스)로 다양한 체험 제공
   * 아이들의 정서적 및 신체적 발달을 위한 간단한 놀이 제공
   * 회원 담당 환자등록 서비스
   * 회원관리 및 1대1 문의 서비스
   * 빔 프로젝터, 키오스크 등 확장 가능한 IoT & 웹 서비스
+
 * **주요 기술**
+
   - Single Page Application
   - Raspberry Pi
   - REST API
-* **참조 리소스**
-  * Material-UI: React Component Library
+
+* **프로젝트 기간**
+
+  2022.07.11 ~ 2022.08.19
+
 * **배포 환경**
+
   - URL: https://i7d204.p.ssafy.io/
 
-## 👨‍👧‍👧요들(요셉과 아이들)팀 소개
-🦉**팀장 양요셉**
+</br>
+
+## 👨‍👧‍👧 요들(요셉과 아이들)팀 소개
+🦉 **팀장 양요셉**
 
 - Back-end
 - 서버 API 개발
 - DB 관리
 - CI/CD 구축
 
-👿**팀원 권성호**
+👿 **팀원 권성호**
 
 - Front-end
 - 전반적인 게임 작동방식 구현
@@ -53,13 +64,13 @@
 - 3D 캐릭터 제작
 - 라즈베리파이와 프론트엔드 통신 담당
 
-🦝**팀원 임영선**
+🦝 **팀원 임영선**
 
 * IoT 담당
 * 초음파 센서를 이용한 터치기능 구현
 * openCV, face_recognition을 이용한 얼굴인식 기능 구현
 
-💘**팀원 유지홍**
+💘 **팀원 유지홍**
 
 - Front-end
 
@@ -67,42 +78,48 @@
 * 게임 작동방식 구현
 * 라즈베리파이와 프론트엔드 통신 담당
 
-**🐨팀원 김성령**
+**🐨 팀원 김성령**
 
 * Back-end
 * 서버 API 개발
 * DB 관리
 * CI/CD 구축
 
-🎄**팀원 박소정**
+🎄 **팀원 박소정**
 
 * Front-end
 * 전반적인 게임 작동방식 구현
 * 테마맵 디자인
 * css 스타일링
 
+</br>
 
+## 🎁프로젝트 상세 설명
 
-# 프로젝트 상세 설명
+**어디서도 아이들의 상상력이 멈추지 않도록**✨
 
-### 🌈 상상 놀이터
+**상상놀이터**는 소아병동 아이들을 위한 교육 및 놀이 통합형 IoT 서비스입니다.
 
-```
-소아병동 아이들을 위한 교육, 심리치료 놀이 통합형 IoT 서비스
-```
+병원이라는 제한적인 공간에서 오랜 시간을 보내는 환우들에게 다양한 경험을 선물해주고 싶어 기획하게 되었습니다. 또한 힘든 치료와 장기입원으로 인해 또래들보다 신체적 및 정서적 발달이 늦은 아이들에게 놀이를 통해 도움을 주고자 하였습니다.
 
 </br>
 
+### 서비스 화면
+
+**게임 - 정글맵 <우가우가숲>**
+
+
+
+
+
 </br>
 
-​             
-
-## 🛠 기술 환경
+### 🛠 기술 환경
 
 ```
 프론트엔드: React, Three.JS(3D 웹 실행), Blender(3D 캐릭터 구현) Axios (API 통신 라이브러리), Mui(리액트 CSS 라이브러리), Javascript, Redux(리액트 상태관리 라이브러리), HTML5, CSS3
 
-백엔드: Spring Security를 활용한 OAuth2.0과 JWT를 활용한 인증 방식 Naver Clova/Google Speech를 활용한 음성인식 기능 탑재, MariaDB
+백엔드: Spring Security를 활용한 OAuth2.0과 JWT를 활용한 인증 방식 Naver Clova/Google Speech를 활용한 음성인식 기능 탑재 MariaDB
 
 IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_recognition(얼굴인식 라이브러리) Google Assistant SDK(음성인식 SDK)
 
@@ -113,7 +130,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 ​             
 
-## 📒 기술 스택
+### 📒 기술 스택
 
 ​               
 
@@ -173,25 +190,13 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 </br>
 
-​                 
+## 🕋 프로젝트 구성도
 
-## 🎧 시스템 구상도
-
-### ... 플로우 차트 3개 제작 중에 있습니다
+<img src="https://lab.ssafy.com/s07-webmobile3-sub2/S07P12D204/-/raw/master/db/ERD_imaginationPlayground.png">
 
 </br>
 
-​                 
 
-## 🕋 ERD 구조
-
-<img src="https://lab.ssafy.com/s07-webmobile3-sub2/S07P12D204/-/blob/master/backend/image/backend_structure.png">
-
-</br>
-
-</br>
-
-​                 
 
 ## 🎪 기능 상세
 
@@ -201,13 +206,13 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 1. 소아병동 아이들이 실시간 참여할 수 있는 IOT 놀이공간
 2. 약 6개의 테마, 각 맵마다 다른 게임으로
-   아이들에게 다양한 체험 제공
+아이들에게 다양한 체험 제공
 3. 표정 분석을 이용한 맞춤형 심리 진단 서비스 제공
 4. 정서 안정 및 스트레스 완화를 위한 색칠 놀이 기능
 5. 아이의 그림놀이, AI와 대화 자료를 바탕으로 한
-   통계 데이터 열람 기능
+통계 데이터 열람 기능
 6. 빔 프로젝터, 키오스크 또는 태블릿 등 확장성이 용이한
-   웹 서비스로 접근성 증대
+웹 서비스로 접근성 증대
 
 </br>
 
