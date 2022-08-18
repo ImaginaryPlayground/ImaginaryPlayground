@@ -49,6 +49,7 @@ const ChristmasPresentation = () => {
             alert("다시 로그인 해주세요!");
             sessionStorage.removeItem("isLogin");
             sessionStorage.removeItem("token");
+            Howler.stop();
             navigate("/login");
           }
         })
@@ -60,7 +61,7 @@ const ChristmasPresentation = () => {
   }, []);
 
   useEffect(() => {
-    const socket = io("http://192.168.100.221:3001");
+    const socket = io("http://192.168.1.105:3001");
     setTimeout(() => {
       socket.emit("faceOn");
       socket.on("face", (info) => {
