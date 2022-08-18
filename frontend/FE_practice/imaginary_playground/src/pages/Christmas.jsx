@@ -71,6 +71,7 @@ const Christmas = () => {
             alert("다시 로그인 해주세요!");
             sessionStorage.removeItem("isLogin");
             sessionStorage.removeItem("token");
+            Howler.stop();
             navigate("/login");
           }
         })
