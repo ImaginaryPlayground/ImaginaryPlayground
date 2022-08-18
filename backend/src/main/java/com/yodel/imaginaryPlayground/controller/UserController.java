@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,8 @@ public class UserController {
     private static final String fail = "FAIL";
     private static final String error = "ERROR";
 
-    private final String FILE_PATH = "/tmp/";
+    @Value("${variable.image.save.path}")
+    String FILE_PATH;
 
     @PostMapping("/register")
     @ApiOperation(value = "회원가입", notes = "회원가입을 한다.")
