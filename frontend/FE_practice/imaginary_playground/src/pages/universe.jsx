@@ -44,11 +44,12 @@ const Universe = () => {
     let y = "0";
     let isLoadingTime = false;
     socket.on("chat message", (data) => {
-      if (data.split(" ")[0] == 3) {
-        console.log(data(" ")[2]);
-      }
       console.log(data);
-      y = data.split(" ")[2] - 400;
+      if (data.split(" ")[0] != 2) {
+        y = data.split(" ")[2] - 100;
+      } else {
+        y = data.split(" ")[2];
+      }
       //x값 세팅
       if (!isLoadingTime) {
         if (data.split(" ")[0] == 1) {
@@ -69,11 +70,11 @@ const Universe = () => {
         } else if (data.split(" ")[0] == 2) {
           if (
             (planetTouchObjectClass === "mars_click_div" &&
-              planetTouchObjectRect.y <= y &&
-              planetTouchObjectRect.y + planetTouchObjectRect.height >= y) ||
+              100 <= y &&
+              1000 >= y) ||
             (planetTouchObjectClass === "earth_click_div" &&
-              planetTouchObjectRect.y <= y &&
-              planetTouchObjectRect.y + planetTouchObjectRect.height >= y)
+              100 <= y &&
+              1000 >= y)
           ) {
             isLoadingTime = true;
             planetTouchObject.click();
@@ -84,8 +85,8 @@ const Universe = () => {
         } else if (data.split(" ")[0] == 3) {
           if (
             (planetTouchObjectClass === "jupyter2_click_div" &&
-              planetTouchObjectRect.y <= y &&
-              planetTouchObjectRect.y + planetTouchObjectRect.height >= y) ||
+              500 <= y &&
+              1020 >= y) ||
             (planetTouchObjectClass === "saturn_click_div" &&
               planetTouchObjectRect.y <= y &&
               planetTouchObjectRect.y + planetTouchObjectRect.height >= y)

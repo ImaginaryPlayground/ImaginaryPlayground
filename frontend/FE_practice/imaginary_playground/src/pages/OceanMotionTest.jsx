@@ -42,7 +42,7 @@ const OceanMotionTest = () => {
   //자세 따라하라는 오디오
   const MotionStartBeforeAudio = new Howl({
     //  음성
-    src: ["/assets/audio/ocean/applaud.mp3"],
+    src: ["/assets/audio/ocean/자세따라하라는 음성.mp3"],
     onend: () => {
       document.getElementById("main_dolphin_next_stage_1")?.remove();
 
@@ -90,7 +90,7 @@ const OceanMotionTest = () => {
       let motion3Success = false;
       setIsMotionStart(true);
       let canvas, ctx;
-      const socket = io("http://192.168.100.221:3001");
+      const socket = io("http://192.168.1.105:3001");
       socket.emit("poseOn");
       canvas = document.getElementById("canvas");
 
@@ -106,7 +106,7 @@ const OceanMotionTest = () => {
 
         if (
           motionStart1 &&
-          className === "pose1" &&
+          className === "hands_up" &&
           maxProbability == 1.0 &&
           !motion1Success
         ) {
@@ -128,7 +128,7 @@ const OceanMotionTest = () => {
           // }, 5000);
         } else if (
           motionStart2 &&
-          className === "pose2" &&
+          className === "bong_pose" &&
           maxProbability == 1.0 &&
           !motion2Success
         ) {
@@ -152,9 +152,10 @@ const OceanMotionTest = () => {
         } else if (
           motionStart3 &&
           !motion3Success &&
-          className === "pose3" &&
+          className === "monkey_pose" &&
           maxProbability == 1.0
         ) {
+          console.log("여기 찍힘?");
           socket.emit("poseOff");
           setisMotionCorrect(true);
           // canvas.style.display = "none";
@@ -244,7 +245,7 @@ const OceanMotionTest = () => {
       )}
       {(motionStart1 || motionStart2 || motionStart3) && !isMotionLoading && (
         <h2 className="dance_start_text text_size_change">
-          <span style={{ color: "darkcyan" }}>돌리</span>의&nbsp;
+          <span style={{ color: "darkcyan" }}>원숭이</span>의&nbsp;
           <span style={{ color: "midnightblue" }}>자세</span>를 따라 하세요!!
         </h2>
       )}
