@@ -1,4 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
+
 /* 아이박스 */
+.ChristmasPresentation {
+  font-family: "Do Hyeon", sans-serif;
+}
+
+.ChristmasPresentation .kid_box {
+  font-weight: bold;
+}
 
 .ChristmasPresentation .kid_box_1 {
   position: absolute;
@@ -90,11 +99,11 @@
 }
 @keyframes scale_defferent {
   0% {
-    transform: scale(1);
+    transform: scale(1) translateY(0px);
   }
 
   100% {
-    transform: scale(2);
+    transform: scale(1) translateY(+100px);
   }
 }
 
@@ -112,4 +121,45 @@
 
 .ChristmasPresentation .now_recognition_name {
   color: snow;
+}
+
+.ChristmasPresentation .now_recognition_text {
+  z-index: 10000;
+}
+
+.ChristmasPresentation .now_recognition_name {
+  font-size: 90px;
+  color: violet;
+  border-radius: 30px;
+  background-color: snow;
+}
+
+.ChristmasPresentation .bg_aqua {
+  background-color: aqua;
+  color: white;
+}
+
+.ChristmasPresentation .bg_violet {
+  background-color: darkorchid;
+  color: white;
+}
+
+.ChristmasPresentation .bg_green {
+  background-color: greenyellow;
+  color: white;
+}
+
+.ChristmasPresentation .bg_yello {
+  background-color: gold;
+  color: white;
+}
+
+.ChristmasPresentation .bg_orange {
+  background-color: orange;
+  color: white;
+}
+
+.ChristmasPresentation .bg_crimson {
+  background-color: crimson;
+  color: white;
 }
