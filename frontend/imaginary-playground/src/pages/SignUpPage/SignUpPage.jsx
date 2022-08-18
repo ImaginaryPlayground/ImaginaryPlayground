@@ -359,24 +359,14 @@ const SignUpPage = () => {
         </Grid>
         <Grid item className="sns_signup_btn">
           <img
-<<<<<<< Updated upstream
             src={`${imgUrl}/iconFolder/SnsLogin/kakao_talk.png`}
-=======
-            src={`${imgUrl}/iconFolder/SnsLogin/kakao-talk.png`}
->>>>>>> Stashed changes
             alt="카카오톡"
           />
 
           <img
-<<<<<<< Updated upstream
             src={`${imgUrl}/iconFolder/SnsLogin/free_icon_google.png`}
             alt="구글"
           />
-=======
-            src={`${imgUrl}/iconFolder/SnsLogin/free-icon-google.png`}
-            alt="구글"
-          />  
->>>>>>> Stashed changes
           <img
             src={`${imgUrl}/iconFolder/SnsLogin/naver_icon_1.png`}
             width="64px"

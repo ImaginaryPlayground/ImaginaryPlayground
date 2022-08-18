@@ -132,7 +132,7 @@ const MiddlePage = () => {
     };
 
     formData.append("data", JSON.stringify(data));
-
+    console.log("회원가입 데이터:", data);
     //회원가입시 보내야 하는 데이터 양식
     // {
     //     email: `${userInfo.emailId}@${
