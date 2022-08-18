@@ -68,6 +68,10 @@ const Christmas = () => {
             setKidsData(res.data.data);
           } else {
             console.log("데이터를 가져오는 데서 오류가 발생했습니다.!");
+            alert("다시 로그인 해주세요!");
+            sessionStorage.removeItem("isLogin");
+            sessionStorage.removeItem("token");
+            navigate("/login");
           }
         })
         .catch((err) => {
