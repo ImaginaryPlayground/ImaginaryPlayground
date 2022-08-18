@@ -89,7 +89,7 @@ const OceanMotionTest = () => {
       let motion3Success = false;
       setIsMotionStart(true);
       let canvas, ctx;
-      const socket = io("http://192.168.1.104:3001");
+      const socket = io("http://192.168.100.221:3001");
       socket.emit("poseOn");
       canvas = document.getElementById("canvas");
 
@@ -102,102 +102,93 @@ const OceanMotionTest = () => {
       socket.on("pose", (className, maxProbability) => {
         //여기서 pose에 대한 정보가 온다.
         console.log(className, maxProbability);
-        socket.on("ok", (ok) => {
-          if (
-            motionStart1 &&
-            className === "hands_up" &&
-            maxProbability == 1.0 &&
-            !motion1Success
-          ) {
-            motion1Success = true;
-            const motion1Dolphin = document.getElementById("motion1_dolphin_0");
-            setisMotionCorrect(true);
-            // canvas.style.display = "none";
 
-            if (ok == "ok") {
-              setTimeout(() => {
-                //모션 로딩 처리
-                setisMotionCorrect(false);
-                setisMotionLoading(true);
-                // nextMotionAudio.play();
-                motion1Dolphin?.remove();
-              }, 5000);
-            }
+        if (
+          motionStart1 &&
+          className === "pose1" &&
+          maxProbability == 1.0 &&
+          !motion1Success
+        ) {
+          motion1Success = true;
+          const motion1Dolphin = document.getElementById("motion1_dolphin_0");
+          setisMotionCorrect(true);
+          // canvas.style.display = "none";
 
-            // setTimeout(() => {
-            //   canvas.style.display = "block";
-            // }, 5000);
-          } else if (
-            motionStart2 &&
-            className === "bong_pose" &&
-            maxProbability == 1.0 &&
-            !motion2Success
-          ) {
-            motion2Success = false;
-            const motion2Dolphin = document.getElementById("motion2_dolphin_0");
-            setisMotionCorrect(true);
-            // canvas.style.display = "none";
+          setTimeout(() => {
+            //모션 로딩 처리
+            setisMotionCorrect(false);
+            setisMotionLoading(true);
+            // nextMotionAudio.play();
+            motion1Dolphin?.remove();
+          }, 5000);
 
-            if (ok == "ok") {
-              setTimeout(() => {
-                //모션 로딩 처리
-                setisMotionCorrect(false);
-                setisMotionLoading(true);
-                // lastMotionAudio.play();
-                motion2Dolphin?.remove();
-                canvas.style.display = "none";
-              }, 5000);
-            }
+          // setTimeout(() => {
+          //   canvas.style.display = "block";
+          // }, 5000);
+        } else if (
+          motionStart2 &&
+          className === "pose2" &&
+          maxProbability == 1.0 &&
+          !motion2Success
+        ) {
+          motion2Success = false;
+          const motion2Dolphin = document.getElementById("motion2_dolphin_0");
+          setisMotionCorrect(true);
+          // canvas.style.display = "none";
 
+          setTimeout(() => {
+            //모션 로딩 처리
+            setisMotionCorrect(false);
+            setisMotionLoading(true);
+            // lastMotionAudio.play();
+            motion2Dolphin?.remove();
+            canvas.style.display = "none";
+          }, 5000);
+
+          setTimeout(() => {
+            canvas.style.display = "block";
+          }, 8000);
+        } else if (
+          motionStart3 &&
+          !motion3Success &&
+          className === "pose3" &&
+          maxProbability == 1.0
+        ) {
+          socket.emit("poseOff");
+          setisMotionCorrect(true);
+          // canvas.style.display = "none";
+          motion3Success = true;
+
+          setTimeout(() => {
+            setisMotionCorrect(false);
+            setMotionStart3(false);
+            setEndGameAudio(true);
+            canvas.remove();
+            Howler.stop();
+            document.getElementById("motion3_dolphin_0")?.remove();
+
+            // 끝나는 텍스트 교체하기
             setTimeout(() => {
-              canvas.style.display = "block";
-            }, 8000);
-          } else if (
-            motionStart3 &&
-            !motion3Success &&
-            className === "idle" &&
-            maxProbability == 1.0
-          ) {
-            socket.emit("poseOff");
-            setisMotionCorrect(true);
-            // canvas.style.display = "none";
-            motion3Success = true;
+              document.getElementById("endGame_text1").style.display = "none";
+              document.getElementById("endGame_text2").style.display = "block";
+            }, 3000);
 
-            if (true) {
-              setTimeout(() => {
-                setisMotionCorrect(false);
-                setMotionStart3(false);
-                setEndGameAudio(true);
-                canvas.remove();
-                Howler.stop();
-                document.getElementById("motion3_dolphin_0")?.remove();
+            endGameSound.play();
 
-                // 끝나는 텍스트 교체하기
-                setTimeout(() => {
-                  document.getElementById("endGame_text1").style.display =
-                    "none";
-                  document.getElementById("endGame_text2").style.display =
-                    "block";
-                }, 3000);
+            // 돌핀 사라지기
+            setTimeout(() => {
+              document
+                .getElementById("endGame_dolphin_0")
+                .setAttribute("class", "disappear");
+            }, 30000);
 
-                endGameSound.play();
-
-                // 돌핀 사라지기
-                setTimeout(() => {
-                  document
-                    .getElementById("endGame_dolphin_0")
-                    .setAttribute("class", "disappear");
-                }, 30000);
-
-                // 돌핀 제거 후 메인화면으로
-                setTimeout(() => {
-                  document.getElementById("endGame_dolphin_0").remove();
-                  navigate("/", { replace: "true" });
-                }, 31300);
-              }, 5000);
-            }
-          }
-        });
+            // 돌핀 제거 후 메인화면으로
+            setTimeout(() => {
+              document.getElementById("endGame_dolphin_0").remove();
+              navigate("/", { replace: "true" });
+            }, 31300);
+          }, 5000);
+        }
       });
 
       socket.on("poseImg", (image) => {
