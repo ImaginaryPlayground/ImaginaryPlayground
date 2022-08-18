@@ -17,7 +17,7 @@ wifi를 통해서 데이터를 주고 받을 수 있다는 이야기를 듣고 �
 
 **그런데**
 
-컨설턴트님이 말씀하시기를.. 두 방식은 속도에 있어서 크게 차이가 없다고 말씀하셨다. 참고한 오버플로우의 글은 10년전의 글이므로 컨설턴트님의 말씀을 믿기로 하고 `socket.io` 라이브러리를 사용하기로 바꾸었다.
+컨설턴트님이 말씀하시기를.. 두 방식은 속도에 있어서 크게 차이가 없다고 말씀하셨다. 참고한 오버플로우의 글은 10년전의 글이므로 컨설턴트님의 말씀을 믿기로 하고 후에는 `socket.io` 라이브러리를 사용하기로 바꾸었다.
 
 ### WebSocket 통신
 
@@ -33,20 +33,19 @@ websocket은 server 코드로 작성하였다. 하지만 이후 사용할 socket
 
 ### Socket.io 통신
 
-라즈베리파이에서는 3D캐릭터의 로딩이 잘 되지 않는 다는 점을 뒤늦게 알아차리고 라즈베리파이 대신 노트북의 아니라 node.js 서버와 통신하기 위해서 socket.io 통신으로 바꾸게 되었다.
+라즈베리파이에서는 3D캐릭터의 로딩이 잘 되지 않는 다는 점을 뒤늦게 알아차리고 라즈베리파이 대신 노트북의 아니라 node.js 서버와 통신하기 위해서 socket.io 통신으로 바꾸게 되었다. 동시에 이전에 잘못 생각하여 만들었던 아두이노가 socketServer 를 socketClient로 변
 
 arduino에서 사용할 수 있는 [예제코드](https://github.com/timum-viw/socket.io-client)를 참고하여 권성호 팀원이 기본적인 통신코드를 작성하였고 필자가 위에서 만들었던 코드의 초음파 알고리즘만을 추가하여 node.js로 송신하는 [socket.io client 코드](./codes/WebSocketClientSocketIO/WebSocketClientSocketIO.ino)를 작성하였다.
 
-잘 작동하는지 확인이 필요하다.
+이후 프론트엔드의 유지홍 팀원과 같이 위에서 작성한 [코드를 개선](./codes/WebSocketClientSocketIO_modified/WebSocketClientSocketIO_modified.ino)하였고 정상적으로 화면 터치가 되는것을 확인하였다.
 
-### 전원 공급
+<img src="https://user-images.githubusercontent.com/19484971/185301267-ec0ad0b2-dc8b-4008-9fc1-4b8dfbdf1c14.png
+" width=800>
 
-wifi를 통해 초음파 센서의 값을 `무선으로` 라즈베리파이 혹은 노트북에 전송한다는 것은 전원도 배터리를 사용해야한다는 의미이다. 그런데 그것을 생각하지 못하다가 벽에 붙일 생각을 하고나서야 배터리를 구할 생각을 하게 되었다.
+### 결과
 
-원래는 리튬폴리머배터리 1000mAh 가지고 있는 빵판의 크기(5cm * 3.5cm)와 비슷한 것으로 구하려고 하였으나, 해당 배터리의 충전 단자와 케이블과 어댑터 등등이 없어서 단순히 AA배터리홀더를 주문하고 약간의 작업을 통해 전원 공급을 할 배터리를 만들게 되었다.
+wemos D1 mini와 WeMos D1 Mini Battery Shield, 리튬폴리머배터리, 초음파 센서를 활용하여 포터블 터치 IOT를 제작하였다.
 
-필자의 회로도를 보신 컨설턴트님이 회로도의 이상함을 느껴 이야기하다가[ESP8266 WeMos D1 Mini 스펙](https://diyi0t.com/esp8266-wemos-d1-mini-tutorial/)을 보게되었다. 단순히 3V의 전원으로는 
+<img src="https://user-images.githubusercontent.com/19484971/185298704-8e838b95-e6cf-46a9-85de-ec8e948f478f.jpg" width=400>
 
-스펙을 알아야 된다고 알고는 있었지만, 기능 구현에 급해서 찾아야 된다는 생각 자체를 못했던것 같다; 매일 컨설턴트님에게 열심히 질문하다가 알아차려서 다행이었다 @,.@
-
-이해가 안되어서 찾아보게된 [동영상](https://www.youtube.com/watch?v=z6Vgy1cY0XU)을 통해서 어떻게 만들어야할지 알게되었다. 추가로 납땜을 더 해야한다는 사실에 (현재 가진 인두기 성능이 너무 안좋아서) 인두기와 납을 새로 사야할 것 같다... 
+<img src="https://user-images.githubusercontent.com/19484971/185298707-3b8450af-d376-4951-b039-f5cc8aa96f7d.jpg" width=400>
