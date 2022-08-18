@@ -368,7 +368,7 @@
 
 .paper-effect1 {
   position: absolute;
-  z-index: 1000;
+  z-index: 1000000000000;
   width: 5%;
   top: 76vh;
   left: 18vw;
@@ -418,7 +418,7 @@
   position: absolute;
   z-index: 1000;
   width: 5%;
-  top: 66vh;
+  top: 60vh;
   left: 13vw;
 }
 

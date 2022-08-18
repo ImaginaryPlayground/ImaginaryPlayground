@@ -39,6 +39,8 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
+const imgUrl = process.env.PUBLIC_URL || "";
+
 //SignUpPage 시작
 const SignUpPage = () => {
   // 이메일 유효성 정규식
@@ -352,19 +354,26 @@ const SignUpPage = () => {
         <Grid item className="banner">
           <h3 style={{ marginBottom: 0 }}>회원가입</h3>
         </Grid>
-        <Grid item textAlign="center">
+        {/* <Grid item textAlign="center">
           <h5>sns로 간편 회원가입</h5>
         </Grid>
         <Grid item className="sns_signup_btn">
-          <img src="/iconFolder/SnsLogin/kakao_talk.png" alt="카카오톡" />
-          <img src="/iconFolder/SnsLogin/free_icon_google.png" alt="구글" />
           <img
-            src="/iconFolder/SnsLogin/naver_icon_1.png"
+            src={`${imgUrl}/iconFolder/SnsLogin/kakao_talk.png`}
+            alt="카카오톡"
+          />
+
+          <img
+            src={`${imgUrl}/iconFolder/SnsLogin/free_icon_google.png`}
+            alt="구글"
+          />
+          <img
+            src={`${imgUrl}/iconFolder/SnsLogin/naver_icon_1.png`}
             width="64px"
             height="64px"
             alt="네이버"
           />
-        </Grid>
+        </Grid> */}
         <div className="divide"></div>
 
         <Grid item>

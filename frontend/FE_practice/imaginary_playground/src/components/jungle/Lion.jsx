@@ -12,7 +12,7 @@ export const SampleglTF2 = ({ id }) => {
   dom.setAttribute("class", "whale_3d");
   dom.style.position = "absolute";
   dom.style.left = "9%";
-  dom.style.top = "14%";
+  dom.style.top = "14%"; 
   dom.style.zIndex = "1";
   // dom.setAttribute("class", "appear");
   const scene = new THREE.Scene();

@@ -103,7 +103,7 @@ const OceanCopy = () => {
           console.log(data.split(" ")[2] - 320);
         }
         console.log(data);
-        y = data.split(" ")[2] - 400;
+        y = data.split(" ")[2] - 100;
         //x값 세팅
         if (!isLoadingTime) {
           for (let index = 0; index < sharkObjects.length; index++) {
@@ -212,7 +212,7 @@ const OceanCopy = () => {
       let motion3Success = false;
       setIsMotionStart(true);
       let canvas, ctx;
-      const socket = io("http://localhost:3001");
+      const socket = io("http://10.2.1.172:3001");
       socket.emit("poseOn");
       canvas = document.getElementById("canvas");
       console.log(canvas);
@@ -228,7 +228,7 @@ const OceanCopy = () => {
 
         if (
           motionStart1 &&
-          className === "hands_up" &&
+          className === "pose1" &&
           maxProbability == 1.0 &&
           !motion1Success
         ) {
@@ -250,7 +250,7 @@ const OceanCopy = () => {
           // }, 5000);
         } else if (
           motionStart2 &&
-          className === "bong_pose" &&
+          className === "pose2" &&
           maxProbability == 1.0 &&
           !motion2Success
         ) {
@@ -271,7 +271,7 @@ const OceanCopy = () => {
         } else if (
           motionStart3 &&
           !motion3Success &&
-          className === "idle" &&
+          className === "pose3" &&
           maxProbability == 1.0
         ) {
           socket.emit("poseOff");
@@ -969,12 +969,12 @@ const OceanCopy = () => {
               <div>
                 <EndGameMainDolphin id={"endGame_dolphin_0"} />
               </div>
-              <h2
+              <div
                 className="complete_title endGame_text"
                 style={{ display: "block" }}
                 id="endGame_text1"
               >
-                <div>
+                {/* <div>
                   너무 <span style={{ color: "midnightblue" }}>재밌었어</span>
                   !!
                 </div>
@@ -991,14 +991,25 @@ const OceanCopy = () => {
                     또 <span style={{ color: "red" }}>상어</span>가 괴롭힌다면
                     너가 와서 도와줘야 해!
                   </div>
-                </div>
-              </h2>
-              <h2
+                </div> */}
+                <img
+                  src="/assets/ocean/dolly-complete1.png"
+                  alt=""
+                  className="dolly-complete animate__animated animate__pulse"
+                />
+              </div>
+              <div
                 className="complete_title endGame_text"
                 style={{ display: "none" }}
                 id="endGame_text2"
               >
-                <div>
+                <img
+                  src="/assets/ocean/dolly-complete2.png"
+                  alt=""
+                  className="dolly-complete animate__animated animate__pulse"
+                />
+
+                {/* <div>
                   항상 <span style={{ color: "midnightblue" }}>건강해</span>!!
                 </div>
                 <div style={{ fontSize: "55px", marginTop: "20px" }}>
@@ -1023,8 +1034,8 @@ const OceanCopy = () => {
                     우리 꼭 <span style={{ color: "limegreen" }}>언젠가</span>{" "}
                     다시 볼 수 있기를...
                   </div>
-                </div>
-              </h2>
+                </div> */}
+              </div>
             </>
           )}
 
@@ -1081,9 +1092,8 @@ const OceanCopy = () => {
           </div>
 
           {/* 홈으로 돌아가기 버튼 */}
-          <button onClick={() => navigate("/")} className="home-button">
-            돌아가기
-          </button>
+
+          <img src="/assets/map/minimap.png" alt="" className="minimap" />
         </>
       ) : (
         <>

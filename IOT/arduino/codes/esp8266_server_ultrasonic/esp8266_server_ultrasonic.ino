@@ -6,8 +6,8 @@
 
 // wifi, 초음파 순서, 터치 인식 매개변수, 화면 크기 등 
 // 코드 업로드 하기전 정해야하는 상수
-const char* ssid     = "MERCUSYS_5ABA"; // Galaxy Quantum33143
-const char* password = "dudtjs972972@";  // qwertyuiop
+const char* ssid     = "happyhouse"; // Galaxy Quantum33143 happyhouse MERCUSYS_5ABA
+const char* password = "306306306";  // qwertyuiop 306306306 dudtjs972972@
 const char number = '1';  // 초음파 번호(순서)
 const int touchRecognizeCnt = 3;  // 터치라고 인식하기 위한 TouchGroup구조체의 최소 cnt
 
@@ -46,6 +46,9 @@ void setup() {
   // trig와 echo 핀 선언
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+
+  pinMode(LED_BUILTIN, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
+  digitalWrite(LED_BUILTIN, LOW);  // Turn the LED off by making the voltage HIGH
 
   // 초음파를 꺼둠
   digitalWrite(trigPin, LOW);
@@ -91,7 +94,7 @@ void setup() {
   startServer();
 }
 
-void loop() {
+void loop() {    
   // wifi가 끊겼다면 다시 연결 후 서버 시작
   if (WiFi.status() != WL_CONNECTED) {
     startServer();
@@ -221,7 +224,7 @@ float touchPos(float distance, TouchGroup* t1, TouchGroup* temp){
 
     // 만약 유효하지 못한 거리라면 -1 반환(터치 안함)
     float avg = (*t1).sum / (*t1).cnt;
-    if(avg < 10 || 60 < avg){
+    if(avg < 10 || 120 < avg){
       return -1;
     }
     // 유효한 거리라면 터치 데이터 반환

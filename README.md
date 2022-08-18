@@ -4,15 +4,15 @@
 
 ## ✔카테고리
 
-| Application | Domain | Language | Framework |
-| ---- | ---- | ---- | ---- |
-| :white_check_mark: Desktop Web | :black_square_button: AI | :white_check_mark: JavaScript | :black_square_button: Vue.js |
-| :black_square_button: Mobile Web | :black_square_button: Big Data | :black_square_button: TypeScript | :white_check_mark: React |
-| :white_check_mark: Responsive Web | :black_square_button: Blockchain | :black_square_button: C/C++ | :black_square_button: Angular |
-| :black_square_button: Android App | :white_check_mark: IoT | :black_square_button: C# | :black_square_button: Node.js |
-| :black_square_button: iOS App | :black_square_button: AR/VR/Metaverse | :black_square_button: ​Python | :black_square_button: Flask/Django |
-| :black_square_button: Desktop App | :black_square_button: Game | :white_check_mark: Java | :white_check_mark: Spring/Springboot |
-| | | :black_square_button: Kotlin | |
+| Application                       | Domain                                | Language                         | Framework                            |
+| --------------------------------- | ------------------------------------- | -------------------------------- | ------------------------------------ |
+| :white_check_mark: Desktop Web    | :black_square_button: AI              | :white_check_mark: JavaScript    | :black_square_button: Vue.js         |
+| :black_square_button: Mobile Web  | :black_square_button: Big Data        | :black_square_button: TypeScript | :white_check_mark: React             |
+| :white_check_mark: Responsive Web | :black_square_button: Blockchain      | :black_square_button: C/C++      | :black_square_button: Angular        |
+| :black_square_button: Android App | :white_check_mark: IoT                | :black_square_button: C#         | :black_square_button: Node.js        |
+| :black_square_button: iOS App     | :black_square_button: AR/VR/Metaverse | :black_square_button: ​Python    | :black_square_button: Flask/Django   |
+| :black_square_button: Desktop App | :black_square_button: Game            | :white_check_mark: Java          | :white_check_mark: Spring/Springboot |
+|                                   |                                       | :black_square_button: Kotlin     |                                      |
 
 <!-- 필수 항목 -->
 
@@ -36,8 +36,6 @@
   * Material-UI: React Component Library
 * **배포 환경**
   - URL: https://i7d204.p.ssafy.io/
-
-
 
 ## 👨‍👧‍👧요들(요셉과 아이들)팀 소개
 🦉**팀장 양요셉**
@@ -187,7 +185,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 ## 🕋 ERD 구조
 
-![image-20220805181040600](backend/asset/image-20220805181040600.png)
+<img src="https://lab.ssafy.com/s07-webmobile3-sub2/S07P12D204/-/blob/master/backend/image/backend_structure.png">
 
 </br>
 
@@ -203,13 +201,13 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_reco
 
 1. 소아병동 아이들이 실시간 참여할 수 있는 IOT 놀이공간
 2. 약 6개의 테마, 각 맵마다 다른 게임으로
-아이들에게 다양한 체험 제공
+   아이들에게 다양한 체험 제공
 3. 표정 분석을 이용한 맞춤형 심리 진단 서비스 제공
 4. 정서 안정 및 스트레스 완화를 위한 색칠 놀이 기능
 5. 아이의 그림놀이, AI와 대화 자료를 바탕으로 한
-통계 데이터 열람 기능
+   통계 데이터 열람 기능
 6. 빔 프로젝터, 키오스크 또는 태블릿 등 확장성이 용이한
-웹 서비스로 접근성 증대
+   웹 서비스로 접근성 증대
 
 </br>
 

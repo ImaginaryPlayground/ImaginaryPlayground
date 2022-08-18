@@ -36,7 +36,7 @@ const socketIo = require("socket.io");
 //cors 에러 방지 코드
 const io = socketIo(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://192.168.1.103:3000",
     methods: ["GET", "POST"],
   },
 });

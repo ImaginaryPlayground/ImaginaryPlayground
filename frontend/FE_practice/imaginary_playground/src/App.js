@@ -5,15 +5,16 @@ import Map from "./pages/map";
 import Universe from "./pages/universe";
 import JungleBackground from "./components/jungle/JungleBackground";
 import OceanCopy from "./pages/OceanCopy";
-import Test_yjh from "./pages/Test_yjh";
 import OceanCopyIntro from "./pages/OceanCopyIntro";
 import JungleIntro from "./pages/JungleIntro";
 import UniverseIntro from "./pages/UniverseIntro";
 import UniverseOutro from "./components/universeOutro/UniverseOutro";
 import Christmas from "./pages/Christmas";
 import LoginPage from "./pages/LoginPage";
+import OceanMotionTest from "./pages/OceanMotionTest";
 
 import "../src/App.css";
+import ChristmasPresentation from "./pages/ChristmasPresentation";
 
 function App() {
   return (
@@ -31,8 +32,12 @@ function App() {
           <Route path="/junglebackground" element={<JungleBackground />} />
           <Route path="/ocean-copy" element={<OceanCopy />} />
           <Route path="/ocean-intro" element={<OceanCopyIntro />} />
-          <Route path="/test-yjh" element={<Test_yjh />} />
+          <Route path="/ocean-motion" element={<OceanMotionTest />} />
           <Route path="/christmas" element={<Christmas />} />
+          <Route
+            path="/christmas-presentation"
+            element={<ChristmasPresentation />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

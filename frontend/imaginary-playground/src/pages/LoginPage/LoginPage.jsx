@@ -44,6 +44,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 const { naver } = window;
+const imgUrl = process.env.PUBLIC_URL || "";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ const LoginPage = () => {
     if (localStorage.getItem("isLogin") === "true") {
       navigate("/");
     }
-    initializeNaverLogin();
+    // initializeNaverLogin();
   }, []);
 
   const handleFocusInput = (e) => {
@@ -280,11 +281,11 @@ const LoginPage = () => {
         </ColorButton>
       </Grid>
       <Grid item mt={2}>
-        <h5>sns로 간편 로그인/회원가입</h5>
+        {/* <h5>sns로 간편 로그인/회원가입</h5> */}
       </Grid>
       <Grid item className="sns_login_btn">
-        <img
-          src="/iconFolder/SnsLogin/kakao_talk.png"
+        {/* <img
+          src={`${imgUrl}/iconFolder/SnsLogin/kakao-talk.png`}
           alt="카카오톡"
           onClick={() => {
             window.location.href = KAKAO_AUTH_URL;
@@ -292,7 +293,7 @@ const LoginPage = () => {
         />
 
         <img
-          src="/iconFolder/SnsLogin/free_icon_google.png"
+          src={`${imgUrl}/iconFolder/SnsLogin/free_icon_google.png`}
           alt="구글"
           onClick={() => {
             window.location.href = GOOGLE_AUTH_URL;
@@ -300,12 +301,12 @@ const LoginPage = () => {
         />
         <div id="naverIdLogin">
           <img
-            src="/iconFolder/SnsLogin/naver_icon_1.png"
+            src={`${imgUrl}/iconFolder/SnsLogin/naver_icon_1.png`}
             width="64px"
             height="64px"
             alt="네이버"
           />
-        </div>
+        </div> */}
       </Grid>
     </Grid>
   );
