@@ -11,10 +11,10 @@ export const DolphinglTF = ({ id }) => {
   dom.setAttribute("id", `${id}`);
 
   dom.style.position = "absolute";
-  dom.style.left = "25%";
+  dom.style.left = "6%";
   dom.style.top = "11%";
   dom.style.zIndex = "-3";
-  dom.style.scale = "120%";
+  dom.style.scale = "150%";
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -43,7 +43,7 @@ export const DolphinglTF = ({ id }) => {
       const model = gltf.scene;
       // gltf.scene.scale.set(0.9, 0.9, 0.9);
       gltf.scene.scale.multiplyScalar(3.2);
-      model.position.set(-2, 5, 10);
+      model.position.set(6, 5, 12);
       scene.add(model);
 
       mixer1 = new THREE.AnimationMixer(model);
