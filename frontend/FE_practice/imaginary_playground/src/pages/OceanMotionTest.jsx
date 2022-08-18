@@ -41,7 +41,8 @@ const OceanMotionTest = () => {
 
   //자세 따라하라는 오디오
   const MotionStartBeforeAudio = new Howl({
-    src: ["/assets/audio/ocean/자세따라하라는 음성.mp3"],
+    //  음성
+    src: ["/assets/audio/ocean/applaud.mp3"],
     onend: () => {
       document.getElementById("main_dolphin_next_stage_1")?.remove();
 
