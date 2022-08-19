@@ -39,8 +39,9 @@ arduino에서 사용할 수 있는 [예제코드](https://github.com/timum-viw/s
 
 이후 프론트엔드의 유지홍 팀원과 같이 위에서 작성한 [코드를 개선](./codes/WebSocketClientSocketIO_modified/WebSocketClientSocketIO_modified.ino)하였고 정상적으로 화면 터치가 되는것을 확인하였다.
 
-<img src="https://user-images.githubusercontent.com/19484971/185301267-ec0ad0b2-dc8b-4008-9fc1-4b8dfbdf1c14.png
-" width=800>
+아두이노 초음파 센서 작동 사진 추가 요망
+
+<img src="" width=800>
 
 ### 결과
 
