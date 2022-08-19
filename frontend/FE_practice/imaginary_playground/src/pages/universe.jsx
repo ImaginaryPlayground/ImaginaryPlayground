@@ -71,10 +71,10 @@ const Universe = () => {
           if (
             (planetTouchObjectClass === "mars_click_div" &&
               100 <= y &&
-              1000 >= y) ||
+              800 >= y) ||
             (planetTouchObjectClass === "earth_click_div" &&
-              100 <= y &&
-              1000 >= y)
+              0 <= y &&
+              1100 >= y)
           ) {
             isLoadingTime = true;
             planetTouchObject.click();
