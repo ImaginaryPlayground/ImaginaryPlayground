@@ -23,7 +23,7 @@ const char* ssid     = "MERCUSYS_5ABA"; // Galaxy Quantum33143
 const char* password = "dudtjs972972@";  // qwertyuiop
 const int numbers = 4;  // 사용하는 초음파 수, 기본적으로 초음파 센서의 개수는 4개
 const int number = 1;  // 초음파 번호(순서)
-const String num = "1"; 
+const String num = "4"; 
 const int touchRecognizeCnt = 3;  // 터치라고 인식하기 위한 TouchGroup구조체의 최소 cnt
 // *터치 가능 높이는 빔 프로젝터의 세로길이의 5~70퍼라고 가정하고 진행한다.*
 const int pWidth = 245; // 빔 프로젝터 화면의 가로 길이
@@ -150,7 +150,7 @@ void setup() {
     USE_SERIAL.println(WiFi.localIP());  
     
     //ip 192.168.0.8
-    socketIO.begin("192.168.1.101", 4001, "/socket.io/?EIO=4");
+    socketIO.begin("192.168.1.107", 4001, "/socket.io/?EIO=4");
     
     String ip = WiFi.localIP().toString();
     USE_SERIAL.printf("[SETUP] WiFi Connected %s\n", ip.c_str());
@@ -211,7 +211,7 @@ void loop() {
         // 터치가 없다고 판단되면 바로 다음 측정을 시작한다.
          //y값 비율 화면 변환기
         mY = (int) (distance / pHeight * mHeight); 
-         if(mY <= 1400) {
+         if(mY <= 1200) {
          (String)mY;
          array.add(num+" "+strX +" "+mY);
          //array.add((String)mY);
