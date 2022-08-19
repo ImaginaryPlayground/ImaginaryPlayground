@@ -94,7 +94,7 @@
 
 </br>
 
-## 🎁프로젝트 상세 설명
+## 🎁 프로젝트 상세 설명
 
 **어디서도 아이들의 상상력이 멈추지 않도록**✨
 
@@ -106,9 +106,27 @@
 
 ### 서비스 화면
 
-**게임 - 정글맵 <우가우가숲>**
+**상상놀이터 메인 테마맵**
 
+</br>
 
+**게임 테마 - 정글 <우가우가숲>**
+
+</br>
+
+**게임 테마 - 우주 <갤럭시월드>**
+
+</br>
+
+**게임 테마 - 바다 <언더더씨>**
+
+</br>
+
+**이벤트 테마 - 크리스마스 <눈 내리는 마을>**
+
+</br>
+
+**웹 페이지 - 회원가입**
 
 
 
@@ -121,7 +139,7 @@
 
 백엔드: Spring Security를 활용한 OAuth2.0과 JWT를 활용한 인증 방식 Naver Clova/Google Speech를 활용한 음성인식 기능 탑재 MariaDB
 
-IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.8.12) face_recognition(얼굴인식 라이브러리) Google Assistant SDK(음성인식 SDK)
+IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.7.3) face_recognition(1.3.0)
 
 기획: JIRA, Notion, Mattermost (팀 협업, 프로젝트 관리) GitLab(버전관리) Figma(디자인 협업) ERD cloud(DB 모델링) Coggle(마인드맵)
 ```
