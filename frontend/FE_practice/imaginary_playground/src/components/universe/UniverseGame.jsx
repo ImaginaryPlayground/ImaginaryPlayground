@@ -30,14 +30,14 @@ const UniverseGame = () => {
       const socket = socketIOClient(ENDPOINT);
       socket.on("chat message", (data) => {
         // console.log(data);
-        y = data.split(" ")[2] - 400;
+        y = data.split(" ")[2] - 100;
 
         if (data.split(" ")[0] == 1) {
           xStart = "0";
-          xEnd = "960";
+          xEnd = "560";
         } else if (data.split(" ")[0] == 2) {
-          xStart = "481";
-          xEnd = "960";
+          xStart = "500";
+          xEnd = "800";
         } else if (data.split(" ")[0] == 3) {
           xStart = "961";
           xEnd = "1920 ";
@@ -46,10 +46,11 @@ const UniverseGame = () => {
           xEnd = "1920";
         }
         const planetTouchObject = document.getElementsByClassName("click_div");
+
         if (!isLoading) {
           for (let idx = 0; idx < planetTouchObject.length; idx++) {
             const objectRect = planetTouchObject[idx].getBoundingClientRect();
-            //console.log(objectRect);
+            // console.log(objectRect);
             if (
               xStart <= objectRect.x &&
               xEnd >= objectRect.x + objectRect.width &&
@@ -456,6 +457,7 @@ const UniverseGame = () => {
         alt="" src="/assets/universe/can.png" className="metal4" onClick={clickMetal} id={'metal4'} /> */}
 
       {/* 게임이 끝이 나면??? */}
+
       {totalTrash === 8 ? (
         <>
           {/* 하이파이브 에일리언 로딩 */}

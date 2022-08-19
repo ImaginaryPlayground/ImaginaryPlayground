@@ -27,7 +27,7 @@
   z-index: 1000;
   color: white;
   top: 31vh;
-  left: 24.5vw;
+  left: 53.5vw;
   font-size: 3vw;
   /* font-family: "Single Day", cursive; */
   font-family: "IBM Plex Sans KR", sans-serif;
@@ -520,7 +520,7 @@ UniverseIntro .universe_intro_text_box {
   /* background-color: snow; */
   border-radius: 100px;
   /* border: 10px solid plum; */
-  left: 52%;
+  left: 13%;
   top: 50vh;
   width: 620px;
   padding: 30px;
@@ -574,7 +574,7 @@ UniverseIntro .universe_intro_text_box {
 
 .universe .hifive_touch_location {
   position: absolute;
-  left: 45vh;
+  left: 95vh;
   top: 45vh;
   width: 450px;
   height: 495px;
@@ -705,14 +705,14 @@ UniverseIntro .universe_intro_text_box {
   width: 160px;
   height: 200px;
   left: 14vw;
-  top: 76vh;
+  top: 80vh;
 }
 
 .universe .paper2_click_div {
   width: 160px;
   height: 200px;
   left: 33vw;
-  top: 55vh;
+  top: 45vh;
 }
 
 .universe .paper3_click_div {

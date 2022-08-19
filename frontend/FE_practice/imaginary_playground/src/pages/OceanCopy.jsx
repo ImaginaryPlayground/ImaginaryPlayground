@@ -99,11 +99,9 @@ const OceanCopy = () => {
       const socket = socketIOClient(ENDPOINT);
       socket.on("chat message", (data) => {
         const sharkObjects = document.getElementsByClassName("click_div");
-        if (data.split(" ")[0] == 3) {
-          console.log(data.split(" ")[2] - 320);
-        }
+
         console.log(data);
-        y = data.split(" ")[2] - 100;
+        y = data.split(" ")[2] - 80;
         //x값 세팅
         if (!isLoadingTime) {
           for (let index = 0; index < sharkObjects.length; index++) {
@@ -112,8 +110,8 @@ const OceanCopy = () => {
             if (data.split(" ")[0] == 1) {
               if (
                 sharkObject.classList[0] === "copy_Shark1" &&
-                100 <= y &&
-                1000 >= y
+                sharkObjectRect.y <= y &&
+                sharkObjectRect.y + sharkObjectRect.height >= y
               ) {
                 isLoadingTime = true;
                 sharkObject.click();
@@ -143,7 +141,7 @@ const OceanCopy = () => {
                   750 >= y) ||
                 (sharkObject.classList[0] === "copy_Shark3" &&
                   751 <= y &&
-                  1060 >= y)
+                  1000 >= y)
               ) {
                 isLoadingTime = true;
                 sharkObject.click();
@@ -154,8 +152,8 @@ const OceanCopy = () => {
             } else if (data.split(" ")[0] == 4) {
               if (
                 sharkObject.classList[0] === "copy_Shark4" &&
-                100 <= y &&
-                800 >= y
+                sharkObjectRect.y <= y &&
+                sharkObjectRect.y + sharkObjectRect.height >= y
               ) {
                 isLoadingTime = true;
                 sharkObject.click();
