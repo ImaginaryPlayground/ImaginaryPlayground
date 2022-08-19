@@ -230,3 +230,8 @@ TM에서 만든 모델을 적용하고 인식한 자세를 React로 전달하기
 공식 홈페이지의 다큐먼트를 참고하긴 하였으나, 추가적인 설명이 조금 더 필요하다고 느껴서 [한 블로그](https://inpa.tistory.com/entry/SOCKET-%F0%9F%93%9A-SocketIO-%EC%82%AC%EC%9A%A9-%ED%95%B4%EB%B3%B4%EA%B8%B0)를 참고하였다.
 
 TM과 Socket.io를 활용하여 프로젝트에 적용한 [파일 링크](./codes/poseRecognition-NodeJs/README.md)
+
+## porting
+
+컨설턴트님이 언급하신 말을 유추하면 다양한 라이브러리나 패키지를 서로 호환되는 버전을 신경써서 컴퓨터에 설치하는 작업같다. 해당 작업을 필자가 하기는 했지만 전문용어로 따로 있는 것은 모르고 진행했기 때문에 찾아보기로 하였다.
+

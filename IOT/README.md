@@ -21,8 +21,6 @@
 + ESP8266WiFi (아두이노 wifi 통신)
 + Socket.io (소켓 통신)
 
-아두이노 사진 추가 요망
-
 회로도
 
 아두이노 wifi 모듈 esp8266(wemos D1 mini)와 WeMos D1 Mini Battery Shield, 리튬폴리머배터리, 초음파 센서 회로도
@@ -31,6 +29,12 @@
 
 > with [fritzing](https://fritzing.org/)
 
+실재 사진
+
+<img src="https://user-images.githubusercontent.com/19484971/185298704-8e838b95-e6cf-46a9-85de-ec8e948f478f.jpg" width=400>
+
+<img src="https://user-images.githubusercontent.com/19484971/185298707-3b8450af-d376-4951-b039-f5cc8aa96f7d.jpg" width=400>
+
 ### 얼굴인식
 
 웹캠 이미지를 face_recognition을 통해 사람의 얼굴을 탐지하고 학습이 된 사람이라면 누구인지 식별한다. 
@@ -38,7 +42,7 @@
 식별된 사람들의 이름은 라즈베리파이의 node.js 서버를 통해서 React에 전달된다.
 
 사용장비
-+ Raspberry Pi + Node.js
++ Raspberry Pi (+ Node.js)
 + webcam
 
 사용기술
@@ -52,6 +56,8 @@
 
 위 기술에서 중점이 되는 기술은 openCV, dlib, face_recognition 이다.
 
+얼굴인식 사진 추가 요망
+
 ### 자세인식
 
 Google에서 개발한 Teachable Machine 을 활용하여 간단한 자세를 인식하는 모델을 만들고 이를 통해 웹캠의 사람의 자세를 인식한다. 
@@ -59,15 +65,25 @@ Google에서 개발한 Teachable Machine 을 활용하여 간단한 자세를 �
 특정한 자세를 취하면 해당 자세를 인식하고 인식한 자세와 자세의 인식율을 라즈베리파이의 node.js 서버를 통해서 React에 전달한다.
 
 사용장비
-+ Raspberry Pi + Node.js
++ Raspberry Pi (+ Node.js)
 + webcam
 
 사용기술
 + [Teachable Machine](https://teachablemachine.withgoogle.com/)
 + Socket.io (소켓 통신)
 
+자세인식 사진 추가 요망
+
 ## 통신 흐름도
 
 <img src="https://user-images.githubusercontent.com/19484971/185294578-ad6241b8-ab41-41b2-bb18-1790a4928d9e.png" width=500>
 
 > with [draw.io](https://www.draw.io/)
+
+## 프로젝트 시연
+
+프로젝트 진행 중 사진 추가 요망
+
+## 느낀점
+
+라즈베리파이에 기능을 추가하기 위해서 다양한 라이브러리를 설치하는 도중(porting 작업) [굉장히 다양한 에러](./RaspberryPi/problems/README.md)를 겪으면서 
