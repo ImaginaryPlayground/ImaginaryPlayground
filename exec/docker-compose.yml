@@ -1,0 +1,33 @@
+# 프로젝트 Root 폴더
+# 프로젝트Root/docker-compose.yml
+version: '3.7'
+
+services:
+
+  frontend:
+    image: frontend-react
+    build:
+      context: frontend/imaginary-playground/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    # [인증서 파일 저장 경로]:/var/www/html
+    volumes:
+      - /home/ubuntu/docker-volume/pem:/var/www/html
+    container_name: "frontend"
+    #restart: always
+    environment:
+      - TZ=Asia/Seoul
+
+  backend:
+    image: backend-spring
+    build:
+      context: backend/
+      dockerfile: Dockerfile
+    ports:
+      - "8443:8443"
+    volumes:
+      - /home/ubuntu/docker-volume/pem/key.p12:/root/key.p12
+    container_name: "backend"
+    environment:
+      - TZ=Asia/Seoul
