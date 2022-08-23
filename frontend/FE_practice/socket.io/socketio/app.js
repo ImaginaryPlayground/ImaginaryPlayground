@@ -2,14 +2,19 @@ const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
 
-//내가 추가
-//const { Server } = require("socket.io");
-
 const port = process.env.PORT || 4001;
-const index = require("./routes/index");
+// const index = require("./routes/index");
 
 const app = express();
-app.use(index);
+// app.use(index);
+
+// react build 파일을 사용하는 경우
+// app.use(express.static(__dirname + '/build'));
+
+// app.get('/', function (req, res) {
+//   // console.log(__dirname + '/build/index.html');
+//   res.sendFile(__dirname + '/build/index.html');
+// });
 
 const server = http.createServer(app);
 
