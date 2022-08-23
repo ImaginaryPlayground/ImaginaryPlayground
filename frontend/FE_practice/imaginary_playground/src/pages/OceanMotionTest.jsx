@@ -9,6 +9,8 @@ import Motion1Dolphin from "../components/oceanCopy/Motion1Dolphin";
 import MainDolphinNextStage from "../components/oceanCopy/MainDolphinNextStage";
 import "../css/oceanCopy.css";
 
+import { MOTION_POINT } from "../util/nodeConfig";
+
 const OceanMotionTest = () => {
   //첫번째 모션 인식 시작
   const [motionStart1, setMotionStart1] = useState(false);
@@ -90,7 +92,7 @@ const OceanMotionTest = () => {
       let motion3Success = false;
       setIsMotionStart(true);
       let canvas, ctx;
-      const socket = io("http://192.168.1.105:3001");
+      const socket = io(MOTION_POINT);
       socket.emit("poseOn");
       canvas = document.getElementById("canvas");
 
