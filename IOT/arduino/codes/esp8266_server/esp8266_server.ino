@@ -24,6 +24,8 @@ const int pX = (pWidth / 2) + (number - numbers / 2) * 50 - 25; // 초음파 센
 const int mX = pX * mWidth / pWidth; // 초음파 센서의 모니터 화면 가로 위치
 const String strX = (String) mX; // 단순히 String으로 만든 x
 
+const int errorRange = 8;
+
 // wifi를 통한 웹소켓 통신시 사용하는 변수들
 IPAddress local_IP(192, 168, 0, 50);     // 사용할 IP 주소
 IPAddress gateway(192, 168, 1, 1);  // 게이트웨이 주소
@@ -119,10 +121,10 @@ void loop() {
 //    float pY; // 거리를 프로젝터 화면 크기에 맞게 변환시킨 값
     int mY; //모니터 화면 크기에 맞게 변환 시킨 값
     // 터치 그룹들, 그룹의 수가 3이상이 되면 터치를 했다고 인식한다.
-    TouchGroup t1 = { .top = -6, .bottom = -6, .sum = 0, .cnt = 0 };
+    TouchGroup t1 = { .top = -errorRange, .bottom = -errorRange, .sum = 0, .cnt = 0 };
     // 잠시 튀는 값 혹은 다음 터치 값을 저장하기 위한 터치 그룹
     // 만약 해당 그룹의 cnt가 3이되면 t1으로 옮겨지고 터치가 되었다고 인식한다.
-    TouchGroup temp = { .top = -6, .bottom = -6, .sum = 0, .cnt = 0 };
+    TouchGroup temp = { .top = -errorRange, .bottom = -errorRange, .sum = 0, .cnt = 0 };
 
     // 연결이 되어있다면
     while (client.connected()) {
@@ -212,7 +214,7 @@ float sonicDistance(){
 float touchPos(float distance, TouchGroup* t1, TouchGroup* temp){
   // distance가..
   if ((*t1).bottom > distance){
-    if ((*t1).top - distance > 6){ // (bottom보다 작아서) t1 터치 그룹의 오차 범위(6cm)를 넘는다면 temp에 추가한다.
+    if ((*t1).top - distance > errorRange){ // (bottom보다 작아서) t1 터치 그룹의 오차 범위(6cm)를 넘는다면 temp에 추가한다.
       addDataTemp(temp, distance);
     }else{  // 그렇지 않고 오차 범위 내라면 t1에 거리를 추가한다.
       (*t1).cnt += 1;
@@ -221,7 +223,7 @@ float touchPos(float distance, TouchGroup* t1, TouchGroup* temp){
     }
     
   }else if((*t1).top < distance){
-    if (distance - (*t1).bottom > 6){ // distance가 (top보다 커서) t1 터치 그룹의 오차 범위(6cm)를 넘는다면 temp에 등록한다.
+    if (distance - (*t1).bottom > errorRange){ // distance가 (top보다 커서) t1 터치 그룹의 오차 범위(6cm)를 넘는다면 temp에 등록한다.
       addDataTemp(temp, distance);
     }else{  // 그렇지 않고 오차 범위 내라면 t1에 거리를 추가한다.
       (*t1).cnt += 1;
@@ -238,11 +240,11 @@ float touchPos(float distance, TouchGroup* t1, TouchGroup* temp){
   if ((*temp).cnt == 3){
     // t1으로 데이터를 옮기고 temp 초기화 후
     *t1 = *temp;
-    *temp = { .top = -6, .bottom = -6, .sum = 0, .cnt = 0 };
+    *temp = { .top = -errorRange, .bottom = -errorRange, .sum = 0, .cnt = 0 };
 
     // 만약 유효하지 못한 거리라면 -1 반환(터치 안함)
     float avg = (*t1).sum / (*t1).cnt;
-    if(avg < minDistance || maxDistance < avg){
+    if(avg < minDistance && maxDistance < avg){
       return -1;
     }
     // 유효한 거리라면 터치 데이터 반환
@@ -264,7 +266,7 @@ void addDataTemp(TouchGroup* temp, float distance){
   }
 
   // 오차 범위를 벗어나면 들어온 정보를 토대로 새 그룹을 만든다.
-  if ((*temp).top - (*temp).bottom > 6){
+  if ((*temp).top - (*temp).bottom > errorRange){
     *temp = { .top = distance, .bottom = distance, .sum = distance, .cnt = 1 };
   }else{  // 그렇지 않으면 데이터만 추가한다.
     (*temp).sum += distance;
