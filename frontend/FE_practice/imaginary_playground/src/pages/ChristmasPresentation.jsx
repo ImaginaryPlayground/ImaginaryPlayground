@@ -9,6 +9,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 
+import { MOTION_POINT } from "../util/nodeConfig";
+
 const ChristmasPresentation = () => {
   const [kidsData, setKidsData] = useState([]);
   const [nowRecognitionPerson, setNowRecognitionPerson] = useState("");
@@ -61,7 +63,7 @@ const ChristmasPresentation = () => {
   }, []);
 
   useEffect(() => {
-    const socket = io("http://192.168.1.105:3001");
+    const socket = io(MOTION_POINT);
     setTimeout(() => {
       socket.emit("faceOn");
       socket.on("face", (info) => {
