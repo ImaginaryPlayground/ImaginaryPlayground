@@ -2,9 +2,11 @@
 
 ## 서버 컴퓨터
 
-[imaginary_playground](../frontend/FE_practice/imaginary_playground/) 폴더로 이동한 `npm i --force` 를 통해 필요한 node_modul을 다운로드 받고 `npm run start`를 입력하여 react를 실행시키면 연결된 빔 프로젝터를 통해 화면을 볼 수 있다.
+서버 컴퓨터의 ip를 192.168.1.201로 고정한다. 터미널에선 [서버 폴더](../frontend/FE_practice/socket.io/socketio/app.js)로 이동한 후 `node app.js`를 입력하여 서버를 실행한다.
 
-cors 에러를 피하기 위해 react의 ip와 포트번호를 적어준다. (지홍님이 여기 파일 위치 링크)
+[imaginary_playground](../frontend/FE_practice/imaginary_playground/) 폴더로 이동한 `npm i --force` 를 통해 필요한 node_modul을 다운로드 받고 `npm run start`를 입력하여 react를 실행시키면 메인화면을 볼 수 있다.
+
+해당 화면을 연결된 빔 프로젝터를 통해 가로 200, 세로 112의 화면이 보이도록 세팅하고 브라우저의 화면을 ctrl을 클릭한 상태로 휠을 내려 화면비율을 맞춰준다. 해상도 1920*1080화면에서 크롬 브라우저로 67%로 맞추면 된다.
 
 ## 아두이노
 
@@ -27,12 +29,15 @@ cors 에러를 피하기 위해 react의 ip와 포트번호를 적어준다. (�
 
 필자의 경우 [해당 링크](https://glorlfy.tistory.com/4)를 보고 보드 기본 설정을 따라하였고 라이브러리는 위의 목록의 것을 보드 매니저에서 다운로드 받았다.
 
-이후 [코드](../IOT/arduino/codes/WebSocketClientSocketIO_modified/WebSocketClientSocketIO_modified.ino)를 아두이노에 업로드한 후 적절한 위치에서 작동시키면 된다.
+이후 [코드](../IOT/arduino/codes/WebSocketClientSocketIO_modified/WebSocketClientSocketIO_modified.ino)를 아두이노에 업로드한 후 적절한 위치에서 작동시키면 된다. 업로드할 때 `String num` 변수에 왼쪽 초음파센서부터 순서대로 1, 2, 3, 4 를 넣어주어야 한다.
 
-미리 준비된 코드는 빔 프로젝터의 화면이 가로 200, 세로 112 이고, 가로 1920, 세로 1080의 해상도의 ip가 `192.168.1.107`인 빔 프로젝터와 연결된 컴퓨터라고 가정한 코드이며 크기나 ip가 바뀌면 수정하여 업로드를 진행해주어야 한다.
+위와 같이 미리 준비된 코드는 빔 프로젝터의 화면이 가로 200, 세로 112 이고, 가로 1920, 세로 1080의 해상도의 ip가 `192.168.1.201`인 빔 프로젝터와 연결된 컴퓨터라고 가정한 코드이며 크기나 ip가 바뀌면 수정하여 업로드를 진행해주어야 한다.
 
 ## 라즈베리파이 
 
+라즈베리파이 이미지가 있으나 60GB로 인하여 깃에 올리지 못하였다.
+
+서버 컴퓨터의 ip를 192.168.1.202로 고정한다.
 우선 사용하는 라즈베리파이 모델명과 OS버전은 다음과 같다.
 
 - 라즈베리파이 모델 : Raspberry Pi 4 Model B Rev 1.2 (8GB)
@@ -53,7 +58,7 @@ cors 에러를 피하기 위해 react의 ip와 포트번호를 적어준다. (�
 - face_recognition : 1.3.0
 - facial_recognition : X
 
-[라즈베리파이에 폴더](../frontend/FE_practice/raspPiServerTest/)를 넣고 react의 ip주소를 cors 처리하는 코드에 넣어준 후 `node index.js`로 서버를 켠다.
+[라즈베리파이에 폴더](../frontend/FE_practice/raspPiServerTest/)를 넣고 `node index.js`로 서버를 켠다.
 라즈베리파이의 브라우저인 chromium에서 `localhost:3001`로 들어가면 react와 연동하여 자세인식을 하는 화면을 볼 수 있다. react에서 통신이 있기 전까지는 카메라가 켜지지 않는다.
 
 facial_recognition 설치 메뉴얼에 따라 다운로드한 facial_recognition 깃헙 폴더에 [한 파일](../IOT/RaspberryPi/facialRecognition/facial_req_custom.py)을 넣고 `facial_req.py` 대신 `facial_req_custom.py`을 실행하여 위의 파일과 같이 react와 연동하여 사용한다. 마찬가지로 react로 부터의 통신이 있기 전까지는 얼굴인식 기능이 시작되지 않는다.
