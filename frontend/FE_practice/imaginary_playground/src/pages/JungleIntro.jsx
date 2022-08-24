@@ -11,7 +11,6 @@ import "../css/JungleIntro.css";
 import { useFBO } from "@react-three/drei";
 
 const JungleIntro = () => {
-
   const navigate = useNavigate();
   const jungleIntroAudio = new Howl({
     src: ["/assets/audio/jungle/정글맵 인트로 음성.wav"],
@@ -28,13 +27,13 @@ const JungleIntro = () => {
     },
   });
 
-  useEffect(()=>{
-    setTimeout(()=> {
+  useEffect(() => {
+    setTimeout(() => {
       document
-      .getElementById('tory-intro')
-      .setAttribute('class','tory-disappear')
-    },0)
-  })
+        .getElementById("tory-intro")
+        .setAttribute("class", "tory-disappear");
+    }, 0);
+  });
 
   useEffect(() => {
     setTimeout(() => {
@@ -42,8 +41,8 @@ const JungleIntro = () => {
         .getElementById("jungleIntroTori")
         .setAttribute("class", "move_down_up");
       document
-        .getElementById('tory-intro')
-        .setAttribute('class','animate__animated animate__tada tory-intro ')
+        .getElementById("tory-intro")
+        .setAttribute("class", "animate__animated animate__tada tory-intro ");
       jungleIntroAudio.play();
     }, 3000);
 
@@ -56,14 +55,13 @@ const JungleIntro = () => {
     };
   }, []);
 
-
   return (
     <div className="JungleIntro">
       <div>
         <JungleIntroTori id="jungleIntroTori" />
       </div>
       {/* <div className="text_location animate__animated animate__backInDown" > */}
-        {/* <div className="text_box">
+      {/* <div className="text_box">
           <div>
             안녕! &nbsp;
             <span style={{ color: "green" }}>우가우가 숲</span>에 온 걸
@@ -76,15 +74,29 @@ const JungleIntro = () => {
             지금 바로 정글의 동물들을 보러가자!
           </div>
         </div> */}
-        <div id="intro_jungle_text">
-          <img src="/assets/jungle/jungle-text.png" alt="" 
-          className="jungle-text animate__animated animate__backInDown" 
-          />
-          <img src="/assets/jungle/tory-intro.png" alt="" className="tory-intro 
+      <div id="intro_jungle_text">
+        <img
+          src="/assets/jungle/jungle-text.png"
+          alt=""
+          className="jungle-text animate__animated animate__backInDown"
+        />
+        <img
+          src="/assets/jungle/tory-intro.png"
+          alt=""
+          className="tory-intro 
            "
-           id="tory-intro"
-          />
-        </div>
+          id="tory-intro"
+        />
+      </div>
+
+      {/* 홈으로 돌아가기 버튼 */}
+
+      <img
+        src="/assets/map/jungle_minimap.png"
+        alt=""
+        className="jungle_minimap"
+      />
+
       {/* </div> */}
       <JungleBackground />
     </div>

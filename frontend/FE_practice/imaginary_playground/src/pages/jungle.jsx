@@ -60,7 +60,7 @@ const Jungle = () => {
   useEffect(() => {
     setTimeout(() => {
       findTextAudio.play();
-      mainJungleSound.play('key1')
+      mainJungleSound.play("key1");
     }, 2000);
 
     return () => {
@@ -365,8 +365,6 @@ const Jungle = () => {
       }, 13500);
     }
 
-
-
     //마지막 출발 멘트 외치기
     if (end_2 && transcript.includes("출발")) {
       //음성인식 초기화
@@ -413,15 +411,14 @@ const Jungle = () => {
     onend: () => {},
   });
 
-   //정글 메인 음악
-   const mainJungleSound = new Howl({
+  //정글 메인 음악
+  const mainJungleSound = new Howl({
     src: ["/assets/audio/jungle/jungle.mp3"],
     sprite: {
       key1: [0, 10000, true],
     },
-    volume:0.3,
-    onend: () => {
-    },
+    volume: 0.3,
+    onend: () => {},
   });
 
   //메인 원숭이 음성
@@ -571,7 +568,7 @@ const Jungle = () => {
 
   return (
     <div className="jungle" id="jungle_box">
-       {/* <iframe
+      {/* <iframe
           title="배경음악"
           src="/assets/audio/jungle/jungle.mp3?autoplay=1&loop=1&autopause=0"
           allow="autoplay;"
@@ -585,16 +582,14 @@ const Jungle = () => {
             <div className="text_box">
               <div>
                 <span style={{ color: "brown" }}>동물</span>들이 여기저기
-                숨어있어!!{" "}
-                <br />
+                숨어있어!! <br />
                 어서 <span style={{ color: "brown" }}>동물</span>들을 찾아줘!{" "}
                 <br />
-                현재 숨어있는 <span style={{ color: "brown" }}>동물</span>은{" "}
+                현재 숨어있는 <span style={{ color: "brown" }}>
+                  동물
+                </span>은{" "}
                 <span>
-                  총{" "}
-                  <span style={{ color: "green" }}>
-                    {restAnimal}마리
-                  </span>
+                  총 <span style={{ color: "green" }}>{restAnimal}마리</span>
                   야!
                 </span>{" "}
               </div>
@@ -630,12 +625,17 @@ const Jungle = () => {
                 </div>
               </div>
             )}
-          </div> 
+          </div>
         )}
         {/* 메인원숭이 텍스트 */}
-        {isMonkyMain && (<>
-          <img src="/assets/jungle/monkey-bubble.png" alt="" className="monkey-bubble animate__animated animate__tada"/>
-        </>
+        {isMonkyMain && (
+          <>
+            <img
+              src="/assets/jungle/monkey-bubble.png"
+              alt=""
+              className="monkey-bubble animate__animated animate__tada"
+            />
+          </>
           // <div className="text_location appear_text">
           //   <div className="text_box">
           //     <div>
@@ -650,15 +650,20 @@ const Jungle = () => {
           // </div>
         )}
         {/* 메인사자 텍스트 */}
-        {isLionMain && (<>
-          <img src="/assets/jungle/lion-bubble.png" alt="" className="lion-bubble animate__animated animate__tada"/>
-        </>
+        {isLionMain && (
+          <>
+            <img
+              src="/assets/jungle/lion-bubble.png"
+              alt=""
+              className="lion-bubble animate__animated animate__tada"
+            />
+          </>
           // <div className="text_location appear_text">
           //   <div className="text_box">
           //     <div>
           //       나는 정글왕 <span style={{ color: "saddlebrown" }}>사자</span>야
           //       <br />
-          //       운동을 정말로 좋아하지! 
+          //       운동을 정말로 좋아하지!
           //       <br />
           //       <span style={{ color: "midnightblue" }}>"할 수 있다"</span> 라고
           //       외쳐줘!!!
@@ -667,9 +672,14 @@ const Jungle = () => {
           // </div>
         )}
         {/* 메인 늑대 텍스트 */}
-        {isWolfMain && (<>
-          <img src="/assets/jungle/wolf-bubble.png" alt="" className="wolf-bubble animate__animated animate__tada"/>
-        </>
+        {isWolfMain && (
+          <>
+            <img
+              src="/assets/jungle/wolf-bubble.png"
+              alt=""
+              className="wolf-bubble animate__animated animate__tada"
+            />
+          </>
           // <div className="text_location appear_text">
           //   <div className="text_box">
           //     <div>
@@ -686,16 +696,21 @@ const Jungle = () => {
         )}
 
         {/* 메인 코끼리 텍스트 */}
-        {isElephantMain && (<>
-          <img src="/assets/jungle/elephant-bubble.png" alt="" className="wolf-bubble animate__animated animate__tada"/>
-        </>
+        {isElephantMain && (
+          <>
+            <img
+              src="/assets/jungle/elephant-bubble.png"
+              alt=""
+              className="wolf-bubble animate__animated animate__tada"
+            />
+          </>
           // <div className="text_location appear_text">
           //   <div className="text_box">
           //     <div>
           //       나는 정글의 수호신{" "}
           //       <span style={{ color: "saddlebrown" }}>코끼리</span>야
           //       <br />
-          //       나와 내친구들과 정글에서 놀지 않을래? 
+          //       나와 내친구들과 정글에서 놀지 않을래?
           //       <br />
           //       꼭 온다고 약속해줘!!
           //       <br />
@@ -714,7 +729,7 @@ const Jungle = () => {
                 덕분에 동물 친구들을 찾을 수 있었어!
                 <br />
                 <span style={{ color: "saddlebrown" }}>동물</span> 친구들은
-                나중에 너가 밝은 얼굴로 
+                나중에 너가 밝은 얼굴로
                 <br />
                 놀러오기만을 기다리고 있을거야
               </div>
@@ -790,6 +805,14 @@ const Jungle = () => {
           <ToriMain id={`main_tori`} />
         </div>
       )}
+
+      {/* 홈으로 돌아가기 버튼 */}
+
+      <img
+        src="/assets/map/jungle_minimap.png"
+        alt=""
+        className="jungle_minimap"
+      />
 
       <JungleBackground />
     </div>
