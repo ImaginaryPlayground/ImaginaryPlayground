@@ -671,11 +671,12 @@ const Universe = () => {
           </>
         )}
 
+        {/* 홈으로 돌아가기 버튼 */}
+
         <img
-          src="/assets/map/minimap.png"
+          src="/assets/map/planet_minimap.png"
           alt=""
-          className="minimap"
-          onClick={() => (window.location.href = "/")}
+          className="christmas_minimap"
         />
 
         {/* 우주 배경 구현 */}

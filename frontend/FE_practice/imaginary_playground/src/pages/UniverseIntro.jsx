@@ -7,20 +7,18 @@ import { useNavigate } from "react-router";
 import "../css/UniverseIntro.css";
 
 const UniverseIntro = () => {
-
   useEffect(() => {
     var canvasNode = document.querySelectorAll("canvas");
     var canvas = Array.prototype.slice.call(canvasNode);
     if (canvas) {
       canvas.forEach(function (element) {
         // element.style.display = 'none'
-        if (element.id !== 'AlienMain') {
+        if (element.id !== "AlienMain") {
           element.remove();
         }
       });
     }
   }, []);
-
 
   const navigate = useNavigate();
   const universeIntroAudio = new Howl({
@@ -66,9 +64,12 @@ const UniverseIntro = () => {
       </div> */}
 
       <h2 className="universe-intro-text">갤럭시 월드로 입장 중</h2>
-      <img src="/assets/universe/intro-text.png" alt="" className="universe-intro animate__animated animate__zoomIn"/>
+      <img
+        src="/assets/universe/intro-text.png"
+        alt=""
+        className="universe-intro animate__animated animate__zoomIn"
+      />
 
-      
       {/* <img src="/assets/universe/map.png" alt="" className="universe-map"/> */}
 
       {/* <div className="universe_intro_text_box universe_Right_appear">
@@ -92,7 +93,13 @@ const UniverseIntro = () => {
         </div>
       </div> */}
 
-        
+      {/* 홈으로 돌아가기 버튼 */}
+
+      <img
+        src="/assets/map/planet_minimap.png"
+        alt=""
+        className="christmas_minimap"
+      />
       {/* 우주맵 백그라운드 */}
       <UniverseLoading />
     </div>
