@@ -58,10 +58,18 @@ const OceanCopyIntro = () => {
           로 가는중!
         </h2>
       </div> */}
-      <img src="/assets/ocean/ocean-title.png" alt="" className="ocean-title animate__animated animate__fadeIn"/>
+      <img
+        src="/assets/ocean/ocean-title.png"
+        alt=""
+        className="ocean-title animate__animated animate__fadeIn"
+      />
       {isThreeSeconds && (
         <>
-          <img src="/assets/ocean/dolly-text.png" alt="" className="dolly-text animate__animated animate__tada"/>
+          <img
+            src="/assets/ocean/dolly-text.png"
+            alt=""
+            className="dolly-text animate__animated animate__tada"
+          />
         </>
         // <div className="text_box">
         //   <div
@@ -98,6 +106,10 @@ const OceanCopyIntro = () => {
         // </div>
       )}
       {/* 지금부터 배경 요소 시작 */}
+
+      {/* 홈으로 돌아가기 버튼 */}
+      <img src="/assets/map/minimap.png" alt="" className="ocean_minimap" />
+
       {/* 양옆 암벽 */}
       <img alt="" src="/assets/ocean/cliff1.png" className="cliff1" />
       <img alt="" src="/assets/ocean/cliff2.png" className="cliff2" />
