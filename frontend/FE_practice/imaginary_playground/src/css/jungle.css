@@ -10,8 +10,8 @@ body {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  font-family: 'IBM Plex Sans KR', sans-serif;
-} 
+  font-family: "IBM Plex Sans KR", sans-serif;
+}
 
 /* 고래 */
 .jungle .hide_monky_box {
@@ -59,7 +59,6 @@ body {
   height: 100vh;
   z-index: 10;
 }
-
 
 /* 등장 애니메이션 */
 .appear {
@@ -146,8 +145,6 @@ body {
   }
 }
 
-
-
 /* 동물들 버블 */
 .animate__animated.animate__tada {
   --animate-duration: 2s;
@@ -178,8 +175,7 @@ body {
   height: 100vh;
   left: -38vw;
   top: -35vh;
-} 
-
+}
 
 /* 배경 */
 
@@ -275,4 +271,15 @@ body {
   position: absolute;
   z-index: -7;
   width: 100%;
+}
+
+/* 홈으로 돌아가기 버튼 여기서 구현 */
+.jungle_minimap {
+  position: absolute;
+  z-index: 9100000000000000;
+  width: 64px;
+  height: 64px;
+  top: 92vh;
+  left: 1vw;
+  cursor: pointer;
 }

@@ -242,6 +242,14 @@ const Christmas = () => {
         className="minimap"
         onClick={() => (window.location.href = "/")}
       />
+
+      {/* 홈으로 돌아가기 버튼 */}
+
+      <img
+        src="/assets/map/christmas_minimap.png"
+        alt=""
+        className="christmas_minimap"
+      />
     </div>
   );
 };
