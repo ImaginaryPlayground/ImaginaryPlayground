@@ -504,13 +504,15 @@
 }
 
 /* 홈으로 돌아가기 버튼 여기서 구현 */
-/* .minimap {
+.ocean_minimap {
   position: absolute;
   z-index: 9100000000000000;
-  width: 100vw;
-  height: 100vh;
-  top: 10vw;
-} */
+  width: 64px;
+  height: 64px;
+  top: 92vh;
+  left: 1vw;
+  cursor: pointer;
+}
 
 .dolly-complete {
   position: absolute;

@@ -16,7 +16,7 @@ import Motion1Dolphin from "../components/oceanCopy/Motion1Dolphin";
 import Motion2Dolphin from "../components/oceanCopy/Motion2Dolphin";
 import Motion3Dolphin from "../components/oceanCopy/Motion3Dolphin";
 import EndGameMainDolphin from "../components/oceanCopy/EndGameMainDolphin";
-import { ENDPOINT } from "../util/nodeConfig";
+import { ENDPOINT, MOTION_POINT } from "../util/nodeConfig";
 import socketIOClient, { io } from "socket.io-client";
 
 const OceanCopy = () => {
@@ -203,6 +203,133 @@ const OceanCopy = () => {
   });
 
   // 자세따라할때 맞는지 IOT 와 웹소켓 통신 하기
+  // useEffect(() => {
+  //   if (motionStart1 || motionStart2 || motionStart3) {
+  //     let motion1Success = false;
+  //     let motion2Success = false;
+  //     let motion3Success = false;
+  //     setIsMotionStart(true);
+  //     let canvas, ctx;
+  //     const socket = io("http://10.2.1.172:3001");
+  //     socket.emit("poseOn");
+  //     canvas = document.getElementById("canvas");
+  //     console.log(canvas);
+  //     canvas.width = 500;
+  //     canvas.height = 500;
+  //     canvas.style.display = "block";
+  //     ctx = canvas.getContext("2d");
+
+  //     // 받은 pose 출력
+  //     socket.on("pose", (className, maxProbability) => {
+  //       //여기서 pose에 대한 정보가 온다.
+  //       console.log(className, maxProbability);
+
+  //       if (
+  //         motionStart1 &&
+  //         className === "pose1" &&
+  //         maxProbability == 1.0 &&
+  //         !motion1Success
+  //       ) {
+  //         motion1Success = true;
+  //         const motion1Dolphin = document.getElementById("motion1_dolphin_0");
+  //         setisMotionCorrect(true);
+  //         canvas.style.display = "none";
+
+  //         setTimeout(() => {
+  //           //모션 로딩 처리
+  //           setisMotionCorrect(false);
+  //           setisMotionLoading(true);
+  //           // nextMotionAudio.play();
+  //           motion1Dolphin?.remove();
+  //         }, 3000);
+
+  //         // setTimeout(() => {
+  //         //   canvas.style.display = "block";
+  //         // }, 5000);
+  //       } else if (
+  //         motionStart2 &&
+  //         className === "pose2" &&
+  //         maxProbability == 1.0 &&
+  //         !motion2Success
+  //       ) {
+  //         motion2Success = false;
+  //         const motion2Dolphin = document.getElementById("motion2_dolphin_0");
+  //         setisMotionCorrect(true);
+  //         canvas.style.display = "none";
+  //         setTimeout(() => {
+  //           //모션 로딩 처리
+  //           setisMotionCorrect(false);
+  //           setisMotionLoading(true);
+  //           // lastMotionAudio.play();
+  //           motion2Dolphin?.remove();
+  //         }, 8000);
+  //         // setTimeout(() => {
+  //         //   canvas.style.display = "block";
+  //         // }, 5000);
+  //       } else if (
+  //         motionStart3 &&
+  //         !motion3Success &&
+  //         className === "pose3" &&
+  //         maxProbability == 1.0
+  //       ) {
+  //         socket.emit("poseOff");
+  //         setisMotionCorrect(true);
+  //         canvas.style.display = "none";
+  //         motion3Success = true;
+  //         setTimeout(() => {
+  //           setisMotionCorrect(false);
+  //           setMotionStart3(false);
+  //           setEndGameAudio(true);
+  //           canvas.remove();
+  //           Howler.stop();
+  //           document.getElementById("motion3_dolphin_0")?.remove();
+
+  //           // 끝나는 텍스트 교체하기
+  //           setTimeout(() => {
+  //             document.getElementById("endGame_text1").style.display = "none";
+  //             document.getElementById("endGame_text2").style.display = "block";
+  //           }, 8000);
+
+  //           endGameSound.play();
+
+  //           // 돌핀 사라지기
+  //           setTimeout(() => {
+  //             document
+  //               .getElementById("endGame_dolphin_0")
+  //               .setAttribute("class", "disappear");
+  //           }, 30000);
+
+  //           // 돌핀 제거 후 메인화면으로
+  //           setTimeout(() => {
+  //             document.getElementById("endGame_dolphin_0").remove();
+  //             navigate("/", { replace: "true" });
+  //           }, 31300);
+  //         }, 3000);
+  //       }
+  //     });
+
+  //     socket.on("poseImg", (image) => {
+  //       // console.log("poseImg");
+
+  //       const imageObj = new Image();
+  //       imageObj.onload = function () {
+  //         ctx.drawImage(imageObj, 0, 0);
+  //       };
+  //       imageObj.src = image;
+  //     });
+  //   }
+
+  //   if (motionStart1 && isMotionLoading) {
+  //     Howler.stop();
+  //     nextMotionAudio.play();
+  //   } else if (motionStart2 && isMotionLoading) {
+  //     Howler.stop();
+  //     lastMotionAudio.play();
+  //   }
+
+  //   return () => {};
+  // }, [motionStart1, motionStart2, motionStart3, isMotionLoading]);
+
   useEffect(() => {
     if (motionStart1 || motionStart2 || motionStart3) {
       let motion1Success = false;
@@ -210,10 +337,10 @@ const OceanCopy = () => {
       let motion3Success = false;
       setIsMotionStart(true);
       let canvas, ctx;
-      const socket = io("http://10.2.1.172:3001");
+      const socket = io(MOTION_POINT);
       socket.emit("poseOn");
       canvas = document.getElementById("canvas");
-      console.log(canvas);
+
       canvas.width = 500;
       canvas.height = 500;
       canvas.style.display = "block";
@@ -226,14 +353,14 @@ const OceanCopy = () => {
 
         if (
           motionStart1 &&
-          className === "pose1" &&
+          className === "hands_up" &&
           maxProbability == 1.0 &&
           !motion1Success
         ) {
           motion1Success = true;
           const motion1Dolphin = document.getElementById("motion1_dolphin_0");
           setisMotionCorrect(true);
-          canvas.style.display = "none";
+          // canvas.style.display = "none";
 
           setTimeout(() => {
             //모션 로딩 처리
@@ -241,41 +368,46 @@ const OceanCopy = () => {
             setisMotionLoading(true);
             // nextMotionAudio.play();
             motion1Dolphin?.remove();
-          }, 3000);
+          }, 5000);
 
           // setTimeout(() => {
           //   canvas.style.display = "block";
           // }, 5000);
         } else if (
           motionStart2 &&
-          className === "pose2" &&
+          className === "bong_pose" &&
           maxProbability == 1.0 &&
           !motion2Success
         ) {
           motion2Success = false;
           const motion2Dolphin = document.getElementById("motion2_dolphin_0");
           setisMotionCorrect(true);
-          canvas.style.display = "none";
+          // canvas.style.display = "none";
+
           setTimeout(() => {
             //모션 로딩 처리
             setisMotionCorrect(false);
             setisMotionLoading(true);
             // lastMotionAudio.play();
             motion2Dolphin?.remove();
+            canvas.style.display = "none";
+          }, 5000);
+
+          setTimeout(() => {
+            canvas.style.display = "block";
           }, 8000);
-          // setTimeout(() => {
-          //   canvas.style.display = "block";
-          // }, 5000);
         } else if (
           motionStart3 &&
           !motion3Success &&
-          className === "pose3" &&
+          className === "monkey_pose" &&
           maxProbability == 1.0
         ) {
+          console.log("여기 찍힘?");
           socket.emit("poseOff");
           setisMotionCorrect(true);
-          canvas.style.display = "none";
+          // canvas.style.display = "none";
           motion3Success = true;
+
           setTimeout(() => {
             setisMotionCorrect(false);
             setMotionStart3(false);
@@ -288,7 +420,7 @@ const OceanCopy = () => {
             setTimeout(() => {
               document.getElementById("endGame_text1").style.display = "none";
               document.getElementById("endGame_text2").style.display = "block";
-            }, 8000);
+            }, 3000);
 
             endGameSound.play();
 
@@ -304,7 +436,7 @@ const OceanCopy = () => {
               document.getElementById("endGame_dolphin_0").remove();
               navigate("/", { replace: "true" });
             }, 31300);
-          }, 3000);
+          }, 5000);
         }
       });
 
@@ -1088,10 +1220,6 @@ const OceanCopy = () => {
               뚜뚜뚜루 뚜뚜루 뚜뚜
             </div> */}
           </div>
-
-          {/* 홈으로 돌아가기 버튼 */}
-
-          <img src="/assets/map/minimap.png" alt="" className="minimap" />
         </>
       ) : (
         <>
@@ -1121,6 +1249,9 @@ const OceanCopy = () => {
           }}
         ></canvas>
       </div>
+      {/* 홈으로 돌아가기 버튼 */}
+
+      <img src="/assets/map/minimap.png" alt="" className="ocean_minimap" />
       {/* 지금부터 배경 요소 시작 */}
       {/* 양옆 암벽 */}
       <img alt="" src="/assets/ocean/cliff1.png" className="cliff1" />

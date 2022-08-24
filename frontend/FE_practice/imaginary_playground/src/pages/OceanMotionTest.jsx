@@ -348,6 +348,10 @@ const OceanMotionTest = () => {
         ></canvas>
       </div>
       {/* 지금부터 배경 요소 시작 */}
+
+      {/* 홈으로 돌아가기 버튼 */}
+      <img src="/assets/map/minimap.png" alt="" className="ocean_minimap" />
+
       {/* 양옆 암벽 */}
       <img alt="" src="/assets/ocean/cliff1.png" className="cliff1" />
       <img alt="" src="/assets/ocean/cliff2.png" className="cliff2" />

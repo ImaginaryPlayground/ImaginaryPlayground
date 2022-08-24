@@ -260,3 +260,14 @@
   color: mintcream;
   font-family: "IBM Plex Sans KR", sans-serif;
 }
+
+/* 홈으로 돌아가기 버튼 여기서 구현 */
+.christmas_minimap {
+  position: absolute;
+  z-index: 9100000000000000;
+  width: 64px !important;
+  height: 64px;
+  top: 92vh;
+  left: 1vw;
+  cursor: pointer;
+}
