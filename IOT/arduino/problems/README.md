@@ -38,7 +38,7 @@ Wemos D1 mini 보드에 초음파 센서가 작동하는지 확인하고 wifi로
 
 [wemos 공식 홈페이지](https://www.wemos.cc/en/latest/d1/d1_mini_lite.html)를 보아도 이해가 안되어서 찾아보게된 [동영상](https://www.youtube.com/watch?v=z6Vgy1cY0XU)을 통해서 어떻게 만들어야할지 알게되었다. 사용하고 있는 wemos D1 mini battery shield라는 추가로 납땜을 더 해야한다는 사실에 (현재 가진 인두기 성능이 너무 안좋아서) 인두기와 납을 새로 사야할 것 같다... 
 
-### wemos D1 mini battery shield 터넥터
+### wemos D1 mini battery shield 커넥터
 
 우선 먼저 새 인두기를 샀다. 비싸고 질 좋은 것은 아니었지만 행복했다.
 
@@ -53,6 +53,8 @@ Wemos D1 mini 보드에 초음파 센서가 작동하는지 확인하고 wifi로
 > \+ 전극이 떨어진 상황
 
 그때그때 납땜을 다시 해주기는 하였으나 새로 납 제거 테이프를 사기 전까지는 이미 코드에 녹인 납을 제거할 방법이 없었기 때문에 힘들게 붙여주었다. 
+
+<img src="https://user-images.githubusercontent.com/19484971/187028810-2200288d-6dee-47a4-940b-d64c82dbc5b6.jpg" width=300>
 
 ## WebSocket 통신 고정 IP
 
