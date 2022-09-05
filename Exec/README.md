@@ -47,11 +47,13 @@
 
 필자의 경우 [해당 링크](https://glorlfy.tistory.com/4)를 보고 보드 기본 설정을 따라하였고 라이브러리는 위의 목록의 것을 보드 매니저에서 다운로드 받았다.
 
-이후 [코드](../IOT/arduino/codes/WebSocketClientSocketIO_modified/WebSocketClientSocketIO_modified.ino)를 아두이노에 업로드한 후 적절한 위치에서 작동시키면 된다. 업로드할 때 `String num` 변수에 왼쪽 무선터치센서부터 순서대로 1, 2, 3, 4 를 넣어주어야 한다.
+이후 [코드](../IOT/arduino/codes/WebSocketClientSocketIO_modified/WebSocketClientSocketIO_modified.ino)를 아두이노에 업로드한 후 적절한 위치에서 작동시키면 된다. 업로드할 때 `String num` 변수에 왼쪽 무선터치센서부터 순서대로 1, 2, 3, 4 를 넣어주어야 한다. 또한 벽면에 설치할 때도 아래의 그림에 따라서 순서에 따라서 적절한 간격으로 배치해주어야 한다.
+
+<img src="https://user-images.githubusercontent.com/19484971/188360970-02eb4180-198a-4b0f-8b93-39a9b58dc362.png" width=400>
 
 필자의 경우 무선터치센서 바닥에 구멍을 뚫어 몇 번째의 센서인지 표시를 해놓았다.
 
-위에서 설정한 서버 컴퓨터에 터치데이터를 송신하게 되며 빔 프로젝터로 보이는 크기나 서버 컴퓨터의 ip가 바뀌면 수정하여 업로드를 진행해주어야 한다.
+코드가 잘 업로드 되었다면 아두이노를 켰을 때 설정한 서버 컴퓨터에 터치데이터를 송신하게 되며 빔 프로젝터로 보이는 크기나 서버 컴퓨터의 ip가 바뀌면 수정하여 업로드를 진행해주어야 한다.
 
 만약 잘 통신이 되었다면 아래와 같은 데이터를 컴퓨터의 서버에서 확인할 수 있다.
 
@@ -60,6 +62,17 @@
 `hoNew client connected`는 리액트가 연결되었을 때, `distance: num width height`는 무선터치센서가 서버에 터치 데이터를 송신할 때 출력된다.
 
 참고로 (가끔 멋대로 터치가 되었다고 인식하여 생각하지도 않은 맵에 들어가는 경우가 있어서) 메인화면에서는 강제 클릭 이벤트를 넣어주지 않았기 때문에 맵을 이동할 경우에는 마우스를 이용해야 한다.
+
+- 무선 터치 센서 켜는법
+    1. 5핀 단자로 충전을 한다. (충전 중인 경우에는 빨간불, 완전 충전이 되면 초록불)
+    <img src="https://user-images.githubusercontent.com/19484971/188360634-574dac51-847b-4dc5-bc11-51307d68326e.jpg" width=300>
+    2. 배터리 쉴드를 보드 위에 맞춰 끼우면 바로 작동한다. (전원 공급이 되면 파란불)
+    <img src="https://user-images.githubusercontent.com/19484971/188360605-f31d9b53-61a9-48cd-a3ec-9563462d7e01.jpg" width=400>
+    <img src="https://user-images.githubusercontent.com/19484971/188360614-bb1dedd1-bcc1-450c-a13a-fbeff7e67b39.jpg" width=400>
+    3. 무선 터치 센서를 다 사용했다면 배터리 쉴드와 보드를 분해해주면 된다.
+    <img src="https://user-images.githubusercontent.com/19484971/188360630-ad51aabe-fd07-41a7-9eff-5358baa91205.jpg" width=400>
+
+- 전압계와 같은 장비가 없어 유지시간은 정확히 모르겠지만 4시간 이상 작동하는 것을 2번 확인
 
 ## 라즈베리파이 
 
