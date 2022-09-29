@@ -1,7 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse,macos,java,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,macos,java,windows
 
-### Eclipse ###
+### Eclipse ####
 .metadata
 bin/
 tmp/
