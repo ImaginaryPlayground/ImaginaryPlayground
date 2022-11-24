@@ -92,7 +92,17 @@ explorer에서 아래의 버튼을 클릭하면
 
 ## get-apt와 apt의 차이
 
-### pip와 apt-get의 차이
+대부분의 블로그가 차이가 없다는 말 밖에 없어서 컨설턴트님과 필자의 경험을 미루어 볼 때, 둘의 차이점은 크게 의존성 관리 여부이다.
+
+`apt-get`으로 했을 때 설치가 안되는 라이브러리가 있었는데 `apt`로 바꿔주자마자 설치가 되었다. 의존성 파일에 또 의존성 파일이 있어서 설치에 어려움이 있었는데 그것을 모두 고려해서 설치를 진행해준 것이었다.
+
+[`What is the difference between apt and apt-get?`](https://askubuntu.com/questions/445384/what-is-the-difference-between-apt-and-apt-get)라는 글에 따르면 거의 대부분은 비슷하지만, `apt-get`는 사람보다는 `lower-level` 혹은 `back-end`에 맞춰 다양한 APT 도구 모음을 지원하고 `apt`는 사람(`end-users`)에 맞춰 개발되었다고 한다.
+
+## pip와 apt-get의 차이
+
+`apt`는 `Advanced packaging tool`의 약자로 이고 `pip`는 파이썬으로 작성된 패키지 소프트웨어를 다운로드, 설치, 관리하는 패키지 관리 시스템이다.
+
+사실 둘 다 패키지를 관리한다는 점에서는 같지만, `apt-get`는 Ubuntu 리포지토리에서, `pip`는 `PyPI`(파이썬 패키지 인덱스, 파이썬 모듈의 저장소)에서 다운로드 받기 때문에 파이썬 패키지만을 다룬다는 차이점이 있다.
 
 ## 라즈베리파이 SD카드 이미지 백업
 
@@ -105,6 +115,8 @@ explorer에서 아래의 버튼을 클릭하면
 그래서 그런지 백업은 5분인가 10분인가 걸렸지만, 복원은 3분 정도면 끝난다. 에러 해결해본다고 이것저것 설치하고 설정 변경하다가 라즈베리파이가 켜지지도 않는 경우가 꽤 있었는데 몰랐으면 울뻔했다!
 
 ## JS에서 Python 파일 실행하기
+
+해당 방법은 socket.io를 사용하면서 활용하지 않게 되었지만, 실습했던 내용을 정리하였다.
 
 프로젝트 중 라즈베리파이 센서의 값을 웹으로 송신해야하는 경우가 생겨 컨선턴트님께 여쭤보았더니 방법이 있으시다고 하셔서 검색해서 아래와 같이 실습을 해보았다.
 
@@ -164,7 +176,7 @@ AttributeError: 'str' object has no attribute 'toInt'
 [Done] exited with code=0 in 1.013 seconds
 ```
 
-참고
+### 참고
 
 - [[Node.js] 자바스크립트로 파이썬 연동 실행 방법(함수 매개변수 전달 호출 : child-process)](https://curryyou.tistory.com/225)
 - [자바스크립트에서 Python 파일 실행하기](https://doongdoongeee.tistory.com/148)
