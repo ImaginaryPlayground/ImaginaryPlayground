@@ -23,7 +23,7 @@ const char* ssid     = "MERCUSYS_5ABA"; // Galaxy Quantum33143
 const char* password = "dudtjs972972@";  // qwertyuiop
 const int numbers = 4;  // 사용하는 초음파 수, 기본적으로 초음파 센서의 개수는 4개
 const int number = 1;  // 초음파 번호(순서)
-const String num = "3"; 
+const String num = "1"; 
 const int touchRecognizeCnt = 3;  // 터치라고 인식하기 위한 TouchGroup구조체의 최소 cnt
 // *터치 가능 높이는 빔 프로젝터의 세로길이의 5~70퍼라고 가정하고 진행한다.*
 const int pWidth = 200; // 빔 프로젝터 화면의 가로 길이
