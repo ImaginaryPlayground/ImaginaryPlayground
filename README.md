@@ -238,7 +238,11 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.7.3) face_recog
 
 </br>
 
+## 🥇 수상 이력
 
+<img src="https://user-images.githubusercontent.com/86208370/215349293-5d1d1e38-c071-4a12-b0e8-291cd11b047d.png" width="800" height="400"/>
+
+<
 
 ## 🎪 기능 상세
 
