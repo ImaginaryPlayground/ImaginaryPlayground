@@ -1,22 +1,29 @@
 # 🎪 상상놀이터(소아병동 아이들을 위한 IoT 서비스)
 
-<!-- 필수 항목 -->
 
 </br>
 
-## ✔ 카테고리
+![image](https://user-images.githubusercontent.com/86208370/215335715-0c07eada-696f-49dd-a87f-68177e5bd1eb.png)
 
-| Application | Domain | Language | Framework |
-| ---- | ---- | ---- | ---- |
-| :white_check_mark: Desktop Web | :black_square_button: AI | :white_check_mark: JavaScript | :black_square_button: Vue.js |
-| :black_square_button: Mobile Web | :black_square_button: Big Data | :black_square_button: TypeScript | :white_check_mark: React |
-| :white_check_mark: Responsive Web | :black_square_button: Blockchain | :white_check_mark: C/C++ | :black_square_button: Angular |
-| :black_square_button: Android App | :white_check_mark: IoT | :black_square_button: C# | :black_square_button: Node.js |
-| :black_square_button: iOS App | :black_square_button: AR/VR/Metaverse | :white_check_mark: ​Python | :black_square_button: Flask/Django |
-| :black_square_button: Desktop App | :black_square_button: Game | :white_check_mark: Java | :white_check_mark: Spring/Springboot |
-| | | :black_square_button: Kotlin | |
 
-<!-- 필수 항목 -->
+💡 `어디서도 아이들의 상상력이 멈추지 않도록`✨
+
+상상놀이터는 소아병동 아이들을 위한 교육 및 놀이 통합형 `IoT 웹 서비스`입니다.
+
+병원이라는 제한적인 공간에서 희귀 난치 질병으로 장기 입원하는 환아에게 다양한 경험을 선물해주고 싶어 기획하게 되었습니다. <br>
+또한 힘든 치료와 장기입원으로 인해 또래들보다 신체적 및 정서적 발달이 늦은 아이들에게 놀이를 통해 도움을 주고자 하였습니다. <br>
+
+
+`아래의 링크를 클릭하면 이동합니다` <br>
+💌 [Notion](https://quill-peripheral-d93.notion.site/ed5a71762fd1428097710fd05e435e20) - 프로젝트를 진행하며 서비스 관리 및 회고 등 정리하였습니다. <br>
+💻 [Web](https://common-test-0808.netlify.app/) - 상상놀이터의 Front-End를 확인할 수 있는 공간입니다.(배포) <br>
+📻 [Youtube](https://www.youtube.com/watch?v=zck0G1kbDmA&t=189s) - SSAFY 공식 유튜브에 업로드된 프로젝트 소개입니다. <br>
+🎞 [UCC](https://www.youtube.com/watch?v=CdfojzqRaxo&t=29s) - 팀에서 제작한 프로젝트 UCC 입니다. <br>
+🎁 [PPT](https://drive.google.com/drive/folders/1BbnMu3ADYH5gcATDYuoL8bo7R-f7JtOk?usp=sharing) 프로젝트 지역 발표, 삼성전자 임원 발표 PPT(권성호 제작)입니다.
+
+
+<br>
+<br>
 
 ## 💁‍♀️ 프로젝트 소개
 
@@ -40,14 +47,32 @@
 
 * **프로젝트 기간**
 
-  2022.07.11 ~ 2022.08.19
+  - `2022.07.11 ~ 2022.08.19 (7주)`
+  - 2022.08.16 : 칠곡 경북대학교 어린이병원에서 소아암 환아 3명에게 [상상놀이터] 시연
 
-* **배포 환경**
+* **팀 구성**
 
-  - URL: https://i7d204.p.ssafy.io/
+  - 총 6인으로 구성
+  - BE : 2명
+  - FE : 3명
+  - IoT : 1명 (FE 멤버 권성호 프로젝트 중순 이후 추가 합류)
+
 
 </br>
 
+## ✔ 카테고리
+
+| Application | Domain | Language | Framework |
+| ---- | ---- | ---- | ---- |
+| :white_check_mark: Desktop Web | :black_square_button: AI | :white_check_mark: JavaScript | :black_square_button: Vue.js |
+| :black_square_button: Mobile Web | :black_square_button: Big Data | :black_square_button: TypeScript | :white_check_mark: React |
+| :white_check_mark: Responsive Web | :black_square_button: Blockchain | :white_check_mark: C/C++ | :black_square_button: Angular |
+| :black_square_button: Android App | :white_check_mark: IoT | :black_square_button: C# | :black_square_button: Node.js |
+| :black_square_button: iOS App | :black_square_button: AR/VR/Metaverse | :white_check_mark: ​Python | :black_square_button: Flask/Django |
+| :black_square_button: Desktop App | :black_square_button: Game | :white_check_mark: Java | :white_check_mark: Spring/Springboot |
+| | | :black_square_button: Kotlin | |
+
+<br>
 ## 👨‍👧‍👧 요들(요셉과 아이들)팀 소개
 🦉 **팀장 양요셉**
 
@@ -56,7 +81,7 @@
 - DB 관리
 - CI/CD 구축
 
-👿 **팀원 권성호**
+👿 `**부팀장 권성호**`
 
 - Front-end
 - 전반적인 게임 작동방식 구현
@@ -94,40 +119,39 @@
 
 </br>
 
-## 🎁 프로젝트 상세 설명
 
-**어디서도 아이들의 상상력이 멈추지 않도록**✨
-
-**상상놀이터**는 소아병동 아이들을 위한 교육 및 놀이 통합형 IoT 서비스입니다.
-
-병원이라는 제한적인 공간에서 오랜 시간을 보내는 환우들에게 다양한 경험을 선물해주고 싶어 기획하게 되었습니다. 또한 힘든 치료와 장기입원으로 인해 또래들보다 신체적 및 정서적 발달이 늦은 아이들에게 놀이를 통해 도움을 주고자 하였습니다.
 
 </br>
 
-### 서비스 화면
+## 🎁 서비스 화면
 
-**상상놀이터 메인 테마맵**
-
-</br>
-
-**게임 테마 - 정글 <우가우가숲>**
+### 1. **`상상놀이터 메인 테마맵`** <br>
+<img src="https://user-images.githubusercontent.com/86208370/215336829-5d18c876-e5cc-436f-a92f-a9a56268773b.png" width="800" height="400"/>
 
 </br>
 
-**게임 테마 - 우주 <갤럭시월드>**
+### 2. **게임 테마 - 정글 `<우가우가숲>`** <br>
+<img src="https://user-images.githubusercontent.com/86208370/215336728-be0eac38-09f8-445a-bd32-38b95032c94d.png" width="800" height="400"/>
 
 </br>
 
-**게임 테마 - 바다 <언더더씨>**
+### 3. **게임 테마 - 우주 `<갤럭시월드>`** <br>
+<img src="https://user-images.githubusercontent.com/86208370/215336754-7e028bed-bdf6-4239-9acc-a25e0de087c8.png" width="800" height="400"/>
 
 </br>
 
-**이벤트 테마 - 크리스마스 <눈 내리는 마을>**
+### 4. **게임 테마 - 바다 `<언더더씨>`** <br>
+<img src="https://user-images.githubusercontent.com/86208370/215336762-95c81621-8034-4072-b004-e5efde22e23e.png" width="800" height="400"/>
+
+<br>
+
+### 5. **이벤트 테마 - 크리스마스 `<눈 내리는 마을>`** <br>
+<img src="https://user-images.githubusercontent.com/86208370/215336774-38c4b230-b375-4caf-af0b-3aa88020bf15.png" width="800" height="400"/>
 
 </br>
 
-**웹 페이지 - 회원가입**
-
+### 6. **웹 페이지 - `<관리자 페이지>`** <br>
+<img src="https://user-images.githubusercontent.com/86208370/215336777-c2b78212-0884-4212-b831-e9088b222bb3.png" width="800" height="400"/>
 
 
 </br>
@@ -210,7 +234,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.7.3) face_recog
 
 ## 🕋 프로젝트 구성도
 
-<img src="https://lab.ssafy.com/s07-webmobile3-sub2/S07P12D204/-/raw/master/db/ERD_imaginationPlayground.png">
+<img src="https://user-images.githubusercontent.com/86208370/215346646-82b559e9-14f1-4fd6-8fd5-929ebc1572b5.png" width="800" height="400"/>
 
 </br>
 
@@ -225,23 +249,108 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.7.3) face_recog
 1. 소아병동 아이들이 실시간 참여할 수 있는 IOT 놀이공간
 2. 약 6개의 테마, 각 맵마다 다른 게임으로
 아이들에게 다양한 체험 제공
-3. 표정 분석을 이용한 맞춤형 심리 진단 서비스 제공
-4. 정서 안정 및 스트레스 완화를 위한 색칠 놀이 기능
-5. 아이의 그림놀이, AI와 대화 자료를 바탕으로 한
-통계 데이터 열람 기능
-6. 빔 프로젝터, 키오스크 또는 태블릿 등 확장성이 용이한
+3. `동작 인식 기능` : 원숭이 캐릭터 '우끼'의 동작을 따라함으로서 환아의 가벼운 스트레칭 
+4. `음성 인식 기능` : 동물 캐릭터의 울음소리를 맞추면 동물들이 희망의 메시지로 아이들을 응원(코리끼, 늑대, 사자, 원숭이)
+5. `얼굴 인식 기능` : 환아들의 얼굴을 인식하여 AI 
+6. `터치 인식 기능` : '상어를 혼내줘' 와 '우주의 쓰레기 분리수거' 게임에서 활용. 초음파 센서 값을 아두이노를 통해 웹 리액트로 전달해서 스크린에서 터치 기능이 가능 
+7. 빔 프로젝터, 키오스크 또는 태블릿 등 확장성이 용이한
 웹 서비스로 접근성 증대
 
 </br>
 
-#### - 서비스의 특징 / 독창성
+### - 서비스의 특징 / 독창성
 
-1. 개인모드와 공용모드로 나눠져있어 개인 또는 다수가 동시에 플레이 가능
-2. 6종류의 다양한 테마를 구성하여 아이들이 다양한 환경에서 게임 플레이 가능
-3. 개인모드의 미술놀이와 상담 및 친구 기능은 병원과 연계하여 아이들의 심리 상태 파악에 활용
+1. 개인 또는 다수가 동시에 플레이 가능
+2. `4종류의 다양한 테마 맵`를 구성하여 아이들이 다양한 환경에서 게임 플레이 가능
+3. 병원과 연계하여 아이들의 심리 상태 파악에 활용
 4. 단순한 유희성 게임이 아닌 놀이와 교육을 통합한 게임으로 아이들의 사회성, 신체, 인지 발달에 기여
 5. 프로젝트 빔을 사용하여 화면을 보여주고 초음파 센서를 활용하여 터치패널이 없는 화면에서도 터치가 가능하도록 구현
 6. 회원가입 시에 등록한 아이 얼굴 사진을 토대로 얼굴인식을 한 후 사용자와 상호작용
 7. 모든 과정은 자동으로 진행되지만 사용자가 수동으로도 조작할 수 있는 시스템
-8. 블렌더로 3D 캐릭터를 제작함으로써 생동감 증대
+8. 블렌더로 3D 동물 캐릭터를 제작하고 Three.js로 생동감 증대
 9. 웹서비스 기반의 확장 가능한 서비스, Oauth2와 JWT를 활용한 보안 및 접근성 증대
+10. 관리자 서버를 구축하여 병원에서 환아들 관리 용이
+
+
+<br>
+
+## 🗂 디렉토리 구조
+```
+java
+└── com.yodel.imaginaryPlayground
+    └── config
+    │    ├── SecurityConfing
+    │   ├── SwaggerConfig
+    │    └── WebConfig
+    └── controller
+    │    ├── AdminController
+    │   ├── AnswerController
+    │    ├── BabyController
+    │    ├── ClovaFaceController
+    │    ├── ClovaSpeechController
+    │    ├── HospitalController
+    │    ├── QuestionController
+    │    ├── TestController
+    │    ├── UserCareController
+    │    └── UserController
+    └── mapper
+    │    ├── AdminMapper
+    │    ├── AnswerMapper
+    │    ├── HospitalMapper
+    │    ├── QuestionMapper
+    │    ├── UserCareMapper
+    │    └── UserMapper
+    ├── model
+    │    ├── dto
+    │   │   ├── AnswerDto
+    │   │    ├── BabyDto
+    │   │    ├── ConsultDto
+    │   │    ├── HospitalDto
+    │   │    ├── PageDto
+    │   │    ├── QuestionDto
+    │   │    ├── Role
+    │   │    └── UserDto
+    │    ├── jwt
+    │   │    ├── JwtAuthenticationFilter
+    │   │    └── JwtTokenService
+    │    ├── oauth
+    │   │    ├── OAuth2SuccessHandler
+    │   │    └── OAuthAttributes
+    │    └── vo
+    │   │    ├── BabyVO
+    │   │    ├── EmailCodeVO
+    │   │    ├── IdVO
+    │   │    └── PasswordVO
+    ├── Service
+    │   ├── jwt
+    │   │    └── CustomUserDetailService
+    │   ├── oauth
+    │   │    └── CustomOAuth2UserService
+    │   ├── oauth
+    │   ├── AdminService
+    │   ├── AdminServiceImpl
+    │   ├── AnswerService
+    │   ├── AnswerServiceImpl
+    │   ├── EmailService
+    │   ├── EmailServiceImpl
+    │   ├── HospitalService
+    │   ├── HospitalServiceImpl
+    │   ├── QuestionService
+    │   ├── QuestionServiceImpl
+    │   ├── UserCareService
+    │   ├── UserCareServiceImpl
+    │   ├── UserService
+    │   └── UserServiceImpl
+    └── ImagnaryPlaygroundApplication
+resources
+└── mappers
+        ├── admin.xml
+        ├── answer.xml
+        └── hospital.xml
+         ├── question.xml
+        ├── user.xml
+        └── usercare.xml
+├── application-oauth.properties
+├── application-prod.properties
+└── application.properties
+```
