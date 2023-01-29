@@ -41,7 +41,7 @@
 
 * **주요 기술**
 
-  - Single Page Application
+  - React (Single Page Application)
   - Raspberry Pi
   - REST API
 
