@@ -35,6 +35,7 @@
 
   * 4개의 테마(정글, 우주, 바다, 크리스마스)로 다양한 체험 제공
   * 아이들의 정서적 및 신체적 발달을 위한 간단한 놀이 제공
+  * Blender 로 3D 동물 캐릭터 제작 및 Three.js로 실행
   * 회원 담당 환자등록 서비스
   * 회원관리 및 1대1 문의 서비스
   * 빔 프로젝터, 키오스크 등 확장 가능한 IoT & 웹 서비스
@@ -159,7 +160,14 @@
 ### 🛠 기술 환경
 
 ```
-프론트엔드: React, Three.JS(3D 웹 실행), Blender(3D 캐릭터 구현) Axios (API 통신 라이브러리), Mui(리액트 CSS 라이브러리), Javascript, Redux(리액트 상태관리 라이브러리), HTML5, CSS3
+🦁 프론트엔드
+- React
+- Three.JS(3D 웹 동물 캐릭터실행)
+- Blender(3D 캐릭터 구현) 
+- Axios (API 통신 라이브러리)
+- Mui(리액트 CSS 라이브러리)
+- Javascript, HTML5, CSS3
+- Redux(리액트 상태관리 라이브러리) 
 
 백엔드: Spring Security를 활용한 OAuth2.0과 JWT를 활용한 인증 방식 Naver Clova/Google Speech를 활용한 음성인식 기능 탑재 MariaDB
 
