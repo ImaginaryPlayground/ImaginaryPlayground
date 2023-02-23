@@ -74,7 +74,7 @@
 | | | :black_square_button: Kotlin | |
 
 <br>
-## 👨‍👧‍👧 요들(요셉과 아이들)팀 소개
+## 👨‍👧‍👧 요들(요셉과 아이들)팀 소개 <br>
 🦉 **팀장 양요셉**
 
 - Back-end
@@ -136,7 +136,9 @@
 환아들이 동물 이름을 말하면서 게임이 진행됩니다. 
 ```
 <img src="https://user-images.githubusercontent.com/86208370/215336728-be0eac38-09f8-445a-bd32-38b95032c94d.png" width="800" height="400"/>
-<img src="https://github.com/ImaginaryPlayground/ImaginaryPlayground/issues/1#issue-1596983145.gif" />
+<img src="https://github.com/ImaginaryPlayground/ImaginaryPlayground/issues/1#issue-1596983145.gif"/>
+![jungle2-1_AdobeExpress (1)](https://user-images.githubusercontent.com/86208370/220940588-bd3b1b78-f6d6-49d4-a817-c3c1165f061f.gif)
+https://github.com/ImaginaryPlayground/ImaginaryPlayground/issues/1#issue-1596983145
 
 </br>
 
