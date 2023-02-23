@@ -3,6 +3,8 @@
 
 </br>
 
+<img src="https://user-images.githubusercontent.com/86208370/221011200-8c427844-fdcc-4aaa-a182-99d1e56e39d6.png" width="880" height="400"/>
+
 ![image](https://user-images.githubusercontent.com/86208370/215335715-0c07eada-696f-49dd-a87f-68177e5bd1eb.png)
 
 
@@ -12,14 +14,14 @@
 
 병원이라는 제한적인 공간에서 희귀 난치 질병으로 장기 입원하는 환아에게 다양한 경험을 선물해주고 싶어 기획하게 되었습니다. 
 또한 힘든 치료와 장기입원으로 인해 또래들보다 신체적 및 정서적 발달이 늦은 아이들에게 놀이를 통해 도움을 주고자 하였습니다. <br>
-Three.js와 다양한 인공지능 기술을 웹 리액트와 결합하여 환아들이 게임을 즐길 수 있도록 제작하였습니다. <br>
+`Three.js와 다양한 인공지능 기술을 웹 리액트와 결합`하여 환아들이 게임을 즐길 수 있도록 제작하였습니다. <br>
 <br>
 
 `아래의 링크를 클릭하면 이동합니다` <br>
 💌 [Notion 회고록 및 트러블슈팅](https://quill-peripheral-d93.notion.site/ed5a71762fd1428097710fd05e435e20) - 프로젝트를 진행하며 서비스 관리 및 회고 등 정리하였습니다. <br>
 💻 [Web nelify 배포](https://common-test-0808.netlify.app/) - 상상놀이터의 Front-End를 확인할 수 있는 공간입니다. <br>
 로컬에서는 빠르게 작동하지만 Blender로 3D 캐릭터를 제작할 때 파일이 무거워  Three.js가 로딩 속도가 다소 느립니다.  <br>
-📻 [Youtube](https://www.youtube.com/watch?v=zck0G1kbDmA&t=189s) - SSAFY 공식 유튜브에 업로드된 인터뷰 및 프로젝트 소개 영상입니다. <br>
+📻 [Youtube](https://www.youtube.com/watch?v=zck0G1kbDmA&t=189s) - SSAFY 공식 유튜브에 업로드된 저의 인터뷰 및 프로젝트 소개 영상입니다. <br>
 🎞 [UCC](https://www.youtube.com/watch?v=CdfojzqRaxo&t=29s) - 팀에서 제작한 경북대학교 어린이병원 시연 영상입니다. <br>
 🎁 [PPT](https://drive.google.com/drive/folders/1BbnMu3ADYH5gcATDYuoL8bo7R-f7JtOk?usp=sharing) 프로젝트 지역 발표, 삼성전자 임원 발표 PPT(권성호 제작)입니다.
 
@@ -76,15 +78,17 @@ Three.js와 다양한 인공지능 기술을 웹 리액트와 결합하여 환�
 | | | :black_square_button: Kotlin | |
 
 <br>
+
 ## 👨‍👧‍👧 요들(요셉과 아이들)팀 소개 <br>
-🦉 **팀장 양요셉**
+<br>
+🦉 팀장 양요셉
 
 - Back-end
 - 서버 API 개발
 - DB 관리
 - CI/CD 구축
 
-👿 `**부팀장 권성호**`
+👿 `부팀장 권성호`
 
 - Front-end
 - 전반적인 게임 작동방식 구현
@@ -146,6 +150,7 @@ Three.js와 다양한 인공지능 기술을 웹 리액트와 결합하여 환�
 
 ### 2. **게임 테마 - 정글 `<우가우가숲>` : 음성인식** <br>
 ```
+게임 목적 : 병원의 특성상 동물원에 가기 어려운 환경이므로 3D 동물들과 교감하고 희망적 메시지(퇴원) 전달 
 react-speech-kit을 활용하여 음성을 인식하는 기술을 통해 아이들의 음성을 판별할 수 있습니다.
 환아들이 정글의 동물 이름을 말하면서 게임이 진행됩니다.
 동물 친구들과 만나 인사하고 동물 친구들이 희망의 메시지를 외치는 시간입니다. 
@@ -158,6 +163,7 @@ react-speech-kit을 활용하여 음성을 인식하는 기술을 통해 아이�
 
 ### 3. **게임 테마 - 우주 `<갤럭시월드>`** : 터치인식 <br>
 ```
+게임 목적 : 게이미케이션(교육+게임)으로 태양계 행성 및 분리수거 교육 학습
 `아두이노(IOT)`에서 처리하는 터치 좌표(x, y)를 `리액트(프론트)`로 전달하기 위해서는 웹 소켓 통신을 이용하여야 했습니다. 
 그러나 `아두이노(IOT)` - `리액트(프론트)` 간의 직접 통신은 할 수 없었고 
 통신을 위해선 중간 다리 역할을 하는 `노드 서버(백)`를 거쳐야 했습니다.
@@ -174,8 +180,9 @@ react-speech-kit을 활용하여 음성을 인식하는 기술을 통해 아이�
 
 </br>
 
-### 4. **게임 테마 - 바다 `<언더더씨>`** <br>
+### 4. **게임 테마 - 바다 `<언더더씨>`** : 터치인식과 동작인식 <br>
 ```
+게임 목적 : 아이들이 움직이고 스트레칭을 진행하면서 활동 장려 및 신체발달
 (아두이노에서 리액트로) 소켓 통신으로 넘어온 `터치 좌표(x,y)`를 어떻게 해당 터치 영역에 있는 div 태그들에 적용해 
 `클릭 이벤트`까지 발생시킬 것인가에 대한 문제가 계속 존재하였습니다.
 
@@ -255,7 +262,8 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.7.3) face_recog
 
 ### Front
 
-<img alt="React" src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"><img alt="MUI" src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white"><img  alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"> <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
+<img alt="React" src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"><img alt="MUI" src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white"><img  alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"><img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
+
 
 </br>
 
@@ -312,6 +320,16 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.7.3) face_recog
 ## 🕋 프로젝트 구성도
 
 <img src="https://user-images.githubusercontent.com/86208370/215346646-82b559e9-14f1-4fd6-8fd5-929ebc1572b5.png" width="800" height="400"/>
+<img src="https://user-images.githubusercontent.com/86208370/221005781-0be27cca-6184-4b71-9678-d6a7518ae3fb.png" width="800" height="600"/>
+
+```
+아두이노 WIFI 모듈이 4개와 라즈베리파이가 사용되기 때문에 효율적인 데이터 전달을 위해 Client와 Server 설계가 매우 중요했습니다. 
+초음파센서와 연결된 아두이노 WIFI 모듈을 Client로, React(웹 프론트)의 Node 서버와 Socket.IO로 통신하였습니다. 
+그리고 직렬화로 아두이노 알고리즘(모니터 화면 비율로 전환 및 데이터 필터링)을 거친 데이터 값들을 보냈습니다. 
+동작 인식과 얼굴 인식은 카메라가 필요하므로, 라즈베리파이에 연결하여 Client와 Server 구조를 설계하였습니다. 
+```
+
+
 
 </br>
 
@@ -319,7 +337,7 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.7.3) face_recog
 
 <img src="https://user-images.githubusercontent.com/86208370/215349293-5d1d1e38-c071-4a12-b0e8-291cd11b047d.png" width="800" height="400"/>
 
-<
+
 
 ## 🎪 기능 상세
 
@@ -332,10 +350,9 @@ IoT: 라즈베리파이(Raspberry Pi 4 Model B Rev 1.2) Python(3.7.3) face_recog
 아이들에게 다양한 체험 제공
 3. `동작 인식 기능` : 원숭이 캐릭터 '우끼'의 동작을 따라함으로서 환아의 가벼운 스트레칭 
 4. `음성 인식 기능` : 동물 캐릭터의 울음소리를 맞추면 동물들이 희망의 메시지로 아이들을 응원(코리끼, 늑대, 사자, 원숭이)
-5. `얼굴 인식 기능` : 환아들의 얼굴을 인식하여 AI 
+5. `얼굴 인식 기능` : 사전에 아이의 사진을 학습한 AI가 (카메라를 통해) 환아들의 얼굴을 인식하여 편지가 열림 
 6. `터치 인식 기능` : '상어를 혼내줘' 와 '우주의 쓰레기 분리수거' 게임에서 활용. 초음파 센서 값을 아두이노를 통해 웹 리액트로 전달해서 스크린에서 터치 기능이 가능 
-7. 빔 프로젝터, 키오스크 또는 태블릿 등 확장성이 용이한
-웹 서비스로 접근성 증대
+7. 빔 프로젝터, 키오스크 또는 태블릿 등 확장성이 용이한 웹 서비스로 접근성 증대
 
 </br>
 
