@@ -12,13 +12,15 @@
 
 병원이라는 제한적인 공간에서 희귀 난치 질병으로 장기 입원하는 환아에게 다양한 경험을 선물해주고 싶어 기획하게 되었습니다. 
 또한 힘든 치료와 장기입원으로 인해 또래들보다 신체적 및 정서적 발달이 늦은 아이들에게 놀이를 통해 도움을 주고자 하였습니다. <br>
-
+Three.js와 다양한 인공지능 기술을 웹 리액트와 결합하여 환아들이 게임을 즐길 수 있도록 제작하였습니다. <br>
+<br>
 
 `아래의 링크를 클릭하면 이동합니다` <br>
-💌 [Notion](https://quill-peripheral-d93.notion.site/ed5a71762fd1428097710fd05e435e20) - 프로젝트를 진행하며 서비스 관리 및 회고 등 정리하였습니다. <br>
-💻 [Web](https://common-test-0808.netlify.app/) - 상상놀이터의 Front-End를 확인할 수 있는 공간입니다.(배포) <br>
-📻 [Youtube](https://www.youtube.com/watch?v=zck0G1kbDmA&t=189s) - SSAFY 공식 유튜브에 업로드된 프로젝트 소개입니다. <br>
-🎞 [UCC](https://www.youtube.com/watch?v=CdfojzqRaxo&t=29s) - 팀에서 제작한 프로젝트 UCC 입니다. <br>
+💌 [Notion 회고록 및 트러블슈팅](https://quill-peripheral-d93.notion.site/ed5a71762fd1428097710fd05e435e20) - 프로젝트를 진행하며 서비스 관리 및 회고 등 정리하였습니다. <br>
+💻 [Web nelify 배포](https://common-test-0808.netlify.app/) - 상상놀이터의 Front-End를 확인할 수 있는 공간입니다. <br>
+로컬에서는 빠르게 작동하지만 Blender로 3D 캐릭터를 제작할 때 파일이 무거워  Three.js가 로딩 속도가 다소 느립니다.  <br>
+📻 [Youtube](https://www.youtube.com/watch?v=zck0G1kbDmA&t=189s) - SSAFY 공식 유튜브에 업로드된 인터뷰 및 프로젝트 소개 영상입니다. <br>
+🎞 [UCC](https://www.youtube.com/watch?v=CdfojzqRaxo&t=29s) - 팀에서 제작한 경북대학교 어린이병원 시연 영상입니다. <br>
 🎁 [PPT](https://drive.google.com/drive/folders/1BbnMu3ADYH5gcATDYuoL8bo7R-f7JtOk?usp=sharing) 프로젝트 지역 발표, 삼성전자 임원 발표 PPT(권성호 제작)입니다.
 
 
@@ -125,38 +127,101 @@
 </br>
 
 ## 🎁 서비스 화면
-
+💻 [Web 배포](https://common-test-0808.netlify.app/) - 상상놀이터의 Front-End를 확인할 수 있는 공간입니다. <br>
+로컬에서는 빠르게 작동하지만 Blender로 3D 캐릭터를 제작할 때 파일이 무거워  Three.js가 로딩 속도가 다소 느립니다. (nelify 배포) <br> 
+💌 [Notion 회고록 및 트러블슈팅](https://quill-peripheral-d93.notion.site/ed5a71762fd1428097710fd05e435e20) - 프로젝트를 진행하며 서비스 관리 및 회고 등 정리하였습니다. 
+```
+대상 고객: (병원에 장기 입원하는 희귀질병) 소아병동의 4~7세 아이들
+목적: 능동적인 게임 참여를 통한 환아들의 사회성, 신체, 인지 발달
+시연 장소 : 경북대학교 어린이병원
+맵 : 각기 다른 기술(음성인식, 얼굴인식, 터치, 동작인식) 을 적용한 4가지 테마 (우주, 크리스마스, 정글, 바다)
+```
 ### 1. **`상상놀이터 메인 테마맵`** <br>
 <img src="https://user-images.githubusercontent.com/86208370/215336829-5d18c876-e5cc-436f-a92f-a9a56268773b.png" width="800" height="400"/>
+<img src="https://user-images.githubusercontent.com/86208370/220974903-34601481-211d-45e7-aa45-227bc3093227.png" width="800" height="400"/>
+
+
 
 </br>
 
 ### 2. **게임 테마 - 정글 `<우가우가숲>` : 음성인식** <br>
 ```
-환아들이 동물 이름을 말하면서 게임이 진행됩니다. 
+react-speech-kit을 활용하여 음성을 인식하는 기술을 통해 아이들의 음성을 판별할 수 있습니다.
+환아들이 정글의 동물 이름을 말하면서 게임이 진행됩니다.
+동물 친구들과 만나 인사하고 동물 친구들이 희망의 메시지를 외치는 시간입니다. 
+음성인식 정답 : [원숭이] -> [화이팅] -> [사자] -> [할수있다] -> [늑대] -> [건강하자] -> [코끼리] -> [약속한다]
 ```
 <img src="https://user-images.githubusercontent.com/86208370/215336728-be0eac38-09f8-445a-bd32-38b95032c94d.png" width="800" height="400"/>
 <img src="https://user-images.githubusercontent.com/86208370/220940588-bd3b1b78-f6d6-49d4-a817-c3c1165f061f.gif" width="800" height="400" />
 
 </br>
 
-### 3. **게임 테마 - 우주 `<갤럭시월드>`** <br>
+### 3. **게임 테마 - 우주 `<갤럭시월드>`** : 터치인식 <br>
+```
+`아두이노(IOT)`에서 처리하는 터치 좌표(x, y)를 `리액트(프론트)`로 전달하기 위해서는 웹 소켓 통신을 이용하여야 했습니다. 
+그러나 `아두이노(IOT)` - `리액트(프론트)` 간의 직접 통신은 할 수 없었고 
+통신을 위해선 중간 다리 역할을 하는 `노드 서버(백)`를 거쳐야 했습니다.
+
+(정리하면 `리액트(프론트)` - `노드 서버(백)`- `아두이노(IOT)` 간의 3자 통신)
+
+따라서 터치할 경우 해당 x, y 좌표를 `아두이노(IOT)` - `노드 서버(백)` 간의 소켓 통신으로 넘긴 후 
+그 노드 서버로 넘어온 값을 다시 `리액트(프론트)`- `노드 서버(백)`간의 소켓 통신을 통해 
+`리액트(프론트)`로 넘겨주어 터치 좌표 통신이 가능했습니다.
+```
 <img src="https://user-images.githubusercontent.com/86208370/215336754-7e028bed-bdf6-4239-9acc-a25e0de087c8.png" width="800" height="400"/>
+<img src="https://user-images.githubusercontent.com/86208370/220970233-6a2512dc-a030-4f32-ad6e-74987622dfd1.gif" width="800" height="400"/>
+
 
 </br>
 
 ### 4. **게임 테마 - 바다 `<언더더씨>`** <br>
+```
+(아두이노에서 리액트로) 소켓 통신으로 넘어온 `터치 좌표(x,y)`를 어떻게 해당 터치 영역에 있는 div 태그들에 적용해 
+`클릭 이벤트`까지 발생시킬 것인가에 대한 문제가 계속 존재하였습니다.
+
+생각해 낸 해결책은 터치가 필요한 영역(div 태그)들에 touch_div라는 클래스 이름을 동일하게 다 적용하는 것이었습니다.
+
+그 후 리액트의 useEffect 기능을 이용해서 맵이 오픈되자마자 해당 클래스가 적용된 div(혹은 이미지) 들의
+`(왼쪽 상단 기준: x좌표, y좌표), 넓이, 높이`를 반환하는 함수를 이용하여 터치 영역을 미리 계산해 놓는 것이었습니다.
+
+소켓 통신을 통해서 터치를 하게 될 경우 계속해서 아두이노에서 전달받은 `터치 x, y 좌표`가 `
+미리 계산된 터치 영역`내에 존재한다면 해당 영역 내부의 div태그를 클릭이 되게 처리하였습니다.
+```
 <img src="https://user-images.githubusercontent.com/86208370/215336762-95c81621-8034-4072-b004-e5efde22e23e.png" width="800" height="400"/>
+<img src="https://user-images.githubusercontent.com/86208370/220980412-f2b1f7d6-1f28-45ef-81b0-e66dbd4b308d.jpg" width="800" height="400"/>
+<img src="https://user-images.githubusercontent.com/86208370/220965607-d4b26d33-a022-4bb2-b050-e18b92978fc4.gif" width="800" height="400"/>
+<img src="https://user-images.githubusercontent.com/86208370/220967831-473fd12b-fdf6-46fa-b949-efc8a8beb2df.gif" width="800" height="400"/>
+
+
 
 <br>
 
-### 5. **이벤트 테마 - 크리스마스 `<눈 내리는 마을>`** <br>
+### 5. **이벤트 테마 - 크리스마스 `<눈 내리는 마을>`** : 얼굴인식 <br>
+```
+환아들이 병원에서 크리스마스를 접하기 어려워 준비한 이벤트 맵입니다.
+아이들의 얼굴을 미리 Opan AI로 학습시키고 아이들이 카메라 앞에 다가갔을 때 
+카메라가 얼굴을 인식한 뒤 부모님이 보내주신 편지가 리렌더 되는 기능을 추가하였습니다.
+```
 <img src="https://user-images.githubusercontent.com/86208370/215336774-38c4b230-b375-4caf-af0b-3aa88020bf15.png" width="800" height="400"/>
+<img src="https://user-images.githubusercontent.com/86208370/220974243-486416be-6460-4f68-8a84-19649118d9f9.gif" width="800" height="400"/>
+
 
 </br>
 
 ### 6. **웹 페이지 - `<관리자 페이지>`** <br>
+```
+병원에서 환아들을 관리할 수 있는 관리자 페이지입니다.
+1. 이메일 인증과 재직증명서 검증을 통한 회원가입
+2. 어드민 계정이 회원가입 승인을 한 후에 로그인을 가능하게 하여 병원 별 환자 데이터 접근 보안성 강화
+3. 로그인 시 token 발급
+4. 각 병원 담당자는 병원 내 아이들의 정보를 검색/등록/수정/삭제 가능
+5. 라즈베리파이가 웹사이트에 등록된 아이들의 사진을 불러와 얼굴인식 학습
+6. 문의 게시판 기능
+```
 <img src="https://user-images.githubusercontent.com/86208370/215336777-c2b78212-0884-4212-b831-e9088b222bb3.png" width="800" height="400"/>
+<img src="https://user-images.githubusercontent.com/86208370/220978407-38287939-0af2-4445-96fc-69b1728e386f.png" width="800" height="400"/>
+
+
 
 
 </br>
