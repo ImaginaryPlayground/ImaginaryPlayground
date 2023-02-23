@@ -136,6 +136,7 @@
 환아들이 동물 이름을 말하면서 게임이 진행됩니다. 
 ```
 <img src="https://user-images.githubusercontent.com/86208370/215336728-be0eac38-09f8-445a-bd32-38b95032c94d.png" width="800" height="400"/>
+<img src="https://github.com/ImaginaryPlayground/ImaginaryPlayground/issues/1#issue-1596983145.gif" />
 
 </br>
 
